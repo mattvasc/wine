@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `wine_chamados`.`Cliente` (
   `email` VARCHAR(128) NULL,
   `nome fantasia` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
 ENGINE = InnoDB;
 
 

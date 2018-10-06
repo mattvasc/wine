@@ -4,4 +4,5 @@ As extensões do php 7.2
 - mbstring
 - xml
 - mysql
+- php-memcached
 - (e outras que vou adicionar conforme demanda)

@@ -1,5 +1,13 @@
 # WineCallsApp
 
+Instale a última versão estavel do node, (para obter o npm)
+
+Instale o angular na sua máquina com: npm install -g @angular/cli
+
+E nessa pasta digite: npm install
+
+-------------------------------------------------------------------------
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
 
 ## Development server

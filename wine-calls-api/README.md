@@ -1,8 +1,3 @@
-Precisa instalar o PHP 7.2
+# API feita com NodeJS
 
-As extensões do php 7.2
-- mbstring
-- xml
-- mysql
-- php-memcached
-- (e outras que vou adicionar conforme demanda)
+Deu mais certa do que com lumen...

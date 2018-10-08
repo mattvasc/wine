@@ -16,39 +16,38 @@ CREATE SCHEMA IF NOT EXISTS `wine_chamados` DEFAULT CHARACTER SET utf8 ;
 USE `wine_chamados` ;
 
 -- -----------------------------------------------------
--- Table `wine_chamados`.`Cliente`
+-- Table `wine_chamados`.`client`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wine_chamados`.`Cliente` (
+CREATE TABLE IF NOT EXISTS `wine_chamados`.`client` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(64) NOT NULL,
+  `name` VARCHAR(64) NOT NULL,
   `email` VARCHAR(128) NULL,
-  `nome fantasia` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wine_chamados`.`Empresa`
+-- Table `wine_chamados`.`company`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wine_chamados`.`Empresa` (
+CREATE TABLE IF NOT EXISTS `wine_chamados`.`company` (
   `cnpj` VARCHAR(14) NOT NULL,
-  `nome` VARCHAR(64) NULL,
-  `endereço` VARCHAR(128) NULL,
+  `name` VARCHAR(64) NULL,
+  `address` VARCHAR(128) NULL,
   `site` VARCHAR(64) NULL,
   `email` VARCHAR(128) NULL,
-  `telefones` VARCHAR(128) NULL,
+  `phone` VARCHAR(128) NULL,
   PRIMARY KEY (`cnpj`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wine_chamados`.`Tecnico`
+-- Table `wine_chamados`.`technician`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `wine_chamados`.`Tecnico` (
+CREATE TABLE IF NOT EXISTS `wine_chamados`.`technician` (
   `id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `endereco` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `address` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;

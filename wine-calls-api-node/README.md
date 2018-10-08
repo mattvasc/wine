@@ -1,3 +1,0 @@
-# API feita com NodeJS
-
-Deu mais certa do que com lumen...

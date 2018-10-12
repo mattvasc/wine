@@ -45,7 +45,6 @@ router.post('/', function (req, res, next) {
 	});
 });
 router.delete('/:id', function (req, res, next) {
-
 	Client.deleteClient(req.params.id, function (err, count) {
 
 		if (err) {

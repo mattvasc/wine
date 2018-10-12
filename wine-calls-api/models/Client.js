@@ -15,7 +15,7 @@ var Client = {
 		return db.query("Insert into client values(?,?,?)", [Client.id, Client.name, Client.email], callback);
 	},
 	deleteClient: function (id, callback) {
-		return db.query("delete from client where Id=?", [id], callback);
+		return db.query("delete from client where id=?", [id], callback);
 	},
 	updateClient: function (id, Client, callback) {
 		return db.query("update client set name=?, email=? where id=?", [Client.name, Client.email, id], callback);

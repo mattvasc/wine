@@ -4,9 +4,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+
 var routes = require('./routes/index');
 var clients = require('./routes/Client');
 var companies = require('./routes/Company');
+var technicians = require('./routes/Technician');
+
 var app = express();
 // var favicon = require('serve-favicon');
 
@@ -27,7 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/clients', clients);
 app.use('/companies', companies);
-// app.use('/Tasks',Tasks);
+app.use('/technicians', technicians);
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -35,7 +40,7 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-// error handlers
+    // error handlers
 
 // development error handler
 // will print stacktrace

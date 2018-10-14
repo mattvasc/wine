@@ -11,11 +11,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { ClientMainComponent } from './client-main/client-main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TechnicianCreateUpdateComponent } from './technician-create-update/technician-create-update.component';
+import { TechnicianListComponent } from './technician-list/technician-list.component';
+import { TechnicianMainComponent } from './technician-main/technician-main.component';
 
 const appRoutes: Routes = [
   {path:'clientes', component: ClientMainComponent},
   {path:'formsCliente', component: ClientCreateUpdateComponent},
   {path:'formsCliente/:id', component: ClientCreateUpdateComponent},
+
+  {path:'tecnicos', component: TechnicianMainComponent},
+  {path:'formsTecnico', component: TechnicianCreateUpdateComponent},
+  {path:'formsTecnico/:id', component: TechnicianCreateUpdateComponent},
+
   // Colocar todas as rotas novas antes dessas duas abaixo..!
   { path: '', pathMatch: 'full', component: MainComponent },
   { path: '**', component: NotFoundComponent }
@@ -29,7 +37,10 @@ const appRoutes: Routes = [
     ClientUpdateComponent,
     MainComponent,
     ClientMainComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TechnicianCreateUpdateComponent,
+    TechnicianListComponent,
+    TechnicianMainComponent
   ],
   imports: [
     BrowserModule,

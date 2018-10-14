@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ClientService } from '../client.service';
 import { Client } from '../client';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-client-create',
-  templateUrl: './client-create.component.html',
-  styleUrls: ['./client-create.component.scss']
+  selector: 'app-client-create-update',
+  templateUrl: './client-create-update.component.html',
+  styleUrls: ['./client-create-update.component.scss']
 })
-export class ClientCreateComponent implements OnInit {
+export class ClientCreateUpdateComponent implements OnInit {
   private clienteAtual: Client;
   private id: number;
   private sub: any;
   private retorno: Client;
   private textoBotao: String = 'Salvar';
   constructor(
-    private api: ApiService,
+    private api: ClientService,
     private route: ActivatedRoute,
     private router: Router) { }
 

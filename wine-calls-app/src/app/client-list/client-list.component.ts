@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ClientService } from '../client.service';
 import { Client } from '../client';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ClientListComponent implements OnInit {
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ClientService, private router: Router) { }
   clients: Client[] = [];
   ngOnInit() {
     this.getClients();

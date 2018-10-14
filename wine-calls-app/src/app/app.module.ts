@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientListComponent } from './client-list/client-list.component';
-import { ClientCreateComponent } from './client-create/client-create.component';
+import { ClientCreateUpdateComponent } from './client-create-update/client-create-update.component';
 import { ClientUpdateComponent } from './client-update/client-update.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
@@ -14,8 +14,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   {path:'clientes', component: ClientMainComponent},
-  {path:'formsCliente', component: ClientCreateComponent},
-  {path:'formsCliente/:id', component: ClientCreateComponent},
+  {path:'formsCliente', component: ClientCreateUpdateComponent},
+  {path:'formsCliente/:id', component: ClientCreateUpdateComponent},
   // Colocar todas as rotas novas antes dessas duas abaixo..!
   { path: '', pathMatch: 'full', component: MainComponent },
   { path: '**', component: NotFoundComponent }
@@ -25,7 +25,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     ClientListComponent,
-    ClientCreateComponent,
+    ClientCreateUpdateComponent,
     ClientUpdateComponent,
     MainComponent,
     ClientMainComponent,

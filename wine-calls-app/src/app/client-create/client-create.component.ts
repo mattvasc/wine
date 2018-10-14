@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Client } from '../client';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-client-create',
@@ -8,15 +10,70 @@ import { Client } from '../client';
   styleUrls: ['./client-create.component.scss']
 })
 export class ClientCreateComponent implements OnInit {
+  private clienteAtual: Client;
+  private id: number;
+  private sub: any;
+  private retorno: Client;
+  private textoBotao: String = 'Salvar';
+  constructor(
+    private api: ApiService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
-  constructor(private api: ApiService) { }
-  retorno: Client;
+
   ngOnInit() {
+    this.clienteAtual = new Client("", "");
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+      // se o usuário acessou a pagina sem passar um id inteiro...
+      if (this.id !== undefined && isNaN(this.id)) {
+        // TODO: Proteger a página, saindo dela quando informar id invalido
+        alert("Acessando a pagina de maneira inválida!");
+        this.router.navigateByUrl('/');
+      }
+      // Se for um Update
+      if (this.id !== undefined) {
+        this.textoBotao = "Atualizar";
+        this.id = + this.id; // Cast string to int
+        this.api.getClient(this.id).subscribe(ret => {
+          if (ret !== null) {
+            this.clienteAtual = ret;
+          } else {
+            // TODO: Proteger a página, saindo dela quando informar id invalido
+            alert("Acessando a pagina com um id inválido!");
+            this.router.navigateByUrl('/');
+          }
+        });
+
+      }
+
+    });
   }
 
-  createClient(name: String, email: String) {
-    let c = new Client(name, email);
-    this.api.createClient(c).subscribe(valor => console.log(valor));
-    console.log(c);
+  exec(){
+    if(this.id === undefined)
+      this.createClient();
+    else
+      this.updateClient();
   }
+
+  createClient() {
+    // TODO: Validar Campos antes!
+    // TODO: Mostrar modal de loading enquanto comunica com API
+    this.api.createClient(this.clienteAtual).subscribe(valor => {
+      // TODO: Verificar se a api retornou cod 400 ou erro
+      
+      this.router.navigateByUrl("/clientes");
+    
+    });
+  }
+  updateClient() {
+    // TODO: Validar campos antes!
+    // TODO: Mostrar modal de loading enquanto comunica com API
+    this.api.updateClient(this.clienteAtual).subscribe(valor => {
+      // TODO: Verificar se a api retornou cod 400 ou erro
+      this.router.navigateByUrl("/clientes");
+    });
+  }
+
 }

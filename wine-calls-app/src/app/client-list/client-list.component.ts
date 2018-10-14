@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Client } from '../client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-list',
@@ -9,7 +10,7 @@ import { Client } from '../client';
 })
 export class ClientListComponent implements OnInit {
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
   clients: Client[] = [];
   ngOnInit() {
     this.getClients();
@@ -17,6 +18,10 @@ export class ClientListComponent implements OnInit {
 
   getClients() {
     this.api.getClients().subscribe(c => this.clients = c);
+  }
+
+  editClient(id: number) {
+    this.router.navigateByUrl(`/formsCliente/${id}`);
   }
 
   deleteClient(id: number){

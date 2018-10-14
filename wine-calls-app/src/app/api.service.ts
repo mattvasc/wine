@@ -29,12 +29,22 @@ export class ApiService {
 
     return this.http.get<Client[]>(this.apiUrl + 'clients');
   }
+
+  getClient(id: number): Observable<Client> {
+
+    return this.http.get<Client>(this.apiUrl + `clients/${id}`);
+  }
+
   createClient(c: Client): Observable<Client> {
     return this.http.post<Client>(this.apiUrl + 'clients', c, httpOptions);
   }
 
   deleteClient(id: number): Observable<Object> {
     return this.http.delete(this.apiUrl+'clients/'+id.toString());
+  }
+
+  updateClient(c : Client): Observable<Client> {
+    return this.http.put<Client>(this.apiUrl + `clients/${c.id}`, c, httpOptions);
   }
 
   /*

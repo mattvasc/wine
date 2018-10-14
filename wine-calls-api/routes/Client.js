@@ -12,7 +12,10 @@ router.get('/:id?', function (req, res, next) {
 				res.json(err);
 			}
 			else {
-				res.json(rows);
+				if(rows[0] != undefined)
+					res.json(rows[0]);
+				else
+					res.json(null);
 			}
 		});
 	}

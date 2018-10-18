@@ -18,10 +18,10 @@ No terminal, digite: npm install -g @angular/cli
 
 
 ### Instale as dependências da API
-Dentro da pasta wine-calls-api, digite: npm install
+Dentro da pasta wine-calls-api, no terminal, digite: npm install
 
 ### Instale as dependências do APP
-Dentro da pasta wine-calls-app, digite: npm install
+Dentro da pasta wine-calls-app,  no terminal, digite: npm install
 
 # Execução
 

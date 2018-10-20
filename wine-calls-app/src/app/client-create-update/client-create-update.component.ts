@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../client.service';
-import { Client } from '../client';
+import { ClientService } from '../service/client.service';
+import { Client } from '../service/client';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 

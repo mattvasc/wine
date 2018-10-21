@@ -1,0 +1,3 @@
+<li *ngFor="let client of clients">
+  {{client.id}} - {{ client.name }} - {{client.email}} - <button (click)="editClient(client.id)">edit</button><button (click)="deleteClient(client.id)">delete</button>
+</li>

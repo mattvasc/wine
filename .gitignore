@@ -2,3 +2,4 @@
 tmp/
 wine-calls-app/package-lock.json
 wine-calls-api/package-lock.json
+*.bak

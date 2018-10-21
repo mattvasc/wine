@@ -3,13 +3,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClientListComponent } from './client-list/client-list.component';
-import { ClientCreateUpdateComponent } from './client-create-update/client-create-update.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
-import { MainComponent } from './main/main.component';
-import { ClientMainComponent } from './client-main/client-main.component';
-import { NotFoundComponent, TechnicianCreateUpdateComponent, TechnicianListComponent, TechnicianMainComponent, TicketMainComponent } from './components/pages';
+import {
+  ClientListComponent,
+  ClientCreateUpdateComponent,
+  ClientMainComponent,
+  MainComponent,
+  NotFoundComponent, 
+  TechnicianCreateUpdateComponent, 
+  TechnicianListComponent, 
+  TechnicianMainComponent, 
+  TicketMainComponent } from './components/pages';
 import { StoreModule } from '@ngrx/store';
 import { simpleReducer } from './reducers/simple.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';

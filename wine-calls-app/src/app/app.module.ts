@@ -18,14 +18,17 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { simpleReducer } from './reducers/simple.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment'; // Angular CLI environemnt
+import { environment } from '../environments/environment';
+import { ParceiroFormComponent } from './components/pages/parceiro-form/parceiro-form.component';
+import { EnderecoComponent } from './components/pages/endereco/endereco.component'; // Angular CLI environemnt
+
 
 const appRoutes: Routes = [
   { path: 'clientes', component: ClientMainComponent },
   { path: 'formsCliente', component: ClientCreateUpdateComponent },
   { path: 'formsCliente/:id', component: ClientCreateUpdateComponent },
 
-  { path: 'tecnicos', component: TechnicianMainComponent },
+  { path: 'parceiros', component: ParceiroFormComponent },
   { path: 'formsTecnico', component: TechnicianCreateUpdateComponent },
   { path: 'formsTecnico/:id', component: TechnicianCreateUpdateComponent },
 
@@ -46,7 +49,9 @@ const appRoutes: Routes = [
     TechnicianCreateUpdateComponent,
     TechnicianListComponent,
     TechnicianMainComponent,
-    TicketMainComponent
+    TicketMainComponent,
+    ParceiroFormComponent,
+    EnderecoComponent
   ],
   imports: [
     BrowserModule,

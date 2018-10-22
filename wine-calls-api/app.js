@@ -6,9 +6,10 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 
 var routes = require('./routes/index');
-var clients = require('./routes/Client');
-var companies = require('./routes/Company');
-var technicians = require('./routes/Technician');
+var clienteRouter = require('./routes/Cliente');
+var pagamentoRouter = require('./routes/Pagamento');
+var tecnicoRouter = require('./routes/Tecnico');
+const Model = require('./model/');
 
 var app = express();
 // var favicon = require('serve-favicon');
@@ -27,17 +28,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// TODO: Trocar para um for na pasta routes
 app.use('/', routes);
-app.use('/clients', clients);
-app.use('/companies', companies);
-app.use('/technicians', technicians);
+app.use('/clientes', clienteRouter);
+app.use('/pagamentos', pagamentoRouter);
+app.use('/tecnicos', tecnicoRouter);
 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
-    next(err);
+    err.message = "route not found";
+    let temp = {success: false, error: err};
+    res.json(temp);
 });
 
     // error handlers
@@ -63,6 +67,9 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-console.log('API Rodando na porta 3000');
-app.listen(3000);
+Model.sequelize.sync().then(() => {
+    console.log('API Rodando na porta 3000');
+    app.listen(3000);
+ } );
+
 module.exports = app;

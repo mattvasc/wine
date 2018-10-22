@@ -20,7 +20,9 @@ import { simpleReducer } from './reducers/simple.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { ParceiroFormComponent } from './components/pages/parceiro-form/parceiro-form.component';
-import { EnderecoComponent } from './components/pages/endereco/endereco.component'; // Angular CLI environemnt
+import { EnderecoComponent } from './components/pages/endereco/endereco.component';
+import { EmailTelefoneComponent } from './components/pages/email-telefone/email-telefone.component';
+import { ObservacoesComponent } from './components/pages/observacoes/observacoes.component'; // Angular CLI environemnt
 
 
 const appRoutes: Routes = [
@@ -51,7 +53,9 @@ const appRoutes: Routes = [
     TechnicianMainComponent,
     TicketMainComponent,
     ParceiroFormComponent,
-    EnderecoComponent
+    EnderecoComponent,
+    EmailTelefoneComponent,
+    ObservacoesComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,9 @@ import { environment } from '../environments/environment';
 import { ParceiroFormComponent } from './components/pages/parceiro-form/parceiro-form.component';
 import { EnderecoComponent } from './components/pages/endereco/endereco.component';
 import { EmailTelefoneComponent } from './components/pages/email-telefone/email-telefone.component';
-import { ObservacoesComponent } from './components/pages/observacoes/observacoes.component'; // Angular CLI environemnt
+import { ObservacoesComponent } from './components/pages/observacoes/observacoes.component';
+import { TecnicoFormComponent } from './components/pages/tecnico-form/tecnico-form.component';
+import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component'; // Angular CLI environemnt
 
 
 const appRoutes: Routes = [
@@ -31,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'formsCliente/:id', component: ClientCreateUpdateComponent },
 
   { path: 'parceiros', component: ParceiroFormComponent },
+  {path: 'tecnicos', component: TecnicoFormComponent},
   { path: 'formsTecnico', component: TechnicianCreateUpdateComponent },
   { path: 'formsTecnico/:id', component: TechnicianCreateUpdateComponent },
 
@@ -55,7 +58,9 @@ const appRoutes: Routes = [
     ParceiroFormComponent,
     EnderecoComponent,
     EmailTelefoneComponent,
-    ObservacoesComponent
+    ObservacoesComponent,
+    TecnicoFormComponent,
+    StatusAtivoInativoComponent
   ],
   imports: [
     BrowserModule,

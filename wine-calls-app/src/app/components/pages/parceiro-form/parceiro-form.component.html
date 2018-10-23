@@ -35,7 +35,7 @@
 
         <div class="form-group">
           <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
-          <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}">
+          <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="">
         </div>
 
         <div class="form-group">
@@ -44,7 +44,7 @@
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group" *ngIf='isPJ=="pessoaJuridica" '>
           <label for="empresaCNPJ">CNPJ </label>
           <input type="text" class="form-control" id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
         </div>

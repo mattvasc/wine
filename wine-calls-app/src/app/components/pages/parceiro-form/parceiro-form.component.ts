@@ -15,7 +15,6 @@ export class ParceiroFormComponent implements OnInit {
  
   ngOnInit() {
     this.isPJ = 'pessoaJuridica';
-    this.teste = 'oi';
   }
 
 }

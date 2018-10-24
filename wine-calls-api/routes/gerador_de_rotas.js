@@ -58,7 +58,7 @@ router.get('/describe', function (req, res) {
 
 // criar uma nova instancia
 router.post('/', function (req, res) { 
-	let temp = entidate.build(req.body);
+	let temp = entidade.build(req.body);
 	temp.save()
 	.then( payload => {
 		let temp = {

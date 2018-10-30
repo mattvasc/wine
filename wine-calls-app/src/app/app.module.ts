@@ -4,30 +4,36 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {
-  ClientListComponent,
+  ClienteListComponent,
   ClientCreateUpdateComponent,
   ClientMainComponent,
   MainComponent,
-  NotFoundComponent, 
-  TechnicianCreateUpdateComponent, 
-  TechnicianListComponent, 
-  TechnicianMainComponent, 
+  NotFoundComponent,
+  EmpresaParceiraMainComponent,
+  EmpresaParceiraCreateUpdateComponent,
+  EmpresaParceiraListComponent,
   TicketMainComponent } from './components/pages';
 import { StoreModule } from '@ngrx/store';
 import { simpleReducer } from './reducers/simple.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment'; // Angular CLI environemnt
+import { environment } from '../environments/environment';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
+import { EntidadeComponent } from './entidade/entidade.component';
+
+// Angular CLI environemnt
 
 const appRoutes: Routes = [
   { path: 'clientes', component: ClientMainComponent },
   { path: 'formsCliente', component: ClientCreateUpdateComponent },
   { path: 'formsCliente/:id', component: ClientCreateUpdateComponent },
 
-  { path: 'tecnicos', component: TechnicianMainComponent },
-  { path: 'formsTecnico', component: TechnicianCreateUpdateComponent },
-  { path: 'formsTecnico/:id', component: TechnicianCreateUpdateComponent },
+  { path: 'empresasParceiras', component: EmpresaParceiraMainComponent },
+  { path: 'formsEmpresaParceira', component: EmpresaParceiraCreateUpdateComponent },
+  { path: 'formsEmpresaParceira/:id', component: EmpresaParceiraCreateUpdateComponent },
 
   { path: 'chamados', component: TicketMainComponent },
   // Colocar todas as rotas novas antes dessas duas abaixo..!
@@ -38,21 +44,25 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ClientListComponent,
+    ClienteListComponent,
     ClientCreateUpdateComponent,
     MainComponent,
     ClientMainComponent,
     NotFoundComponent,
-    TechnicianCreateUpdateComponent,
-    TechnicianListComponent,
-    TechnicianMainComponent,
-    TicketMainComponent
+    TicketMainComponent,
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
+    EmpresaParceiraMainComponent,
+    EmpresaParceiraCreateUpdateComponent,
+    EmpresaParceiraListComponent,
+    EntidadeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes
       //, { enableTracing: true } // <-- debugging purposes only

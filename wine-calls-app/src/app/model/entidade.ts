@@ -1,4 +1,4 @@
-export class Entidade {
-	public id?: number;
-	public observacoes?: string;
+export interface Entidade {
+	id?: number;
+	observacoes?: string;
 }

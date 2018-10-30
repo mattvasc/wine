@@ -1,6 +1,5 @@
-import { Entidade } from "./entidade";
 
-export class EmpresaParceira extends Entidade {
+export class EmpresaParceira  {
 	public static rota: String = "EmpresasParceiras"
 	public id?: number;
 	public cnpj?: string;

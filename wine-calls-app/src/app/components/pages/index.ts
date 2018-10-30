@@ -7,3 +7,4 @@ export { TicketMainComponent } from './ticket-main/ticket-main.component';
 export { EmpresaParceiraMainComponent } from './empresa-parceira/empresa-parceira-main/empresa-parceira-main.component';
 export { EmpresaParceiraCreateUpdateComponent } from './empresa-parceira/empresa-parceira-create-update/empresa-parceira-create-update.component';
 export { EmpresaParceiraListComponent } from './empresa-parceira/empresa-parceira-list/empresa-parceira-list.component'; 
+

@@ -36,7 +36,7 @@
 ---- -----------------------------------------------------
 ---- Schema wine_ticket
 ---- -----------------------------------------------------
---CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
+CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --SHOW WARNINGS;
 --USE `wine_ticket` ;
 --

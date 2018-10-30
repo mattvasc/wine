@@ -24,6 +24,14 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    endereco_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'endereco',
+        key: 'id'
+      }
+    },
     ticket_cliente_id: {
       type: DataTypes.STRING(45),
       allowNull: true
@@ -32,11 +40,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    observacoes: {
-      type: DataTypes.STRING(256),
+    data_agendamento: {
+      type: DataTypes.STRING(45),
       allowNull: true
     },
-    preco_cliente: {
+     preco_cliente: {
       type: DataTypes.FLOAT,
       allowNull: true
     },
@@ -44,25 +52,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.FLOAT,
       allowNull: true
     },
-    ticket_status_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'ticket_status',
-        key: 'id'
-      }
-    },
-    data_agendamento: {
-      type: DataTypes.STRING(45),
+    situacao: {
+      type: DataTypes.STRING(16),
       allowNull: true
     },
-    endereco_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'endereco',
-        key: 'id'
-      }
+    observacoes: {
+      type: DataTypes.STRING(256),
+      allowNull: true
+    },
+    descricao: {
+      type: DataTypes.STRING(1024),
+      allowNull: true
     }
   }, {
     tableName: 'ticket'

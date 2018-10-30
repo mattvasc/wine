@@ -7,6 +7,7 @@ var cors = require('cors');
 
 var routes = require('./routes/index');
 var clienteRouter = require('./routes/Cliente');
+var empresaParceiraRouter = require('./routes/EmpresaParceira');
 var pagamentoRouter = require('./routes/Pagamento');
 var tecnicoRouter = require('./routes/Tecnico');
 const Model = require('./model/');
@@ -33,6 +34,7 @@ app.use('/', routes);
 app.use('/clientes', clienteRouter);
 app.use('/pagamentos', pagamentoRouter);
 app.use('/tecnicos', tecnicoRouter);
+app.use('/empresasParceiras', empresaParceiraRouter);
 
 
 // catch 404 and forward to error handler

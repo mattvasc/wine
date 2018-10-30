@@ -1,52 +1,35 @@
-var express = require('express');
-var router = express.Router();
 const Model = require('../model');
-router.get('/:id?', function (req, res, next) {
+const geradorDeRotas = require('./gerador_de_rotas');
+const entidade_nome = "cliente";
+const Sequelize = require('sequelize');
 
-	if (req.params.id && !isNaN(req.params.id) ) {
-		//Model.client
-		
-	}
-	else if(req.params.id == "lala") { 
-		
-	}
-	else if (req.params.id === undefined) {
+let entidade = Model[entidade_nome];
 
-		Model.cliente.findAll().then(response => res.json(response)); 
-	} else {
-		var err = new Error('Not Found');
-		err.status = 404;
-		next(err);
-	}
-});
-router.post('/', function (req, res, next) {
+const router = geradorDeRotas(Model, entidade_nome);
+const Op = Sequelize.Op;
+/* Rotas extras específicas para o domínio */
 
-	let temp = Model.cliente.build(req.body);
-	temp.save().then(res.json(temp));
+router.get('/nome/:nome', function (req, res) {
+	const nome = req.params.nome;
 
-});
-router.delete('/:id', function (req, res, next) {
-	Client.deleteClient(req.params.id, function (err, count) {
-
-		if (err) {
-			res.json(err);
+	entidade.findAll({
+		where: {
+			[Op.or]: { 
+				nome_fantasia: { [Op.like]: '%' + nome + '%'},
+				razao_social: { [Op.like]: '%' + nome+'%'}
+			}	
 		}
-		else {
-			res.json(count);
-		}
-
-	});
+	})
+	.then(result => {
+		let temp = {success: true, data: {}};
+		temp.data["cliente"] = result;
+		res.json(temp);
+	})
+	.catch(error => res.json({
+			success: false,
+			data: {},
+			error: error
+	}));
 });
-router.put('/:id', function (req, res, next) {
 
-	Client.updateClient(req.params.id, req.body, function (err, rows) {
-
-		if (err) {
-			res.json(err);
-		}
-		else {
-			res.json(rows);
-		}
-	});
-});
 module.exports = router;

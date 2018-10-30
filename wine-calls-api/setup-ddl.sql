@@ -14,48 +14,48 @@
 
 -- MySQL Workbench Forward Engineering
 --
---SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
---SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
---SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+-- SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+-- SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+-- SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 --
----- -----------------------------------------------------
----- Schema wine_ticket
----- -----------------------------------------------------
---DROP SCHEMA IF EXISTS `wine_ticket` ;
+-- -- -----------------------------------------------------
+-- -- Schema wine_ticket
+-- -- -----------------------------------------------------
+-- DROP SCHEMA IF EXISTS `wine_ticket` ;
 --
----- -----------------------------------------------------
----- Schema wine_ticket
----- -----------------------------------------------------
---CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
---SHOW WARNINGS;
----- -----------------------------------------------------
----- Schema wine_ticket
----- -----------------------------------------------------
---DROP SCHEMA IF EXISTS `wine_ticket` ;
+-- -- -----------------------------------------------------
+-- -- Schema wine_ticket
+-- -- -----------------------------------------------------
+-- CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
+-- SHOW WARNINGS;
+-- -- -----------------------------------------------------
+-- -- Schema wine_ticket
+-- -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `wine_ticket` ;
 --
----- -----------------------------------------------------
----- Schema wine_ticket
----- -----------------------------------------------------
+-- -- -----------------------------------------------------
+-- -- Schema wine_ticket
+-- -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
---SHOW WARNINGS;
---USE `wine_ticket` ;
+-- SHOW WARNINGS;
+-- USE `wine_ticket` ;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`estado`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`estado` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`estado`
+-- - - -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`estado` (
 --  `id` INT NOT NULL AUTO_INCREMENT,
 --  `nome` VARCHAR(45) NOT NULL,
 --  `uf` CHAR(2) NOT NULL,
 --  PRIMARY KEY (`id`))
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`cidade`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`cidade` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`cidade`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`cidade` (
 --  `id` INT NOT NULL AUTO_INCREMENT,
 --  `nome` VARCHAR(128) NOT NULL,
 --  `estado_id` INT NULL,
@@ -66,14 +66,14 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --    REFERENCES `wine_ticket`.`estado` (`id`)
 --    ON DELETE RESTRICT
 --    ON UPDATE CASCADE)
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`endereco`
 ---- -----------------------------------------------------
----- Table `wine_ticket`.`endereco`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`endereco` (
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`endereco` (
 --  `id` INT NOT NULL AUTO_INCREMENT,
 --  `cep` VARCHAR(12) NULL,
 --  `logradouro` VARCHAR(64) NULL,
@@ -89,14 +89,14 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --    REFERENCES `wine_ticket`.`cidade` (`id`)
 --    ON DELETE NO ACTION
 --    ON UPDATE NO ACTION)
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`pagamento`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`pagamento` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`pagamento`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`pagamento` (
 --  `id` INT NOT NULL,
 --  `agencia` VARCHAR(32) NULL,
 --  `conta` VARCHAR(32) NULL,
@@ -107,14 +107,14 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --  `operacao` VARCHAR(16) NULL,
 --  PRIMARY KEY (`id`),
 --  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`empresa_parceira`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`empresa_parceira` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`empresa_parceira`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`empresa_parceira` (
 --  `id` INT NOT NULL AUTO_INCREMENT,
 --  `cnpj` VARCHAR(45) NULL,
 --  `nome_fantasia` VARCHAR(45) NULL,
@@ -139,27 +139,27 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --    REFERENCES `wine_ticket`.`pagamento` (`id`)
 --    ON DELETE RESTRICT
 --    ON UPDATE CASCADE)
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`funcionario_wine`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`funcionario_wine` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`funcionario_wine`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`funcionario_wine` (
 --  `id` INT NOT NULL AUTO_INCREMENT,
 --  `nome` VARCHAR(45) NULL,
 --  `email` VARCHAR(45) NULL,
 --  `senha` VARCHAR(45) NULL,
 --  PRIMARY KEY (`id`))
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`log`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`log` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`log`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`log` (
 --  `id` INT NOT NULL AUTO_INCREMENT,
 --  `operacao_id` INT NULL,
 --  `operacao` VARCHAR(128) NULL,
@@ -167,15 +167,15 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --  `quando` DATETIME NULL,
 --  `onde` VARCHAR(256) NULL,
 --  PRIMARY KEY (`id`))
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 --
---SHOW WARNINGS;
---USE `wine_ticket` ;
+-- SHOW WARNINGS;
+-- USE `wine_ticket` ;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`cliente`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`cliente` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`cliente`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`cliente` (
 --  `id` INT(11) NOT NULL AUTO_INCREMENT,
 --  `nome_fantasia` VARCHAR(64) NOT NULL,
 --  `razao_social` VARCHAR(128) NULL DEFAULT NULL,
@@ -205,16 +205,16 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --    REFERENCES `wine_ticket`.`endereco` (`id`)
 --    ON DELETE RESTRICT
 --    ON UPDATE CASCADE)
---ENGINE = InnoDB
---AUTO_INCREMENT = 6
---DEFAULT CHARACTER SET = utf8;
+-- ENGINE = InnoDB
+-- AUTO_INCREMENT = 6
+-- DEFAULT CHARACTER SET = utf8;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`tecnico`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`tecnico` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`tecnico`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`tecnico` (
 --  `id` INT(11) NOT NULL AUTO_INCREMENT,
 --  `nome para contato` VARCHAR(45) NULL DEFAULT NULL,
 --  `email` VARCHAR(64) NULL DEFAULT NULL,
@@ -247,31 +247,31 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --    REFERENCES `wine_ticket`.`empresa_parceira` (`id`)
 --    ON DELETE RESTRICT
 --    ON UPDATE CASCADE)
---ENGINE = InnoDB
---AUTO_INCREMENT = 3
---DEFAULT CHARACTER SET = utf8;
+-- ENGINE = InnoDB
+-- AUTO_INCREMENT = 3
+-- DEFAULT CHARACTER SET = utf8;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`ticket_status`
 ---- -----------------------------------------------------
----- Table `wine_ticket`.`ticket_status`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`ticket_status` (
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`ticket_status` (
 --  `id` INT(11) NOT NULL AUTO_INCREMENT,
 --  `status` VARCHAR(45) NOT NULL,
 --  `description` VARCHAR(128) NULL DEFAULT NULL,
 --  PRIMARY KEY (`id`),
 --  UNIQUE INDEX `ticket_status_id_UNIQUE` (`id` ASC) )
---ENGINE = InnoDB
---AUTO_INCREMENT = 5
---DEFAULT CHARACTER SET = utf8;
+-- ENGINE = InnoDB
+-- AUTO_INCREMENT = 5
+-- DEFAULT CHARACTER SET = utf8;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
----- -----------------------------------------------------
----- Table `wine_ticket`.`ticket`
----- -----------------------------------------------------
---CREATE TABLE IF NOT EXISTS `wine_ticket`.`ticket` (
+-- -- -----------------------------------------------------
+-- -- Table `wine_ticket`.`ticket`
+-- -- -----------------------------------------------------
+-- CREATE TABLE IF NOT EXISTS `wine_ticket`.`ticket` (
 --  `ticket_id` INT(10) NOT NULL AUTO_INCREMENT,
 --  `cliente_id` INT(11) NULL DEFAULT NULL,
 --  `tecnico_id` INT(11) NULL DEFAULT NULL,
@@ -309,14 +309,14 @@ CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 --    REFERENCES `wine_ticket`.`tecnico` (`id`)
 --    ON DELETE RESTRICT
 --    ON UPDATE CASCADE)
---ENGINE = InnoDB
---DEFAULT CHARACTER SET = utf8;
+-- ENGINE = InnoDB
+-- DEFAULT CHARACTER SET = utf8;
 --
---SHOW WARNINGS;
+-- SHOW WARNINGS;
 --
---SET SQL_MODE=@OLD_SQL_MODE;
---SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
---SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- SET SQL_MODE=@OLD_SQL_MODE;
+-- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+-- SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 CREATE USER IF NOT EXISTS 'wine_dbadmin'@'%' IDENTIFIED BY 'wine_DS35uqgTFa';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../../../service/client.service';
-import { Client } from '../../../service/client';
+import { ClienteService } from '../../../service/client.service';
+import { Cliente } from '../../../model/cliente';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,14 +10,15 @@ import { Router } from '@angular/router';
 })
 export class ClientListComponent implements OnInit {
 
-  constructor(private api: ClientService, private router: Router) { }
-  clients: Client[] = [];
+  constructor(private api: ClienteService, private router: Router) { }
+  clientes: Cliente[] = [];
   ngOnInit() {
-    this.getClients();
+    this.getClientes();
   }
 
-  getClients() {
-    this.api.getClients().subscribe(c => this.clients = c);
+  getClientes() {
+    this.api.getClientes().subscribe(c => {
+      this.clientes = c['data']['cliente']});
   }
 
   editClient(id: number) {
@@ -26,7 +27,11 @@ export class ClientListComponent implements OnInit {
 
   deleteClient(id: number){
     console.log(`Indo apagar o cliente ${id}`);
-    this.api.deleteClient(id).subscribe(c => console.log(c));
+    this.api.deleteCliente(id).subscribe(c => {
+      console.log(c)
+      alert("Cliente apagado com sucesso!");
+      window.location.reload();
+    });
     // Se deletou com sucesso então affect rows não será igual a zero
   }
 

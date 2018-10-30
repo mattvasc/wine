@@ -3,20 +3,37 @@ var express = require('express');
 var router = express.Router();
 let entidade = Model[entidade_nome];
 
+// get single
+router.get('/:id', function (req, res) {
+	console.log(`Indo pegar um @s ${entidade_nome}`);
+	const object_id = req.params.id;
+	entidade.findByPk(object_id).then( result => {
+		let temp = {success:true, data: {}};
+		temp.data[entidade_nome] = result;
+		console.log(`Deu boa, retornando...`);
+		res.json(temp);
+	}).catch(error => res.json({
+		success: false,
+		data: {},
+		error: error
+	}));
+});
 // get all
 router.get('/', function (req, res) {
+	console.log(`Indo pegar todos @s ${entidade_nome}`);
 	entidade.findAll().then(result => {
 		let temp = {
 			success: true, data: {}
 		};
 		temp["data"][entidade_nome] = result;
+		console.log(`Deu boa, retornando...`);
 		res.json(temp);
 	})
 		.catch(error => res.json({
 			success: false,
 			data: {},
 			error: error
-		}));;
+		}));
 });
 
 // get com Com paginação
@@ -58,7 +75,7 @@ router.get('/describe', function (req, res) {
 
 // criar uma nova instancia
 router.post('/', function (req, res) { 
-	let temp = entidate.build(req.body);
+	let temp = entidade.build(req.body);
 	temp.save()
 	.then( payload => {
 		let temp = {

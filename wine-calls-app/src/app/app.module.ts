@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {
   ClientListComponent,
@@ -18,7 +19,9 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { simpleReducer } from './reducers/simple.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment'; // Angular CLI environemnt
+import { environment } from '../environments/environment';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question.component'; // Angular CLI environemnt
 
 const appRoutes: Routes = [
   { path: 'clientes', component: ClientMainComponent },
@@ -46,13 +49,16 @@ const appRoutes: Routes = [
     TechnicianCreateUpdateComponent,
     TechnicianListComponent,
     TechnicianMainComponent,
-    TicketMainComponent
+    TicketMainComponent,
+    DynamicFormComponent,
+    DynamicFormQuestionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes
       //, { enableTracing: true } // <-- debugging purposes only

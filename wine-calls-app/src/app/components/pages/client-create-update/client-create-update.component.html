@@ -1,8 +1,7 @@
 <button routerLink="/clientes"><- Voltar</button>
-<table>
-<tbody>
-<tr><td>Nome:</td> <td><input [(ngModel)]="clienteAtual.name" type="text" id="nome_input"></td></tr>
-<tr><td>Email:</td><td> <input [(ngModel)]="clienteAtual.email" type="text" id="email_input"></td></tr>
-<tr><button (click)="exec()">{{ textoBotao }}</button></tr>
-</tbody>
-</table>
+
+<div style="margin-left: 5vw">
+	<h2>{{(isSalvar) ? "Cadastro" : "Atualização"}} de Cliente</h2>
+	<app-dynamic-form (submitEvent)="exec($event)" [questions]="questions" [isSalvar]='isSalvar' [bindTo]="clienteAtual">
+	</app-dynamic-form>
+</div>

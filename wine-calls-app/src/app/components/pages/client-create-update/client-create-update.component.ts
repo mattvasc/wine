@@ -1,28 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../../../service/client.service';
-import { Client } from '../../../service/client';
+import { ClienteService } from '../../../service/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { ClienteQuestionService } from '../../../model_questions/cliente-question.service';
+import { Cliente } from '../../../model/cliente';
 
 @Component({
   selector: 'app-client-create-update',
   templateUrl: './client-create-update.component.html',
-  styleUrls: ['./client-create-update.component.scss']
+  styleUrls: ['./client-create-update.component.scss'],
+  providers:  [ClienteQuestionService]
 })
 export class ClientCreateUpdateComponent implements OnInit {
-  private clienteAtual: Client;
+  public isSalvar: boolean = true;
+  private clienteAtual: Cliente;
   private id: number;
   private sub: any;
-  private retorno: Client;
-  private textoBotao: String = 'Salvar';
-  constructor(
-    private api: ClientService,
+  private retorno: Cliente;
+  questions: any[];
+
+  constructor(private questionsService: ClienteQuestionService,
+    private api: ClienteService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+      this.questions = questionsService.getQuestions();
+     }
 
 
   ngOnInit() {
-    this.clienteAtual = new Client("", "");
+    this.clienteAtual = new Cliente();
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       // se o usuário acessou a pagina sem passar um id inteiro...
@@ -33,11 +38,13 @@ export class ClientCreateUpdateComponent implements OnInit {
       }
       // Se for um Update
       if (this.id !== undefined) {
-        this.textoBotao = "Atualizar";
+        this.isSalvar = false;
         this.id = + this.id; // Cast string to int
-        this.api.getClient(this.id).subscribe(ret => {
+        this.api.getCliente(this.id).subscribe(ret => {
           if (ret !== null) {
-            this.clienteAtual = ret;
+            // TODO: Verificar o success
+            this.clienteAtual = ret["data"]["cliente"];
+            
           } else {
             // TODO: Proteger a página, saindo dela quando informar id invalido
             alert("Acessando a pagina com um id inválido!");
@@ -49,28 +56,31 @@ export class ClientCreateUpdateComponent implements OnInit {
 
     });
   }
-
-  exec(){
+  
+  exec(payload){
+    this.clienteAtual = <Cliente>payload;
+    // console.log(this.clienteAtual);
     if(this.id === undefined)
-      this.createClient();
+      this.createCliente(this.api, this.router);
     else
-      this.updateClient();
+      this.updateCliente();
   }
 
-  createClient() {
+  createCliente(api, router) {
     // TODO: Validar Campos antes!
     // TODO: Mostrar modal de loading enquanto comunica com API
-    this.api.createClient(this.clienteAtual).subscribe(valor => {
+    api.createCliente(this.clienteAtual).subscribe(valor => {
       // TODO: Verificar se a api retornou cod 400 ou erro
-      
-      this.router.navigateByUrl("/clientes");
+      console.log(valor);
+      alert(valor);
+    router.navigateByUrl("/clientes");
     
     });
   }
-  updateClient() {
+  updateCliente() {
     // TODO: Validar campos antes!
     // TODO: Mostrar modal de loading enquanto comunica com API
-    this.api.updateClient(this.clienteAtual).subscribe(valor => {
+    this.api.updateCliente(this.clienteAtual).subscribe(valor => {
       // TODO: Verificar se a api retornou cod 400 ou erro
       this.router.navigateByUrl("/clientes");
     });

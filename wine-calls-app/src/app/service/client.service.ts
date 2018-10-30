@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';  
-import { Client } from "./client";
+import { Cliente } from '../model/cliente';
 import {  HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
+import { ApiService } from './api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,31 +15,32 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class ClientService {
+export class ClienteService {
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient, private api: ApiService) {  }
 
 
-  private apiUrl = 'http://localhost:3000/';
-  getClients(): Observable<Client[]> {
+  private apiUrl = this.api.apiUrl;
+  private posfixo = 'clientes'
+  getClientes(): Observable<Cliente[]> {
 
-    return this.http.get<Client[]>(this.apiUrl + 'clients');
+    return this.http.get<Cliente[]>(this.apiUrl + this.posfixo );
   }
 
-  getClient(id: number): Observable<Client> {
+  getCliente(id: number): Observable<Cliente> {
 
-    return this.http.get<Client>(this.apiUrl + `clients/${id}`);
+    return this.http.get<Cliente>(this.apiUrl + this.posfixo +`/${id}`);
   }
 
-  createClient(c: Client): Observable<Client> {
-    return this.http.post<Client>(this.apiUrl + 'clients', c, httpOptions);
+  createCliente(c: Cliente): Observable<Cliente> {
+    return this.http.post<Cliente>(this.apiUrl + this.posfixo, c, httpOptions);
   }
 
-  deleteClient(id: number): Observable<Object> {
-    return this.http.delete(this.apiUrl+'clients/'+id.toString());
+  deleteCliente(id: number): Observable<Object> {
+    return this.http.delete(this.apiUrl+ this.posfixo +'/'+id.toString());
   }
 
-  updateClient(c : Client): Observable<Client> {
-    return this.http.put<Client>(this.apiUrl + `clients/${c.id}`, c, httpOptions);
+  updateCliente(c : Cliente): Observable<Cliente> {
+    return this.http.put<Cliente>(this.apiUrl + this.posfixo +`/${c.id}`, c, httpOptions);
   }
 }

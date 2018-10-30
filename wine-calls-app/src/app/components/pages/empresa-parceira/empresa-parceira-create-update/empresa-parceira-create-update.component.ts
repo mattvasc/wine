@@ -41,6 +41,7 @@ export class EmpresaParceiraCreateUpdateComponent implements OnInit {
           if (ret["data"] !== undefined) {
             // TODO: Verificar o success
             this.epAtual = ret["data"]["empresa_parceira"];
+            console.log(this.epAtual);
 
           } else {
             // TODO: Proteger a página, saindo dela quando informar id invalido
@@ -55,7 +56,9 @@ export class EmpresaParceiraCreateUpdateComponent implements OnInit {
   }
 
   exec(payload) {
+    let temp = this.epAtual["id"];
     this.epAtual = <EmpresaParceira>payload;
+    this.epAtual.id = temp;
     // console.log(this.epAtual);
     if (this.id === undefined)
       this.create();

@@ -56,7 +56,9 @@ export class ClientCreateUpdateComponent implements OnInit {
   }
   
   exec(payload){
+    let temp = this.clienteAtual["id"];
     this.clienteAtual = <Cliente>payload;
+    this.clienteAtual.id = temp;
     // console.log(this.clienteAtual);
     if(this.id === undefined)
       this.createCliente(this.api, this.router);

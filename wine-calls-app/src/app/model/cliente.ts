@@ -1,4 +1,6 @@
-export class Cliente {
+import { Entidade } from "./entidade";
+
+export class Cliente extends Entidade {
 	public id?: number;
 	public nome_fantasia?: string;
 	public razao_social?: string;

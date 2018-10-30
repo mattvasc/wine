@@ -75,6 +75,7 @@ router.get('/describe', function (req, res) {
 
 // criar uma nova instancia
 router.post('/', function (req, res) { 
+	console.log("indo criar uma nova instancia de " + entidade_nome);
 	let temp = entidade.build(req.body);
 	temp.save()
 	.then( payload => {
@@ -85,11 +86,13 @@ router.post('/', function (req, res) {
 		temp["data"][entidade_nome] = payload;
 		res.json(temp);
 	})
-	.catch(error => res.json({
+	.catch(error => {
+		console.log(error);
+		res.json({
 		success: false,
 		data: {},
 		error: error
-	}));
+	})});
 });
 
 

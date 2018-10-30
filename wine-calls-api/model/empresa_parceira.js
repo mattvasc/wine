@@ -48,10 +48,9 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    ativa: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      defaultValue: '1'
+    situacao: {
+      type: DataTypes.STRING(16),
+      allowNull: true
     },
     observacoes: {
       type: DataTypes.STRING(256),

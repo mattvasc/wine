@@ -77,7 +77,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     situacao: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(16),
       allowNull: true
     },
     endereco_id: {
@@ -89,7 +89,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     observacoes: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(256),
       allowNull: true
     }
   }, {

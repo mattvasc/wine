@@ -22,7 +22,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
-import { EntidadeComponent } from './entidade/entidade.component';
 
 // Angular CLI environemnt
 
@@ -55,7 +54,6 @@ const appRoutes: Routes = [
     EmpresaParceiraMainComponent,
     EmpresaParceiraCreateUpdateComponent,
     EmpresaParceiraListComponent,
-    EntidadeComponent
   ],
   imports: [
     BrowserModule,

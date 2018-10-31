@@ -1,33 +1,25 @@
-<h1>Cadastro de Chamado</h1>
+<div class="container">
 
-<br />
-<br />
+  <h1>Cadastro de Chamado</h1>
 
-<form id="formChamado">
+  <form id="formChamado">
 
+    <hr>
 
+    <h3>Dados Gerais: </h3>
 
-  <h3>Dados Gerais: </h3>
-  <br>
-  <br>
+      <div class="form-group col-md-4">
+        <label for="ticket_status_id">Status do Chamado</label>
+        <select id="ticket_status_id" class="form-control">
+          <option selected>Aberto</option>
+          <option>Agendado</option>
+          <option>em Atendimento</option>
+          <option>Entregue</option>
+          <option>Documentos Validados</option>
+          <option>Encerrado</option>
+        </select>
+      </div>
 
-  <br>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="ticket_status_id">Status do Chamado</label>
-      <select id="ticket_status_id" class="form-control">
-        <option selected>Aberto</option>
-        <option>Agendado</option>
-        <option>em Atendimento</option>
-        <option>Entregue</option>
-        <option>Documentos Validados</option>
-        <option>Encerrado</option>
-      </select>
-    </div>
-  </div>
-
-
-  <div class="form-row">
       <div class="form-group col-md-4">
         <label for="tipo_ticket">Categoria do Chamado</label>
         <select id="tipo_ticket" class="form-control">
@@ -36,9 +28,9 @@
           <option>Data Center</option>
         </select>
       </div>
-  </div>
 
-  <div class="form-row">
+    <p style="clear: both"></p>
+
     <div class="form-group col-md-4">
       <label for="cliente_id">ID Cliente</label>
       <input type="number" class="form-control" id="cliente_id" required>
@@ -53,16 +45,27 @@
       <label for="ticket_cliente_id">ID Chamado Externo</label>
       <input type="text" class="form-control" id="ticket_cliente_id" required>
     </div>
-  </div>
 
-  <!-- Chamar Componente Data Hora Agendamento -->
-  <app-data-hora-agendamento></app-data-hora-agendamento>
+    <div class="form-group col-md-12">
+      <label for="email_contato">E-mail para contato</label>
+      <input type="email" class="form-control" id="email_contato" required>
+    </div>
 
-  <!-- Chamar Componente Endereço -->
-  <app-endereco></app-endereco>
+    <!-- TODO: Precisa corrigir o name -->
+    <!-- <app-endereco></app-endereco> -->
 
+    <p style="clear: both"></p>
 
-  <div class="form-row">
+    <hr>
+
+    <!-- Chamar Componente Data Hora Agendamento -->
+    <app-data-hora-agendamento></app-data-hora-agendamento>
+
+    <!-- Chamar Componente Endereço -->
+    <app-endereco></app-endereco>
+
+    <p style="clear: both"></p>
+    <hr>
 
     <h3>Valores Pagamento: </h3>
 
@@ -83,13 +86,13 @@
           id="preco_tecnico" />
       </div>
     </div>
-  </div>
 
-  <br>
-  <br>
-  <!-- Chamar Componente observacoes -->
-  <app-observacoes></app-observacoes>
+    <p style="clear: both"></p>
+    <hr>
+    <app-observacoes></app-observacoes>
 
-  <button type="submit" class="btn btn-success">Cadastrar</button>
+    <button type="submit" class="btn btn-success">Cadastrar</button>
 
-</form>
+  </form>
+
+</div>

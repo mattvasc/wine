@@ -1,0 +1,7 @@
+<button routerLink="/clientes"><- Voltar</button>
+
+<div style="margin-left: 5vw">
+	<h2>{{(isSalvar) ? "Cadastro" : "Atualização"}} de Cliente</h2>
+	<app-dynamic-form (submitEvent)="exec($event)" [questions]="questions" [isSalvar]='isSalvar' [bindTo]="clienteAtual">
+	</app-dynamic-form>
+</div>

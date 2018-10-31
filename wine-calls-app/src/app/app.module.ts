@@ -4,16 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {
-  ClientListComponent,
+  ClienteListComponent,
   ClientCreateUpdateComponent,
   ClientMainComponent,
   MainComponent,
-  NotFoundComponent, 
-  TechnicianCreateUpdateComponent, 
-  TechnicianListComponent, 
-  TechnicianMainComponent, 
+  NotFoundComponent,
+  EmpresaParceiraMainComponent,
+  EmpresaParceiraCreateUpdateComponent,
+  EmpresaParceiraListComponent,
+  LoginComponent,
   TicketMainComponent } from './components/pages';
 import { StoreModule } from '@ngrx/store';
 import { simpleReducer } from './reducers/simple.reducer';
@@ -29,17 +31,22 @@ import { ChamadoComponent } from './components/pages/chamado-form/chamado.compon
 import { DataHoraAgendamentoComponent } from './components/pages/data-hora-agendamento/data-hora-agendamento.component';
 import { ClienteFormComponent } from './components/pages/cliente-form/cliente-form.component';
 import { FuncionarioFormComponent } from './components/pages/funcionario-form/funcionario-form.component'; // Angular CLI environemnt
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
 
+// Angular CLI environemnt
 
 const appRoutes: Routes = [
   { path: 'clientes', component: ClienteFormComponent },
   { path: 'formsCliente', component: ClientCreateUpdateComponent },
   { path: 'formsCliente/:id', component: ClientCreateUpdateComponent },
-
   { path: 'parceiros', component: ParceiroFormComponent },
   {path: 'tecnicos', component: TecnicoFormComponent},
   { path: 'formsTecnico', component: TechnicianCreateUpdateComponent },
   { path: 'formsTecnico/:id', component: TechnicianCreateUpdateComponent },
+  { path: 'empresasParceiras', component: EmpresaParceiraMainComponent },
+  { path: 'formsEmpresaParceira', component: EmpresaParceiraCreateUpdateComponent },
+  { path: 'formsEmpresaParceira/:id', component: EmpresaParceiraCreateUpdateComponent },
 
   { path: 'chamados', component: ChamadoComponent },
   { path: 'funcionarios', component: FuncionarioFormComponent },
@@ -52,7 +59,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ClientListComponent,
+    ClienteListComponent,
     ClientCreateUpdateComponent,
     MainComponent,
     ClientMainComponent,
@@ -71,12 +78,20 @@ const appRoutes: Routes = [
     DataHoraAgendamentoComponent,
     ClienteFormComponent,
     FuncionarioFormComponent
+    TicketMainComponent,
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
+    EmpresaParceiraMainComponent,
+    EmpresaParceiraCreateUpdateComponent,
+    EmpresaParceiraListComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes
       //, { enableTracing: true } // <-- debugging purposes only

@@ -24,7 +24,9 @@ import { EnderecoComponent } from './components/pages/endereco/endereco.componen
 import { EmailTelefoneComponent } from './components/pages/email-telefone/email-telefone.component';
 import { ObservacoesComponent } from './components/pages/observacoes/observacoes.component';
 import { TecnicoFormComponent } from './components/pages/tecnico-form/tecnico-form.component';
-import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component'; // Angular CLI environemnt
+import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component';
+import { ChamadoComponent } from './components/pages/chamado/chamado.component';
+import { DataHoraAgendamentoComponent } from './components/pages/data-hora-agendamento/data-hora-agendamento.component'; // Angular CLI environemnt
 
 
 const appRoutes: Routes = [
@@ -37,7 +39,7 @@ const appRoutes: Routes = [
   { path: 'formsTecnico', component: TechnicianCreateUpdateComponent },
   { path: 'formsTecnico/:id', component: TechnicianCreateUpdateComponent },
 
-  { path: 'chamados', component: TicketMainComponent },
+  { path: 'chamados', component: ChamadoComponent },
   // Colocar todas as rotas novas antes dessas duas abaixo..!
   { path: '', pathMatch: 'full', component: MainComponent },
   { path: '**', component: NotFoundComponent }
@@ -60,7 +62,9 @@ const appRoutes: Routes = [
     EmailTelefoneComponent,
     ObservacoesComponent,
     TecnicoFormComponent,
-    StatusAtivoInativoComponent
+    StatusAtivoInativoComponent,
+    ChamadoComponent,
+    DataHoraAgendamentoComponent
   ],
   imports: [
     BrowserModule,

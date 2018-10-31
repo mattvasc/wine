@@ -1,0 +1,40 @@
+<h1>Cadastro do Funcionário Wine</h1>
+
+<br />
+<br />
+
+<form id="formFuncionario">
+  <div class="form-group col-md-9">
+
+    <h3>Dados Gerais: </h3>
+
+
+    <div class="row">
+      <div class="form-group">
+        <label for="funcionarioNome">Nome Completo</label>
+        <input type="text" class="form-control" id="funcionarioNome" placeholder="Fábio Roberto Alves de Lima" required>
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="funcionarioCPF">CPF </label>
+          <input type="text" class="form-control" id="funcionarioCPF" placeholder="999.999.99-99" required>
+        </div>
+      </div>
+      <div class="form-group col-md-8">
+        <label for="empresaEmail">Email</label>
+        <input type="email" class="form-control" id="empresaEmail" placeholder="fabio@wine.com.br">
+      </div>
+
+      <!-- Chamar Componente observacoes -->
+      <app-observacoes></app-observacoes>
+
+      <button type="submit" class="btn btn-success">Cadastrar</button>
+
+
+    </div>
+  </div>
+
+
+</form>

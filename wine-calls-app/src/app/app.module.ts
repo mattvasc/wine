@@ -27,7 +27,8 @@ import { TecnicoFormComponent } from './components/pages/tecnico-form/tecnico-fo
 import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component';
 import { ChamadoComponent } from './components/pages/chamado-form/chamado.component';
 import { DataHoraAgendamentoComponent } from './components/pages/data-hora-agendamento/data-hora-agendamento.component';
-import { ClienteFormComponent } from './components/pages/cliente-form/cliente-form.component'; // Angular CLI environemnt
+import { ClienteFormComponent } from './components/pages/cliente-form/cliente-form.component';
+import { FuncionarioFormComponent } from './components/pages/funcionario-form/funcionario-form.component'; // Angular CLI environemnt
 
 
 const appRoutes: Routes = [
@@ -41,6 +42,8 @@ const appRoutes: Routes = [
   { path: 'formsTecnico/:id', component: TechnicianCreateUpdateComponent },
 
   { path: 'chamados', component: ChamadoComponent },
+  { path: 'funcionarios', component: FuncionarioFormComponent },
+  
   // Colocar todas as rotas novas antes dessas duas abaixo..!
   { path: '', pathMatch: 'full', component: MainComponent },
   { path: '**', component: NotFoundComponent }
@@ -66,7 +69,8 @@ const appRoutes: Routes = [
     StatusAtivoInativoComponent,
     ChamadoComponent,
     DataHoraAgendamentoComponent,
-    ClienteFormComponent
+    ClienteFormComponent,
+    FuncionarioFormComponent
   ],
   imports: [
     BrowserModule,

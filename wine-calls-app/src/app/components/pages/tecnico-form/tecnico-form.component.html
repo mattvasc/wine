@@ -1,0 +1,71 @@
+<h1>Cadastro do Tecnico</h1>
+
+<!-- Para preencher automaticamente um Campo Nome -->
+<!-- <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
+
+<br/>
+<br/>
+
+<form id="formTecnico">
+  <div class="form-group col-md-9">
+
+    <h3>Dados Gerais: </h3>
+
+
+    <!-- Botao Status Ativo / Inativo -->
+    <app-status-ativo-inativo></app-status-ativo-inativo>
+
+    <br/>
+    
+    <div class="row">
+      <div class="form-group">
+        <label for="tecnicoNome">Nome Completo</label>
+        <input type="text" class="form-control" id="tecnicoNome" placeholder="João Monteiro da Silva">
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="empresaCPF">CPF </label>
+          <input type="text" class="form-control" id="empresaCPF" placeholder="999.999.99-99" required>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="empresaRG">RG </label>
+          <input type="text" class="form-control" id="empresaRG" placeholder="99.999.999-9 SSP" required>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="empresaRGData">Data de Emissão do RG </label>
+          <input type="date" class="form-control" id="empresaRGData">
+        </div>
+
+      </div>
+
+
+      <!-- Chamar Componente emailTelefone -->
+      <app-email-telefone></app-email-telefone>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
+
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
+      <!-- Chamar Componente observacoes -->
+      <app-observacoes></app-observacoes>
+
+      <button type="submit" class="btn btn-success">Cadastrar</button>
+
+
+    </div>
+  </div>
+
+
+</form>

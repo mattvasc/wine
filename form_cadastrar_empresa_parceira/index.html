@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
+		
+		<title>Wine Tecnologia - Cadastro da Empresa Parceira</title>
+
+		<!-- Bootstrap -->
+		<link href="style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	</head>
+	<body>
+		<h1>Cadastro da Empresa Parceira</h1>
+
+		<!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
+		<script src="style/bootstrap/js/bootstrap.min.js"></script>
+
+		<br/>
+		<br/>
+
+		<form id="formEmpresaParceira">
+			<div class="form-group col-md-9">
+
+			<h3>Dados Gerais: </h3>
+			<br/>
+			<br/>
+
+				<div class="row">
+				<div class="col-sm-12">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="gridRadios" id="pessoaJuridica" value="pessoaJuridica" checked>
+						<label class="form-check-label" for="pessoaJuridica">
+							Pessoa Jurídica
+						</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="gridRadios" id="pessoaFisica" value="pessoaFisica">
+						<label class="form-check-label" for="pessoaFisica">
+							Pessoa Física
+						</label>
+					</div>
+			
+			<br/>
+			<br/>
+
+				<div class="form-group">
+					<label for="empresaNomeRazaoSocial">Nome Razão Social</label> 
+					<input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="" required>
+				</div>
+
+				<div class="form-group">
+					<label for="empresaNomeFantasia">Nome Fantasia</label>
+					<input type="text" class="form-control" id="empresaNomeFantasia" placeholder="" required>
+				</div>
+
+
+				<div class="form-group">
+					<label for="empresaCNPJ">CNPJ (se PJ = true)</label>
+					<input type="text" class="form-control" id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
+				</div>
+
+
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="empresaCPF">CPF (se PF = true)</label>
+						<input type="text" class="form-control" id="empresaCPF" placeholder="999.999.99-99" required>
+					</div>
+
+					<div class="form-group col-md-4">
+							<label for="empresaRG">RG (se PF = true)</label>
+							<input type="text" class="form-control" id="empresaRG" placeholder="99.999.999-9 SSP" required>
+					</div>
+
+					<div class="form-group col-md-4">
+							<label for="empresaRGData">Data de Emissão do RG (se PF = true)</label>
+							<input type="date" class="form-control" id="empresaRGData" >
+					</div>
+
+				</div>
+
+
+				<div class="form-group">
+					<label for="empresaLogradouro">Logradouro</label>
+					<input type="text" class="form-control" id="empresaLogradouro" placeholder="Avenida Salgado Filho, 123">
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="empresaMunicipio">Município</label>
+						<input type="text" class="form-control" id="empresaMunicipio">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="empresaEstado">Estado</label>
+						<select id="empresaEstado" class="form-control">
+							<option selected>SP</option>
+							<option>AM</option>
+						</select>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="empresaCEP">CEP</label>
+						<input type="text" class="form-control" id="empresaCEP" placeholder="07115-000">
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="empresaResponsavel">Nome do Responsável</label>
+					<input type="text" class="form-control" id="empresaResponsavel" placeholder="João da Silva" >
+				</div>
+
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="empresaEmail">Email</label>
+						<input type="email" class="form-control" id="empresaEmail" placeholder="contato@empresa.com.br">
+					</div>
+
+					<div class="form-group col-md-6">
+							<label for="empresaTelefones">Telefones</label>
+							<input type="text" class="form-control" id="empresaTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222">
+					</div>
+
+			 </div>
+
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+
+			<h3>Dados Bancários: </h3>
+
+			<br/>
+			<br/>
+			
+			<div class="form-row">
+				<div class="form-group col-md-8">
+					<label for="empresaNomeTitularBanco">Nome do Titular</label>
+					<input type="text" class="form-control" id="empresaNomeTitularBanco" placeholder="David Ricardo dos Santos" >
+				</div>
+		 
+			
+				<div class="form-group col-md-4">
+						<label for="empresaCPFBanco">CPF/CNPJ</label>
+						<input type="text" class="form-control" id="empresaCPFBanco" >
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="gridRadios" id="contaCorrente" value="contaCorrente" checked>
+						<label class="form-check-label" for="contaCorrente">
+							Conta Corrente
+						</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="gridRadios" id="contaPoupanca" value="contaPoupanca">
+						<label class="form-check-label" for="contaPoupanca">
+							Conta Poupança
+						</label>
+			</div>
+
+			<br/>
+			<br/>
+
+
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label for="empresaNomeDoBanco">Nome do Banco</label>
+					<input type="text" class="form-control" id="empresaNomeDoBanco" placeholder="Itaú" >
+				</div>
+			
+				
+				<div class="form-group col-md-3">
+						<label for="empresaAgenciaBanco">Número da Agência</label>
+						<input type="text" class="form-control" id="empresaAgenciaBanco" placeholder="5870">
+				</div>
+
+				<div class="form-group col-md-3">
+						<label for="empresaContaBanco">Número da Conta</label>
+						<input type="text" class="form-control" id="empresaContaBanco" placeholder="12351-3">
+				</div>
+
+				<div class="form-group col-md-2">
+						<label for="empresaOpBanco">Operação</label>
+						<input type="text" class="form-control" id="empresaOpBanco" placeholder="">
+				</div>
+			</div>
+
+
+
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+
+			<h3>Outras Informações: </h3>
+				
+				<div class="form-group">
+					<label for="empresaObs"></label>
+					<textarea class="form-control" id="empresaObs" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante referente à empresa."></textarea>
+				</div>
+
+				<button type="submit" class="btn btn-success">Cadastrar</button>
+			</div>  
+		</form>
+
+
+	</body>
+</html>

@@ -3,11 +3,8 @@
 <!-- Para preencher automaticamente um Campo Nome -->
 <!-- <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
 
-<br/>
-<br/>
-
 <form id="formEmpresaParceira">
-  <div class="form-group col-md-9">
+  <div class="form-group">
 
     <h3>Dados Gerais: </h3>
     <br/>
@@ -15,173 +12,172 @@
 
     <!-- Botao Status Ativo / Inativo -->
     <app-status-ativo-inativo></app-status-ativo-inativo>
-    
+
     <br/>
 
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="pessoaJuridica" value="pessoaJuridica" [(ngModel)]='isPJ'
-            [ngModelOptions]="{standalone: true}">
-          <label class="form-check-label" for="pessoaJuridica">
-            Pessoa Jurídica
-          </label>
+
+    <div class="col-md-12">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="pessoaJuridica" value="pessoaJuridica" [(ngModel)]='isPJ'
+          [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="pessoaJuridica">
+          Pessoa Jurídica
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="pessoaFisica" value="pessoaFisica" [(ngModel)]='isPJ'
+          [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="pessoaFisica">
+          Pessoa Física
+        </label>
+      </div>
+
+      <br/>
+      <br/>
+
+      <div class="form-group">
+        <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
+        <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="">
+      </div>
+
+      <div class="form-group">
+        <label for="empresaNomeFantasia">Nome Fantasia</label>
+        <input type="text" class="form-control" id="empresaNomeFantasia" placeholder="" required>
+      </div>
+
+
+      <div class="form-group" *ngIf='isPJ=="pessoaJuridica" '>
+        <label for="empresaCNPJ">CNPJ </label>
+        <input type="text" class="form-control" id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
+      </div>
+
+      <!-- Se for PessoaFisica -->
+      <div class="form-row" *ngIf='isPJ=="pessoaFisica"'>
+        <div class="form-group col-md-4">
+          <label for="empresaCPF">CPF </label>
+          <input type="text" class="form-control" id="empresaCPF" placeholder="999.999.99-99" required>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="pessoaFisica" value="pessoaFisica" [(ngModel)]='isPJ'
-            [ngModelOptions]="{standalone: true}">
-          <label class="form-check-label" for="pessoaFisica">
-            Pessoa Física
-          </label>
+
+        <div class="form-group col-md-4">
+          <label for="empresaRG">RG </label>
+          <input type="text" class="form-control" id="empresaRG" placeholder="99.999.999-9 SSP" required>
         </div>
 
-        <br/>
-        <br/>
-
-        <div class="form-group">
-          <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
-          <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="">
+        <div class="form-group col-md-4">
+          <label for="empresaRGData">Data de Emissão do RG </label>
+          <input type="date" class="form-control" id="empresaRGData">
         </div>
 
-        <div class="form-group">
-          <label for="empresaNomeFantasia">Nome Fantasia</label>
-          <input type="text" class="form-control" id="empresaNomeFantasia" placeholder="" required>
-        </div>
+      </div>
+      <!-- Fim PessoaFisica -->
+
+      <!-- Chamar Componente Endereço -->
+      <app-endereco></app-endereco>
 
 
-        <div class="form-group" *ngIf='isPJ=="pessoaJuridica" '>
-          <label for="empresaCNPJ">CNPJ </label>
-          <input type="text" class="form-control" id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
-        </div>
 
-        <!-- Se for PessoaFisica -->
-        <div class="form-row" *ngIf='isPJ=="pessoaFisica"'>
-          <div class="form-group col-md-4">
-            <label for="empresaCPF">CPF </label>
-            <input type="text" class="form-control" id="empresaCPF" placeholder="999.999.99-99" required>
+
+      <!-- Chamar Componente emailTelefone -->
+      <app-email-telefone></app-email-telefone>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
+      <h3>Dados de Pagamento: </h3>
+
+      <br/>
+      <br/>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="valorVisita">Valor da Visita</label>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="number" value="100" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="10" class="form-control currency"
+              id="valorVisita" />
           </div>
-
-          <div class="form-group col-md-4">
-            <label for="empresaRG">RG </label>
-            <input type="text" class="form-control" id="empresaRG" placeholder="99.999.999-9 SSP" required>
-          </div>
-
-          <div class="form-group col-md-4">
-            <label for="empresaRGData">Data de Emissão do RG </label>
-            <input type="date" class="form-control" id="empresaRGData">
-          </div>
-
         </div>
-        <!-- Fim PessoaFisica -->
 
-        <!-- Chamar Componente Endereço -->
-        <app-endereco></app-endereco>
-
-
-
-
-        <!-- Chamar Componente emailTelefone -->
-        <app-email-telefone></app-email-telefone>
-
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-
-        <h3>Dados de Pagamento: </h3>
-
-        <br/>
-        <br/>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="valorVisita">Valor da Visita</label>
+        <div class="form-group col-md-6">
+            <label for="valorKM">Valor do KM</label>
             <div class="input-group">
               <span class="input-group-addon">$</span>
-              <input type="number" value="100" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="10" class="form-control currency"
-                id="valorVisita" />
+              <input type="number" value="0.40" step="0.01"  min="0"  class="form-control currency"
+                id="valorKM" />
             </div>
           </div>
 
-          <div class="form-group col-md-6">
-              <label for="valorKM">Valor do KM</label>
-              <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="number" value="0.40" step="0.01"  min="0"  class="form-control currency"
-                  id="valorKM" />
-              </div>
-            </div>
+      </div>
 
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-8">
-            <label for="empresaNomeTitularBanco">Nome do Titular</label>
-            <input type="text" class="form-control" id="empresaNomeTitularBanco" placeholder="David Ricardo dos Santos">
-          </div>
-
-
-          <div class="form-group col-md-4">
-            <label for="empresaCPFBanco">CPF/CNPJ</label>
-            <input type="text" class="form-control" id="empresaCPFBanco">
-          </div>
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <label for="empresaNomeTitularBanco">Nome do Titular</label>
+          <input type="text" class="form-control" id="empresaNomeTitularBanco" placeholder="David Ricardo dos Santos">
         </div>
 
 
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="contaCorrente" value="contaCorrente" checked="true">
-              <label class="form-check-label" for="contaCorrente">
-                Conta Corrente
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="contaPoupanca" value="contaPoupanca">
-              <label class="form-check-label" for="contaPoupanca">
-                Conta Poupança
-              </label>
-            </div>
-
-            <br/>
-            <br/>
+        <div class="form-group col-md-4">
+          <label for="empresaCPFBanco">CPF/CNPJ</label>
+          <input type="text" class="form-control" id="empresaCPFBanco">
+        </div>
+      </div>
 
 
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="empresaNomeDoBanco">Nome do Banco</label>
-                <input type="text" class="form-control" id="empresaNomeDoBanco" placeholder="Itaú">
-              </div>
-
-
-              <div class="form-group col-md-3">
-                <label for="empresaAgenciaBanco">Número da Agência</label>
-                <input type="text" class="form-control" id="empresaAgenciaBanco" placeholder="5870">
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="empresaContaBanco">Número da Conta</label>
-                <input type="text" class="form-control" id="empresaContaBanco" placeholder="12351-3">
-              </div>
-
-              <div class="form-group col-md-2">
-                <label for="empresaOpBanco">Operação</label>
-                <input type="text" class="form-control" id="empresaOpBanco" placeholder="">
-              </div>
-            </div>
-
-
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-            <!-- Chamar Componente observacoes -->
-            <app-observacoes></app-observacoes>
-
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="contaCorrente" value="contaCorrente" checked="true">
+            <label class="form-check-label" for="contaCorrente">
+              Conta Corrente
+            </label>
           </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="contaPoupanca" value="contaPoupanca">
+            <label class="form-check-label" for="contaPoupanca">
+              Conta Poupança
+            </label>
+          </div>
+
+          <br/>
+          <br/>
+
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="empresaNomeDoBanco">Nome do Banco</label>
+              <input type="text" class="form-control" id="empresaNomeDoBanco" placeholder="Itaú">
+            </div>
+
+
+            <div class="form-group col-md-3">
+              <label for="empresaAgenciaBanco">Número da Agência</label>
+              <input type="text" class="form-control" id="empresaAgenciaBanco" placeholder="5870">
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="empresaContaBanco">Número da Conta</label>
+              <input type="text" class="form-control" id="empresaContaBanco" placeholder="12351-3">
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="empresaOpBanco">Operação</label>
+              <input type="text" class="form-control" id="empresaOpBanco" placeholder="">
+            </div>
+          </div>
+
+
+
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+
+          <!-- Chamar Componente observacoes -->
+          <app-observacoes></app-observacoes>
+
+          <button type="submit" class="btn btn-success">Cadastrar</button>
         </div>
       </div>
     </div>

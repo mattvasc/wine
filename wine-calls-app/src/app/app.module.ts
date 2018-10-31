@@ -15,6 +15,7 @@ import {
   EmpresaParceiraMainComponent,
   EmpresaParceiraCreateUpdateComponent,
   EmpresaParceiraListComponent,
+  LoginComponent,
   TicketMainComponent } from './components/pages';
 import { StoreModule } from '@ngrx/store';
 import { simpleReducer } from './reducers/simple.reducer';
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     EmpresaParceiraMainComponent,
     EmpresaParceiraCreateUpdateComponent,
     EmpresaParceiraListComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -46,9 +46,14 @@
       <input type="text" class="form-control" id="ticket_cliente_id" required>
     </div>
 
+
     <div class="form-group col-md-12">
-      <label for="email_contato">E-mail para contato</label>
-      <input type="email" class="form-control" id="email_contato" required>
+        <label for="nome_contato">Nome do cliente responsavel pelo chamado</label>
+        <input type="text" class="form-control" id="nome_contato" placeholder="David Ricardo dos Santos">
+    </div>
+    <div class="form-group col-md-12">
+      <!-- Componente EmailTelefone -->
+      <app-email-telefone></app-email-telefone>
     </div>
 
     <!-- TODO: Precisa corrigir o name -->

@@ -25,12 +25,13 @@ import { EmailTelefoneComponent } from './components/pages/email-telefone/email-
 import { ObservacoesComponent } from './components/pages/observacoes/observacoes.component';
 import { TecnicoFormComponent } from './components/pages/tecnico-form/tecnico-form.component';
 import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component';
-import { ChamadoComponent } from './components/pages/chamado/chamado.component';
-import { DataHoraAgendamentoComponent } from './components/pages/data-hora-agendamento/data-hora-agendamento.component'; // Angular CLI environemnt
+import { ChamadoComponent } from './components/pages/chamado-form/chamado.component';
+import { DataHoraAgendamentoComponent } from './components/pages/data-hora-agendamento/data-hora-agendamento.component';
+import { ClienteFormComponent } from './components/pages/cliente-form/cliente-form.component'; // Angular CLI environemnt
 
 
 const appRoutes: Routes = [
-  { path: 'clientes', component: ClientMainComponent },
+  { path: 'clientes', component: ClienteFormComponent },
   { path: 'formsCliente', component: ClientCreateUpdateComponent },
   { path: 'formsCliente/:id', component: ClientCreateUpdateComponent },
 
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
     TecnicoFormComponent,
     StatusAtivoInativoComponent,
     ChamadoComponent,
-    DataHoraAgendamentoComponent
+    DataHoraAgendamentoComponent,
+    ClienteFormComponent
   ],
   imports: [
     BrowserModule,

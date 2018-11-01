@@ -19,7 +19,11 @@ module.exports = function(sequelize, DataTypes) {
     senha: {
       type: DataTypes.STRING(45),
       allowNull: true
-    }
+    },
+    cpf: {
+      type: DataTypes.STRING(11),
+      allowNull: true
+    },
   }, {
     tableName: 'funcionario_wine'
   });

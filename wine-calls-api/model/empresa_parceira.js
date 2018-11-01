@@ -20,10 +20,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    nome_para_contato: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
     telefones: {
       type: DataTypes.STRING(45),
       allowNull: true
@@ -48,14 +44,42 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    situacao: {
+    status: {
       type: DataTypes.STRING(16),
       allowNull: true
     },
     observacoes: {
       type: DataTypes.STRING(256),
       allowNull: true
+    },
+    valor_visita_tecnica: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
+    },
+    valor_km: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
     }
+    tipo_pessoa: {
+      type: DataTypes.STRING(45)
+      allowNull: true
+    },
+    cpf: {
+      type: DataTypes.STRING(11),
+      allowNull: true
+    },
+    rg: {
+      type: DataTypes.STRING(9),
+      allowNull: true
+    },
+    data_rg: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }
+    // nome_para_contato: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // },
   }, {
     tableName: 'empresa_parceira'
   });

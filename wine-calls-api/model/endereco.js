@@ -16,10 +16,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(64),
       allowNull: true
     },
-    numero: {
-      type: DataTypes.STRING(16),
-      allowNull: true
-    },
     complemento: {
       type: DataTypes.STRING(128),
       allowNull: true

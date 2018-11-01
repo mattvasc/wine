@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    nome_para_contato: {
+    nome: {
       type: DataTypes.STRING(45),
       allowNull: true
     },
@@ -24,29 +24,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(11),
       allowNull: true
     },
-    valor_visita_tecnica: {
-      type: DataTypes.STRING(45),
+    rg: {
+      type: DataTypes.STRING(9),
       allowNull: true
     },
-    valor_km: {
-      type: DataTypes.STRING(45),
+    data_rg: {
+      type: DataTypes.DATE,
       allowNull: true
-    },
-    endereco_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'endereco',
-        key: 'id'
-      }
-    },
-    pagamento_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'pagamento',
-        key: 'id'
-      }
     },
     empresa_do_tecnico_id: {
       type: DataTypes.INTEGER(11),
@@ -56,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    ativo: {
+    status: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
@@ -64,6 +48,22 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     }
+    // endereco_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: true,
+    //   references: {
+    //     model: 'endereco',
+    //     key: 'id'
+    //   }
+    // },
+    // pagamento_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: true,
+    //   references: {
+    //     model: 'pagamento',
+    //     key: 'id'
+    //   }
+    // }
   }, {
     tableName: 'tecnico'
   });

@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
-        model: 'ticet_status',
+        model: 'ticket_status',
         key: 'id'
       }
     },
@@ -55,7 +55,7 @@ module.exports = function(sequelize, DataTypes) {
     data_fim: {
       type: DataTypes.STRING(45),
       allowNull: true
-    },    
+    },
     status: {
       type: DataTypes.STRING(16),
       allowNull: true
@@ -68,7 +68,7 @@ module.exports = function(sequelize, DataTypes) {
     tipo_ticker: {
       type: DataTypes.STRING(45),
       allowNull: true
-    }
+    },
     descricao: {
       type: DataTypes.STRING(1024),
       allowNull: true
@@ -92,11 +92,11 @@ module.exports = function(sequelize, DataTypes) {
     check_docs: {
       type: DataTypes.STRING(45),
       allowNull: true
-    }
+    },
     check_pgto_cliete: {
       type: DataTypes.STRING(45),
       allowNull: true
-    }
+    },
     check_pgto_tecnico: {
       type: DataTypes.STRING(45),
       allowNull: true

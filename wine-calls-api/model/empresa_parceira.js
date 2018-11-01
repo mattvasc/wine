@@ -59,9 +59,9 @@ module.exports = function(sequelize, DataTypes) {
     valor_km: {
       type: DataTypes.DOUBLE,
       allowNull: true
-    }
+    },
     tipo_pessoa: {
-      type: DataTypes.STRING(45)
+      type: DataTypes.STRING(45),
       allowNull: true
     },
     cpf: {

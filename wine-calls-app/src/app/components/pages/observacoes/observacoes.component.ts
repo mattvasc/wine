@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-observacoes',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./observacoes.component.scss']
 })
 export class ObservacoesComponent implements OnInit {
+
+  @Input() parametro : any;
 
   constructor() { }
 

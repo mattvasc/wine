@@ -1,13 +1,9 @@
-<h1 class="col-md-8">Cadastro da Empresa Parceira</h1>
-
-<a href="/tecnicos"><button type="button" class="btn btn-success btn-lg pull-right col-md-4" name="button" style="margin-top: 20px;">Cadastrar técnico</button></a>
-
-<p style="clear: both"></p>
+<h1>Cadastro da Empresa Parceira</h1>
 
 <!-- Para preencher automaticamente um Campo Nome -->
-<!-- <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
+<!-- <input type="text" class="form-control" name="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
 
-<form id="formEmpresaParceira">
+<form name="angularlixo">
   <div class="form-group">
 
     <h3>Dados Gerais: </h3>
@@ -22,14 +18,14 @@
 
     <div class="col-md-12">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="gridRadios" id="pessoaJuridica" value="pessoaJuridica" [(ngModel)]='isPJ'
+        <input class="form-check-input" type="radio" name="gridRadios" name="pessoaJuridica" value="pessoaJuridica" [(ngModel)]='isPJ'
           [ngModelOptions]="{standalone: true}">
         <label class="form-check-label" for="pessoaJuridica">
           Pessoa Jurídica
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="gridRadios" id="pessoaFisica" value="pessoaFisica" [(ngModel)]='isPJ'
+        <input class="form-check-input" type="radio" name="gridRadios" name="pessoaFisica" value="pessoaFisica" [(ngModel)]='isPJ'
           [ngModelOptions]="{standalone: true}">
         <label class="form-check-label" for="pessoaFisica">
           Pessoa Física
@@ -40,49 +36,49 @@
       <br/>
 
       <div class="form-group">
-        <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
-        <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="">
+        <label for="empresaNomeRazaoSocial"> Razão Social</label>
+        <input type="text" [(ngModel)]="parceiroAtual.razao_social" class="form-control" name="empresaNomeRazaoSocial" placeholder="">
       </div>
 
       <div class="form-group">
         <label for="empresaNomeFantasia">Nome Fantasia</label>
-        <input type="text" class="form-control" id="empresaNomeFantasia" placeholder="" required>
+        <input type="text" [(ngModel)]="parceiroAtual.nome_fantasia" class="form-control" name="empresaNomeFantasia" placeholder="" required>
       </div>
 
 
       <div class="form-group" *ngIf='isPJ=="pessoaJuridica" '>
         <label for="empresaCNPJ">CNPJ </label>
-        <input type="text" class="form-control" id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
+        <input type="text" [(ngModel)]="parceiroAtual.cnpj" class="form-control" name="empresaCNPJ" placeholder="99.999.999/9999-99" required>
       </div>
 
       <!-- Se for PessoaFisica -->
       <div class="form-row" *ngIf='isPJ=="pessoaFisica"'>
         <div class="form-group col-md-4">
           <label for="empresaCPF">CPF </label>
-          <input type="text" class="form-control" id="empresaCPF" placeholder="999.999.99-99" required>
+          <input type="text" [(ngModel)]="parceiroAtual.cpf" class="form-control" name="empresaCPF" placeholder="999.999.99-99" required>
         </div>
 
         <div class="form-group col-md-4">
           <label for="empresaRG">RG </label>
-          <input type="text" class="form-control" id="empresaRG" placeholder="99.999.999-9 SSP" required>
+          <input type="text" [(ngModel)]="parceiroAtual.rg" class="form-control" name="empresaRG" placeholder="99.999.999-9 SSP" required>
         </div>
 
         <div class="form-group col-md-4">
           <label for="empresaRGData">Data de Emissão do RG </label>
-          <input type="date" class="form-control" id="empresaRGData">
+          <input type="date" [(ngModel)]="parceiroAtual.data_rg" class="form-control" name="empresaRGData">
         </div>
 
       </div>
       <!-- Fim PessoaFisica -->
 
       <!-- Chamar Componente Endereço -->
-      <app-endereco></app-endereco>
+      <app-endereco [parametro]="parceiroAtual.endereco"></app-endereco>
 
 
 
 
       <!-- Chamar Componente emailTelefone -->
-      <app-email-telefone></app-email-telefone>
+      <app-email-telefone [parametro]="parceiroAtual"></app-email-telefone>
 
       <br/>
       <br/>
@@ -99,8 +95,8 @@
           <label for="valorVisita">Valor da Visita</label>
           <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input type="number" value="100" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="10" class="form-control currency"
-              id="valorVisita" />
+            <input type="number" [(ngModel)]="parceiroAtual.valor_visita_tecnica" value="100" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="10" class="form-control currency"
+              name="valorVisita" />
           </div>
         </div>
 
@@ -108,8 +104,8 @@
             <label for="valorKM">Valor do KM</label>
             <div class="input-group">
               <span class="input-group-addon">$</span>
-              <input type="number" value="0.40" step="0.01"  min="0"  class="form-control currency"
-                id="valorKM" />
+              <input type="number" [(ngModel)]="parceiroAtual.valor_km" value="0.40" step="0.01"  min="0"  class="form-control currency"
+                name="valorKM" />
             </div>
           </div>
 
@@ -118,13 +114,13 @@
       <div class="form-row">
         <div class="form-group col-md-8">
           <label for="empresaNomeTitularBanco">Nome do Titular</label>
-          <input type="text" class="form-control" id="empresaNomeTitularBanco" placeholder="David Ricardo dos Santos">
+          <input type="text" [(ngModel)]="pagamentoAtual.nome" class="form-control" name="empresaNomeTitularBanco" placeholder="David Ricardo dos Santos">
         </div>
 
 
         <div class="form-group col-md-4">
           <label for="empresaCPFBanco">CPF/CNPJ</label>
-          <input type="text" class="form-control" id="empresaCPFBanco">
+          <input type="text" [(ngModel)]="pagamentoAtual.cpfcnpj" class="form-control" name="empresaCPFBanco">
         </div>
       </div>
 
@@ -132,13 +128,13 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="contaCorrente" value="contaCorrente" checked="true">
+            <input class="form-check-input" type="radio" name="gridRadios" name="contaCorrente" [(ngModel)]="pagamentoAtual.isPoupanca" value="contaCorrente" checked="true">
             <label class="form-check-label" for="contaCorrente">
               Conta Corrente
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="contaPoupanca" value="contaPoupanca">
+            <input class="form-check-input" type="radio" name="gridRadios" name="contaPoupanca" [(ngModel)]="pagamentoAtual.isPoupanca" value="contaPoupanca">
             <label class="form-check-label" for="contaPoupanca">
               Conta Poupança
             </label>
@@ -151,23 +147,23 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="empresaNomeDoBanco">Nome do Banco</label>
-              <input type="text" class="form-control" id="empresaNomeDoBanco" placeholder="Itaú">
+              <input type="text" [(ngModel)]="pagamentoAtual.banco" class="form-control" name="empresaNomeDoBanco" placeholder="Itaú">
             </div>
 
 
             <div class="form-group col-md-3">
               <label for="empresaAgenciaBanco">Número da Agência</label>
-              <input type="text" class="form-control" id="empresaAgenciaBanco" placeholder="5870">
+              <input type="text" [(ngModel)]="pagamentoAtual.agencia" class="form-control" name="empresaAgenciaBanco" placeholder="5870">
             </div>
 
             <div class="form-group col-md-3">
               <label for="empresaContaBanco">Número da Conta</label>
-              <input type="text" class="form-control" id="empresaContaBanco" placeholder="12351-3">
+              <input type="text" [(ngModel)]="pagamentoAtual.conta" class="form-control" name="empresaContaBanco" placeholder="12351-3">
             </div>
 
             <div class="form-group col-md-2">
               <label for="empresaOpBanco">Operação</label>
-              <input type="text" class="form-control" id="empresaOpBanco" placeholder="">
+              <input type="text" [(ngModel)]="pagamentoAtual.operacao" class="form-control" name="empresaOpBanco" placeholder="">
             </div>
           </div>
 
@@ -179,9 +175,9 @@
           <br/>
 
           <!-- Chamar Componente observacoes -->
-          <app-observacoes></app-observacoes>
+          <app-observacoes [parametro]="parceiroAtual.observacoes"></app-observacoes>
 
-          <button type="submit" class="btn btn-success">Cadastrar</button>
+          <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ export class EmpresaParceiraService {
   private posfixo = 'EmpresasParceiras'
   getAll(): Observable<EmpresaParceira[]> {
 
-    return this.http.get<EmpresaParceira[]>(this.apiUrl + this.posfixo);
+    return this.http.get<EmpresaParceira[]>(this.apiUrl + this.posfixo );
   }
 
   getSingle(id: number): Observable<EmpresaParceira> {
@@ -33,7 +33,8 @@ export class EmpresaParceiraService {
   }
 
   create(ep: EmpresaParceira): Observable<EmpresaParceira> {
-    return this.http.post<EmpresaParceira>(this.apiUrl + this.posfixo, ep, httpOptions);
+
+    return this.http.post<EmpresaParceira>(this.apiUrl + this.posfixo + '/create', ep, httpOptions);
   }
 
   delete(id: number): Observable<Object> {

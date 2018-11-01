@@ -1,7 +1,7 @@
 <!-- // TODO: formatar essa tabela -->
 
-<table *ngIf="empresas_parceiras.length > 0; else semEP">
-  <thead>
+<table *ngIf="empresas_parceiras.length > 0; else semEP" class="table table-hover">
+  <thead class="thead-dark">
     <th>Id.</th>
     <th>Razão Social</th>
     <th>Email</th>
@@ -13,8 +13,8 @@
       <td>{{ep.id}}</td>
       <td>{{ ep.razao_social}}</td>
       <td>{{ep.email}}</td>
-      <td><button (click)="editEmpresaParceira(ep.id)">Editar</button></td>
-      <td><button (click)="deleteEmpresaParceira(ep.id)">Apagar</button></td>
+      <td><button (click)="editEmpresaParceira(ep.id)" class="btn btn-block btn-success">Editar</button></td>
+      <td><button (click)="deleteEmpresaParceira(ep.id)" class="btn btn-block btn-danger">Apagar</button></td>
     </tr>
   </tbody>
 </table>

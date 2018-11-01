@@ -19,6 +19,7 @@ export class ClienteListComponent implements OnInit {
 
   getClientes() {
     this.api.getAll().subscribe(c => {
+      console.log(c);
       if (c['data']["cliente"] !== undefined)
         this.clientes = c['data']['cliente']});
   }

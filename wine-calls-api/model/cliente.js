@@ -8,15 +8,15 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    nome_fantasia: {
-      type: DataTypes.STRING(64),
-      allowNull: false
-    },
     razao_social: {
       type: DataTypes.STRING(128),
       allowNull: true
     },
-    cpfcnpj: {
+    nome_fantasia: {
+      type: DataTypes.STRING(64),
+      allowNull: false
+    },
+    cnpj: {
       type: DataTypes.STRING(45),
       allowNull: true
     },
@@ -40,31 +40,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    nome_comprador: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    email_comprador: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    data_de_fundacao: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    capital_social_atual: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
     registro_na_junta: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    controle_acionario: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    numero_de_empregados: {
       type: DataTypes.STRING(45),
       allowNull: true
     },
@@ -72,11 +48,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    informacoes_pagamento: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    situacao: {
+    status: {
       type: DataTypes.STRING(16),
       allowNull: true
     },
@@ -92,6 +64,35 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(256),
       allowNull: true
     }
+    
+    // numero_de_empregados: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // },
+    // informacoes_pagamento: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // },
+    // controle_acionario: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // },
+    // nome_comprador: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // },
+    // email_comprador: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // },
+    // data_de_fundacao: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // },
+    // capital_social_atual: {
+    //   type: DataTypes.STRING(45),
+    //   allowNull: true
+    // }
   }, {
     tableName: 'cliente'
   });

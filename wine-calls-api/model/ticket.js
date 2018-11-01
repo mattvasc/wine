@@ -24,14 +24,6 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    endereco_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'endereco',
-        key: 'id'
-      }
-    },
     ticket_cliente_id: {
       type: DataTypes.STRING(45),
       allowNull: true
@@ -40,11 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    data_agendamento: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-     preco_cliente: {
+    preco_cliente: {
       type: DataTypes.FLOAT,
       allowNull: true
     },
@@ -52,7 +40,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.FLOAT,
       allowNull: true
     },
-    situacao: {
+    ticket_status_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'ticet_status',
+        key: 'id'
+      }
+    },
+    data_inicio: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
+    data_fim: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },    
+    status: {
       type: DataTypes.STRING(16),
       allowNull: true
     },
@@ -60,10 +64,52 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(256),
       allowNull: true
     },
+
+    tipo_ticker: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    }
     descricao: {
       type: DataTypes.STRING(1024),
       allowNull: true
+    },
+    email_contato: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
+    endereco_contato_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'endereco',
+        key: 'id'
+      }
+    },
+    nome_contato: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
+    check_docs: {
+      type: DataTypes.STRING(45),
+      allowNull: true
     }
+    check_pgto_cliete: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    }
+    check_pgto_tecnico: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    }
+
+    // endereco_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: true,
+    //   references: {
+    //     model: 'endereco',
+    //     key: 'id'
+    //   }
+    // }
   }, {
     tableName: 'ticket'
   });

@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    nome: {
+    nome_titular: {
       type: DataTypes.STRING(64),
       allowNull: true
     },

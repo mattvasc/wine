@@ -24,7 +24,7 @@ export class ApiService {
   constructor(private http: HttpClient) {  this.needsToUpdate = false;  }
 
 
-  private apiUrl = 'http://localhost:3000/';
+  public apiUrl = 'http://localhost:3000/';
   getClients(): Observable<Client[]> {
 
     return this.http.get<Client[]>(this.apiUrl + 'clients');

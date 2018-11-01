@@ -5,11 +5,16 @@ export class EmpresaParceira  {
 	public cnpj?: string;
 	public nome_fantasia?: string;
 	public razao_social?: string;
-	public nome_para_contato ?: string;
 	public telefones?: string;
 	public email ?: string;
 	public endereco_id ?: number;
 	public pagamento_id ?: number;
-	public situacao ?: string;
+	public status ?: string;
 	public observacoes ?: string;
+	public valor_visita_tecnica ?: number;
+	public valor_km ?: number;
+	public tipo_pessoa ?: string;
+	public cpf ?: string;
+	public rg ?: string;
+	public data_rg ?: string;
 }

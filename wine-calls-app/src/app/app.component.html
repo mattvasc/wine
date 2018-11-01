@@ -2,7 +2,7 @@
 
 <div class="nav-side-menu col-md-3">
   <div class="brand">
-    <a href="/"><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
+    <a routerLink="/"><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
   </div>
     <i class="fa fa-menu fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
@@ -10,20 +10,20 @@
 
         <ul id="menu-content" class="menu-content collapse out">
 
-          <a href="#" class="linkMenu">
-            <li class="active">
+          <a routerLink="/"  class="linkMenu" >
+            <li [ngClass]="{'active': router.url == '/'}">
               <i class="fa fa-menu fa-home fa-lg"></i> Início
             </li>
           </a>
 
-          <a href="/parceiros" class="linkMenu">
-            <li class="">
+          <a routerLink="/parceiros" class="linkMenu" >
+            <li [ngClass]="{'active': router.url == '/parceiros'}">
               <i class="fa fa-menu fa-people-carry fa-lg"></i> Parceiros
             </li>
           </a>
 
-          <a href="/chamados" class="linkMenu">
-            <li class="">
+          <a routerLink="/chamados" class="linkMenu">
+            <li [ngClass]="{'active': router.url == '/chamados'}">
               <i class="fab fa-menu fa-stack-overflow fa-lg"></i> Chamados
             </li>
           </a>
@@ -31,14 +31,14 @@
           <!--
           TODO: implementar
 
-          <a href="/relatorios" class="linkMenu">
+          <a routerLink="/relatorios" class="linkMenu">
             <li class="">
               <i class="fa fa-menu fa-chart-line fa-lg"></i> Relatórios
             </li>
           </a> -->
 
-          <a href="/clientes" class="linkMenu">
-            <li class="">
+          <a routerLink="/clientes" class="linkMenu">
+            <li [ngClass]="{'active': router.url == '/clientes'}">
               <i class="fa fa-menu fa-user fa-lg"></i> Clientes
             </li>
           </a>

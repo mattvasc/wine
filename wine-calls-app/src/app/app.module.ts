@@ -29,7 +29,7 @@ import { TecnicoFormComponent } from './components/pages/tecnico-form/tecnico-fo
 import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component';
 import { ChamadoComponent } from './components/pages/chamado-form/chamado.component';
 import { DataHoraAgendamentoComponent } from './components/pages/data-hora-agendamento/data-hora-agendamento.component';
-import { ClienteFormComponent } from './components/pages/cliente-form/cliente-form.component';
+import { ClienteFormComponent } from './components/pages/cliente/cliente-form/cliente-form.component';
 import { FuncionarioFormComponent } from './components/pages/funcionario-form/funcionario-form.component'; // Angular CLI environemnt
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
@@ -37,9 +37,10 @@ import { DynamicFormQuestionComponent } from './components/dynamic-form-question
 // Angular CLI environemnt
 
 const appRoutes: Routes = [
-  { path: 'clientes', component: ClienteFormComponent },
-  { path: 'formsCliente', component: ClientCreateUpdateComponent },
-  { path: 'formsCliente/:id', component: ClientCreateUpdateComponent },
+  { path: 'clientes', component: ClientMainComponent },
+  { path: 'formsCliente', component: ClienteFormComponent },
+  { path: 'formsCliente/:id', component: ClienteFormComponent },
+
   { path: 'parceiros', component: ParceiroFormComponent },
   {path: 'tecnicos', component: TecnicoFormComponent},
   { path: 'empresasParceiras', component: EmpresaParceiraMainComponent },

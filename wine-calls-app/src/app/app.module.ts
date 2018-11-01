@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import {
   ClienteListComponent,
   ClientCreateUpdateComponent,
@@ -41,13 +42,13 @@ const appRoutes: Routes = [
   { path: 'formsCliente', component: ClienteFormComponent },
   { path: 'formsCliente/:id', component: ClienteFormComponent },
 
-  { path: 'parceiros', component: ParceiroFormComponent },
   {path: 'tecnicos', component: TecnicoFormComponent},
   { path: 'empresasParceiras', component: EmpresaParceiraMainComponent },
-  { path: 'formsEmpresaParceira', component: EmpresaParceiraCreateUpdateComponent },
-  { path: 'formsEmpresaParceira/:id', component: EmpresaParceiraCreateUpdateComponent },
+  { path: 'formsEmpresaParceira', component: ParceiroFormComponent },
+  { path: 'formsEmpresaParceira/:id', component: ParceiroFormComponent },
 
-  { path: 'chamados', component: ChamadoComponent },
+  { path: 'chamados', component: TicketMainComponent },
+  { path: 'formsTicket', component: ChamadoComponent },
   { path: 'funcionarios', component: FuncionarioFormComponent },
   
   // Colocar todas as rotas novas antes dessas duas abaixo..!

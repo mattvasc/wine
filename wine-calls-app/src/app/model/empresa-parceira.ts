@@ -14,7 +14,7 @@ export class EmpresaParceira  {
 	public observacoes ?: string = "";
 	public valor_visita_tecnica ?: number;
 	public valor_km ?: number;
-	public tipo_pessoa ?: string = "";
+	public tipo_pessoa ?: string = "juridica";
 	public cpf ?: string = "";
 	public rg ?: string = "";
 	public data_rg ?: string = "";

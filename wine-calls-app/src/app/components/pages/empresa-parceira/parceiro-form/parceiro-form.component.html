@@ -1,4 +1,4 @@
-<h1>Cadastro da Empresa Parceira</h1>
+<h1>{{isSalvar ? "Cadastro" : "Atualização"}} da Empresa Parceira</h1>
 
 <!-- Para preencher automaticamente um Campo Nome -->
 <!-- <input type="text" class="form-control" name="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
@@ -18,14 +18,14 @@
 
     <div class="col-md-12">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="gridRadios" name="pessoaJuridica" value="pessoaJuridica" [(ngModel)]='isPJ'
+        <input class="form-check-input" type="radio" name="gridRadios" id="pessoaJuridica" value="juridica" [(ngModel)]='isPJ'
           [ngModelOptions]="{standalone: true}">
         <label class="form-check-label" for="pessoaJuridica">
           Pessoa Jurídica
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="gridRadios" name="pessoaFisica" value="pessoaFisica" [(ngModel)]='isPJ'
+        <input class="form-check-input" type="radio" name="gridRadios" id="pessoaFisica" value="fisica" [(ngModel)]='isPJ'
           [ngModelOptions]="{standalone: true}">
         <label class="form-check-label" for="pessoaFisica">
           Pessoa Física
@@ -72,7 +72,66 @@
       <!-- Fim PessoaFisica -->
 
       <!-- Chamar Componente Endereço -->
-      <app-endereco [parametro]="parceiroAtual.endereco"></app-endereco>
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <label for="empresaLogradouro">Logradouro</label>
+          <input type="text" class="form-control" name="logradouro"
+          id="empresaLogradouro" placeholder="Avenida Salgado Filho, 123"
+          
+          >
+        </div>
+      
+        <div class="form-group col-md-4">
+          <label for="empresaBairro">Bairro</label>
+          <input type="text" class="form-control" name="bairro"  id="empresaBairro" placeholder="Vila das Flores">
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="empresaMunicipio">Município</label>
+          <input type="text" class="form-control" name="municipio" id="empresaMunicipio">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="empresaEstado">Estado</label>
+          <select id="empresaEstado" class="form-control" name="estado">
+            <option selected>SP</option>
+            <option>AM</option>
+            <option>AC</option>
+            <option>AL</option>
+            <option>AP</option>
+            <option>AM</option>
+            <option>BA</option>
+            <option>CE</option>
+            <option>DF</option>
+            <option>ES</option>
+            <option>GO</option>
+            <option>MA</option>
+            <option>MT</option>
+            <option>MS</option>
+            <option>MG</option>
+            <option>PA</option>
+            <option>PB</option>
+            <option>PR</option>
+            <option>PE</option>
+            <option>PI</option>
+            <option>RJ</option>
+            <option>RN</option>
+            <option>RS</option>
+            <option>RO</option>
+            <option>RR</option>
+            <option>SC</option>
+            <option>SE</option>
+            <option>TO</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="empresaCEP">CEP</label>
+          <input type="text" class="form-control" name="cep" id="empresaCEP"  placeholder="07115-000">
+        </div>
+      </div>
+      <!-- Fim Componente para Endereço Completo -->
+      
 
 
 
@@ -128,13 +187,13 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" name="contaCorrente" [(ngModel)]="pagamentoAtual.isPoupanca" value="contaCorrente" checked="true">
+            <input class="form-check-input" type="radio" name="gridRadios" id="contaCorrente" [(ngModel)]="pagamentoAtual.isPoupanca" value="contaCorrente" checked="true">
             <label class="form-check-label" for="contaCorrente">
               Conta Corrente
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" name="contaPoupanca" [(ngModel)]="pagamentoAtual.isPoupanca" value="contaPoupanca">
+            <input class="form-check-input" type="radio" name="gridRadios" id="contaPoupanca" [(ngModel)]="pagamentoAtual.isPoupanca" value="contaPoupanca">
             <label class="form-check-label" for="contaPoupanca">
               Conta Poupança
             </label>
@@ -174,9 +233,8 @@
           <br/>
           <br/>
 
-          <!-- Chamar Componente observacoes -->
-          <app-observacoes [parametro]="parceiroAtual.observacoes"></app-observacoes>
-
+          <label for="observacao"></label>
+          <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="parceiroAtual.observacoes" ></textarea>
           <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>
         </div>
       </div>

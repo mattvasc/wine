@@ -16,13 +16,13 @@ import {
   EmpresaParceiraMainComponent,
   EmpresaParceiraCreateUpdateComponent,
   EmpresaParceiraListComponent,
+  ParceiroFormComponent,
   LoginComponent,
   TicketMainComponent } from './components/pages';
 import { StoreModule } from '@ngrx/store';
 import { simpleReducer } from './reducers/simple.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ParceiroFormComponent } from './components/pages/parceiro-form/parceiro-form.component';
 import { EnderecoComponent } from './components/pages/endereco/endereco.component';
 import { EmailTelefoneComponent } from './components/pages/email-telefone/email-telefone.component';
 import { ObservacoesComponent } from './components/pages/observacoes/observacoes.component';

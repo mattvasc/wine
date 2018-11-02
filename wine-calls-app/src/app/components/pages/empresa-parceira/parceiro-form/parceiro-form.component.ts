@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EmpresaParceira } from "../../../model/empresa-parceira";
-import { Pagamento } from "../../../model/pagamento";
-import { EmpresaParceiraService } from "../../../service/empresa-parceira.service";
+import { EmpresaParceira } from '../../../../model/empresa-parceira';
+import { Pagamento } from '../../../../model/pagamento';
+import { EmpresaParceiraService } from '../../../../service/empresa-parceira.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Endereco } from "../../../model/endereco";
+import { Endereco } from '../../../../model/endereco';
 @Component({
   selector: 'app-parceiro-form',
   templateUrl: './parceiro-form.component.html',
@@ -87,22 +87,24 @@ private route: ActivatedRoute) {
    }
 
    atualizar() {
+     console.log("indo atalizar criente");
      // TODO: Verificar dados
      this.parceiroAtual.pagamento = this.pagamentoAtual;
-     this.api.create(this.parceiroAtual).subscribe(retorno => {
+     this.api.update(this.parceiroAtual).subscribe(retorno => {
        console.log(retorno);
        if(retorno !== undefined && retorno['success'] === true)
         {
-          alert("Parceiro Salvo com Sucesso!");
+          alert("Parceiro Atualizado com Sucesso!");
         }
         else{
-          alert("Deu ruim ao salvar Parceiro, sorry..");
+          alert("Deu ruim ao atualizar Parceiro, sorry..");
         }
         this.router.navigateByUrl("/empresasParceiras");
      });
    }
 
    exec() {
+     console.log(this.parceiroAtual);
     if (this.isSalvar) {
       this.salvar();
     } else {

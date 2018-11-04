@@ -10,6 +10,8 @@ var clienteRouter = require('./routes/Cliente');
 var empresaParceiraRouter = require('./routes/EmpresaParceira');
 var pagamentoRouter = require('./routes/Pagamento');
 var tecnicoRouter = require('./routes/Tecnico');
+var cidadeRouter = require('./routes/Cidade');
+var estadoRouter = require('./routes/Estado');
 const Model = require('./model/');
 
 var app = express();
@@ -35,6 +37,8 @@ app.use('/clientes', clienteRouter);
 app.use('/pagamentos', pagamentoRouter);
 app.use('/tecnicos', tecnicoRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
+app.use('/cidades', cidadeRouter);
+app.use('/estados', estadoRouter);
 
 
 // catch 404 and forward to error handler

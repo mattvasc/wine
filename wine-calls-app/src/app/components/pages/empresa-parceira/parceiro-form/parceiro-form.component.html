@@ -179,7 +179,7 @@
 
         <div class="form-group col-md-4">
           <label for="empresaCPFBanco">CPF/CNPJ</label>
-          <input type="text" [(ngModel)]="pagamentoAtual.cpfcnpj" [textMask]="{mask: (pagamentoAtual.cpfcnpj === undefined || pagamentoAtual.cpfcnpj.length < 15) ? masks.CPF2 : masks.cnpj }" class="form-control" name="empresaCPFBanco">
+          <input type="text" [(ngModel)]="pagamentoAtual.cpfcnpj" [textMask]="{mask: masks.CPF}" class="form-control" name="empresaCPFBanco">
         </div>
       </div>
 

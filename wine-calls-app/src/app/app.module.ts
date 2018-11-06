@@ -34,7 +34,7 @@ import { ClienteFormComponent } from './components/pages/cliente/cliente-form/cl
 import { FuncionarioFormComponent } from './components/pages/funcionario-form/funcionario-form.component'; // Angular CLI environemnt
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
-
+import { TextMaskModule } from 'angular2-text-mask';
 // Angular CLI environemnt
 
 const appRoutes: Routes = [
@@ -87,6 +87,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    TextMaskModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(

@@ -5,6 +5,7 @@ import { Pagamento } from '../../../../model/pagamento';
 import { EmpresaParceiraService } from '../../../../service/empresa-parceira.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Endereco } from '../../../../model/endereco';
+import { Masks } from '../../../../masks';
 @Component({
   selector: 'app-parceiro-form',
   templateUrl: './parceiro-form.component.html',
@@ -14,7 +15,7 @@ export class ParceiroFormComponent implements OnInit {
 
   public isPJ: String;
   public teste: String;
-
+  private masks = Masks;
   private isSalvar: boolean;
   private id: number;
   private parceiroAtual: EmpresaParceira;

@@ -48,14 +48,14 @@
 
       <div class="form-group" *ngIf='isPJ=="pessoaJuridica" '>
         <label for="empresaCNPJ">CNPJ </label>
-        <input type="text" [(ngModel)]="parceiroAtual.cnpj" class="form-control" name="empresaCNPJ" placeholder="99.999.999/9999-99" required>
+        <input type="text" [textMask]="{mask: masks.CNPJ}" [(ngModel)]="parceiroAtual.cnpj" class="form-control" name="empresaCNPJ" placeholder="99.999.999/9999-99" required>
       </div>
 
       <!-- Se for PessoaFisica -->
       <div class="form-row" *ngIf='isPJ=="pessoaFisica"'>
         <div class="form-group col-md-4">
           <label for="empresaCPF">CPF </label>
-          <input type="text" [(ngModel)]="parceiroAtual.cpf" class="form-control" name="empresaCPF" placeholder="999.999.99-99" required>
+          <input type="text"  [textMask]="{mask: masks.CPF}" [(ngModel)]="parceiroAtual.cpf" class="form-control" name="empresaCPF" placeholder="999.999.99-99" required>
         </div>
 
         <div class="form-group col-md-4">
@@ -67,12 +67,16 @@
           <label for="empresaRGData">Data de Emissão do RG </label>
           <input type="date" [(ngModel)]="parceiroAtual.data_rg" class="form-control" name="empresaRGData">
         </div>
-
+        
       </div>
       <!-- Fim PessoaFisica -->
-
+      
       <!-- Chamar Componente Endereço -->
       <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="empresaCEP">CEP</label>
+            <input type="text"[textMask]="{mask: masks.CEP}"  class="form-control" name="cep" id="empresaCEP"  placeholder="07115-000">
+          </div>
         <div class="form-group col-md-8">
           <label for="empresaLogradouro">Logradouro</label>
           <input type="text" class="form-control" name="logradouro"
@@ -124,10 +128,6 @@
             <option>SE</option>
             <option>TO</option>
           </select>
-        </div>
-        <div class="form-group col-md-2">
-          <label for="empresaCEP">CEP</label>
-          <input type="text" class="form-control" name="cep" id="empresaCEP"  placeholder="07115-000">
         </div>
       </div>
       <!-- Fim Componente para Endereço Completo -->

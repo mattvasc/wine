@@ -46,13 +46,13 @@
       </div>
 
 
-      <div class="form-group" *ngIf='isPJ=="pessoaJuridica" '>
+      <div class="form-group" *ngIf='isPJ=="juridica" '>
         <label for="empresaCNPJ">CNPJ </label>
         <input type="text" [textMask]="{mask: masks.CNPJ}" [(ngModel)]="parceiroAtual.cnpj" class="form-control" name="empresaCNPJ" placeholder="99.999.999/9999-99" required>
       </div>
 
       <!-- Se for PessoaFisica -->
-      <div class="form-row" *ngIf='isPJ=="pessoaFisica"'>
+      <div class="form-row" *ngIf='isPJ=="fisica"'>
         <div class="form-group col-md-4">
           <label for="empresaCPF">CPF </label>
           <input type="text"  [textMask]="{mask: masks.CPF}" [(ngModel)]="parceiroAtual.cpf" class="form-control" name="empresaCPF" placeholder="999.999.99-99" required>
@@ -179,7 +179,7 @@
 
         <div class="form-group col-md-4">
           <label for="empresaCPFBanco">CPF/CNPJ</label>
-          <input type="text" [(ngModel)]="pagamentoAtual.cpfcnpj" class="form-control" name="empresaCPFBanco">
+          <input type="text" [(ngModel)]="pagamentoAtual.cpfcnpj" [textMask]="{mask: (pagamentoAtual.cpfcnpj === undefined || pagamentoAtual.cpfcnpj.length < 15) ? masks.CPF2 : masks.cnpj }" class="form-control" name="empresaCPFBanco">
         </div>
       </div>
 

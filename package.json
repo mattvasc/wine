@@ -1,0 +1,12 @@
+{
+  "name": "wine-tickets",
+  "version": "0.0.0",
+  "scripts": {
+    "front": "cd ./wine-calls-app/ && npm start",
+    "back": "cd ./wine-calls-api/ && npm start",
+    "start": "concurrently --kill-others \"npm run front\" \"npm run back\""
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}

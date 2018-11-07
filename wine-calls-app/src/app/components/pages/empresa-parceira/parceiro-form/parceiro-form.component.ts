@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { EmpresaParceira } from '../../../../model/empresa-parceira';
 import { Pagamento } from '../../../../model/pagamento';
 import { EmpresaParceiraService } from '../../../../service/empresa-parceira.service';
+import { ApiService } from '../../../../service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Endereco } from '../../../../model/endereco';
 import { Masks } from '../../../../masks';
@@ -20,10 +21,14 @@ export class ParceiroFormComponent implements OnInit {
   private id: number;
   private parceiroAtual: EmpresaParceira;
   private pagamentoAtual: Pagamento;
+  private endereco: Endereco;
 
-  constructor(private api: EmpresaParceiraService,
-  private router: Router,
-private route: ActivatedRoute) {
+  constructor(
+    private api: EmpresaParceiraService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private apiGeral: ApiService
+  ) {
   
   this.isSalvar = true;
 }
@@ -32,6 +37,7 @@ ngOnInit() {
   this.parceiroAtual = new EmpresaParceira();
   this.parceiroAtual.endereco = new Endereco();
   this.pagamentoAtual = new Pagamento();
+  this.endereco = new Endereco();
   this.isPJ = 'juridica';
   
   this.route.params.subscribe(params => {
@@ -63,12 +69,35 @@ ngOnInit() {
     }
     
   });
-  
   console.log("**********");
   console.log(this.parceiroAtual);
   console.log("**********");
 }
 
+buscaCEP(event: any) {
+  event = event.replace('-','');
+  event = event.replace('_','');
+  if(event.length < 8)
+    return;
+  // Chamar api do CEP AQUI
+  this.apiGeral.buscaCep(event).subscribe(retorno => {
+    if(retorno['erro'] !== undefined && retorno['erro'] === true)
+      return;
+    if (retorno['logradouro'] !== undefined ) {
+      this.endereco.logradouro = retorno['logradouro'];
+    }
+    if (retorno['bairro'] !== undefined) {
+      this.endereco.bairro = retorno['bairro'];
+    }
+    if (retorno['localidade'] !== undefined) {
+      this.endereco.cidade = retorno['localidade'];
+    }
+    if (retorno['uf'] !== undefined) {
+      this.endereco.uf = retorno['uf'];
+    }
+  });
+  
+}
 salvar() {
   // TODO: ARRUMAR ISSO AI
   delete this.parceiroAtual.data_rg;

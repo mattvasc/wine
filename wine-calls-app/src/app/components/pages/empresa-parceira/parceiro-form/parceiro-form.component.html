@@ -75,11 +75,11 @@
       <div class="form-row">
           <div class="form-group col-md-2">
             <label for="empresaCEP">CEP</label>
-            <input type="text"[textMask]="{mask: masks.CEP}"  class="form-control" name="cep" id="empresaCEP"  placeholder="07115-000">
+            <input type="text"[textMask]="{mask: masks.CEP}" (ngModelChange)="buscaCEP($event)" [(ngModel)]="endereco.cep" class="form-control" name="cep" id="empresaCEP"  placeholder="07115-000">
           </div>
         <div class="form-group col-md-8">
           <label for="empresaLogradouro">Logradouro</label>
-          <input type="text" class="form-control" name="logradouro"
+          <input type="text" class="form-control" [(ngModel)]="endereco.logradouro" name="logradouro"
           id="empresaLogradouro" placeholder="Avenida Salgado Filho, 123"
           
           >
@@ -87,46 +87,46 @@
       
         <div class="form-group col-md-4">
           <label for="empresaBairro">Bairro</label>
-          <input type="text" class="form-control" name="bairro"  id="empresaBairro" placeholder="Vila das Flores">
+          <input type="text" class="form-control" name="bairro"  id="empresaBairro" [(ngModel)]="endereco.bairro" placeholder="Vila das Flores">
         </div>
       </div>
       
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="empresaMunicipio">Município</label>
-          <input type="text" class="form-control" name="municipio" id="empresaMunicipio">
+          <input [(ngModel)]="endereco.cidade" type="text" class="form-control" name="municipio" id="empresaMunicipio">
         </div>
         <div class="form-group col-md-4">
           <label for="empresaEstado">Estado</label>
-          <select id="empresaEstado" class="form-control" name="estado">
+          <select id="empresaEstado" class="form-control" name="estado" [(ngModel)]="endereco.uf">
             <option selected>SP</option>
-            <option>AM</option>
-            <option>AC</option>
-            <option>AL</option>
-            <option>AP</option>
-            <option>AM</option>
-            <option>BA</option>
-            <option>CE</option>
-            <option>DF</option>
-            <option>ES</option>
-            <option>GO</option>
-            <option>MA</option>
-            <option>MT</option>
-            <option>MS</option>
-            <option>MG</option>
-            <option>PA</option>
-            <option>PB</option>
-            <option>PR</option>
-            <option>PE</option>
-            <option>PI</option>
-            <option>RJ</option>
-            <option>RN</option>
-            <option>RS</option>
-            <option>RO</option>
-            <option>RR</option>
-            <option>SC</option>
-            <option>SE</option>
-            <option>TO</option>
+            <option value="AM">AM</option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AP">AP</option>
+            <option value="AM">AM</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MT">MT</option>
+            <option value="MS">MS</option>
+            <option value="MG">MG</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PR">PR</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RS">RS</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="SC">SC</option>
+            <option value="SE">SE</option>
+            <option value="TO">TO</option>
           </select>
         </div>
       </div>

@@ -40,13 +40,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.FLOAT,
       allowNull: true
     },
-    ticket_status_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'ticket_status',
-        key: 'id'
-      }
+    ticket_status: {
+      type: DataTypes.STRING(45),
+      allowNull: false,
+      default: 'aberto'
+      /*
+        aberto
+        agendado
+        em atendimento
+        entregue
+        encerrado com sucesso
+        encerrado com insucesso
+        cancelado
+      */
     },
     data_inicio: {
       type: DataTypes.STRING(45),
@@ -65,10 +71,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
 
-    tipo_ticker: {
+    tipo_ticket: {
       type: DataTypes.STRING(45),
       allowNull: true
-    },
+    }, 
     descricao: {
       type: DataTypes.STRING(1024),
       allowNull: true

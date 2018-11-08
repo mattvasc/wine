@@ -12,6 +12,7 @@ var pagamentoRouter = require('./routes/Pagamento');
 var tecnicoRouter = require('./routes/Tecnico');
 var cidadeRouter = require('./routes/Cidade');
 var estadoRouter = require('./routes/Estado');
+var ticketRouter = require('./routes/Ticket');
 const Model = require('./model/');
 
 var app = express();
@@ -39,6 +40,7 @@ app.use('/tecnicos', tecnicoRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
 app.use('/cidades', cidadeRouter);
 app.use('/estados', estadoRouter);
+app.use('/ticket', ticketRouter);
 
 
 // catch 404 and forward to error handler

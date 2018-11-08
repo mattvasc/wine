@@ -24,8 +24,6 @@ import { simpleReducer } from './reducers/simple.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EnderecoComponent } from './components/pages/endereco/endereco.component';
-import { EmailTelefoneComponent } from './components/pages/email-telefone/email-telefone.component';
-import { ObservacoesComponent } from './components/pages/observacoes/observacoes.component';
 import { TecnicoFormComponent } from './components/pages/tecnico-form/tecnico-form.component';
 import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component';
 import { ChamadoComponent } from './components/pages/chamado-form/chamado.component';
@@ -67,8 +65,6 @@ const appRoutes: Routes = [
     TicketMainComponent,
     ParceiroFormComponent,
     EnderecoComponent,
-    EmailTelefoneComponent,
-    ObservacoesComponent,
     TecnicoFormComponent,
     StatusAtivoInativoComponent,
     ChamadoComponent,

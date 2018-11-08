@@ -136,8 +136,18 @@
 
 
 
-      <!-- Chamar Componente emailTelefone -->
-      <app-email-telefone [parametro]="parceiroAtual"></app-email-telefone>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="empresaEmail" name="email">Email</label>
+          <input type="email" class="form-control" id="empresaEmail" name="empresaEmail"  placeholder="contato@empresa.com.br" [(ngModel)]="parceiroAtual['email']">
+        </div>
+      
+        <div class="form-group col-md-6">
+          <label for="empresaTelefones"  name="telefone">Telefones</label>
+          <input type="text" class="form-control" id="empresaTelefones" name="empresaTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222" [(ngModel)]="parceiroAtual['telefones']">
+        </div>
+      </div>
+      
 
       <br/>
       <br/>

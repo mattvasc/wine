@@ -39,7 +39,13 @@
 
 
       <!-- Chamar Componente observacoes -->
-      <app-observacoes></app-observacoes>
+      <h3>Outras Informações: </h3>
+
+<div class="form-group">
+  <label for="observacao"></label>
+  <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext" (keyup)="onKey($event)"></textarea>
+</div>
+
 
       <button type="submit" class="btn btn-success">Cadastrar</button>
 

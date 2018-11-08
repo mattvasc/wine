@@ -1,0 +1,8 @@
+<button routerLink="/clientes"><- Voltar</button>
+<table>
+<tbody>
+<tr><td>Nome:</td> <td><input [(ngModel)]="clienteAtual.name" type="text" id="nome_input"></td></tr>
+<tr><td>Email:</td><td> <input [(ngModel)]="clienteAtual.email" type="text" id="email_input"></td></tr>
+<tr><button (click)="exec()">{{ textoBotao }}</button></tr>
+</tbody>
+</table>

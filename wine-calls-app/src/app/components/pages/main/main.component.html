@@ -1,10 +1,10 @@
 <h1>Resumo dos Chamados</h1>
 
 <div class="col-md-4">
-  <div class="panel panel-danger">
+  <div class="panel panel-warning">
     <div class="panel-heading">Aberto</div>
     <div class="panel-body">
-      0
+      {{contadores.aberto}}
     </div>
     <div class="panel-footer">
       <a href="/" class="aEspecial">
@@ -21,7 +21,41 @@
   <div class="panel panel-warning">
     <div class="panel-heading">Agendado</div>
     <div class="panel-body">
-      0
+      {{contadores.agendado}}
+    </div>
+    <div class="panel-footer">
+      <a href="/" class="aEspecial">
+        <button type="button" class="btn btn-default btn-lg btn-block">
+          Ver Detalhes
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4">
+
+  <div class="panel panel-warning">
+    <div class="panel-heading">Em atendimento</div>
+    <div class="panel-body">
+      {{contadores['em-atendimento']}}
+    </div>
+    <div class="panel-footer">
+      <a href="/" class="aEspecial">
+        <button type="button" class="btn btn-default btn-lg btn-block">
+          Ver Detalhes
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">Entregue</div>
+    <div class="panel-body">
+      {{contadores.entregue}}
     </div>
     <div class="panel-footer">
       <a href="/" class="aEspecial">
@@ -36,9 +70,45 @@
 <div class="col-md-4">
 
   <div class="panel panel-success">
-    <div class="panel-heading">Em atendimento</div>
+    <div class="panel-heading">Encerrado com sucesso</div>
     <div class="panel-body">
-      0
+      {{contadores['encerrado-com-sucesso']}}
+    </div>
+    <div class="panel-footer">
+      <a href="/" class="aEspecial">
+        <button type="button" class="btn btn-default btn-lg btn-block">
+          Ver Detalhes
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-4">
+
+  <div class="panel panel-danger">
+    <div class="panel-heading">Encerrado com insucesso</div>
+    <div class="panel-body">
+      {{contadores['encerrado-com-insucesso']}}
+    </div>
+    <div class="panel-footer">
+      <a href="/" class="aEspecial">
+        <button type="button" class="btn btn-default btn-lg btn-block">
+          Ver Detalhes
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-4">
+
+  <div class="panel panel-danger">
+    <div class="panel-heading">Cancelado</div>
+    <div class="panel-body">
+      {{contadores.cancelado}}
     </div>
     <div class="panel-footer">
       <a href="/" class="aEspecial">

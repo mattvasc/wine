@@ -47,10 +47,10 @@ module.exports = function(sequelize, DataTypes) {
       /*
         aberto
         agendado
-        em atendimento
+        em-atendimento
         entregue
-        encerrado com sucesso
-        encerrado com insucesso
+        encerrado-com-sucesso
+        encerrado-com-insucesso
         cancelado
       */
     },

@@ -40,7 +40,7 @@ app.use('/tecnicos', tecnicoRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
 app.use('/cidades', cidadeRouter);
 app.use('/estados', estadoRouter);
-app.use('/ticket', ticketRouter);
+app.use('/tickets', ticketRouter);
 
 
 // catch 404 and forward to error handler

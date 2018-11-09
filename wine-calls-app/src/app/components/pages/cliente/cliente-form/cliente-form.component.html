@@ -11,41 +11,98 @@
   <app-status-ativo-inativo></app-status-ativo-inativo>
 
   <div class="form-group">
-    <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
-    <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="">
+    <label for="clieteNomeRazaoSocial">Nome Razão Social</label>
+    <input type="text" [(ngModel)]="clienteAtual.razao_social" class="form-control" id="clienteNomeRazaoSocial" placeholder="">
   </div>
 
   <div class="form-group">
-    <label for="empresaNomeFantasia">Nome Fantasia</label>
-    <input type="text" class="form-control" id="empresaNomeFantasia" placeholder="" required>
+    <label for="clienteNomeFantasia">Nome Fantasia</label>
+    <input type="text" [(ngModel)]="clienteAtual.nome_fantasia" class="form-control" id="clienteNomeFantasia" placeholder="" required>
   </div>
 
   <div class="form-group">
-    <label for="empresaCNPJ">CNPJ </label>
-    <input type="text" class="form-control" id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
+    <label for="clienteCNPJ">CNPJ </label>
+    <input type="text" [(ngModel)]="clienteAtual.cnpj" class="form-control" id="clienteCNPJ" placeholder="99.999.999/9999-99" required>
   </div>
 
   <!-- Chamar Componente Endereço -->
-  <app-endereco></app-endereco>
+   <div class="form-row">
+        <div class="form-group col-md-8">
+          <label for="empresaLogradouro">Logradouro</label>
+          <input type="text" [(ngModel)]="clienteAtual.logradouro" class="form-control" name="logradouro"
+          id="empresaLogradouro" placeholder="Avenida Salgado Filho, 123"
+          
+          >
+        </div>
+      
+        <div class="form-group col-md-4">
+          <label for="empresaBairro">Bairro</label>
+          <input type="text" [(ngModel)]="clienteAtual.bairro" class="form-control" name="bairro"  id="empresaBairro" placeholder="Vila das Flores">
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="empresaMunicipio">Município</label>
+          <input type="text" [(ngModel)]="clienteAtual.municipio" class="form-control" name="municipio" id="empresaMunicipio">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="empresaEstado">Estado</label>
+          <select id="empresaEstado" [(ngModel)]="clienteAtual.estado" class="form-control" name="estado">
+            <option selected>SP</option>
+            <option>AM</option>
+            <option>AC</option>
+            <option>AL</option>
+            <option>AP</option>
+            <option>AM</option>
+            <option>BA</option>
+            <option>CE</option>
+            <option>DF</option>
+            <option>ES</option>
+            <option>GO</option>
+            <option>MA</option>
+            <option>MT</option>
+            <option>MS</option>
+            <option>MG</option>
+            <option>PA</option>
+            <option>PB</option>
+            <option>PR</option>
+            <option>PE</option>
+            <option>PI</option>
+            <option>RJ</option>
+            <option>RN</option>
+            <option>RS</option>
+            <option>RO</option>
+            <option>RR</option>
+            <option>SC</option>
+            <option>SE</option>
+            <option>TO</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="empresaCEP">CEP</label>
+          <input type="text" [(ngModel)]="clienteAtual.cep" class="form-control" name="cep" id="empresaCEP"  placeholder="07115-000">
+        </div>
+      </div>
 
   <div class="form-group col-md-6">
     <label for="inscricao_estadual">Inscrição Estudual</label>
-    <input type="text" class="form-control" id="inscricao_estadual">
+    <input type="text" [(ngModel)]="clienteAtual.inscricao_estadual" class="form-control" id="inscricao_estadual">
   </div>
 
   <div class="form-group col-md-6">
     <label for="inscricao_municipal">Inscrição Municipal</label>
-    <input type="text" class="form-control" id="inscricao_municipal">
+    <input type="text" [(ngModel)]="clienteAtual.inscricao_municipal" class="form-control" id="inscricao_municipal">
   </div>
 
   <div class="form-group col-md-6">
     <label for="registro_junta">Registro na Junta</label>
-    <input type="text" class="form-control" id="registro_junta">
+    <input type="text"  [(ngModel)]="clienteAtual.registro_na_junta" class="form-control" id="registro_junta">
   </div>
 
   <div class="form-group col-md-6">
     <label for="ramo_atividade">Ramo de Atividade</label>
-    <select id="ramo_atividade" class="form-control">
+    <select id="ramo_atividade" [(ngModel)]="clienteAtual.ramo_de_atividade" class="form-control">
       <option>Alimentação</option>
       <option>Educação</option>
       <option>Lazer</option>
@@ -59,17 +116,32 @@
 
   <div class="form-group col-md-12">
     <label for="nome_contato">Nome da pessoa ponto focal no cliente</label>
-    <input type="text" class="form-control" id="nome_contato" placeholder="David Ricardo dos Santos">
+    <input type="text"  [(ngModel)]="clienteAtual.nome_para_contato" class="form-control" id="nome_contato" placeholder="David Ricardo dos Santos">
   </div>
   <!-- Chamar Componente emailTelefone -->
-  <app-email-telefone></app-email-telefone>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="clienteEmail" name="email">Email</label>
+      <input type="email" [(ngModel)]="clienteAtual.email" class="form-control" id="clienteEmail" placeholder="contato@empresa.com.br" [(ngModel)]="parametro['email']">
+    </div>
+  
+    <div class="form-group col-md-6">
+      <label for="clienteTelefones"  name="telefone">Telefones</label>
+      <input type="text" [(ngModel)]="clienteAtual.telefone" class="form-control" id="clienteTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222" [(ngModel)]="parametro['telefones']">
+    </div>
+  </div>
 
   <br />
   <br />
 
   <!-- Chamar Componente observacoes -->
-  <app-observacoes></app-observacoes>
+  <h3>Outras Informações: </h3>
 
-  <button type="submit" class="btn btn-success">Cadastrar</button>
+  <div class="form-group">
+    <label for="observacao"></label>
+    <textarea class="form-control" [(ngModel)]="clienteAtual.observacao" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext" (keyup)="onKey($event)"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>
 
 </form>

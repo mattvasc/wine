@@ -14,6 +14,11 @@ export class Cliente {
 	public status ?: string;
 	public endereco_id ?: number; 
 	public observacoes ?: string;
+	public cep ?: string;
+    public logradouro ?: string;
+    public complemento ?: string;
+	public bairro ?: string;
+	public cidade ?: string;
 
 	// public endereco: Endereco;
 }

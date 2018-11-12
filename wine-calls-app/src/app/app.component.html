@@ -18,7 +18,13 @@
 
           <a routerLink="/empresasParceiras" class="linkMenu" >
             <li [ngClass]="{'active': router.url == '/empresasParceiras'}">
-              <i class="fa fa-menu fa-people-carry fa-lg"></i> Parceiros
+              <i class="fa fa-menu fa-people-carry fa-lg"></i> Empresas Parceiras
+            </li>
+          </a>
+
+          <a routerLink="/tecnicos" class="linkMenu" >
+            <li [ngClass]="{'active': router.url == '/tecnicos'}">
+              <i class="fa fa-menu fa-chess-pawn fa-lg"></i> Técnicos
             </li>
           </a>
 
@@ -40,6 +46,12 @@
           <a routerLink="/clientes" class="linkMenu">
             <li [ngClass]="{'active': router.url == '/clientes'}">
               <i class="fa fa-menu fa-user fa-lg"></i> Clientes
+            </li>
+          </a>
+
+          <a routerLink="/funcionarios" class="linkMenu">
+            <li [ngClass]="{'active': router.url == '/funcionarios'}">
+              <i class="fa fa-menu fa-cat fa-lg"></i> Funcionários
             </li>
           </a>
 

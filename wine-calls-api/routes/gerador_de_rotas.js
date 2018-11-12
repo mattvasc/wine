@@ -11,8 +11,6 @@ module.exports = function buildRoutes(Model, entidade_nome,
 var express = require('express');
 var router = express.Router();
 let entidade = Model[entidade_nome];
-console.log("**************************************************8");
-console.log(quais_rotas.create);
 	// get single
 	if(quais_rotas.single)
 		router.get('/:id', function (req, res) {

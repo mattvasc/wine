@@ -8,7 +8,9 @@ const Credentials = require('../credentials');
 
 const sequelize = new Sequelize(Credentials.database, Credentials.user, Credentials.password, {
 	dialect:"mysql",
-	omitNull:true
+  omitNull:true,
+  operatorsAliases: false,
+  logging: false /* <--- Mude para true para visualizar o SQL de Criação. */
 });
 const db = {};
 

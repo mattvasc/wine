@@ -1,3 +1,9 @@
+const result = require('dotenv').config()
+
+if (result.error) {
+  throw result.error
+}
+
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -14,6 +20,7 @@ var cidadeRouter = require('./routes/Cidade');
 var estadoRouter = require('./routes/Estado');
 var ticketRouter = require('./routes/Ticket');
 const Model = require('./model/');
+
 
 var app = express();
 // var favicon = require('serve-favicon');

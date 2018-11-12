@@ -29,7 +29,7 @@ export class ClientCreateUpdateComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       // se o usuário acessou a pagina sem passar um id inteiro...
-      if (this.id !== undefined && isNaN(this.id)) {
+      if (this.id !== undefined || isNaN(this.id)) {
         // TODO: Proteger a página, saindo dela quando informar id invalido
         alert("Acessando a pagina de maneira inválida!");
         this.router.navigateByUrl('/');
@@ -42,7 +42,7 @@ export class ClientCreateUpdateComponent implements OnInit {
           if (ret !== null) {
             // TODO: Verificar o success
             this.clienteAtual = ret["data"]["cliente"];
-            
+
           } else {
             // TODO: Proteger a página, saindo dela quando informar id invalido
             alert("Acessando a pagina com um id inválido!");
@@ -54,7 +54,7 @@ export class ClientCreateUpdateComponent implements OnInit {
 
     });
   }
-  
+
   exec(payload){
     let temp = this.clienteAtual["id"];
     this.clienteAtual = <Cliente>payload;
@@ -77,7 +77,7 @@ export class ClientCreateUpdateComponent implements OnInit {
       else
         alert("Erro al salvar cliente");
     router.navigateByUrl("/clientes");
-    
+
     });
   }
   updateCliente() {

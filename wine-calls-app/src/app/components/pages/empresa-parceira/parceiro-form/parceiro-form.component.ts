@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmpresaParceira } from '../../../../model/empresa-parceira';
-import { Pagamento } from '../../../../model/pagamento';
+//import { Pagamento } from '../../../../model/pagamento';
 import { EmpresaParceiraService } from '../../../../service/empresa-parceira.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Endereco } from '../../../../model/endereco';
+//import { Endereco } from '../../../../model/endereco';
 @Component({
   selector: 'app-parceiro-form',
   templateUrl: './parceiro-form.component.html',
@@ -18,14 +18,14 @@ export class ParceiroFormComponent implements OnInit {
   private isSalvar: boolean;
   private id: number;
   private parceiroAtual: EmpresaParceira;
-  private pagamentoAtual: Pagamento;
+  //private pagamentoAtual: Pagamento;
 
   constructor(private api: EmpresaParceiraService,
   private router: Router,
 private route: ActivatedRoute) {
     this.parceiroAtual = new EmpresaParceira();
-    this.pagamentoAtual = new Pagamento();
-    this.parceiroAtual.endereco = new Endereco();
+    //this.pagamentoAtual = new Pagamento();
+    //this.parceiroAtual.endereco = new Endereco();
     console.log("**********");
     console.log(this.parceiroAtual);
     console.log("**********");
@@ -72,7 +72,7 @@ private route: ActivatedRoute) {
      // TODO: ARRUMAR ISSO AI
      delete this.parceiroAtual.data_rg;
      // TODO: Verificar dados
-     this.parceiroAtual.pagamento = this.pagamentoAtual;
+     //this.parceiroAtual.pagamento = this.pagamentoAtual;
      this.api.create(this.parceiroAtual).subscribe(retorno => {
        console.log(retorno);
        if(retorno !== undefined && retorno['success'] === true)
@@ -89,7 +89,7 @@ private route: ActivatedRoute) {
    atualizar() {
      console.log("indo atalizar criente");
      // TODO: Verificar dados
-     this.parceiroAtual.pagamento = this.pagamentoAtual;
+     //this.parceiroAtual.pagamento = this.pagamentoAtual;
      this.api.update(this.parceiroAtual).subscribe(retorno => {
        console.log(retorno);
        if(retorno !== undefined && retorno['success'] === true)

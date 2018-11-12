@@ -17,9 +17,4 @@ export class Cliente {
 	public telefones?: string;
 	public email ?: string;
 	public observacoes ?: string;
-	public cep ?: string;
-    public logradouro ?: string;
-    public complemento ?: string;
-	public bairro ?: string;
-	public cidade ?: string;
 }

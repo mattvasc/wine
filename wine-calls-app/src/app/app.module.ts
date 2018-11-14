@@ -9,29 +9,20 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {
   ClienteListComponent,
-  ClientCreateUpdateComponent,
   ClientMainComponent,
   MainComponent,
   NotFoundComponent,
   EmpresaParceiraMainComponent,
-  EmpresaParceiraCreateUpdateComponent,
   EmpresaParceiraListComponent,
   ParceiroFormComponent,
   LoginComponent,
-  TicketMainComponent } from './components/pages';
-import { StoreModule } from '@ngrx/store';
-import { simpleReducer } from './reducers/simple.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+  TicketMainComponent } from './components';
 import { environment } from '../environments/environment';
-import { EnderecoComponent } from './components/pages/endereco/endereco.component';
-import { TecnicoFormComponent } from './components/pages/tecnico-form/tecnico-form.component';
-import { StatusAtivoInativoComponent } from './components/pages/status-ativo-inativo/status-ativo-inativo.component';
-import { ChamadoComponent } from './components/pages/chamado-form/chamado.component';
-import { DataHoraAgendamentoComponent } from './components/pages/data-hora-agendamento/data-hora-agendamento.component';
-import { ClienteFormComponent } from './components/pages/cliente/cliente-form/cliente-form.component';
-import { FuncionarioFormComponent } from './components/pages/funcionario-form/funcionario-form.component'; // Angular CLI environemnt
-import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
-import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
+
+import { TecnicoFormComponent } from './components/index';
+import { ChamadoComponent } from './components/index';
+import { ClienteFormComponent } from './components/index';
+import { FuncionarioFormComponent } from './components/index';
 import { TextMaskModule } from 'angular2-text-mask';
 // Angular CLI environemnt
 
@@ -58,24 +49,17 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     ClienteListComponent,
-    ClientCreateUpdateComponent,
     MainComponent,
     ClientMainComponent,
     NotFoundComponent,
     TicketMainComponent,
     ParceiroFormComponent,
-    EnderecoComponent,
     TecnicoFormComponent,
-    StatusAtivoInativoComponent,
     ChamadoComponent,
-    DataHoraAgendamentoComponent,
     ClienteFormComponent,
     FuncionarioFormComponent,
     TicketMainComponent,
-    DynamicFormComponent,
-    DynamicFormQuestionComponent,
     EmpresaParceiraMainComponent,
-    EmpresaParceiraCreateUpdateComponent,
     EmpresaParceiraListComponent,
     LoginComponent,
   ],
@@ -89,12 +73,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
       //, { enableTracing: true } // <-- debugging purposes only
-    ),
-    StoreModule.forRoot({ message: simpleReducer }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    })
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

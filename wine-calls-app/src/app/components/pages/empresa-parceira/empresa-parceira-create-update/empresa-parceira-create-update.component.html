@@ -1,8 +1,0 @@
-<button routerLink="/empresasParceiras">
-  <- Voltar
-</button> 
-<div style="margin-left: 5vw">
-    <h2>{{(isSalvar) ? "Cadastro" : "Atualização"}} de Empresa Parceiras</h2>
-    <app-dynamic-form (submitEvent)="exec($event)" [questions]="questions" [isSalvar]='isSalvar' [bindTo]="epAtual">
-    </app-dynamic-form>
-</div>

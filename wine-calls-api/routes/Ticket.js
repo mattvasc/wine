@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const formidable = require('formidable')
-console.log(process.env);
 const Model = require('../model');
 const geradorDeRotas = require('./gerador_de_rotas');
 const path = require('path')

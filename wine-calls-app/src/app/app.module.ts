@@ -39,9 +39,12 @@ const appRoutes: Routes = [
   { path: 'chamados', component: TicketMainComponent },
   { path: 'formsTicket', component: ChamadoComponent },
   { path: 'funcionarios', component: FuncionarioFormComponent },
+
+  { path: 'login', component: LoginComponent },
   
   // Colocar todas as rotas novas antes dessas duas abaixo..!
-  { path: '', pathMatch: 'full', component: MainComponent },
+  { path: '', pathMatch: 'full', component: LoginComponent },
+  { path: 'main', pathMatch: 'full', component: MainComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

@@ -6,5 +6,6 @@ export class Pagamento {
     public nome ?: string;
     public cpfcnpj ?: string;
     public isPoupanca ?: number;
+    public isPJ ?: number = 0;
     public operacao ?: string;
 }

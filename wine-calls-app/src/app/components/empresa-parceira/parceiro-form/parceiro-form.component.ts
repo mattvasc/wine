@@ -31,12 +31,13 @@ export class ParceiroFormComponent implements OnInit {
   ) {
   
   this.isSalvar = true;
+  this.pagamentoAtual = new Pagamento();
+  this.pagamentoAtual.isPJ = 0;
 }
 
 ngOnInit() {
   this.parceiroAtual = new EmpresaParceira();
   this.parceiroAtual.endereco = new Endereco();
-  this.pagamentoAtual = new Pagamento();
   this.endereco = new Endereco();
   this.isPJ = 'juridica';
   

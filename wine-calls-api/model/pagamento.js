@@ -31,6 +31,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(4),
       allowNull: true
     },
+    ispj: {
+      type: DataTypes.INTEGER(1),
+      defaultValue: 0
+    },
     operacao: {
       type: DataTypes.STRING(16),
       allowNull: true

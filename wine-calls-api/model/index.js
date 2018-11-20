@@ -24,4 +24,7 @@ Fs.readdirSync(__dirname)
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+//db['empresa_parceira'].hasOne(db.endereco);
+//db['empresa_parceira'].hasOne(db.pagamento);
+// db['pagamento'].belongsTo(db.empresa_parceira);
 module.exports = db;

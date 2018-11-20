@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('empresa_parceira', {
+  const empresa_parceira =  sequelize.define('empresa_parceira', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -60,9 +60,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DOUBLE,
       allowNull: true
     },
-    tipo_pessoa: {
-      type: DataTypes.STRING(45),
-      allowNull: true
+    ispj: {
+      type: DataTypes.INTEGER(1),
+      defaultValue: 0
     },
     cpf: {
       type: DataTypes.STRING(11),
@@ -81,6 +81,13 @@ module.exports = function(sequelize, DataTypes) {
     //   allowNull: true
     // },
   }, {
-    tableName: 'empresa_parceira'
+    tableName: 'empresa_parceira',
+    underscored: true
   });
+  empresa_parceira.associate = models => {
+    empresa_parceira.hasOne(models.endereco);
+    empresa_parceira.hasOne(models.pagamento);
+    // empresa_parceira.belongsToMany(model.Address, {through: model.UserAddress, foreignKey: "userId" })
+}
+  return empresa_parceira;
 };

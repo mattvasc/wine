@@ -24,12 +24,17 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit() {
+    var logado = sessionStorage.getItem('logado');
+    if(logado !== undefined && logado !== null && logado === 'true')
+      this.router.navigateByUrl(`/main`);
+
   }
   login() {
     if (this.funcionario.email === '' || this.funcionario.senha === '') {
       return;
     }
     this.router.navigateByUrl(`/main`);
+    window.sessionStorage.setItem('logado', 'true');
     // this.service.login(this.actualBetter.username, this.actualBetter.password).subscribe(data => {
     //   console.log(data);
     //   if (data === undefined || data['payload'] === undefined) {

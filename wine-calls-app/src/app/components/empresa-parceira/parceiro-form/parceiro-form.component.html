@@ -88,6 +88,7 @@
             </div>
 
             <div class="col-md-4">
+              ósó{{parceiroAtual.data_rg}}viu?
               <label for="empresaRGData">Data de Emissão do RG </label>
               <input type="date" [(ngModel)]="parceiroAtual.data_rg" class="form-control" name="empresaRGData">
             </div>
@@ -128,7 +129,7 @@
         </div>
         <div class="form-group col-md-2">
           <label for="empresaEstado">Estado</label>
-          <select id="empresaEstado" class="form-control" name="estado" [(ngModel)]="endereco.uf">
+          <select id="empresaEstado" class="form-control" name="estado" [(ngModel)]="endereco.estado">
             <option selected>SP</option>
             <option value="AM">AM</option>
             <option value="AC">AC</option>
@@ -232,7 +233,7 @@
       <div class="form-row" *ngIf="pagamentoAtual.isPJ == 0; else cnpjtemplate">
         <div class="form-group col-md-8">
           <label for="empresaNomeTitularBanco">Nome do Titular</label>
-          <input type="text" [(ngModel)]="pagamentoAtual.nome" class="form-control" name="empresaNomeTitularBanco"
+          <input type="text" [(ngModel)]="pagamentoAtual.nome_titular" class="form-control" name="empresaNomeTitularBanco"
             placeholder="David Ricardo dos Santos">
         </div>
 

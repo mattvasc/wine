@@ -37,8 +37,9 @@ export class ParceiroFormComponent implements OnInit {
 
 ngOnInit() {
   this.parceiroAtual = new EmpresaParceira();
-  this.parceiroAtual.endereco = new Endereco();
   this.endereco = new Endereco();
+  this.parceiroAtual.endereco = this.endereco;
+  this.parceiroAtual.pagamento = this.pagamentoAtual;
   this.isPJ = 'juridica';
   
   this.route.params.subscribe(params => {
@@ -54,11 +55,14 @@ ngOnInit() {
       this.isSalvar = false;
       this.id = + this.id; // Cast string to int
       console.log("Indo buscar o id tal" + this.id);
-      this.api.getSingle(this.id).subscribe(ret => {
+      this.api.getFullSingle(this.id).subscribe(ret => {
         console.log(ret);
         if (ret !== null) {
           // TODO: Verificar o success
-          this.parceiroAtual = ret["data"]["empresa_parceira"];
+          this.parceiroAtual = ret["data"];
+          this.endereco = this.parceiroAtual.endereco;
+          this.pagamentoAtual = this.parceiroAtual.pagamento;
+          
           
         } else {
           // TODO: Proteger a página, saindo dela quando informar id invalido
@@ -70,9 +74,6 @@ ngOnInit() {
     }
     
   });
-  console.log("**********");
-  console.log(this.parceiroAtual);
-  console.log("**********");
 }
 
 buscaCEP(event: any) {
@@ -100,10 +101,7 @@ buscaCEP(event: any) {
   
 }
 salvar() {
-  // TODO: ARRUMAR ISSO AI
-  delete this.parceiroAtual.data_rg;
   // TODO: Verificar dados
-  this.parceiroAtual.pagamento = this.pagamentoAtual;
   this.api.create(this.parceiroAtual).subscribe(retorno => {
     console.log(retorno);
     if(retorno !== undefined && retorno['success'] === true)
@@ -136,6 +134,8 @@ salvar() {
 
    exec() {
      console.log(this.parceiroAtual);
+     if(this.parceiroAtual.data_rg.length != 10)
+      delete this.parceiroAtual.data_rg;
     if (this.isSalvar) {
       this.salvar();
     } else {

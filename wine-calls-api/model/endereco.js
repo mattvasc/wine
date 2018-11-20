@@ -32,9 +32,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(64),
       allowNull: true
     },
-    observacoes: {
-      type: DataTypes.STRING(256),
-      allowNull: true
+    estado: {
+      type: DataTypes.STRING(2),
+      defaultValue: 'SP'
     }
   }, {
     tableName: 'endereco',

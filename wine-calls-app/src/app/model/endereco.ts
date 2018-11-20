@@ -9,7 +9,7 @@ export class Endereco {
     public numero ?: string = "";
     public complemento ?: string ="";
     public cidade ?: string = '';
-    public uf ?: string = '';
+    public estado ?: string = '';
     public bairro ?: string ="";
     public observacoes ?: string ="";
 

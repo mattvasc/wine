@@ -1,6 +1,6 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const endereco = sequelize.define('endereco', {
     id: {
       type: DataTypes.INTEGER(11),
@@ -37,9 +37,9 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 'SP'
     }
   }, {
-    tableName: 'endereco',
-    underscored: true
-  });
+      tableName: 'endereco',
+      underscored: true
+    });
   endereco.associate = models => {
     endereco.belongsToMany(models.empresa_parceira);
     endereco.belongsToMany(models.cliente);

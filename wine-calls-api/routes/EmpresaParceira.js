@@ -14,6 +14,7 @@ const router = geradorDeRotas(Model, entidade_nome, quais_rotas);
 let entidade = Model[entidade_nome];
 let xablau = Model['endereco'];
 
+// Get com associações
 router.get('/full/:id', function (req, res) {
   console.log(`Indo pegar um @s ${entidade_nome}`);
   Model.sequelize.query(`SELECT empresa_parceira.id AS \`id\`, empresa_parceira.pagamento_id AS \`pagamento.id\`, empresa_parceira.endereco_id AS \`endereco.id\`,
@@ -68,7 +69,6 @@ router.get('/full/:id', function (req, res) {
 
 // criar uma nova instancia
 router.post('/create', function (req, res) {
-  console.log("lalalalallalala");
   pagamento = Model["pagamento"];
   console.log("indo criar uma nova instancia de " + entidade_nome);
   console.log(entidade_nome);
@@ -81,9 +81,6 @@ router.post('/create', function (req, res) {
     new_endereco.save()
       .then(payload_address => {
         req.body.endereco_id = payload_address.id;
-        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        console.log(req.body);
-        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         let new_parceiro = entidade.build(req.body);
         new_parceiro.save()
           .then(payload => {
@@ -115,6 +112,69 @@ router.post('/create', function (req, res) {
   );
 });
 
+// Delete em cascata
+router.delete('/full/:id', function (req, res) {
+  let pagamento = Model["pagamento"];
+  let endereco = Model["endereco"];
+  let empresa_parceira = Model["empresa_parceira"];
+  const object_id = req.params.id;
+
+  if (object_id === undefined || isNaN(object_id)) {
+    res.json({
+      success: false,
+      data: [],
+      error: ("Missing id for " + entidade_nome)
+    });
+    return;
+  }
+
+  empresa_parceira.findByPk(object_id).then(result => {
+    pagamento.destroy({
+      where: {
+        id: object_id.pagamento_id
+      }
+    })
+      .catch(error => res.json({
+        success: false,
+        data: {},
+        error: error
+      }));
+
+      endereco.destroy({
+        where: {
+          id: object_id.endereco_id
+        }
+      }).then( () => {
+        empresa_parceira.destroy({
+          where: {
+            id: object_id
+          }
+        }).then(affectedRows => {
+          res.json({
+            success: true,
+            data: { "affected_rows": affectedRows }
+          })
+        }).catch(error => res.json({
+          success: false,
+          data: [],
+          error: error
+        }));
+      })
+        .catch(error => res.json({
+          success: false,
+          data: {},
+          error: error
+        }));
+
+  }).catch(error => res.json({
+    success: false,
+    data: {},
+    error: error
+  }));
+
+  
+
+});
 
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmpresaParceira } from '../../../model/empresa-parceira';
 import { Pagamento } from '../../../model/pagamento';
@@ -12,9 +12,8 @@ import { Masks } from '../../../masks';
   templateUrl: './parceiro-form.component.html',
   styleUrls: ['./parceiro-form.component.scss']
 })
-export class ParceiroFormComponent implements OnInit {
+export class ParceiroFormComponent implements OnInit, AfterViewInit {
 
-  public isPJ: String;
   public teste: String;
   private masks = Masks;
   private isSalvar: boolean;
@@ -32,7 +31,8 @@ export class ParceiroFormComponent implements OnInit {
   
   this.isSalvar = true;
   this.pagamentoAtual = new Pagamento();
-  this.pagamentoAtual.isPJ = 0;
+  this.pagamentoAtual.ispj = 0;
+  this.pagamentoAtual.isPoupanca = 0;
 }
 
 ngOnInit() {
@@ -40,7 +40,6 @@ ngOnInit() {
   this.endereco = new Endereco();
   this.parceiroAtual.endereco = this.endereco;
   this.parceiroAtual.pagamento = this.pagamentoAtual;
-  this.isPJ = 'juridica';
   
   this.route.params.subscribe(params => {
     this.id = params['id'];
@@ -50,6 +49,7 @@ ngOnInit() {
       alert("Acessando a pagina de maneira inválida!");
       this.router.navigateByUrl('/');
     }
+
     // Se for um Update
     if (this.id !== undefined) {
       this.isSalvar = false;
@@ -60,9 +60,15 @@ ngOnInit() {
         if (ret !== null) {
           // TODO: Verificar o success
           this.parceiroAtual = ret["data"];
+          console.log(this.parceiroAtual);
+          if(this.parceiroAtual.pagamento.ispj == 1) {
+            document.getElementById('pagamentopj').click();
+          }
+          else if(this.parceiroAtual.pagamento.ispj == 0) {
+            document.getElementById('pagamentopf').click();
+          }
           this.endereco = this.parceiroAtual.endereco;
           this.pagamentoAtual = this.parceiroAtual.pagamento;
-          
           
         } else {
           // TODO: Proteger a página, saindo dela quando informar id invalido
@@ -74,6 +80,10 @@ ngOnInit() {
     }
     
   });
+}
+
+ngAfterViewInit() {
+    
 }
 
 buscaCEP(event: any) {
@@ -95,7 +105,7 @@ buscaCEP(event: any) {
       this.endereco.cidade = retorno['localidade'];
     }
     if (retorno['uf'] !== undefined) {
-      this.endereco.uf = retorno['uf'];
+      this.endereco.estado = retorno['uf'];
     }
   });
   

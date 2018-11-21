@@ -22,7 +22,7 @@ router.get('/full/:id', function (req, res) {
   empresa_parceira.valor_km, empresa_parceira.ispj, empresa_parceira.cpf, empresa_parceira.rg, empresa_parceira.data_rg,
   endereco.cep AS \`endereco.cep\`, endereco.logradouro AS \`endereco.logradouro\`, endereco.complemento AS \`endereco.complemento\`, 
   endereco.bairro AS \`endereco.bairro\`, endereco.cidade AS \`endereco.cidade\`, pagamento.agencia AS \`pagamento.agencia\`, 
-  endereco.estado AS \`endereco.estado\`,
+  endereco.estado AS \`endereco.estado\`, endereco.numero AS \`endereco.numero\`,
   pagamento.conta AS \`pagamento.conta\`, pagamento.banco AS \`pagamento.banco\`, pagamento.nome_titular AS \`pagamento.nome_titular\`,
   pagamento.cpfcnpj AS \`pagamento.cpfcnpj\`, pagamento.ispoupanca AS \`pagamento.ispoupanca\`, pagamento.operacao AS \`pagamento.operacao\`,
   pagamento.ispj AS \`pagamento.ispj\`

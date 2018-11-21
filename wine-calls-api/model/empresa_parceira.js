@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
     cnpj: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(18),
       allowNull: true
     },
     nome_fantasia: {
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     email: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(128),
       allowNull: true
     },
     endereco_id: {
@@ -65,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0
     },
     cpf: {
-      type: DataTypes.STRING(11),
+      type: DataTypes.STRING(14),
       allowNull: true
     },
     rg: {

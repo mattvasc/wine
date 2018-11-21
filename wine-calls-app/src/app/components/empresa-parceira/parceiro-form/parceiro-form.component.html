@@ -83,12 +83,12 @@
 
             <div class="col-md-4">
               <label for="empresaRG">RG </label>
-              <input type="text" [(ngModel)]="parceiroAtual.rg" class="form-control" name="empresaRG" placeholder="99.999.999-9 SSP"
+              <input type="text" [(ngModel)]="parceiroAtual.rg" class="form-control" name="empresaRG" placeholder="99.999.999-9 SSP/SPF"
                 required>
             </div>
 
             <div class="col-md-4">
-              ósó{{parceiroAtual.data_rg}}viu?
+              
               <label for="empresaRGData">Data de Emissão do RG </label>
               <input type="date" [(ngModel)]="parceiroAtual.data_rg" class="form-control" name="empresaRGData">
             </div>
@@ -215,22 +215,21 @@
 
       <div class="form-row">
         <div class="form-check">
-          <input class="form-check-input radio-inline" type="radio" name="isPJ" id="pagamentopf" [checked]="pagamentoAtual.isPJ == 0"
-            value='0' (change)="pagamentoAtual.isPJ = 0; pagamentoAtual.cpfcnpj = '';">
+          <input class="form-check-input radio-inline" type="radio" name="isPJ" id="pagamentopf" [checked]="pagamentoAtual.ispj == 0"
+            value='0' (change)="pagamentoAtual.ispj = 0; pagamentoAtual.cpfcnpj = '';">
           <label class="form-check-label" for="pagamentopf">
             &nbsp;&nbsp;Pessoa Física
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input radio-inline" type="radio" name="isPJ" id="pagamentopj" [checked]="pagamentoAtual.isPJ == 1"
-            value='1' (change)="pagamentoAtual.isPJ = 1; pagamentoAtual.cpfcnpj = '';">
+          <input class="form-check-input radio-inline" type="radio" name="isPJ" id="pagamentopj" [checked]="pagamentoAtual.ispj == 1"
+            value='1' (change)="pagamentoAtual.ispj = 1; pagamentoAtual.cpfcnpj = '';">
           <label class="form-check-label" for="pagamentopj">
             &nbsp;&nbsp;Pessoa Jurídica
           </label>
         </div>
       </div>
-
-      <div class="form-row" *ngIf="pagamentoAtual.isPJ == 0; else cnpjtemplate">
+      <div class="form-row" *ngIf="pagamentoAtual.ispj == 0; else cnpjtemplate">
         <div class="form-group col-md-8">
           <label for="empresaNomeTitularBanco">Nome do Titular</label>
           <input type="text" [(ngModel)]="pagamentoAtual.nome_titular" class="form-control" name="empresaNomeTitularBanco"
@@ -249,7 +248,7 @@
         <div class="form-row">
           <div class="form-group col-md-8">
             <label for="empresaNomeTitularBanco">Nome da Empresa</label>
-            <input type="text" [(ngModel)]="pagamentoAtual.nome" class="form-control" name="empresaNomeTitularBanco"
+            <input type="text" [(ngModel)]="pagamentoAtual.nome_titular" class="form-control" name="empresaNomeTitularBanco"
               placeholder="Reparos S.A.">
           </div>
           <div class="form-group col-md-4">
@@ -264,15 +263,15 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-check">
-            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaCorrente" [(ngModel)]="pagamentoAtual.isPoupanca"
-              value="contaCorrente" checked="true">
+            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaCorrente" [checked]="pagamentoAtual.ispoupanca == 0" (change)="pagamentoAtual.ispoupanca = 0;"
+              value="0" checked="true">
             <label class="form-check-label" for="contaCorrente">
               &nbsp;&nbsp;Conta Corrente
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaPoupanca" [(ngModel)]="pagamentoAtual.isPoupanca"
-              value="contaPoupanca">
+            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaPoupanca" [checked]="pagamentoAtual.ispoupanca == 1" (change)="pagamentoAtual.ispoupanca = 1;"
+              value="1">
             <label class="form-check-label" for="contaPoupanca">
               &nbsp;&nbsp;Conta Poupança
             </label>

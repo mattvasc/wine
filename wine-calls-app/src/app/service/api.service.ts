@@ -23,4 +23,11 @@ export class ApiService {
 
 
   public apiUrl = 'http://localhost:3000/';
+
+  buscaCep(cep: String){
+    cep = cep.replace('-','');
+    if(cep.length === 8 )
+      return this.http.get<any>('https://viacep.com.br/ws/' + cep + '/json/');
+    return null;
+  }
 }

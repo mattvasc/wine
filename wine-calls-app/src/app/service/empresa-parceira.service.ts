@@ -31,6 +31,9 @@ export class EmpresaParceiraService {
 
     return this.http.get<EmpresaParceira>(this.apiUrl + this.posfixo + `/${id}`);
   }
+  getFullSingle(id: number): Observable<EmpresaParceira> {
+    return this.http.get<EmpresaParceira>(this.apiUrl + this.posfixo + `/full/${id}`);
+  }
 
   create(ep: EmpresaParceira): Observable<EmpresaParceira> {
 

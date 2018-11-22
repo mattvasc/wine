@@ -1,6 +1,6 @@
 <!-- TODO: fazer o if para colocar a class "active" no lugar certo -->
 
-<div class="nav-side-menu col-3">
+<div [ngClass]="{'nav-side-menu col-3': this.router.url !== '/login' && this.router.url !== '/'}" *ngIf="this.router.url !== '/login' && this.router.url !== '/'">
   <div class="brand">
     <a routerLink="/"><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
   </div>
@@ -43,12 +43,17 @@
             </li>
           </a>
 
+          <a class="linkMenu" (click)="logOut()">
+            <li>
+              <i class="fa fa-menu fa-sign-out-alt  fa-lg"></i> Log Out
+            </li>
+          </a>
 
         </ul>
 
   </div>
 </div>
 
-<div class="col-9 offset-md-3">
+<div [ngClass]="{'col-9 offset-md-3': this.router.url !== '/login' && this.router.url !== '/' }">
   <router-outlet></router-outlet>
 </div>

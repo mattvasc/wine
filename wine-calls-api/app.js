@@ -1,3 +1,9 @@
+const result = require('dotenv').config()
+
+if (result.error) {
+  throw result.error
+}
+
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -12,7 +18,9 @@ var pagamentoRouter = require('./routes/Pagamento');
 var tecnicoRouter = require('./routes/Tecnico');
 var cidadeRouter = require('./routes/Cidade');
 var estadoRouter = require('./routes/Estado');
+var ticketRouter = require('./routes/Ticket');
 const Model = require('./model/');
+
 
 var app = express();
 // var favicon = require('serve-favicon');
@@ -39,6 +47,7 @@ app.use('/tecnicos', tecnicoRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
 app.use('/cidades', cidadeRouter);
 app.use('/estados', estadoRouter);
+app.use('/tickets', ticketRouter);
 
 
 // catch 404 and forward to error handler
@@ -73,7 +82,9 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-Model.sequelize.sync().then(() => {
+Model.sequelize.sync(
+    // {"force":true}
+    ).then(() => {
     console.log('API Rodando na porta 3000');
     app.listen(3000);
  } );

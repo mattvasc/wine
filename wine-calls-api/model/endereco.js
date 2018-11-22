@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('endereco', {
+module.exports = function (sequelize, DataTypes) {
+  const endereco = sequelize.define('endereco', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(64),
       allowNull: true
     },
+    numero: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
     complemento: {
       type: DataTypes.STRING(128),
       allowNull: true
@@ -24,19 +28,22 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(64),
       allowNull: true
     },
-    cidade_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'cidade',
-        key: 'id'
-      }
-    },
-    observacoes: {
-      type: DataTypes.STRING(256),
+    cidade: {
+      type: DataTypes.STRING(64),
       allowNull: true
+    },
+    estado: {
+      type: DataTypes.STRING(2),
+      defaultValue: 'SP'
     }
   }, {
-    tableName: 'endereco'
-  });
+      tableName: 'endereco',
+      underscored: true
+    });
+  endereco.associate = models => {
+    endereco.belongsToMany(models.empresa_parceira);
+    endereco.belongsToMany(models.cliente);
+    // endereco.belongsToMany(models.)
+  }
+  return endereco;
 };

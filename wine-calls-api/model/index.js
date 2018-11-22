@@ -8,7 +8,9 @@ const Credentials = require('../credentials');
 
 const sequelize = new Sequelize(Credentials.database, Credentials.user, Credentials.password, {
 	dialect:"mysql",
-	omitNull:true
+  omitNull:true,
+  operatorsAliases: false,
+  logging: false /* <--- Mude para true para visualizar o SQL de Criação. */
 });
 const db = {};
 
@@ -22,4 +24,7 @@ Fs.readdirSync(__dirname)
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+//db['empresa_parceira'].hasOne(db.endereco);
+//db['empresa_parceira'].hasOne(db.pagamento);
+// db['pagamento'].belongsTo(db.empresa_parceira);
 module.exports = db;

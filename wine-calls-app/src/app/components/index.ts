@@ -16,4 +16,7 @@ export { ParceiroFormComponent } from './empresa-parceira/parceiro-form/parceiro
 export { TecnicoFormComponent } from './tecnico-empresa/tecnico-form/tecnico-form.component';
 export { ChamadoComponent } from './ticket/chamado-form/chamado.component';
 export { ClienteFormComponent } from './cliente/cliente-form/cliente-form.component';
-export { FuncionarioFormComponent } from './funcionario-form/funcionario-form.component';
+export { FuncionarioFormComponent } from './funcionario/funcionario-form/funcionario-form.component';
+
+export { FuncionarioListComponent } from './funcionario/funcionario-list/funcionario-list.component';
+export { TecnicoListComponent } from './tecnico-empresa/tecnico-list/tecnico-list.component';

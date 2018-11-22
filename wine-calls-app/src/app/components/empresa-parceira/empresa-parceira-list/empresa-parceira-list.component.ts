@@ -27,6 +27,9 @@ export class EmpresaParceiraListComponent implements OnInit {
     this.router.navigateByUrl(`/formsEmpresaParceira/${id}`);
   }
 
+  editFuncionariosEmpresaParceira(id: number) {
+    this.router.navigateByUrl(`/tecnicos/${id}`);
+  }
   deleteEmpresaParceira(id: number) {
     console.log(`Indo apagar o cliente ${id}`);
     this.api.delete(id).subscribe(c => {

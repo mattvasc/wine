@@ -18,8 +18,6 @@ export class EmpresaParceiraListComponent implements OnInit {
 
   getEmpresasParceiras() {
     this.api.getAll().subscribe(c => {
-      console.log('recebi dados');
-      console.log(c);
       if (c['data']['empresa_parceira'] !== undefined) {
         this.empresas_parceiras = c['data']['empresa_parceira'];
       }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { EmpresaParceira } from '../model/empresa-parceira';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './api.service';
 
 const httpOptions = {
@@ -21,7 +21,8 @@ export class EmpresaParceiraService {
 
 
   private apiUrl = this.api.apiUrl;
-  private posfixo = 'EmpresasParceiras'
+  private posfixo = 'EmpresasParceiras';
+
   getAll(): Observable<EmpresaParceira[]> {
 
     return this.http.get<EmpresaParceira[]>(this.apiUrl + this.posfixo );

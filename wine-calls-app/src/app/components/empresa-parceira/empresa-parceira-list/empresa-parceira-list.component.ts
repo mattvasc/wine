@@ -18,8 +18,11 @@ export class EmpresaParceiraListComponent implements OnInit {
 
   getEmpresasParceiras() {
     this.api.getAll().subscribe(c => {
-      if(c['data']["empresa_parceira"]!== undefined)
-        this.empresas_parceiras = c['data']['empresa_parceira']
+      console.log('recebi dados');
+      console.log(c);
+      if (c['data']['empresa_parceira'] !== undefined) {
+        this.empresas_parceiras = c['data']['empresa_parceira'];
+      }
     });
   }
 
@@ -33,8 +36,8 @@ export class EmpresaParceiraListComponent implements OnInit {
   deleteEmpresaParceira(id: number) {
     console.log(`Indo apagar o cliente ${id}`);
     this.api.delete(id).subscribe(c => {
-      console.log(c)
-      alert("Empresa apagada com sucesso!");
+      console.log(c);
+      alert('Empresa apagada com sucesso!');
       window.location.reload();
     });
   }

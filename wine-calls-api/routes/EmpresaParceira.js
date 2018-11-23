@@ -10,8 +10,7 @@ let quais_rotas = {
   "update": true,
   "delete": true
 }
-var express = require('express');
-var router = express.Router();
+const router = geradorDeRotas(Model, entidade_nome);
 
 let entidade = Model[entidade_nome];
 let xablau = Model['endereco'];

@@ -41,6 +41,7 @@ const appRoutes: Routes = [
   { path: 'formsEmpresaParceira/:id', component: ParceiroFormComponent, canActivate: [AuthService]  },
 
   { path: 'tecnicos', component: TecnicoListComponent, canActivate: [AuthService]},
+  { path: 'formsTecnicoEmpresaParceira/:id', component: TecnicoFormComponent, canActivate: [AuthService]},
   { path: 'formsTecnicoEmpresaParceira', component: TecnicoFormComponent, canActivate: [AuthService]},
 
   { path: 'chamados', component: TicketMainComponent, canActivate: [AuthService]  },
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
 
   { path: 'login', component: LoginComponent },
 
-  // Colocar todas as rotas novas antes dessas duas abaixo..!
+  // Colocar todas as rotas novas antes dessas três abaixo..!
   { path: '', pathMatch: 'full', component: LoginComponent },
   { path: 'main', pathMatch: 'full', component: MainComponent, canActivate: [AuthService]  },
   { path: '**', component: NotFoundComponent }

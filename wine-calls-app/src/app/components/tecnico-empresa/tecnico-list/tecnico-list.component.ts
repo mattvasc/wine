@@ -3,6 +3,7 @@ import { Tecnico } from '../../../model/tecnico';
 import { EmpresaParceira } from 'src/app/model/empresa-parceira';
 import { Router } from '@angular/router';
 import { DataStorageService } from '../../../service/data-storage.service';
+import { TecnicoService } from '../../../service/tecnico.service';
 
 @Component({
   selector: 'app-tecnico-list',
@@ -15,6 +16,7 @@ export class TecnicoListComponent implements OnInit {
   constructor(
     public dataStorage: DataStorageService,
     private router: Router,
+    private tecnicoService: TecnicoService
   ) { }
 
   ngOnInit() {
@@ -22,6 +24,21 @@ export class TecnicoListComponent implements OnInit {
       this.router.navigateByUrl('/empresasParceiras');
     }
     this.tecnicos = [];
+    this.tecnicoService.getAllofOneCompany(this.dataStorage.empresa_parceira.id).subscribe(result => {
+      if (result['success'] !== true) {
+        console.log("Erro ao obter listagem de técnicos.");
+        this.router.navigateByUrl('/empresasParceiras');
+      }
+      this.tecnicos = result['data']['tecnico'];
+    });
     this.empresa = JSON.parse(window.sessionStorage.getItem('empresa'));
+  }
+
+  editTecnico(id: number){
+    this.router.navigateByUrl('/formsTecnicoEmpresaParceira/' + id);
+  }
+
+  deleteTecnico(id: number){
+   // TODO: fazer isso aqui 
   }
 }

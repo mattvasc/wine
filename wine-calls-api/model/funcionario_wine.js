@@ -24,6 +24,38 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(11),
       allowNull: true
     },
+
+
+    data_rg: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+
+    nascimento: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+
+    nome_pai: {
+      type: DataTypes.STRING(45),
+      allowNull: false
+    },
+
+    nome_pai: {
+      type: DataTypes.STRING(45),
+      allowNull: false
+    },
+
+    rg: {
+      type: DataTypes.STRING(9),
+      allowNull: false
+    },
+
+    observacoes: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
+    
   }, {
     tableName: 'funcionario_wine'
   });

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Funcionario } from '../../../model/funcionario';
 
 @Component({
   selector: 'app-funcionario-list',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FuncionarioListComponent implements OnInit {
 
+  public funcionarios: Funcionario[] = [];
   constructor() { }
 
   ngOnInit() {

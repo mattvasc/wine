@@ -86,5 +86,5 @@
       [(ngModel)]="tecnicoAtual.observacoes" (keyup)="onKey($event)"></textarea>
   </div>
 
-  <button type="submit" class="btn btn-success">Cadastrar</button>
+  <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>
 </form>

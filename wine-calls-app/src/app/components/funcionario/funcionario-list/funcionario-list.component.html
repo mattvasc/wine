@@ -1,3 +1,23 @@
-<p>
-  funcionario-list works!
-</p>
+<table *ngIf="funcionarios.length > 0; else semFunc" class="table table-hover">
+  <thead class="thead-dark">
+    <th>Id.</th>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Editar</th>
+    <th>Apagar</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let func of funcionarios">
+      <td>{{func.id}}</td>
+      <td>{{ func.nome}}</td>
+      <td>{{func.email}}</td>
+      <td><button (click)="editFuncionario(func.id)" class="btn btn-block btn-success">Editar</button></td>
+      <td><button (click)="deleteFuncionario(func.id)" class="btn btn-block btn-danger">Apagar</button></td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #semFunc>
+    <h4>Não há funcionários Wine cadastrados no momento!</h4>
+</ng-template>
+
+<button class="btn btn-primary" routerLink="/funcionario">Cadastrar um novo Funcionário</button>

@@ -40,12 +40,14 @@ const appRoutes: Routes = [
   { path: 'formsEmpresaParceira', component: ParceiroFormComponent, canActivate: [AuthService]  },
   { path: 'formsEmpresaParceira/:id', component: ParceiroFormComponent, canActivate: [AuthService]  },
 
-  { path: 'tecnicos/:id', component: TecnicoListComponent, canActivate: [AuthService]},
+  { path: 'tecnicos', component: TecnicoListComponent, canActivate: [AuthService]},
   { path: 'formsTecnicoEmpresaParceira', component: TecnicoFormComponent, canActivate: [AuthService]},
 
   { path: 'chamados', component: TicketMainComponent, canActivate: [AuthService]  },
   { path: 'formsTicket', component: ChamadoComponent, canActivate: [AuthService]  },
-  { path: 'funcionarios', component: FuncionarioFormComponent, canActivate: [AuthService]  },
+  { path: 'funcionarios', component: FuncionarioListComponent, canActivate: [AuthService]  },
+  { path: 'funcionario', component: FuncionarioFormComponent, canActivate: [AuthService]  },
+  { path: 'funcionario/:id', component: FuncionarioFormComponent, canActivate: [AuthService]  },
 
   { path: 'login', component: LoginComponent },
 

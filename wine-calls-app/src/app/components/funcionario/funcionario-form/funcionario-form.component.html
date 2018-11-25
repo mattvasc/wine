@@ -7,17 +7,17 @@
 
       <div class="form-group col-md-8">
         <label for="funcionarioNome">Nome Completo</label>
-        <input type="text" class="form-control" id="funcionarioNome" placeholder="Fábio Roberto Alves de Lima" required>
+        <input type="text" [(ngModel)]="funcionarioAtual.nome" class="form-control" id="funcionarioNome" placeholder="Fábio Roberto Alves de Lima" required>
       </div>
 
       <div class="form-group col-md-4">
         <label for="funcionarioCPF">CPF </label>
-        <input type="text" class="form-control" id="funcionarioCPF" placeholder="999.999.99-99" required>
+        <input type="text" [(ngModel)]="funcionarioAtual.CPF" class="form-control" id="funcionarioCPF" placeholder="999.999.99-99" required>
       </div>
 
       <div class="form-group col-md-12">
         <label for="funcionarioEmail">Email</label>
-        <input type="email" class="form-control" id="funcionarioEmail" placeholder="fabio@wine.com.br">
+        <input type="email" [(ngModel)]="funcionarioAtual.nome" class="form-control" id="funcionarioEmail" placeholder="fabio@wine.com.br" required>
       </div>
 
       <div class="form-group col-md-6">
@@ -27,16 +27,48 @@
 
       <div class="form-group col-md-6">
         <label for="funcionarioSenhaConfirmar">Confirmar Senha</label>
-        <input type="password" class="form-control" id="funcionarioSenhaConfirmar" required>
+        <input type="password" class="form-control" id="funcionarioSenhaConfirmar" required [(ngModel)]="funcionarioAtual.senha" class="form-control" id="funcionarioSenhaConfirmar" required>
+
+        <label for="funcionarioSenhaConfirmar">Confirmar Senha</label>
+        <input type="password" [(ngModel)]="funcionarioAtual.senha" class="form-control" id="funcionarioSenhaConfirmar" required>
       </div>
 
+      <div class=" col-md-2">
+        <label for="tecnicoRG">RG </label>
+        <input type="text" [(ngModel)]="funcionarioAtual.rg" class="form-control" id="tecnicoRG" placeholder="99.999.999-9 SSP" required>
+      </div>
+
+      <div class=" col-md-2">
+        <label for="dataRG">Data de Expedição do RG </label>
+        <input type="date" [(ngModel)]="funcionarioAtual.data_rg" class="form-control" id="dataRG"  required>
+      </div>
+
+      <div class=" col-md-2">
+        <label for="dataNasc">Data de Nascimento </label>
+        <input type="date" [(ngModel)]="funcionarioAtual.nascimento" class="form-control" id="dataNasc"  required>
+      </div>
+
+      <div class="col-md-8">
+        <label for="funcionarioMae">Nome da Mãe</label>
+        <input type="text" [(ngModel)]="funcionarioAtual.nome_mae" class="form-control" id="funcionarioMae" placeholder="Maria da Silva" required>
+      </div>
+
+      <div class="col-md-8">
+        <label for="funcionarioPai">Nome do Pai</label>
+        <input type="text" [(ngModel)]="funcionarioAtual.nome_pai" class="form-control" id="funcionarioPai" placeholder="Jorge da Silva" required>
+      </div>
+
+      <div class="form-group col-md-4">
+          <label for="funcionarioTelefones" name="telefone">Telefones</label>
+          <input type="text"  [(ngModel)]="funcionarioAtual.telefones" class="form-control" id="funcionarioTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222">
+        </div>
 
       <!-- Chamar Componente observacoes -->
       <h3>Outras Informações: </h3>
 
       <div class="form-group col-md-12">
         <label for="observacao"></label>
-        <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext" (keyup)="onKey($event)"></textarea>
+        <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext" (keyup)="onKey($event)" [(ngModel)]="funcionarioAtual.observacoes"></textarea>
       </div>
 
       <div class="col-md-12">

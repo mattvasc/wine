@@ -3,20 +3,23 @@
 <!-- Para preencher automaticamente um Campo Nome -->
 <!-- <input type="text" class="form-control" name="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
 
-<form name="angularlixo">
+<form name="cadastroEmpresaParceira">
   <div class="form-group">
 
     <h3>Dados Gerais: </h3>
     <br />
 
-
     <!-- Botao Status Ativo / Inativo -->
-    <div class="btn-group-toggle" data-toggle="buttons">
-      <button type="button" class="btn btn-success">Ativo</button>
-      <button type="button" class="btn btn-danger">Inativo</button>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary active">
+        <input type="radio" name="ativo" checked> Ativo
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="ativo"> Inativo
+      </label>
     </div>
 
-    <br />
+    <p class="clearfix"></p>
 
 
     <div class="col-md-12">
@@ -87,11 +90,15 @@
                 required>
             </div>
 
+<<<<<<< HEAD
+
+=======
             <div class="col-md-4">
-              
+
               <label for="empresaRGData">Data de Emissão do RG </label>
               <input type="date" [(ngModel)]="parceiroAtual.data_rg" class="form-control" name="empresaRGData">
             </div>
+>>>>>>> a3a527a2a38cc95b01945da2def4859dc49ad4fd
           </div>
         </div>
       </ng-template>
@@ -127,10 +134,10 @@
           <label for="empresaMunicipio">Município</label>
           <input [(ngModel)]="endereco.cidade" type="text" class="form-control" name="municipio" id="empresaMunicipio">
         </div>
-        <div class="form-group col-md-2">
+        <div class="col-md-2">
           <label for="empresaEstado">Estado</label>
-          <select id="empresaEstado" class="form-control" name="estado" [(ngModel)]="endereco.estado">
-            <option selected>SP</option>
+          <select id="empresaEstado" class="custom-select custom-select-lg" name="estado" [(ngModel)]="endereco.estado">
+            <option value="SP" selected>SP</option>
             <option value="AM">AM</option>
             <option value="AC">AC</option>
             <option value="AL">AL</option>

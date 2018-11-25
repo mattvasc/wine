@@ -8,7 +8,7 @@
 
     <div class="form-group col-md-4">
       <label for="ticket_status_id">Status do Chamado</label>
-      <select id="ticket_status_id" class="custom-select">
+      <select id="ticket_status_id" class="custom-select custom-select-lg">
         <option selected>Aberto</option>
         <option>Agendado</option>
         <option>em Atendimento</option>
@@ -20,7 +20,7 @@
 
     <div class="form-group col-md-4">
       <label for="tipo_ticket">Categoria do Chamado</label>
-      <select id="tipo_ticket" class="custom-select">
+      <select id="tipo_ticket" class="custom-select custom-select-lg">
         <option selected>Rollout</option>
         <option>Cabling</option>
         <option>Data Center</option>
@@ -31,7 +31,7 @@
     <hr>
     <div class="form-group col-md-4">
       <label for="docValidada">Documentação Validada</label>
-      <select id="docValidada" class="custom-select">
+      <select id="docValidada" class="custom-select custom-select-lg">
         <option selected>Pendente</option>
         <option>Validada</option>
       </select>
@@ -39,7 +39,7 @@
 
     <div class="form-group col-md-4">
       <label for="pgto_cliente">Pago pelo cliente</label>
-      <select id="pgto_cliente" class="custom-select">
+      <select id="pgto_cliente" class="custom-select custom-select-lg">
         <option selected>Pendente</option>
         <option>Faturado</option>
       </select>
@@ -47,7 +47,7 @@
 
     <div class="form-group col-md-4">
       <label for="pgto_tecnico">Pago para o técnico</label>
-      <select id="pgto_tecnico" class="custom-select">
+      <select id="pgto_tecnico" class="custom-select custom-select-lg">
         <option selected>Pendente</option>
         <option>Faturado</option>
       </select>
@@ -77,15 +77,15 @@
     <input type="email" class="form-control" id="email_contato" required>
   </div>
 
-  
-  
+
+
 
   <p style="clear: both"></p>
 
   <hr>
 
   <!-- Chamar Componente Data Hora Agendamento -->
-  
+
 <h3>Agendamento: </h3>
 
 <div class="form-row">
@@ -123,7 +123,7 @@
   </div>
   <div class="form-group col-md-4">
     <label for="empresaEstado">Estado</label>
-    <select id="empresaEstado" class="form-control" name="estado">
+    <select id="empresaEstado" class="custom-select custom-select-lg" name="estado">
       <option selected>SP</option>
       <option>AM</option>
       <option>AC</option>
@@ -198,7 +198,7 @@
     <label for="observacao"></label>
     <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext" (keyup)="onKey($event)"></textarea>
   </div>
-  
+
 
   <button type="submit" class="btn btn-success">Cadastrar</button>
 

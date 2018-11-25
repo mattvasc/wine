@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmpresaParceira } from '../../../model/empresa-parceira';
-import { Pagamento } from '../../../model/pagamento';
+//import { Pagamento } from '../../../model/pagamento';
 import { EmpresaParceiraService } from '../../../service/empresa-parceira.service';
 import { ApiService } from '../../../service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Endereco } from '../../../model/endereco';
+//import { Endereco } from '../../../model/endereco';
 import { Masks } from '../../../masks';
 @Component({
   selector: 'app-parceiro-form',
@@ -19,8 +19,8 @@ export class ParceiroFormComponent implements OnInit, AfterViewInit {
   private isSalvar: boolean;
   private id: number;
   private parceiroAtual: EmpresaParceira;
-  private pagamentoAtual: Pagamento;
-  private endereco: Endereco;
+  //private pagamentoAtual: Pagamento;
+  //private endereco: Endereco;
 
   constructor(
     private api: EmpresaParceiraService,
@@ -30,16 +30,16 @@ export class ParceiroFormComponent implements OnInit, AfterViewInit {
   ) {
   
   this.isSalvar = true;
-  this.pagamentoAtual = new Pagamento();
-  this.pagamentoAtual.ispj = 0;
-  this.pagamentoAtual.isPoupanca = 0;
+  //this.pagamentoAtual = new Pagamento();
+  //this.pagamentoAtual.ispj = 0;
+  //this.pagamentoAtual.isPoupanca = 0;
 }
 
 ngOnInit() {
   this.parceiroAtual = new EmpresaParceira();
-  this.endereco = new Endereco();
-  this.parceiroAtual.endereco = this.endereco;
-  this.parceiroAtual.pagamento = this.pagamentoAtual;
+ // this.endereco = new Endereco();
+  //this.parceiroAtual.endereco = this.endereco;
+  //this.parceiroAtual.pagamento = this.pagamentoAtual;
   
   this.route.params.subscribe(params => {
     this.id = params['id'];
@@ -61,14 +61,14 @@ ngOnInit() {
           // TODO: Verificar o success
           this.parceiroAtual = ret["data"];
           console.log(this.parceiroAtual);
-          if(this.parceiroAtual.pagamento.ispj == 1) {
+          if(this.parceiroAtual.pgto_ispj == 1) {
             document.getElementById('pagamentopj').click();
           }
-          else if(this.parceiroAtual.pagamento.ispj == 0) {
+          else if(this.parceiroAtual.pgto_ispj == 0) {
             document.getElementById('pagamentopf').click();
           }
-          this.endereco = this.parceiroAtual.endereco;
-          this.pagamentoAtual = this.parceiroAtual.pagamento;
+          //this.endereco = this.parceiroAtual.endereco;
+          //this.pagamentoAtual = this.parceiroAtual.pagamento;
           
         } else {
           // TODO: Proteger a página, saindo dela quando informar id invalido
@@ -96,16 +96,16 @@ buscaCEP(event: any) {
     if(retorno['erro'] !== undefined && retorno['erro'] === true)
       return;
     if (retorno['logradouro'] !== undefined ) {
-      this.endereco.logradouro = retorno['logradouro'];
+      this.logradouro = retorno['logradouro'];
     }
     if (retorno['bairro'] !== undefined) {
-      this.endereco.bairro = retorno['bairro'];
+      this.bairro = retorno['bairro'];
     }
     if (retorno['localidade'] !== undefined) {
-      this.endereco.cidade = retorno['localidade'];
+      this.cidade = retorno['localidade'];
     }
     if (retorno['uf'] !== undefined) {
-      this.endereco.estado = retorno['uf'];
+      this.estado = retorno['uf'];
     }
   });
   
@@ -128,7 +128,7 @@ salvar() {
    atualizar() {
      console.log("indo atalizar criente");
      // TODO: Verificar dados
-     this.parceiroAtual.pagamento = this.pagamentoAtual;
+     //this.parceiroAtual.pagamento = this.pagamentoAtual;
      this.api.update(this.parceiroAtual).subscribe(retorno => {
        console.log(retorno);
        if(retorno !== undefined && retorno['success'] === true)
@@ -144,8 +144,8 @@ salvar() {
 
    exec() {
      console.log(this.parceiroAtual);
-     if(this.parceiroAtual.data_rg.length != 10)
-      delete this.parceiroAtual.data_rg;
+     //if(this.parceiroAtual.data_rg.length != 10)
+      //delete this.parceiroAtual.data_rg;
     if (this.isSalvar) {
       this.salvar();
     } else {

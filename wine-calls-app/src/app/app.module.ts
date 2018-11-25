@@ -45,7 +45,9 @@ const appRoutes: Routes = [
 
   { path: 'chamados', component: TicketMainComponent, canActivate: [AuthService]  },
   { path: 'formsTicket', component: ChamadoComponent, canActivate: [AuthService]  },
-  { path: 'funcionarios', component: FuncionarioFormComponent, canActivate: [AuthService]  },
+  { path: 'funcionarios', component: FuncionarioListComponent, canActivate: [AuthService]  },
+  { path: 'funcionario', component: FuncionarioFormComponent, canActivate: [AuthService]  },
+  { path: 'funcionario/:id', component: FuncionarioFormComponent, canActivate: [AuthService]  },
 
   { path: 'login', component: LoginComponent },
 

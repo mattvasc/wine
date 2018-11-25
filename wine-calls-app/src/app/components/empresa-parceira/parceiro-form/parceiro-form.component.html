@@ -1,7 +1,6 @@
 <h1>{{isSalvar ? "Cadastro" : "Atualização"}} da Empresa Parceira</h1>
 
 <!-- Para preencher automaticamente um Campo Nome -->
-<!-- <input type="text" class="form-control" name="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
 
 <form name="cadastroEmpresaParceira">
   <div class="form-group">
@@ -10,14 +9,13 @@
     <br />
 
     <!-- Botao Status Ativo / Inativo -->
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="ativo" checked> Ativo
-      </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="ativo"> Inativo
-      </label>
-    </div>
+    <div class="form-group row">
+        <!-- Botao Status Ativo / Inativo -->
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <button type="button" class="btn btn-success">Ativo</button>
+          <button type="button" class="btn btn-danger">Inativo</button>
+        </div>
+      </div>
 
     <p class="clearfix"></p>
 
@@ -78,27 +76,18 @@
         <div class="form-group">
           <div class="form-row">
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="empresaCPF">CPF </label>
               <input type="text" [textMask]="{mask: masks.CPF}" [(ngModel)]="parceiroAtual.cpf" class="form-control"
                 name="empresaCPF" placeholder="999.999.99-99" required>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="empresaRG">RG </label>
-              <input type="text" [(ngModel)]="parceiroAtual.rg" class="form-control" name="empresaRG" placeholder="99.999.999-9 SSP/SPF"
+              <input type="text" [(ngModel)]="parceiroAtual.rg" class="form-control" name="empresaRG" placeholder="99.999.999-9 SSP"
                 required>
             </div>
 
-<<<<<<< HEAD
-
-=======
-            <div class="col-md-4">
-
-              <label for="empresaRGData">Data de Emissão do RG </label>
-              <input type="date" [(ngModel)]="parceiroAtual.data_rg" class="form-control" name="empresaRGData">
-            </div>
->>>>>>> a3a527a2a38cc95b01945da2def4859dc49ad4fd
           </div>
         </div>
       </ng-template>
@@ -108,18 +97,18 @@
       <div class="form-row">
         <div class="form-group col-md-2">
           <label for="empresaCEP">CEP</label>
-          <input type="text" [textMask]="{mask: masks.CEP}" (ngModelChange)="buscaCEP($event)" [(ngModel)]="endereco.cep"
+          <input type="text" [textMask]="{mask: masks.CEP}" (ngModelChange)="buscaCEP($event)" [(ngModel)]="parceiroAtual.cep"
             class="form-control" name="cep" id="empresaCEP" placeholder="07115-000">
         </div>
         <div class="form-group col-md-8">
           <label for="empresaLogradouro">Logradouro</label>
-          <input type="text" class="form-control" [(ngModel)]="endereco.logradouro" name="logradouro" id="empresaLogradouro"
+          <input type="text" class="form-control" [(ngModel)]="parceiroAtual.logradouro" name="logradouro" id="empresaLogradouro"
             placeholder="Avenida Salgado Filho, 123">
         </div>
 
         <div class="form-group col-md-2">
           <label for="empresanumero">Número</label>
-          <input type="text" class="form-control" name="numero" id="empresanumero" [(ngModel)]="endereco.numero"
+          <input type="text" class="form-control" name="numero" id="empresanumero" [(ngModel)]="parceiroAtual.numero"
             placeholder="140">
         </div>
       </div>
@@ -127,16 +116,16 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="empresaBairro">Bairro</label>
-          <input type="text" class="form-control" name="bairro" id="empresaBairro" [(ngModel)]="endereco.bairro"
+          <input type="text" class="form-control" name="bairro" id="empresaBairro" [(ngModel)]="parceiroAtual.bairro"
             placeholder="Vila das Flores">
         </div>
         <div class="form-group col-md-6">
           <label for="empresaMunicipio">Município</label>
-          <input [(ngModel)]="endereco.cidade" type="text" class="form-control" name="municipio" id="empresaMunicipio">
+          <input [(ngModel)]="parceiroAtual.cidade" type="text" class="form-control" name="municipio" id="empresaMunicipio">
         </div>
         <div class="col-md-2">
           <label for="empresaEstado">Estado</label>
-          <select id="empresaEstado" class="custom-select custom-select-lg" name="estado" [(ngModel)]="endereco.estado">
+          <select id="empresaEstado" class="custom-select custom-select-lg" name="estado" [(ngModel)]="parceiroAtual.estado">
             <option value="SP" selected>SP</option>
             <option value="AM">AM</option>
             <option value="AC">AC</option>
@@ -178,13 +167,13 @@
         <div class="form-group col-md-6">
           <label for="empresaEmail" name="email">Email</label>
           <input type="email" class="form-control" id="empresaEmail" name="empresaEmail" placeholder="contato@empresa.com.br"
-            [(ngModel)]="parceiroAtual['email']">
+            [(ngModel)]="parceiroAtual.email">
         </div>
 
         <div class="form-group col-md-6">
           <label for="empresaTelefones" name="telefone">Telefones</label>
           <input type="text" class="form-control" id="empresaTelefones" name="empresaTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222"
-            [(ngModel)]="parceiroAtual['telefones']">
+            [(ngModel)]="parceiroAtual.telefones">
         </div>
       </div>
 

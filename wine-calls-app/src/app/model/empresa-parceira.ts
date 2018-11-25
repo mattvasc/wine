@@ -34,6 +34,10 @@ export class EmpresaParceira  {
     public pgto_nome_titular ?: string;
     public pgto_cpfcnpj ?: string;
 	public pgto_isPoupanca ?: number;
+	public pgto_ispj ?: string;
+
+	
+
 	
 	public observacoes ?: string = "";
 

@@ -22,6 +22,12 @@
             </li>
           </a>
 
+          <a routerLink="/tecnicos" class="linkMenu" >
+            <li [ngClass]="{'active': router.url == '/tecnicos'}">
+              <i class="fa fa-menu fa-chess-pawn fa-lg"></i> Técnicos
+            </li>
+          </a>
+
           <a routerLink="/chamados" class="linkMenu">
             <li [ngClass]="{'active': router.url == '/chamados'}">
               <i class="fab fa-menu fa-stack-overflow fa-lg"></i> Chamados
@@ -40,6 +46,12 @@
           <a routerLink="/clientes" class="linkMenu">
             <li [ngClass]="{'active': router.url == '/clientes'}">
               <i class="fa fa-menu fa-user fa-lg"></i> Clientes
+            </li>
+          </a>
+
+          <a routerLink="/funcionarios" class="linkMenu">
+            <li [ngClass]="{'active': router.url == '/funcionarios'}">
+              <i class="fa fa-menu fa-cat fa-lg"></i> Funcionários
             </li>
           </a>
 

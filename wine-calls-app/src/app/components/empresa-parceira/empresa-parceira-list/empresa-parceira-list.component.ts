@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmpresaParceira } from '../../../model/empresa-parceira';
 import { Router } from '@angular/router';
 import { EmpresaParceiraService } from 'src/app/service/empresa-parceira.service';
+import { DataStorageService } from '../../../service/data-storage.service';
 
 @Component({
   selector: 'app-empresa-parceira-list',
@@ -10,7 +11,7 @@ import { EmpresaParceiraService } from 'src/app/service/empresa-parceira.service
 })
 export class EmpresaParceiraListComponent implements OnInit {
 
-  constructor(private api: EmpresaParceiraService, private router: Router) { }
+  constructor(private api: EmpresaParceiraService, private router: Router, public dataStorage: DataStorageService) { }
   empresas_parceiras: EmpresaParceira[] = [];
   ngOnInit() {
     this.getEmpresasParceiras();
@@ -29,7 +30,8 @@ export class EmpresaParceiraListComponent implements OnInit {
   }
 
   editFuncionariosEmpresaParceira(id: number) {
-    this.router.navigateByUrl(`/tecnicos/${id}`);
+    this.dataStorage.empresa_parceira = this.empresas_parceiras[id];
+    this.router.navigateByUrl(`/tecnicos`);
   }
   deleteEmpresaParceira(id: number) {
     console.log(`Indo apagar o cliente ${id}`);

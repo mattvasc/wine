@@ -17,7 +17,7 @@
   </tbody>
 </table>
 <ng-template #semEP>
-    <h2>Não há Técnicos cadastrados para essa Empresa no momento!</h2>
+    <h4>Não há Técnicos cadastrados para a Empresa "{{ (this.dataStorage !== undefined && this.dataStorage.empresa_parceira.nome_fantasia !== undefined) ? this.dataStorage.empresa_parceira.nome_fantasia : ""}}" no momento!</h4>
 </ng-template>
 
 <button class="btn btn-primary" routerLink="/formsTecnicoEmpresaParceira">Cadastrar um novo Técnico</button>

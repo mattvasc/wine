@@ -10,11 +10,11 @@
     <th>Apagar</th>
   </thead>
   <tbody>
-    <tr *ngFor="let ep of empresas_parceiras">
+    <tr *ngFor="let ep of empresas_parceiras; let i = index">
       <td>{{ep.id}}</td>
       <td>{{ ep.razao_social}}</td>
       <td>{{ep.email}}</td>
-      <td><button (click)="editFuncionariosEmpresaParceira(ep.id)" class="btn btn-block btn-primary">Funcionários</button></td>
+      <td><button (click)="editFuncionariosEmpresaParceira(i)" class="btn btn-block btn-primary">Funcionários</button></td>
       <td><button (click)="editEmpresaParceira(ep.id)" class="btn btn-block btn-success">Editar</button></td>
       <td><button (click)="deleteEmpresaParceira(ep.id)" class="btn btn-block btn-danger">Apagar</button></td>
     </tr>

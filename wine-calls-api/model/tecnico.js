@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     rg: {
-      type: DataTypes.STRING(9),
+      type: DataTypes.STRING(30),
       allowNull: false
     },
     data_rg: {

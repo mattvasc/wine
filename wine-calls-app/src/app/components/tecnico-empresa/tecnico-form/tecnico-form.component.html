@@ -97,6 +97,8 @@
 
 
 
-
-  <button type="submit" class="btn btn-success">Cadastrar</button>
+  <label for="observacao"></label>
+  <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante."
+    [(ngModel)]="tecnicoAtual.observacoes"></textarea>
+  <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>
 </form>

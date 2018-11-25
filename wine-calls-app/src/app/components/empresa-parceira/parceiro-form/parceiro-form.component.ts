@@ -5,7 +5,7 @@ import { EmpresaParceira } from '../../../model/empresa-parceira';
 import { EmpresaParceiraService } from '../../../service/empresa-parceira.service';
 import { ApiService } from '../../../service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Endereco } from '../../../model/endereco';
+//import { Endereco } from '../../../model/endereco';
 import { Masks } from '../../../masks';
 @Component({
   selector: 'app-parceiro-form',
@@ -37,8 +37,8 @@ export class ParceiroFormComponent implements OnInit, AfterViewInit {
 
 ngOnInit() {
   this.parceiroAtual = new EmpresaParceira();
-  this.endereco = new Endereco();
-  this.parceiroAtual.endereco = this.endereco;
+ // this.endereco = new Endereco();
+  //this.parceiroAtual.endereco = this.endereco;
   //this.parceiroAtual.pagamento = this.pagamentoAtual;
   
   this.route.params.subscribe(params => {
@@ -64,10 +64,10 @@ ngOnInit() {
           if(this.parceiroAtual.pgto_ispj == 1) {
             document.getElementById('pagamentopj').click();
           }
-          else if(this.parceiroAtual.pagamento.ispj == 0) {
+          else if(this.parceiroAtual.pgto_ispj == 0) {
             document.getElementById('pagamentopf').click();
           }
-          this.endereco = this.parceiroAtual.endereco;
+          //this.endereco = this.parceiroAtual.endereco;
           //this.pagamentoAtual = this.parceiroAtual.pagamento;
           
         } else {
@@ -96,16 +96,16 @@ buscaCEP(event: any) {
     if(retorno['erro'] !== undefined && retorno['erro'] === true)
       return;
     if (retorno['logradouro'] !== undefined ) {
-      this.endereco.logradouro = retorno['logradouro'];
+      this.logradouro = retorno['logradouro'];
     }
     if (retorno['bairro'] !== undefined) {
-      this.endereco.bairro = retorno['bairro'];
+      this.bairro = retorno['bairro'];
     }
     if (retorno['localidade'] !== undefined) {
-      this.endereco.cidade = retorno['localidade'];
+      this.cidade = retorno['localidade'];
     }
     if (retorno['uf'] !== undefined) {
-      this.endereco.estado = retorno['uf'];
+      this.estado = retorno['uf'];
     }
   });
   

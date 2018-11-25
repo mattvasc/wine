@@ -1,13 +1,12 @@
 <h1>Cadastro do Cliente</h1>
 
-<br />
-<br />
+<hr>
 
 <form id="formCliente">
 
-
   <h3>Dados Gerais: </h3>
   <!-- Botao Status Ativo / Inativo -->
+<<<<<<< HEAD
   <div class="btn-group-toggle" data-toggle="buttons">
     <button type="button" class="btn btn-success">Ativo</button>
     <button type="button" class="btn btn-danger">Inativo</button>
@@ -46,8 +45,68 @@
       <input type="text" [(ngModel)]="clienteAtual.cep" [textMask]="{mask: masks.CEP}" class="form-control" name="cep"
         id="CEP" placeholder="07115-000">
     </div>
+=======
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+      <input type="radio" name="ativo" checked> Ativo
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="ativo"> Inativo
+    </label>
+  </div>
+
+  <p style="clear: both"></p>
+
+  <div class="form-group col-md-12">
+    <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
+    <input type="text" [(ngModel)]="clienteAtual.razao_social" class="form-control" id="empresaNomeRazaoSocial" placeholder="" required>
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="empresaNomeFantasia">Nome Fantasia</label>
+    <input type="text" [(ngModel)]="clienteAtual.nome_fantasia" class="form-control" id="empresaNomeFantasia" placeholder="" >
+  </div>
+
+  <!-- TODO: máscara não funcionando -->
+
+  <div class="form-group col-md-12">
+    <label for="empresaCNPJ">CNPJ </label>
+    <input type="text" [(ngModel)]="clienteAtual.cnpj" [textMask]="{mask: masks.CNPJ}"class="form-control" id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
+  </div>
+
+  <div class="form-group col-md-6">
+    <label for="inscricao_estadual">Inscrição Estudual</label>
+    <input type="text" [(ngModel)]="clienteAtual.inscricao_estadual" class="form-control" id="inscricao_estadual">
+  </div>
+
+  <div class="form-group col-md-6">
+    <label for="ramo_atividade">Ramo de Atividade</label>
+    <select id="ramo_atividade" [(ngModel)]="clienteAtual.ramo_de_atividade" class="custom-select custom-select-lg">
+      <option>Alimentação</option>
+      <option>Educação</option>
+      <option>Lazer</option>
+      <option>Serviços</option>
+      <option>Transporte</option>
+      <option>Turismo</option>
+      <option>Outros</option>
+    </select>
+  </div>
+  <p class="clearfix"></p>
+  <!-- Início Componente para Endereço Completo -->
+  <div class="form-group col-md-3">
+    <label for="CEP">CEP</label>
+    <input type="text" [(ngModel)]="clienteAtual.cep" [textMask]="{mask: masks.CEP}" class="form-control" name="cep" id="CEP"  placeholder="07115-000">
+  </div>
+
+  <div class="form-group col-md-9">
+    <label for="empresaLogradouro">Logradouro</label>
+    <input type="text" [(ngModel)]="clienteAtual.logradouro" class="form-control" name="logradouro" required
+    id="empresaLogradouro" placeholder="Avenida Salgado Filho, 123">
+  </div>
+>>>>>>> a3a527a2a38cc95b01945da2def4859dc49ad4fd
 
   </div>
+<<<<<<< HEAD
   <div class="form-row">
     <div class="form-group col-md-8">
       <label for="empresaLogradouro">Logradouro</label>
@@ -103,6 +162,47 @@
     </div>
 
   </div>
+=======
+
+  <div class="form-group col-md-6">
+    <label for="empresaMunicipio">Município</label>
+    <input type="text" [(ngModel)]="clienteAtual.municipio" class="form-control" name="municipio" id="empresaMunicipio" required>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label for="empresaEstado">Estado</label>
+    <select id="empresaEstado" [(ngModel)]="clienteAtual.estado" class="custom-select custom-select-lg" name="estado">
+      <option selected>SP</option>
+      <option>AM</option>
+      <option>AC</option>
+      <option>AL</option>
+      <option>AP</option>
+      <option>AM</option>
+      <option>BA</option>
+      <option>CE</option>
+      <option>DF</option>
+      <option>ES</option>
+      <option>GO</option>
+      <option>MA</option>
+      <option>MT</option>
+      <option>MS</option>
+      <option>MG</option>
+      <option>PA</option>
+      <option>PB</option>
+      <option>PR</option>
+      <option>PE</option>
+      <option>PI</option>
+      <option>RJ</option>
+      <option>RN</option>
+      <option>RS</option>
+      <option>RO</option>
+      <option>RR</option>
+      <option>SC</option>
+      <option>SE</option>
+      <option>TO</option>
+    </select>
+  </div>
+>>>>>>> a3a527a2a38cc95b01945da2def4859dc49ad4fd
   <!-- Fim Componente para Endereço Completo -->
 
 
@@ -127,6 +227,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <div class="form-row">
     <div class="form-group col-md-12">
       <label for="nome_contato">Nome da pessoa ponto focal no cliente</label>
@@ -148,20 +249,38 @@
       <input type="text" [(ngModel)]="clienteAtual.telefones" class="form-control" id="empresaTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222"
         required>
     </div>
+=======
+  <!-- Chamar Componente emailTelefone -->
+  <div class="form-group col-md-6">
+    <label for="empresaEmail" name="email">Email</label>
+    <input type="email"  [(ngModel)]="clienteAtual.email" class="form-control" id="empresaEmail" placeholder="contato@empresa.com.br" required >
   </div>
 
-  <br />
-  <br />
+  <div class="form-group col-md-6">
+    <label for="empresaTelefones"  name="telefone">Telefones</label>
+    <input type="text"  [(ngModel)]="clienteAtual.telefones" class="form-control" id="empresaTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222" required >
+>>>>>>> a3a527a2a38cc95b01945da2def4859dc49ad4fd
+  </div>
 
+  <p class="clearfix"></p>
+
+  <hr>
   <!-- Chamar Componente observacoes -->
   <h3>Outras Informações: </h3>
 
   <div class="form-group">
     <label for="observacao"></label>
+<<<<<<< HEAD
     <textarea class="form-control" [(ngModel)]="clienteAtual.observacoes" name="observacao" id="observacao" rows="15"
       placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext"></textarea>
+=======
+    <textarea class="form-control"  [(ngModel)]="clienteAtual.observacoes" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext"  ></textarea>
+>>>>>>> a3a527a2a38cc95b01945da2def4859dc49ad4fd
   </div>
 
+  <label for="observacao"></label>
+  <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante."
+  [(ngModel)]="parceiroAtual.observacoes"></textarea>
 
   <!-- Chamar Botao salvar ou cadastrar -->
   <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>

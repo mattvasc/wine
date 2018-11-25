@@ -160,9 +160,6 @@
       placeholder="Campo adicional para inserir qualquer informação relevante." [(ngModel)]="obstext"></textarea>
   </div>
 
-  <label for="observacao"></label>
-  <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante."
-  [(ngModel)]="parceiroAtual.observacoes"></textarea>
 
   <!-- Chamar Botao salvar ou cadastrar -->
   <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>

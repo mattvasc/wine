@@ -8,7 +8,7 @@ export class Endereco {
     public logradouro ?: string  ="";
     public numero ?: string = "";
     public complemento ?: string ="";
-    public cidade ?: string = '';
+    public municipio ?: string = '';
     public estado ?: string = '';
     public bairro ?: string ="";
     public observacoes ?: string ="";

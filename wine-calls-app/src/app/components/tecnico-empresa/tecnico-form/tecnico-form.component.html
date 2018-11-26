@@ -1,9 +1,9 @@
-<h1>Cadastro do Tecnico</h1>
+<h1>{{(cadastrar) ? "Cadastro": "Atualização"}} do Tecnico</h1>
 
 <!-- Para preencher automaticamente um Campo Nome -->
 <!-- <input type="text" class="form-control" id="empresaNomeRazaoSocial" placeholder="" required [(ngModel)]="teste" [ngModelOptions]="{standalone: true}"> -->
 <hr>
-<form id="formTecnico">
+<form id="formTecnico" name="formTecnico">
 
 
   <h3>Dados Gerais: </h3>
@@ -21,61 +21,67 @@
   </div>
 
   <div class="col-md-3">
-    <label for="empresaID">ID </label>
-    <input type="number" [(ngModel)]="tecnicoAtual.empresa_do_tecnico_id" class="form-control" id="empresaID"  required>
+    <label for="empresaID">Empresa </label>
+    <input type="text" [(ngModel)]="dataStorage.empresa_parceira.nome_fantasia" class="form-control" name="empresaID" disabled id="empresaID" required>
   </div>
 
   <p class="clearfix"></p>
 
   <div class="col-md-6">
     <label for="tecnicoNome">Nome Completo</label>
-    <input type="text" [(ngModel)]="tecnicoAtual.nome" class="form-control" id="tecnicoNome" placeholder="João Monteiro da Silva" required>
+    <input type="text" [(ngModel)]="tecnicoAtual.nome" class="form-control" id="tecnicoNome" name="tecnicoNome" placeholder="João Monteiro da Silva"
+      required>
   </div>
 
   <div class="col-md-6">
     <label for="tecnicoCPF">CPF </label>
-    <input type="text" [(ngModel)]="tecnicoAtual.cpf" class="form-control" id="tecnicoCPF" placeholder="999.999.99-99" required>
+    <input type="text" [(ngModel)]="tecnicoAtual.cpf" class="form-control" id="tecnicoCPF" name="tecnicoCPF" placeholder="999.999.99-99"
+      required>
   </div>
 
   <div class="col-md-4">
     <label for="tecnicoRG">RG </label>
-    <input type="text" [(ngModel)]="tecnicoAtual.rg" class="form-control" id="tecnicoRG" placeholder="99.999.999-9 SSP" required>
+    <input type="text" [(ngModel)]="tecnicoAtual.rg" class="form-control" id="tecnicoRG" name="tecnicoRG" placeholder="99.999.999-9 SSP"
+      required>
   </div>
 
   <div class="col-md-4">
     <label for="dataRG">Data de Expedição do RG </label>
-    <input type="date" [(ngModel)]="tecnicoAtual.data_rg" class="form-control" id="dataRG"  required>
+    <input type="date" [(ngModel)]="tecnicoAtual.data_rg" class="form-control" name="tecnicoDataRG" id="dataRG" required>
   </div>
 
   <div class="col-md-4">
     <label for="dataNasc">Data de Nascimento </label>
-    <input type="date" [(ngModel)]="tecnicoAtual.nascimento" class="form-control" id="dataNasc"  required>
+    <input type="date" [(ngModel)]="tecnicoAtual.nascimento" class="form-control" name="tecnicoNascimento" id="dataNasc" required>
   </div>
 
-    <div class="col-md-12">
-      <label for="tecnicoMae">Nome da Mãe</label>
-      <input type="text" [(ngModel)]="tecnicoAtual.nome_mae" class="form-control" id="tecnicoMae" placeholder="Maria da Silva" required>
-    </div>
+  <div class="col-md-12">
+    <label for="tecnicoMae">Nome da Mãe</label>
+    <input type="text" [(ngModel)]="tecnicoAtual.nome_mae" class="form-control" name="tecnicoMae" id="tecnicoMae" placeholder="Maria da Silva"
+      >
+  </div>
 
-    <div class="col-md-12">
-      <label for="tecnicoPai">Nome do Pai</label>
-      <input type="text" [(ngModel)]="tecnicoAtual.nome_pai" class="form-control" id="tecnicoPai" placeholder="Jorge da Silva" required>
-    </div>
+  <div class="col-md-12">
+    <label for="tecnicoPai">Nome do Pai</label>
+    <input type="text" [(ngModel)]="tecnicoAtual.nome_pai" class="form-control" name="tecnicoPai" id="tecnicoPai" placeholder="Jorge da Silva"
+      >
+  </div>
 
-    <div class="form-group col-md-6">
-      <label for="tecnicoEmail" name="email">Email</label>
-      <input type="email"  [(ngModel)]="tecnicoAtual.email" class="form-control" id="tecnicoEmail" placeholder="joao@empresa.com.br" required>
-    </div>
+  <div class="form-group col-md-6">
+    <label for="tecnicoEmail" name="email">Email</label>
+    <input type="email" [(ngModel)]="tecnicoAtual.email" class="form-control" id="tecnicoEmail" name="tecnicoEmail" placeholder="joao@empresa.com.br"
+      required>
+  </div>
 
-    <div class="form-group col-md-6">
-      <label for="tenicoTelefones" name="telefone">Telefones</label>
-      <input type="text"  [(ngModel)]="tecnicoAtual.telefones" class="form-control" id="tenicoTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222">
-    </div>
+  <div class="form-group col-md-6">
+    <label for="tenicoTelefones" name="telefone">Telefones</label>
+    <input type="text" [(ngModel)]="tecnicoAtual.telefones" class="form-control" name="tecnicoTelefone" id="tenicoTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222">
+  </div>
 
 
-    <p class="clearfix"></p>
+  <p class="clearfix"></p>
 
-    <hr>
+  <hr>
 
   <!-- Chamar Componente observacoes -->
   <h3>Outras Informações: </h3>
@@ -83,8 +89,8 @@
   <div class="form-group col-md-12">
     <label for="observacao"></label>
     <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante."
-      [(ngModel)]="tecnicoAtual.observacoes" (keyup)="onKey($event)"></textarea>
+      [(ngModel)]="tecnicoAtual.observacoes" (keyup)="onKey($event)" name="obs"></textarea>
   </div>
 
-  <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>
+  <button type="submit" class="btn btn-success" (click)="exec();">{{(cadastrar) ? "Cadastrar": "Atualizar"}}</button>
 </form>

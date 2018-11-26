@@ -20,6 +20,7 @@ export class TecnicoListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dataStorage.sync();
     if (this.dataStorage.empresa_parceira === undefined) {
       this.router.navigateByUrl('/empresasParceiras');
     }
@@ -34,11 +35,19 @@ export class TecnicoListComponent implements OnInit {
     this.empresa = JSON.parse(window.sessionStorage.getItem('empresa'));
   }
 
-  editTecnico(id: number){
-    this.router.navigateByUrl('/formsTecnicoEmpresaParceira/' + id);
+  editTecnico(index: number){
+    this.dataStorage.tecnico = this.tecnicos[index];
+    this.dataStorage.save();
+    this.router.navigateByUrl('/formsTecnicoEmpresaParceira/');
   }
 
-  deleteTecnico(id: number){
+  newTecnico(){
+    this.dataStorage.tecnico = undefined;
+    this.dataStorage.save();
+    this.router.navigateByUrl('/formsTecnicoEmpresaParceira/');
+  }
+
+  deleteTecnico(index: number){
    // TODO: fazer isso aqui 
   }
 }

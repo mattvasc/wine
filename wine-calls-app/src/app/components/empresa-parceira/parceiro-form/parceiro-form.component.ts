@@ -93,19 +93,20 @@ buscaCEP(event: any) {
     return;
   // Chamar api do CEP AQUI
  this.apiGeral.buscaCep(event).subscribe(retorno => {
+   //console.log(retorno);
     if(retorno['erro'] !== undefined && retorno['erro'] === true)
       return;
     if (retorno['logradouro'] !== undefined ) {
-      this.logradouro = retorno['logradouro'];
+      this.parceiroAtual.logradouro = retorno['logradouro'];
     }
     if (retorno['bairro'] !== undefined) {
-      this.bairro = retorno['bairro'];
+      this.parceiroAtual.bairro = retorno['bairro'];
     }
     if (retorno['localidade'] !== undefined) {
-      this.municipio = retorno['localidade'];
+      this.parceiroAtual.cidade = retorno['localidade'];
     }
     if (retorno['uf'] !== undefined) {
-      this.estado = retorno['uf'];
+      this.parceiroAtual.estado = retorno['uf'];
     }
   }
   );

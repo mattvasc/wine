@@ -28,21 +28,65 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(128),
       allowNull: true
     },
-    endereco_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'endereco',
-        key: 'id'
-      }
+    cep: {
+      type: DataTypes.STRING(12),
+      allowNull: true
     },
-    pagamento_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'pagamento',
-        key: 'id'
-      }
+    logradouro: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    numero: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    complemento: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    bairro: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    cidade: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    estado: {
+      type: DataTypes.STRING(2),
+      defaultValue: 'SP'
+    },
+    pgto_agencia: {
+      type: DataTypes.STRING(32),
+      allowNull: true
+    },
+    pgto_conta: {
+      type: DataTypes.STRING(32),
+      allowNull: true
+    },
+    pgto_banco: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
+    pgto_nome_titular: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    pgto_cpfcnpj: {
+      type: DataTypes.STRING(32),
+      allowNull: true
+    },
+    pgto_ispoupanca: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true
+    },
+    pgto_ispj: {
+      type: DataTypes.INTEGER(1),
+      defaultValue: 0
+    },
+    pgto_operacao: {
+      type: DataTypes.STRING(16),
+      allowNull: true
     },
     status: {
       type: DataTypes.STRING(16),
@@ -84,10 +128,10 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'empresa_parceira',
     underscored: true
   });
-  empresa_parceira.associate = models => {
-    empresa_parceira.hasOne(models.endereco);
-    empresa_parceira.hasOne(models.pagamento);
+  /*empresa_parceira.associate = models => {
+    //empresa_parceira.hasOne(models.endereco);
+    //empresa_parceira.hasOne(models.pagamento);
     // empresa_parceira.belongsToMany(model.Address, {through: model.UserAddress, foreignKey: "userId" })
-}
+  }*/
   return empresa_parceira;
 };

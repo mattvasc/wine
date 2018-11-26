@@ -18,41 +18,30 @@ let xablau = Model['endereco'];
 // Get com associações
 router.get('/full/:id', function (req, res) {
   console.log(`Indo pegar um @s ${entidade_nome}`);
-  Model.sequelize.query(`SELECT empresa_parceira.id AS \`id\`, empresa_parceira.pagamento_id AS \`pagamento.id\`, empresa_parceira.endereco_id AS \`endereco.id\`,
-  empresa_parceira.cnpj, empresa_parceira.nome_fantasia,  empresa_parceira.razao_social, empresa_parceira.telefones, 
-  empresa_parceira.email, empresa_parceira.status, empresa_parceira.observacoes, empresa_parceira.valor_visita_tecnica, 
-  empresa_parceira.valor_km, empresa_parceira.ispj, empresa_parceira.cpf, empresa_parceira.rg, empresa_parceira.data_rg,
-  endereco.cep AS \`endereco.cep\`, endereco.logradouro AS \`endereco.logradouro\`, endereco.complemento AS \`endereco.complemento\`, 
-  endereco.bairro AS \`endereco.bairro\`, endereco.cidade AS \`endereco.cidade\`, pagamento.agencia AS \`pagamento.agencia\`, 
-  endereco.estado AS \`endereco.estado\`, endereco.numero AS \`endereco.numero\`,
-  pagamento.conta AS \`pagamento.conta\`, pagamento.banco AS \`pagamento.banco\`, pagamento.nome_titular AS \`pagamento.nome_titular\`,
-  pagamento.cpfcnpj AS \`pagamento.cpfcnpj\`, pagamento.ispoupanca AS \`pagamento.ispoupanca\`, pagamento.operacao AS \`pagamento.operacao\`,
-  pagamento.ispj AS \`pagamento.ispj\`
-  FROM empresa_parceira 
-  INNER JOIN endereco ON (empresa_parceira.endereco_id = endereco.id)
-  INNER JOIN pagamento ON (empresa_parceira.pagamento_id = pagamento.id) WHERE empresa_parceira.id =  ${req.params.id} ;`,
+  console.log(`SELECT \`id\`, \`cnpj\`, \`nome_fantasia\`, \`razao_social\`, \`telefones\`, \`email\`, \`cep\`, \`logradouro\`, \`numero\`, \`complemento\`, \`bairro\`, \`cidade\`, \`estado\`, \`pgto_agencia\`, \`pgto_conta\`, \`pgto_banco\`, \`pgto_nome_titular\`, \`pgto_cpfcnpj\`, \`pgto_ispoupanca\`, \`pgto_ispj\`, \`pgto_operacao\`, \`status\`, \`observacoes\`, \`valor_visita_tecnica\`, \`valor_km\`, \`cpf\`, \`rg\`, \`data_rg\`, \`created_at\`, \`updated_at\` FROM \`empresa_parceira\`  WHERE empresa_parceira.id =  ${req.params.id} ;`);
+  Model.sequelize.query(`SELECT \`id\`, \`cnpj\`, \`nome_fantasia\`, \`razao_social\`, \`telefones\`, \`email\`, \`cep\`, \`logradouro\`, \`numero\`, \`complemento\`, \`bairro\`, \`cidade\`, \`estado\`, \`pgto_agencia\`, \`pgto_conta\`, \`pgto_banco\`, \`pgto_nome_titular\`, \`pgto_cpfcnpj\`, \`pgto_ispoupanca\`, \`pgto_ispj\`, \`pgto_operacao\`, \`status\`, \`observacoes\`, \`valor_visita_tecnica\`, \`valor_km\`, \`cpf\`, \`rg\`, \`data_rg\`, \`created_at\`, \`updated_at\` FROM \`empresa_parceira\`  WHERE empresa_parceira.id =  ${req.params.id} ;`,
     { type: Model.sequelize.QueryTypes.SELECT })
     .then(success => {
       if (success.length > 0) {
 
         success = success[0];
-        success.endereco = {};
-        success.pagamento = {};
+        // success.endereco = {};
+        // success.pagamento = {};
         for (var property in success) {
           if (success.hasOwnProperty(property)) {
             console.log(property);
-            if (property.includes("endereco") && property != "endereco") {
-              success.endereco[property.substring(9)] = success[property];
-              delete success[property];
-            } else if (property.includes("pagamento") && property != "pagamento") {
-              success.pagamento[property.substring(10)] = success[property];
-              delete success[property];
-            }
+            // if (property.includes("endereco") && property != "endereco") {
+            //   success.endereco[property.substring(9)] = success[property];
+            //   delete success[property];
+            // } else if (property.includes("pagamento") && property != "pagamento") {
+            //   success.pagamento[property.substring(10)] = success[property];
+            //   delete success[property];
+            // }
           }
         }
 
         // key: the name of the object key
-        // index: the ordinal position of the key within the object 
+        // index: the ordinal position of the key within the object
       }
       let response = { success: true, data: success };
       res.json(response);
@@ -173,7 +162,7 @@ router.delete('/full/:id', function (req, res) {
     error: error
   }));
 
-  
+
 
 });
 

@@ -69,48 +69,48 @@ ngOnInit() {
           } */
           //this.endereco = this.parceiroAtual.endereco;
           //this.pagamentoAtual = this.parceiroAtual.pagamento;
-          
+
         } else {
           // TODO: Proteger a página, saindo dela quando informar id invalido
           alert("Acessando a pagina com um id inválido!");
           this.router.navigateByUrl('/');
         }
       });
-      
+
     }
-    
+
   });
 }
 
 ngAfterViewInit() {
-    
+
 }
 
-// buscaCEP(event: any) {
-//   event = event.replace('-','');
-//   event = event.replace('_','');
-//   if(event.length < 8)
-//     return;
-//   // Chamar api do CEP AQUI
-// /*   this.apiGeral.buscaCep(event).subscribe(retorno => {
-//     if(retorno['erro'] !== undefined && retorno['erro'] === true)
-//       return;
-//     if (retorno['logradouro'] !== undefined ) {
-//       this.logradouro = retorno['logradouro'];
-//     }
-//     if (retorno['bairro'] !== undefined) {
-//       this.bairro = retorno['bairro'];
-//     }
-//     if (retorno['localidade'] !== undefined) {
-//       this.municipio = retorno['localidade'];
-//     }
-//     if (retorno['uf'] !== undefined) {
-//       this.estado = retorno['uf'];
-//     } */
-//   //}
-//   );
-  
-// }
+buscaCEP(event: any) {
+  event = event.replace('-','');
+  event = event.replace('_','');
+  if(event.length < 8)
+    return;
+  // Chamar api do CEP AQUI
+ this.apiGeral.buscaCep(event).subscribe(retorno => {
+    if(retorno['erro'] !== undefined && retorno['erro'] === true)
+      return;
+    if (retorno['logradouro'] !== undefined ) {
+      this.logradouro = retorno['logradouro'];
+    }
+    if (retorno['bairro'] !== undefined) {
+      this.bairro = retorno['bairro'];
+    }
+    if (retorno['localidade'] !== undefined) {
+      this.municipio = retorno['localidade'];
+    }
+    if (retorno['uf'] !== undefined) {
+      this.estado = retorno['uf'];
+    }
+  }
+  );
+
+}
 salvar() {
   // TODO: Verificar dados
   this.api.create(this.parceiroAtual).subscribe(retorno => {
@@ -126,33 +126,33 @@ salvar() {
      });
    }
 
-//    atualizar() {
-//      console.log("indo atalizar criente");
-//      // TODO: Verificar dados
-//      //this.parceiroAtual.pagamento = this.pagamentoAtual;
-//      this.api.update(this.parceiroAtual).subscribe(retorno => {
-//        console.log(retorno);
-//        if(retorno !== undefined && retorno['success'] === true)
-//         {
-//           alert("Parceiro Atualizado com Sucesso!");
-//         }
-//         else{
-//           alert("Deu ruim ao atualizar Parceiro, sorry..");
-//         }
-//         this.router.navigateByUrl("/empresasParceiras");
-//      });
-//    }
+   atualizar() {
+     console.log("indo atalizar criente");
+     // TODO: Verificar dados
+     //this.parceiroAtual.pagamento = this.pagamentoAtual;
+     this.api.update(this.parceiroAtual).subscribe(retorno => {
+       console.log(retorno);
+       if(retorno !== undefined && retorno['success'] === true)
+        {
+          alert("Parceiro Atualizado com Sucesso!");
+        }
+        else{
+          alert("Deu ruim ao atualizar Parceiro, sorry..");
+        }
+        this.router.navigateByUrl("/empresasParceiras");
+     });
+   }
 
-//    exec() {
-//      console.log(this.parceiroAtual);
-//      //if(this.parceiroAtual.data_rg.length != 10)
-//       //delete this.parceiroAtual.data_rg;
-//     if (this.isSalvar) {
-//       this.salvar();
-//     } else {
-//       this.atualizar();
-//     }
-//    }
+   exec() {
+     console.log(this.parceiroAtual);
+     //if(this.parceiroAtual.data_rg.length != 10)
+      //delete this.parceiroAtual.data_rg;
+    if (this.isSalvar) {
+      this.salvar();
+    } else {
+      this.atualizar();
+    }
+   }
 
 
 

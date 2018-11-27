@@ -10,19 +10,19 @@
 
     <!-- Botao Status Ativo / Inativo -->
     <div class="form-group row">
-        <!-- Botao Status Ativo / Inativo -->
-        <div class="btn-group-toggle" data-toggle="buttons">
-          <button type="button" class="btn btn-success">Ativo</button>
-          <button type="button" class="btn btn-danger">Inativo</button>
-        </div>
+      <!-- Botao Status Ativo / Inativo -->
+      <div class="btn-group-toggle" data-toggle="buttons">
+        <button type="button" class="btn btn-success">Ativo</button>
+        <button type="button" class="btn btn-danger">Inativo</button>
       </div>
+    </div>
 
     <p class="clearfix"></p>
 
 
     <div class="col-md-12">
       <div class="form-check">
-        <input class="form-check-inpu radio-inlinet" type="radio" name="tipoPessoa" id="pessoaJuridica" value="1"
+        <input class="form-check-inpu radio-inlinet" type="radio" name="tipoPessoa" id="chkpessoaJuridica" value="1"
           [checked]='parceiroAtual.ispj == 1' (change)="parceiroAtual.ispj = 1">
         <label class="form-check-label" for="pessoaJuridica">
           &nbsp;&nbsp;Pessoa Jurídica
@@ -30,7 +30,7 @@
       </div>
       <div class="form-check">
         <label class="form-check-label" for="pessoaFisica">
-          <input class="form-check-input radio-inline" type="radio" name="tipoPessoa" id="pessoaFisica" value="0"
+          <input class="form-check-input radio-inline" type="radio" name="tipoPessoa" id="chkpessoaFisica" value="0"
             [checked]='parceiroAtual.ispj == 0' (change)="parceiroAtual.ispj = 0">
           &nbsp;&nbsp;Pessoa Física
         </label>
@@ -259,15 +259,15 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-check">
-            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaCorrente" [checked]="parceiroAtual.pgto_isPopgto_isPoupanca == 0" (change)="parceiroAtual.pgto_isPoupanca = 0;"
-              value="0" checked="true">
+            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaCorrente" [checked]="parceiroAtual.pgto_ispoupanca == 0"
+              (change)="parceiroAtual.pgto_ispoupanca = 0;" value="0" checked="true">
             <label class="form-check-label" for="contaCorrente">
               &nbsp;&nbsp;Conta Corrente
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaPoupanca" [checked]="parceiroAtual.pgto_isPopgto_isPoupanca == 1" (change)="parceiroAtual.pgto_isPoupanca = 1;"
-              value="1">
+            <input class="form-check-input radio-inline" type="radio" name="gridRadios" id="contaPoupanca" [checked]="parceiroAtual.pgto_ispoupanca == 1"
+              (change)="parceiroAtual.pgto_ispoupanca = 1;" value="1">
             <label class="form-check-label" for="contaPoupanca">
               &nbsp;&nbsp;Conta Poupança
             </label>

@@ -28,19 +28,12 @@ export class ParceiroFormComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private apiGeral: ApiService
   ) {
-  
   this.isSalvar = true;
-//   //this.pagamentoAtual = new Pagamento();
-//   //this.pagamentoAtual.ispj = 0;
-//   //this.pagamentoAtual.isPoupanca = 0;
 }
 
 ngOnInit() {
   this.parceiroAtual = new EmpresaParceira();
-//  // this.endereco = new Endereco();
-//   //this.parceiroAtual.endereco = this.endereco;
-//   //this.parceiroAtual.pagamento = this.pagamentoAtual;
-  
+  this.atualizarCheckBoxes();
   this.route.params.subscribe(params => {
     this.id = params['id'];
     // se o usuário acessou a pagina sem passar um id inteiro...
@@ -55,18 +48,12 @@ ngOnInit() {
       this.isSalvar = false;
       this.id = + this.id; // Cast string to int
       console.log("Indo buscar o id tal" + this.id);
-      this.api.getFullSingle(this.id).subscribe(ret => {
+      this.api.getSingle(this.id).subscribe(ret => {
         console.log(ret);
-        if (ret !== null) {
+        if (ret !== null) { 
           // TODO: Verificar o success
-          this.parceiroAtual = ret["data"];
-          console.log(this.parceiroAtual);
-          /* if(this.parceiroAtual.pgto_ispj == 1) {
-            document.getElementById('pagamentopj').click();
-          }
-          else if(this.parceiroAtual.pgto_ispj == 0) {
-            document.getElementById('pagamentopf').click();
-          } */
+          this.parceiroAtual = ret["data"]['empresa_parceira'];
+          this.atualizarCheckBoxes(); 
           //this.endereco = this.parceiroAtual.endereco;
           //this.pagamentoAtual = this.parceiroAtual.pagamento;
 
@@ -82,6 +69,30 @@ ngOnInit() {
   });
 }
 
+atualizarCheckBoxes(){
+  if(this.parceiroAtual.pgto_ispj == 1) {
+    document.getElementById('pagamentopj').click();
+  }
+  else if(this.parceiroAtual.pgto_ispj == 0) {
+    document.getElementById('pagamentopf').click();
+  } 
+
+  if(this.parceiroAtual.ispj == 1) {
+    document.getElementById('chkpessoaJuridica').click();
+  }
+  else if(this.parceiroAtual.ispj == 0) {
+    document.getElementById('chkpessoaFisica').click();
+  }
+
+  if(this.parceiroAtual.pgto_ispoupanca == 1) {
+    document.getElementById('contaPoupanca').click();
+  }
+  else if(this.parceiroAtual.pgto_ispoupanca == 0) {
+    document.getElementById('contaCorrente').click();
+  }
+
+}
+
 ngAfterViewInit() {
 
 }
@@ -91,9 +102,7 @@ buscaCEP(event: any) {
   event = event.replace('_','');
   if(event.length < 8)
     return;
-  // Chamar api do CEP AQUI
  this.apiGeral.buscaCep(event).subscribe(retorno => {
-   //console.log(retorno);
     if(retorno['erro'] !== undefined && retorno['erro'] === true)
       return;
     if (retorno['logradouro'] !== undefined ) {

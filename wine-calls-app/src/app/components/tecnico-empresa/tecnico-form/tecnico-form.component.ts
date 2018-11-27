@@ -28,6 +28,8 @@ export class TecnicoFormComponent implements OnInit {
 
     if (this.dataStorage.tecnico !== undefined) {
       this.tecnicoAtual = this.dataStorage.tecnico;
+      this.tecnicoAtual.data_rg = this.tecnicoAtual.data_rg.substr(0,10);
+      this.tecnicoAtual.nascimento = this.tecnicoAtual.nascimento.substr(0,10);
       this.cadastrar = false;
     } else {
       this.tecnicoAtual = new Tecnico();
@@ -36,6 +38,7 @@ export class TecnicoFormComponent implements OnInit {
     }
   }
   exec() {
+    this.tecnicoAtual.cpf.replace('.','');
     if (this.cadastrar)
       this.salvar();
     else
@@ -49,7 +52,6 @@ export class TecnicoFormComponent implements OnInit {
         }
         else{
           alert("Erro ao salvar Tecnico...");
-          console.log(retorno);
         }
         this.router.navigateByUrl("/tecnicos");
     });
@@ -62,10 +64,12 @@ export class TecnicoFormComponent implements OnInit {
       }
       else{
         alert("Erro ao atualizar Tecnico...");
-        console.log(retorno);
       }
       this.router.navigateByUrl("/tecnicos");
     });
 
+  }
+  cancelar(){
+    this.router.navigateByUrl("/tecnicos");
   }
 }

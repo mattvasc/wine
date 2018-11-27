@@ -12,11 +12,12 @@
     <!-- Botao Status Ativo / Inativo -->
     <div class="form-group row" data-toggle="buttons">
       Cadastrar como:
+      <!-- Talvez aqui fique melhor com um COMBOBOX -->
       <label>
-        <input type="radio" name="ativo" checked value="1"> Ativo
+        <input type="radio" name="ativo" checked value="ativo"> Ativo
       </label>
       <label >
-        <input type="radio" name="ativo" disabled value="0"> Inativo
+        <input type="radio" name="ativo" disabled value="inativo"> Inativo
       </label>
     </div>
   </div>
@@ -94,4 +95,5 @@
   </div>
 
   <button type="submit" class="btn btn-success" (click)="exec();">{{(cadastrar) ? "Cadastrar": "Atualizar"}}</button>
+  <button class="btn btn-danger"  (click)="cancelar()" >Cancelar</button>
 </form>

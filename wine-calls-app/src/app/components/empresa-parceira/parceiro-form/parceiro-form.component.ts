@@ -15,7 +15,7 @@ import { Masks } from '../../../masks';
 export class ParceiroFormComponent implements OnInit, AfterViewInit {
 
   public teste: String;
-  private masks = Masks;
+  public masks = Masks;
   private isSalvar: boolean;
   private id: number;
   private parceiroAtual: EmpresaParceira;
@@ -130,7 +130,7 @@ salvar() {
           alert("Parceiro Salvo com Sucesso!");
         }
         else{
-          alert("Deu ruim ao salvar Parceiro, sorry..");
+          alert("Erro ao salvar Parceiro...");
         }
         this.router.navigateByUrl("/empresasParceiras");
      });
@@ -141,13 +141,12 @@ salvar() {
      // TODO: Verificar dados
      //this.parceiroAtual.pagamento = this.pagamentoAtual;
      this.api.update(this.parceiroAtual).subscribe(retorno => {
-       console.log(retorno);
        if(retorno !== undefined && retorno['success'] === true)
         {
           alert("Parceiro Atualizado com Sucesso!");
         }
         else{
-          alert("Deu ruim ao atualizar Parceiro, sorry..");
+          alert("Erro ao atualizar Parceiro...");
         }
         this.router.navigateByUrl("/empresasParceiras");
      });

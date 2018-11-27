@@ -38,7 +38,7 @@
 
       <div class="form-group col-md-6">
         <label for="funcionarioCPF">CPF </label>
-        <input type="text" [(ngModel)]="funcionarioAtual.CPF" class="form-control" id="funcionarioCPF" placeholder="999.999.99-99"
+        <input type="text" [(ngModel)]="funcionarioAtual.CPF" class="form-control"  [textMask]="{mask: masks.CPF}" id="funcionarioCPF" placeholder="999.999.99-99"
           required>
       </div>
     </div>

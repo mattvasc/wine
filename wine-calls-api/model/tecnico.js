@@ -57,7 +57,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     status: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(16),
       allowNull: false
     },
 

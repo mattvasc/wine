@@ -3,7 +3,7 @@ import { Tecnico } from '../../../model/tecnico';
 import { DataStorageService } from '../../../service/data-storage.service';
 import { TecnicoService } from '../../../service/tecnico.service';
 import { Router } from '@angular/router';
-
+import { Masks } from '../../../masks';
 @Component({
   selector: 'app-tecnico-form',
   templateUrl: './tecnico-form.component.html',
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class TecnicoFormComponent implements OnInit {
   public tecnicoAtual: Tecnico;
   public cadastrar = true;
+  public masks = Masks;
 
   constructor(
     private router: Router,
@@ -30,6 +31,8 @@ export class TecnicoFormComponent implements OnInit {
       this.cadastrar = false;
     } else {
       this.tecnicoAtual = new Tecnico();
+      this.tecnicoAtual.empresa_do_tecnico_id = this.dataStorage.empresa_parceira.id;
+      this.tecnicoAtual.status = "ativo";
     }
   }
   exec() {
@@ -39,9 +42,30 @@ export class TecnicoFormComponent implements OnInit {
       this.atualizar();
   }
   salvar(){
-
+    this.tecnicoService.create(this.tecnicoAtual).subscribe(retorno => {
+      if(retorno !== undefined && retorno['success'] === true)
+        {
+          alert("Tecnico Salvo com Sucesso!");
+        }
+        else{
+          alert("Erro ao salvar Tecnico...");
+          console.log(retorno);
+        }
+        this.router.navigateByUrl("/tecnicos");
+    });
   }
   atualizar(){
+    this.tecnicoService.update(this.tecnicoAtual).subscribe(retorno => {
+      if(retorno !== undefined && retorno['success'] === true)
+      {
+        alert("Tecnico Atualizado com Sucesso!");
+      }
+      else{
+        alert("Erro ao atualizar Tecnico...");
+        console.log(retorno);
+      }
+      this.router.navigateByUrl("/tecnicos");
+    });
 
   }
 }

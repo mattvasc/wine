@@ -37,16 +37,16 @@ export class TecnicoService {
     return this.http.get<Tecnico>(this.apiUrl + this.posfixo + `/${id}`);
   }
 
-  create(ep: Tecnico): Observable<Tecnico> {
+  create(tec: Tecnico): Observable<Tecnico> {
 
-    return this.http.post<Tecnico>(this.apiUrl + this.posfixo + '/create', ep, httpOptions);
+    return this.http.post<Tecnico>(this.apiUrl + this.posfixo + '/', tec, httpOptions);
   }
 
   delete(id: number): Observable<Object> {
     return this.http.delete(this.apiUrl + this.posfixo + '/' + id.toString());
   }
 
-  update(ep: Tecnico): Observable<Tecnico> {
-    return this.http.put<Tecnico>(this.apiUrl + this.posfixo + `/${ep.id}`, ep, httpOptions);
+  update(tec: Tecnico): Observable<Tecnico> {
+    return this.http.put<Tecnico>(this.apiUrl + this.posfixo + `/${tec.id}`, tec, httpOptions);
   }
 }

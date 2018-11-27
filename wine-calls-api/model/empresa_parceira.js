@@ -113,7 +113,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     rg: {
-      type: DataTypes.STRING(9),
+      type: DataTypes.STRING(30),
       allowNull: true
     },
     data_rg: {

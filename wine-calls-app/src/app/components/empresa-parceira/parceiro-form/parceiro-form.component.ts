@@ -124,7 +124,6 @@ buscaCEP(event: any) {
 salvar() {
   // TODO: Verificar dados
   this.api.create(this.parceiroAtual).subscribe(retorno => {
-    console.log(retorno);
     if(retorno !== undefined && retorno['success'] === true)
         {
           alert("Parceiro Salvo com Sucesso!");

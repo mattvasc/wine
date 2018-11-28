@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../../service/cliente.service';
 import { Cliente } from '../../../model/cliente';
 import { Router } from '@angular/router';
+import { DataStorageService } from '../../../service/data-storage.service';
 
 @Component({
   selector: 'app-cliente-list',
@@ -11,7 +12,13 @@ import { Router } from '@angular/router';
 })
 export class ClienteListComponent implements OnInit {
 
-  constructor(private api: ClienteService, private router: Router) { }
+
+  constructor(
+    private api: ClienteService,
+    private router: Router,
+    public dataStorage: DataStorageService
+    ) { }
+    
   clientes: Cliente[] = [];
   ngOnInit() {
     this.getClientes();
@@ -21,14 +28,16 @@ export class ClienteListComponent implements OnInit {
     this.api.getAll().subscribe(c => {
       console.log(c);
       if (c['data']["cliente"] !== undefined)
-        this.clientes = c['data']['cliente']});
+        this.clientes = c['data']['cliente']
+    });
   }
 
-  editClient(id: number) {
-    this.router.navigateByUrl(`/formsCliente/${id}`);
+  editClient(index: number) {
+    this.dataStorage.cliente = this.clientes[index];
+    this.router.navigateByUrl(`/formsCliente/`);
   }
 
-  deleteClient(id: number){
+  deleteClient(id: number) {
     console.log(`Indo apagar o cliente ${id}`);
     this.api.delete(id).subscribe(c => {
       console.log(c)

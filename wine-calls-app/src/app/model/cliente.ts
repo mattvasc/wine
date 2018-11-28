@@ -11,7 +11,8 @@ export class Cliente {
 	
 	//endereco
 	public cep ?: string = '';
-    public logradouro ?: string  ="";
+	public logradouro ?: string  ="";
+	public logradouro_numero ?: string  = "";
     public complemento ?: string ="";
     public municipio ?: string = '';
     public estado ?: string = '';

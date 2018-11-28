@@ -1,20 +1,26 @@
-<h1>Cadastro do Cliente</h1>
+<h1> {{(cadastrar) ? "Cadastro" : "Atualização"}} do Cliente</h1>
 
 <hr>
 
-<form id="formCliente">
+<form id="formCliente" name="formCliente">
 
   <h3>Dados Gerais: </h3>
   <!-- Botao Status Ativo / Inativo -->
-  <div class="btn-group-toggle" data-toggle="buttons">
-    <button type="button" class="btn btn-success">Ativo</button>
-    <button type="button" class="btn btn-danger">Inativo</button>
+  <div class="form-group row" data-toggle="buttons">
+    Cadastrar como:
+    <!-- Talvez aqui fique melhor com um COMBOBOX -->
+    <label>
+      <input type="radio" name="ativo" checked value="ativo"> Ativo
+    </label>
+    <label >
+      <input type="radio" name="ativo" disabled value="inativo"> Inativo
+    </label>
   </div>
 
   <div class="form-row ">
     <div class="form-group col-md-12">
       <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
-      <input type="text" [(ngModel)]="clienteAtual.razao_social" class="form-control" id="empresaNomeRazaoSocial"
+      <input type="text" [(ngModel)]="clienteAtual.razao_social" name="empresaNomeRazaoSocial" class="form-control" id="empresaNomeRazaoSocial"
         placeholder="" required>
     </div>
   </div>
@@ -22,7 +28,7 @@
   <div class="form-row ">
     <div class="form-group col-md-12">
       <label for="empresaNomeFantasia">Nome Fantasia</label>
-      <input type="text" [(ngModel)]="clienteAtual.nome_fantasia" class="form-control" id="empresaNomeFantasia"
+      <input type="text" [(ngModel)]="clienteAtual.nome_fantasia" class="form-control" name="empresaNomeFantasia" id="empresaNomeFantasia"
         placeholder="">
     </div>
 
@@ -31,7 +37,7 @@
   <div class="form-row ">
     <div class="form-group col-md-12">
       <label for="empresaCNPJ">CNPJ </label>
-      <input type="text" [(ngModel)]="clienteAtual.cnpj" [textMask]="{mask: masks.CNPJ}" class="form-control" id="empresaCNPJ"
+      <input type="text" [(ngModel)]="clienteAtual.cnpj" name="empresaCNPJ" [textMask]="{mask: masks.CNPJ}" class="form-control" id="empresaCNPJ"
         placeholder="99.999.999/9999-99" required>
     </div>
   </div>
@@ -41,7 +47,7 @@
   <div class="form-row ">
     <div class="form-group col-md-12">
       <label for="CEP">CEP</label>
-      <input type="text" [(ngModel)]="clienteAtual.cep" [textMask]="{mask: masks.CEP}" class="form-control" name="cep"
+      <input type="text" [(ngModel)]="clienteAtual.cep" (ngModelChange)="buscaCEP($event)" [textMask]="{mask: masks.CEP}" class="form-control" name="cep"
         id="CEP" placeholder="07115-000">
     </div>
 
@@ -107,13 +113,13 @@
   <div class="form-row ">
     <div class="group col-md-6">
       <label for="inscricao_estadual">Inscrição Estudual</label>
-      <input type="text" [(ngModel)]="clienteAtual.inscricao_estadual" class="form-control" id="inscricao_estadual">
+      <input type="text" [(ngModel)]="clienteAtual.inscricao_estadual" name="inscricao_estadual" class="form-control" id="inscricao_estadual">
     </div>
 
 
     <div class="form-group col-md-6">
       <label for="ramo_atividade">Ramo de Atividade</label>
-      <select id="ramo_atividade" [(ngModel)]="clienteAtual.ramo_de_atividade" class="form-control">
+      <select id="ramo_atividade" [(ngModel)]="clienteAtual.ramo_de_atividade" name="ramo_atividade" class="form-control">
         <option>Alimentação</option>
         <option>Educação</option>
         <option>Lazer</option>
@@ -128,7 +134,7 @@
   <div class="form-row">
     <div class="form-group col-md-12">
       <label for="nome_contato">Nome da pessoa ponto focal no cliente</label>
-      <input type="text" [(ngModel)]="clienteAtual.nome_para_contato" class="form-control" id="nome_contato"
+      <input type="text" [(ngModel)]="clienteAtual.nome_para_contato" name="nome_contato" class="form-control" id="nome_contato"
         placeholder="David Ricardo dos Santos" required>
     </div>
   </div>
@@ -137,13 +143,13 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="empresaEmail" name="email">Email</label>
-      <input type="email" [(ngModel)]="clienteAtual.email" class="form-control" id="empresaEmail" placeholder="contato@empresa.com.br"
+      <input type="email" [(ngModel)]="clienteAtual.email" class="form-control" name="email" id="empresaEmail" placeholder="contato@empresa.com.br"
         required>
     </div>
 
     <div class="form-group col-md-6">
       <label for="empresaTelefones" name="telefone">Telefones</label>
-      <input type="text" [(ngModel)]="clienteAtual.telefones" class="form-control" id="empresaTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222"
+      <input type="text" [(ngModel)]="clienteAtual.telefones" class="form-control" name="telefones" id="empresaTelefones" placeholder="(11) 1234-4258  //  (21)1111-2222"
         required>
     </div>
   </div>
@@ -162,6 +168,6 @@
 
 
   <!-- Chamar Botao salvar ou cadastrar -->
-  <button type="submit" class="btn btn-success" (click)="exec();">{{(isSalvar) ? "Cadastrar" : "Atualizar"}}</button>
+  <button type="submit" class="btn btn-success" (click)="exec();">{{(cadastrar) ? "Cadastrar" : "Atualizar"}}</button>
 
 </form>

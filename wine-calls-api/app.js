@@ -11,18 +11,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var routes = require('./routes/index');
-var clienteRouter = require('./routes/Cliente');
-var empresaParceiraRouter = require('./routes/EmpresaParceira');
-var pagamentoRouter = require('./routes/Pagamento');
-var tecnicoRouter = require('./routes/Tecnico');
-var cidadeRouter = require('./routes/Cidade');
-var estadoRouter = require('./routes/Estado');
-var ticketRouter = require('./routes/Ticket');
+const routes = require('./routes/index');
+const clienteRouter = require('./routes/Cliente');
+const empresaParceiraRouter = require('./routes/EmpresaParceira');
+const pagamentoRouter = require('./routes/Pagamento');
+const tecnicoRouter = require('./routes/Tecnico');
+const cidadeRouter = require('./routes/Cidade');
+const estadoRouter = require('./routes/Estado');
+const ticketRouter = require('./routes/Ticket');
+const testRouter = require('./routes/Test');
+const FuncRouter = require('./routes/Funcionario');
 const Model = require('./model/');
 
 
-var app = express();
+const app = express();
 // var favicon = require('serve-favicon');
 
 
@@ -44,10 +46,12 @@ app.use('/', routes);
 app.use('/clientes', clienteRouter);
 app.use('/pagamentos', pagamentoRouter);
 app.use('/tecnicos', tecnicoRouter);
+app.use('/funcionarios', FuncRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
 app.use('/cidades', cidadeRouter);
 app.use('/estados', estadoRouter);
 app.use('/tickets', ticketRouter);
+app.use('/tests', testRouter);
 
 
 // catch 404 and forward to error handler

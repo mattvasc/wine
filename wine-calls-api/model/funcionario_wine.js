@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     cpf: {
-      type: DataTypes.STRING(11),
+      type: DataTypes.STRING(14),
       allowNull: true
     },
 

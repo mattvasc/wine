@@ -1,6 +1,6 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('cliente', {
     id: {
       type: DataTypes.INTEGER(11),
@@ -85,9 +85,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(256),
       allowNull: true
     }
-    
-    
+
+
   }, {
-    tableName: 'cliente'
-  });
+      tableName: 'cliente'
+    });
 };

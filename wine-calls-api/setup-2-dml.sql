@@ -1,8 +1,5 @@
 -- PARTE II
 
-DROP SCHEMA IF EXISTS `wine_ticket` ;
-
-CREATE SCHEMA IF NOT EXISTS `wine_ticket` ;
 
 USE `wine_ticket` ;
 

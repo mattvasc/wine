@@ -3,12 +3,6 @@
 
 USE `wine_ticket` ;
 
-CREATE USER IF NOT EXISTS 'wine_dbadmin'@'%' IDENTIFIED BY 'wine_DS35uqgTFa';
-CREATE DATABASE wine_ticket;
-GRANT ALL PRIVILEGES ON `wine_ticket` . * TO 'wine_dbadmin'@'%';
-
-FLUSH PRIVILEGES;
-
 INSERT INTO `estado` (`id`, `nome`, `uf`, `createdAt`, `updatedAt`) VALUES
 (1, 'Acre', 'AC', NOW(), NOW()),
 (2, 'Alagoas', 'AL', NOW(), NOW()),

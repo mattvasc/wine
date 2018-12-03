@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { ReactiveFormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt'; // <-- JWT Lives here
 import { HttpClientModule } from '@angular/common/http';
-
 import {
   ClienteListComponent,
   ClientMainComponent,
@@ -88,7 +88,16 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
       //, { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter:  () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:3000'],
+        blacklistedRoutes: []
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

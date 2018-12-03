@@ -11,8 +11,7 @@ export class AppComponent {
   constructor(private router: Router) {
   }
   logOut() {
-    //Tá sendo armazenado no sessionStorage e não no localStorage
-    //localStorage.clear();
+    localStorage.clear();
     sessionStorage.clear();
     this.router.navigateByUrl('/login');
   }

@@ -33,12 +33,20 @@ export class EmpresaParceiraListComponent implements OnInit {
     this.dataStorage.empresa_parceira = this.empresas_parceiras[id];
     this.router.navigateByUrl(`/tecnicos`);
   }
-  deleteEmpresaParceira(id: number) {
+  deleteEmpresaParceira(index: number) {
+    let id = this.empresas_parceiras[index].id;
     console.log(`Indo apagar o cliente ${id}`);
     this.api.delete(id).subscribe(c => {
+      if(c['success'] == true) {
+        this.empresas_parceiras.splice(index,1);
+        alert('Empresa apagada com sucesso!');
+      } else{
+        console.log(c);
+        alert("Erro ao apagar Empresa Parceira!");
+      }
+    }, c => {
       console.log(c);
-      alert('Empresa apagada com sucesso!');
-      window.location.reload();
+      alert("Erro ao apagar Empresa Parceira!");
     });
   }
 }

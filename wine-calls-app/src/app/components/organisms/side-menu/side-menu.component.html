@@ -1,0 +1,73 @@
+ <div class="nav-side-menu"> 
+  <div class="brand" id="wine-logo">
+    <a routerLink="/">
+      <img src="../assets/img/logo-pequeno.png">
+    </a>
+  </div>
+  <i class="fa fa-menu fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+  <div class="add-ticket-button">
+    <button class='btn btn-primary' on-click=(goToAddTicketPage())>Adicionar chamado</button>
+  </div>
+
+  <div class="menu-list">
+
+    <ul id="menu-content" class="menu-content collapse out">
+
+
+      <li routerLinkActive="active" routerLink="/home">
+        <a class="linkMenu">
+          <i class="fa fa-menu fa-home fa-lg"></i> Início
+        </a>
+      </li>
+
+
+      <li routerLinkActive="active" routerLink="/empresasParceiras">
+        <a class="linkMenu">
+          <i class="fa fa-menu fa-people-carry fa-lg"></i> Parceiros
+        </a>
+      </li>
+
+      <!-- <a routerLink="/tecnicos" class="linkMenu" >
+            <li [ngClass]="{'active': router.url == '/tecnicos'}">
+              <i class="fa fa-menu fa-chess-pawn fa-lg"></i> Técnicos
+            </li>
+          </a> -->
+
+      <li routerLinkActive="active" routerLink="/chamados">
+        <a class="linkMenu">
+          <i class="fab fa-menu fa-stack-overflow fa-lg"></i> Chamados
+        </a>
+      </li>
+
+      <!--
+          TODO: implementar
+
+          <a routerLink="/relatorios" class="linkMenu">
+            <li class="">
+              <i class="fa fa-menu fa-chart-line fa-lg"></i> Relatórios
+            </li>
+          </a> -->
+
+      <li routerLinkActive="active" routerLink="/clientes">
+        <a class="linkMenu">
+          <i class="fa fa-menu fa-user fa-lg"></i> Clientes
+        </a>
+      </li>
+
+      <li routerLinkActive="active" routerLink="/funcionarios">
+        <a class="linkMenu">
+          <i class="fa fa-menu fa-cat fa-lg"></i> Funcionários
+        </a>
+      </li>
+
+      <li (click)="logOut()">
+        <a class="linkMenu">
+          <i class="fa fa-menu fa-sign-out-alt  fa-lg"></i> Log Out
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+</div>

@@ -8,75 +8,81 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
-  ClienteListComponent,
-  ClientMainComponent,
-  MainComponent,
-  NotFoundComponent,
-  EmpresaParceiraMainComponent,
-  EmpresaParceiraListComponent,
-  ParceiroFormComponent,
-  LoginComponent,
-  TicketMainComponent } from './components';
+  ClientListPageComponent,
+  ClientPageComponent,
+  HomePageComponent,
+  ErrorPageComponent,
+  PartnerCompanyPageComponent,
+  PartnerCompanyListPageComponent,
+  PartnerCompanyFormPageComponent,
+  LoginPageComponent,
+  TicketPageComponent } from './components';
 import { environment } from '../environments/environment';
 
-import { TecnicoFormComponent } from './components/index';
-import { ChamadoComponent } from './components/index';
-import { ClienteFormComponent } from './components/index';
-import { FuncionarioFormComponent } from './components/index';
+import { TechnicianFormPageComponent } from './components/index';
+import { TicketFormPageComponent } from './components/index';
+import { ClientFormPageComponent } from './components/index';
+import { EmployeeFormPageComponent } from './components/index';
 import { TextMaskModule } from 'angular2-text-mask';
-import { FuncionarioListComponent } from './components/index';
-import { TecnicoListComponent } from './components/index';
+import { EmployeeListPageComponent } from './components/index';
+import { TechnicianListPageComponent } from './components/index';
 
 import { AuthService } from './service/auth.service';
+import { SideMenuComponent } from './components/organisms/side-menu/side-menu.component';
+import { DefaultTemplateComponent } from './components/templates/default-template/default-template.component';
+import { FullPageTemplateComponent } from './components/templates/full-page-template/full-page-template.component';
 // Angular CLI environemnt
 
 const appRoutes: Routes = [
-  { path: 'clientes', component: ClientMainComponent, canActivate: [AuthService] },
-  { path: 'formsCliente', component: ClienteFormComponent, canActivate: [AuthService]  },
-  { path: 'formsCliente/:id', component: ClienteFormComponent, canActivate: [AuthService]  },
+  { path: 'clientes', component: ClientPageComponent, canActivate: [AuthService] },
+  { path: 'formsCliente', component: ClientFormPageComponent, canActivate: [AuthService]  },
+  { path: 'formsCliente/:id', component: ClientFormPageComponent, canActivate: [AuthService]  },
 
 
-  { path: 'empresasParceiras', component: EmpresaParceiraMainComponent, canActivate: [AuthService]  },
-  { path: 'formsEmpresaParceira', component: ParceiroFormComponent, canActivate: [AuthService]  },
-  { path: 'formsEmpresaParceira/:id', component: ParceiroFormComponent, canActivate: [AuthService]  },
+  { path: 'empresasParceiras', component: PartnerCompanyPageComponent, canActivate: [AuthService]  },
+  { path: 'formsEmpresaParceira', component: PartnerCompanyFormPageComponent, canActivate: [AuthService]  },
+  { path: 'formsEmpresaParceira/:id', component: PartnerCompanyFormPageComponent, canActivate: [AuthService]  },
 
-  { path: 'tecnicos', component: TecnicoListComponent, canActivate: [AuthService]},
-  { path: 'formsTecnicoEmpresaParceira/:id', component: TecnicoFormComponent, canActivate: [AuthService]},
-  { path: 'formsTecnicoEmpresaParceira', component: TecnicoFormComponent, canActivate: [AuthService]},
+  { path: 'tecnicos', component: TechnicianListPageComponent, canActivate: [AuthService]},
+  { path: 'formsTecnicoEmpresaParceira/:id', component: TechnicianFormPageComponent, canActivate: [AuthService]},
+  { path: 'formsTecnicoEmpresaParceira', component: TechnicianFormPageComponent, canActivate: [AuthService]},
 
-  { path: 'chamados', component: TicketMainComponent, canActivate: [AuthService]  },
-  { path: 'formsTicket', component: ChamadoComponent, canActivate: [AuthService]  },
-  { path: 'funcionarios', component: FuncionarioListComponent, canActivate: [AuthService]  },
-  { path: 'funcionario', component: FuncionarioFormComponent, canActivate: [AuthService]  },
-  { path: 'funcionario/:id', component: FuncionarioFormComponent, canActivate: [AuthService]  },
+  { path: 'chamados', component: TicketPageComponent, canActivate: [AuthService]  },
+  { path: 'formsTicket', component: TicketFormPageComponent, canActivate: [AuthService]  },
+  { path: 'funcionarios', component: EmployeeListPageComponent, canActivate: [AuthService]  },
+  { path: 'funcionario', component: EmployeeFormPageComponent, canActivate: [AuthService]  },
+  { path: 'funcionario/:id', component: EmployeeFormPageComponent, canActivate: [AuthService]  },
 
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginPageComponent },
+  { path: 'error/:status', component: ErrorPageComponent },
 
   // Colocar todas as rotas novas antes dessas três abaixo..!
-  { path: '', pathMatch: 'full', component: LoginComponent },
-  { path: 'main', pathMatch: 'full', component: MainComponent, canActivate: [AuthService]  },
-  { path: '**', component: NotFoundComponent }
+  { path: '', pathMatch: 'full', component: LoginPageComponent },
+  { path: 'home', pathMatch: 'full', component: HomePageComponent, canActivate: [AuthService]  },
+  { path: '**', component: ErrorPageComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClienteListComponent,
-    MainComponent,
-    ClientMainComponent,
-    NotFoundComponent,
-    TicketMainComponent,
-    ParceiroFormComponent,
-    TecnicoFormComponent,
-    ChamadoComponent,
-    ClienteFormComponent,
-    FuncionarioFormComponent,
-    TicketMainComponent,
-    EmpresaParceiraMainComponent,
-    EmpresaParceiraListComponent,
-    LoginComponent,
-    FuncionarioListComponent,
-    TecnicoListComponent,
+    ClientListPageComponent,
+    HomePageComponent,
+    ClientPageComponent,
+    ErrorPageComponent,
+    PartnerCompanyFormPageComponent,
+    TechnicianFormPageComponent,
+    TicketFormPageComponent,
+    ClientFormPageComponent,
+    EmployeeFormPageComponent,
+    TicketPageComponent,
+    PartnerCompanyPageComponent,
+    PartnerCompanyListPageComponent,
+    LoginPageComponent,
+    EmployeeListPageComponent,
+    TechnicianListPageComponent,
+    SideMenuComponent,
+    DefaultTemplateComponent,
+    FullPageTemplateComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +93,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes
-      //, { enableTracing: true } // <-- debugging purposes only
+      // { enableTracing: true } // <-- debugging purposes only
     )
   ],
   providers: [],

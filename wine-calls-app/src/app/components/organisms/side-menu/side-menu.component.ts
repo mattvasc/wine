@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,16 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss']
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
-  }
-
   logOut() {
-    // Tá sendo armazenado no sessionStorage e não no localStorage
-    // localStorage.clear();
+    localStorage.clear();
     sessionStorage.clear();
     this.router.navigateByUrl('/login');
   }

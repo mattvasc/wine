@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     const token = localStorage.getItem('token');
     if (token !== undefined && token !== null) {
-      this.router.navigateByUrl(`/main`);
+      this.router.navigateByUrl(`/home`);
     }
   }
   erroAoFazerLogin() {
@@ -44,7 +44,7 @@ export class LoginPageComponent implements OnInit {
     this.auth.doLogin(this.funcionario).subscribe(data => {
       if (data['success'] === true) {
         window.localStorage.setItem('token', data['data']);
-        this.router.navigateByUrl(`/main`);
+        this.router.navigateByUrl(`/home`);
       } else {
         this.erroAoFazerLogin();
       }

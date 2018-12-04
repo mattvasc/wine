@@ -47,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
     },
 
     rg: {
-      type: DataTypes.STRING(9),
+      type: DataTypes.STRING(32),
       allowNull: false
     },
 

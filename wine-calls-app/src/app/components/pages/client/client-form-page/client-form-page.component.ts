@@ -71,11 +71,12 @@ export class ClientFormPageComponent implements OnInit {
       console.log(retorno);
       if (retorno !== undefined && retorno['success'] === true) {
         alert("Cliente Salvo com Sucesso!");
+        this.router.navigateByUrl("/clientes");
       }
       else {
         alert("Erro ao salvar Cliente...");
       }
-      // this.router.navigateByUrl("/clientes");
+      
     });
   }
 
@@ -86,6 +87,7 @@ export class ClientFormPageComponent implements OnInit {
     this.clienteService.update(this.clienteAtual).subscribe(retorno => {
       if (retorno !== undefined && retorno['success'] === true) {
         alert("Cliente Atualizado com Sucesso!");
+        this.router.navigateByUrl("/clientes");
       }
       else {
         alert("Erro ao atualizar Cliente...");
@@ -104,7 +106,4 @@ export class ClientFormPageComponent implements OnInit {
       this.atualizar();
     }
   }
-
-
-
 }

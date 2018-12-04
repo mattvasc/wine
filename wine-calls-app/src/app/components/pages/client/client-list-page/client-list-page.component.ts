@@ -38,12 +38,21 @@ export class ClientListPageComponent implements OnInit {
     this.router.navigateByUrl(`/formsCliente/`);
   }
 
-  deleteClient(id: number) {
+  deleteClient(index: number) {
+    let id = this.clientes[index].id;
     console.log(`Indo apagar o cliente ${id}`);
     this.api.delete(id).subscribe(c => {
-      console.log(c);
-      alert('Cliente apagado com sucesso!');
-      window.location.reload();
+      
+      if(c['success'] == true){
+        alert("Cliente apagado com sucesso!");
+        this.clientes.splice(index,1);
+      } else {
+        console.log(c);
+        alert("Erro ao tentar apagar cliente");
+      }
+    }, err => {
+        console.log(err);
+        alert("Erro ao tentar apagar cliente");
     });
     // Se deletou com sucesso então affect rows não será igual a zero
   }

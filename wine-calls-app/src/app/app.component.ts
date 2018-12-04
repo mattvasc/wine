@@ -10,4 +10,9 @@ export class AppComponent {
   title = 'Wine Tickets';
   constructor(private router: Router) {
   }
+  logOut() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigateByUrl('/login');
+  }
 }

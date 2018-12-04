@@ -1,7 +1,7 @@
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
-      <form class="login100-form validate-form" (ngSubmit)="login()" #loginForm="ngForm">
+      <form class="login100-form validate-form" #loginForm="ngForm">
         <span class="login100-form-title p-b-26">
           Sistema de Gerenciamento de Chamados da Wine
         </span>
@@ -10,26 +10,26 @@
         </span>
 
         <div class="wrap-input100 validate-input" data-validate = "Email válido é: fulano@winetecnologia.com.br">
-          <input class="input100" type="text" placeholder="Email" name="email" [(ngModel)]="funcionario.email" required>
+          <input class="input100" type="email" placeholder="Email" name="email" [(ngModel)]="funcionario.email" required>
           <span class="focus-input1000" data-placeholder="email"></span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Enter password" required>
+        <div class="wrap-input100 validate-input" data-validate="Enter password"  *ngIf="isLogin"> 
           <span class="btn-show-pass">
             <i class="zmdi zmdi-eye"></i>
           </span>
-          <input class="input100" type="password" placeholder="Password" name="Senha" required [(ngModel)]="funcionario.senha"
-          >
+          <input class="input100" type="password" placeholder="Password" name="Senha"  *ngIf="isLogin" required="isLogin" [(ngModel)]="funcionario.senha">
           <span class="focus-input1000" data-placeholder="Password"></span>
         </div>
 
         <div class="container-login100-form-btn">
           <div class="wrap-login100-form-btn">
             <div [ngClass]="{'login100-form-bgbtn': loginForm.valid, 'login100-form-bgbtn2': !loginForm.valid}"></div>
-            <button class="login100-form-btn" type="submit" [disabled]="!loginForm.valid" [ngClass]="{'allowed' : loginForm.valid, 'not-allowed' : !loginForm.valid}">
-              Login
+            <button class="login100-form-btn" (click)="doAction()" [disabled]="!loginForm.valid" [ngClass]="{'allowed' : loginForm.valid, 'not-allowed' : !loginForm.valid}">
+              {{ (isLogin) ? 'Login' : 'Recuperar' }}
             </button>
           </div>
+          <a href="#" (click)="isLogin = !isLogin;">{{ (isLogin) ? 'Esqueceu sua senha?' : 'Já lembrei...' }}</a>
         </div>
 
         <!-- <div class="text-center p-t-115">

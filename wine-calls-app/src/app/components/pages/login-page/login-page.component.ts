@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 // import { Better } from '../model/better';
 import { Router } from '@angular/router';
 import { Funcionario } from '../../../model/funcionario';
+import { AuthService } from '../../../service/auth.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
@@ -12,46 +14,79 @@ import { Funcionario } from '../../../model/funcionario';
 })
 export class LoginPageComponent implements OnInit {
   private funcionario: Funcionario;
+  public isLogin = true;
   private easteregg = 0;
   constructor(
     // private service: BetterService,
     private router: Router,
+    private auth: AuthService
     // private data: DataStorageService
-    ) {
+  ) {
     this.funcionario = new Funcionario();
     this.funcionario.email = '';
     this.funcionario.senha = '';
   }
 
   ngOnInit() {
-    const logado = sessionStorage.getItem('logado');
-    if (logado !== undefined && logado !== null && logado === 'true') {
-      this.router.navigateByUrl(`/home`);
+    const token = localStorage.getItem('token');
+    if (token !== undefined && token !== null) {
+      this.router.navigateByUrl(`/main`);
     }
   }
-
+  erroAoFazerLogin() {
+    // todo: mudar para modal
+    alert('Credenciais Inválidas!');
+  }
   login() {
     if (this.funcionario.email === '' || this.funcionario.senha === '') {
       return;
     }
-    this.router.navigateByUrl(`/home`);
-    window.sessionStorage.setItem('logado', 'true');
-    // this.service.login(this.actualBetter.username, this.actualBetter.password).subscribe(data => {
-    //   console.log(data);
-    //   if (data === undefined || data['payload'] === undefined) {
-    //     alert('Error reaching server!');
-    //   } else if (data['payload'] === null) {
-    //     alert('Invalid Credentials');
-    //   } else if (data['payload']['username'] === this.actualBetter.username
-    //   && data['payload']['password'] === this.actualBetter.password) {
-    //     console.log('passou');
-    //     const tempbetter: Better = data['payload'];
-    //     this.data.better = tempbetter;
-    //
-    //   } else {
-    //     alert('Invalid Credentials');
-    //   }
+    this.auth.doLogin(this.funcionario).subscribe(data => {
+      if (data['success'] === true) {
+        window.localStorage.setItem('token', data['data']);
+        this.router.navigateByUrl(`/main`);
+      } else {
+        this.erroAoFazerLogin();
+      }
 
-    // }, error => { console.log(error); alert('Error reaching server'); });
+    }, err => this.erroAoFazerLogin());
+
+    // window.sessionStorage.setItem('logado', 'true');
+
+    /*
+        this.service.login(this.funcionario.email, this.funcionario.senha).subscribe(data => {
+          console.log(data);
+          if (data === undefined || data['payload'] === undefined) {
+            alert('Error reaching server!');
+          } else if (data['payload'] === null) {
+            alert('Invalid Credentials');
+          } else if (data['payload']['email'] === this.funcionario.email
+          && data['payload']['senha'] === this.funcionario.senha) {
+            console.log('passou');
+            const tempbetter: Funcionario = data['payload'];
+            this.data.better = tempbetter;
+
+          } else {
+            alert('Invalid Credentials');
+          }
+
+        }, error => { console.log(error); alert('Error reaching server'); });*/
+  }
+  recover() {
+
+  }
+
+  doAction() {
+    const regex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
+    if (!regex.test(this.funcionario.email)) {
+      alert('Email inválido!');
+      return;
+    }
+
+    if (this.isLogin) {
+      this.login();
+    } else {
+      this.recover();
+    }
   }
 }

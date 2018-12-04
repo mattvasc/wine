@@ -1,5 +1,4 @@
 <app-default-template>
-
   <!-- // TODO: formatar essa tabela -->
 
   <table *ngIf="empresas_parceiras.length > 0; else semEP" class="table table-hover">
@@ -18,7 +17,7 @@
         <td>{{ep.email}}</td>
         <td><button (click)="editFuncionariosEmpresaParceira(i)" class="btn btn-block btn-primary">Funcionários</button></td>
         <td><button (click)="editEmpresaParceira(ep.id)" class="btn btn-block btn-success">Editar</button></td>
-        <td><button (click)="deleteEmpresaParceira(ep.id)" class="btn btn-block btn-danger">Apagar</button></td>
+        <td><button (click)="deleteEmpresaParceira(i)" class="btn btn-block btn-danger">Apagar</button></td>
       </tr>
     </tbody>
   </table>

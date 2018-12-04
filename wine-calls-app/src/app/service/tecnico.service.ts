@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Tecnico } from '../model/tecnico';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './api.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
-  })
-};
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +17,7 @@ export class TecnicoService {
   private apiUrl = this.api.apiUrl;
   private posfixo = 'tecnicos';
 
-  getAll(empresa_id: number): Observable<Tecnico[]> {
+  getAll(): Observable<Tecnico[]> {
 
     return this.http.get<Tecnico[]>(this.apiUrl + this.posfixo);
   }
@@ -37,9 +32,9 @@ export class TecnicoService {
     return this.http.get<Tecnico>(this.apiUrl + this.posfixo + `/${id}`);
   }
 
-  create(tec: Tecnico): Observable<Tecnico> {
+  create(tec: Tecnico): Observable<any> {
 
-    return this.http.post<Tecnico>(this.apiUrl + this.posfixo + '/', tec, httpOptions);
+    return this.http.post<Tecnico>(this.apiUrl + this.posfixo + '/', tec);
   }
 
   delete(id: number): Observable<Object> {
@@ -47,6 +42,6 @@ export class TecnicoService {
   }
 
   update(tec: Tecnico): Observable<Tecnico> {
-    return this.http.put<Tecnico>(this.apiUrl + this.posfixo + `/${tec.id}`, tec, httpOptions);
+    return this.http.put<Tecnico>(this.apiUrl + this.posfixo + `/${tec.id}`, tec);
   }
 }

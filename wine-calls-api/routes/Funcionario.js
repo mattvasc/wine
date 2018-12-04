@@ -2,7 +2,18 @@ const Model = require('../model');
 const geradorDeRotas = require('./gerador_de_rotas');
 const entidade_nome = "funcionario_wine";
 
-const router = geradorDeRotas(Model, entidade_nome);
+let quais_rotas_criar = {
+	"single": false,
+	"all": false,
+	"paginacao": false,
+	"describe": false,
+	"create": true,
+	"update": true,
+	"delete": true
+}
+
+
+const router = geradorDeRotas(Model, entidade_nome, quais_rotas_criar);
 
 var entidade = Model[entidade_nome];
 

@@ -48,6 +48,18 @@ export class TecnicoListComponent implements OnInit {
   }
 
   deleteTecnico(index: number){
-   // TODO: fazer isso aqui 
+    let id = this.tecnicos[index].id;
+    this.tecnicoService.delete(id).subscribe(c => {
+      if(c['success']==true) {
+        this.tecnicos.splice(index,1);
+        alert("Técnico apagado com sucesso!");
+      } else {
+        console.log(c);
+        alert("Erro ao apagar tecnico!!");
+      }
+    }, c => {
+      console.log(c);
+      alert("Erro ao apagar tecnico!!");
+    });
   }
 }

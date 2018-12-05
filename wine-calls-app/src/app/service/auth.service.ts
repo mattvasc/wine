@@ -34,6 +34,7 @@ export class AuthService implements CanActivate {
   doLogin(f: Funcionario) {
     return this.http.post(this.apiService.apiUrl + "funcionarios/login", { "email": f.email, "senha": f.senha });
   }
+
   // Pede um novo JWT para continuar usando a API de forma válida.
   renewToken() {
     let token = window.localStorage.getItem("token");
@@ -46,4 +47,9 @@ export class AuthService implements CanActivate {
           window.localStorage.removeItem("token");
       });
   }
+
+  checkIfIsEmptyOfEmployees(){
+    return this.http.get(this.apiService.apiUrl + "funcionarios/vazio");
+  }
+
 }

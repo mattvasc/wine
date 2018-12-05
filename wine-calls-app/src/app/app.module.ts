@@ -48,6 +48,7 @@ const appRoutes: Routes = [
   { path: 'formsTicket', component: ChamadoComponent, canActivate: [AuthService]  },
   { path: 'funcionarios', component: FuncionarioListComponent, canActivate: [AuthService]  },
   { path: 'funcionario', component: FuncionarioFormComponent, canActivate: [AuthService]  },
+  { path: 'funcionario/first', component: FuncionarioFormComponent  },
   { path: 'funcionario/:id', component: FuncionarioFormComponent, canActivate: [AuthService]  },
 
   { path: 'login', component: LoginComponent },

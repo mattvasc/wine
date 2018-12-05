@@ -31,6 +31,12 @@ export class LoginComponent implements OnInit {
     let token = localStorage.getItem('token');
     if(token !== undefined && token !== null)
       this.router.navigateByUrl(`/main`);
+    this.auth.checkIfIsEmptyOfEmployees().subscribe(retorno => {
+      if(retorno['success'] == true && retorno['data'] == true) {
+        alert("Sistema vazio! Cadastre o primeiro Administrador");
+        this.router.navigateByUrl(`/funcionario/first`);
+      }
+    });
 
   }
   erroAoFazerLogin() {
@@ -50,27 +56,6 @@ export class LoginComponent implements OnInit {
         this.erroAoFazerLogin();
       
     }, err => this.erroAoFazerLogin());
-    
-    //window.sessionStorage.setItem('logado', 'true');
-
-/*
-    this.service.login(this.funcionario.email, this.funcionario.senha).subscribe(data => {
-      console.log(data);
-      if (data === undefined || data['payload'] === undefined) {
-        alert('Error reaching server!');
-      } else if (data['payload'] === null) {
-        alert('Invalid Credentials');
-      } else if (data['payload']['email'] === this.funcionario.email
-      && data['payload']['senha'] === this.funcionario.senha) {
-        console.log('passou');
-        const tempbetter: Funcionario = data['payload'];
-        this.data.better = tempbetter;
-        
-      } else {
-        alert('Invalid Credentials');
-      }
-
-    }, error => { console.log(error); alert('Error reaching server'); });*/
   }
   recover() {
 

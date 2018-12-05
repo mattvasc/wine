@@ -38,6 +38,7 @@ export class TecnicoFormComponent implements OnInit {
     }
   }
   exec() {
+    // todo: verificação do input vem aqui
     this.tecnicoAtual.cpf.replace('.','');
     if (this.cadastrar)
       this.salvar();

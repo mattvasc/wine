@@ -12,7 +12,7 @@ export class FuncionarioService {
   constructor(private http: HttpClient, private api: ApiService) { }
 
   private apiUrl = this.api.apiUrl;
-  private posfixo = 'tecnicos';
+  private posfixo = 'funcionarios';
 
   getAll(): Observable<any> {
 
@@ -27,6 +27,10 @@ export class FuncionarioService {
   create(func: Funcionario): Observable<any> {
 
     return this.http.post<any>(this.apiUrl + this.posfixo + '/', func);
+  }
+
+  createFirst(func: Funcionario): Observable<any> {
+    return this.http.post<any>(this.apiUrl + this.posfixo + '/first', func);
   }
 
   delete(id: number): Observable<Object> {

@@ -52,6 +52,7 @@ const appRoutes: Routes = [
   { path: 'funcionarios', component: EmployeeListPageComponent, canActivate: [AuthService]  },
   { path: 'funcionario', component: EmployeeFormPageComponent, canActivate: [AuthService]  },
   { path: 'funcionario/:id', component: EmployeeFormPageComponent, canActivate: [AuthService]  },
+  { path: 'funcionario/first', component: EmployeeFormPageComponent  },
 
   { path: 'login', component: LoginPageComponent },
   { path: 'error/:status', component: ErrorPageComponent },

@@ -85,28 +85,28 @@ module.exports = function buildRoutes(Model, entidade_nome,
 		});
 
 	// criar uma nova instancia
-	router.post('/', function (req, res) {
-		console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-		console.log("indo criar uma nova instancia de " + entidade_nome);
-		let temp = entidade.build(req.body);
-		temp.save()
-			.then(payload => {
-				let temp = {
-					success: true,
-					data: {}
-				};
-				temp["data"][entidade_nome] = payload;
-				res.json(temp);
-			})
-			.catch(error => {
-				console.log(error);
-				res.json({
-					success: false,
-					data: {},
-					error: error
+	if(quais_rotas.create)
+		router.post('/', function (req, res) {
+			console.log("indo criar uma nova instancia de " + entidade_nome);
+			let temp = entidade.build(req.body);
+			temp.save()
+				.then(payload => {
+					let temp = {
+						success: true,
+						data: {}
+					};
+					temp["data"][entidade_nome] = payload;
+					res.json(temp);
 				})
-			});
-	});
+				.catch(error => {
+					console.log(error);
+					res.json({
+						success: false,
+						data: {},
+						error: error
+					})
+				});
+		});
 
 
 	// atualizar instancia atual

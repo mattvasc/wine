@@ -21,72 +21,57 @@ export class LoginPageComponent implements OnInit {
     private router: Router,
     private auth: AuthService
     // private data: DataStorageService
-  ) {
+    ) {
     this.funcionario = new Funcionario();
     this.funcionario.email = '';
     this.funcionario.senha = '';
   }
-
+  
   ngOnInit() {
-    const token = localStorage.getItem('token');
-    if (token !== undefined && token !== null) {
-      this.router.navigateByUrl(`/home`);
-    }
+    let token = localStorage.getItem('token');
+    if(token !== undefined && token !== null)
+      this.router.navigateByUrl(`/main`);
+    this.auth.checkIfIsEmptyOfEmployees().subscribe(retorno => {
+      if(retorno['success'] == true && retorno['data'] == true) {
+        alert("Sistema vazio! Cadastre o primeiro Administrador");
+        this.router.navigateByUrl(`/funcionario/first`);
+      }
+    });
+
   }
   erroAoFazerLogin() {
     // todo: mudar para modal
-    alert('Credenciais Inválidas!');
+    alert("Credenciais Inválidas!");
   }
   login() {
     if (this.funcionario.email === '' || this.funcionario.senha === '') {
       return;
     }
     this.auth.doLogin(this.funcionario).subscribe(data => {
-      if (data['success'] === true) {
-        window.localStorage.setItem('token', data['data']);
-        this.router.navigateByUrl(`/home`);
-      } else {
-        this.erroAoFazerLogin();
+      if(data['success'] == true) {
+        window.localStorage.setItem("token", data['data']);
+        this.router.navigateByUrl(`/main`);
       }
-
+      else
+        this.erroAoFazerLogin();
+      
     }, err => this.erroAoFazerLogin());
-
-    // window.sessionStorage.setItem('logado', 'true');
-
-    /*
-        this.service.login(this.funcionario.email, this.funcionario.senha).subscribe(data => {
-          console.log(data);
-          if (data === undefined || data['payload'] === undefined) {
-            alert('Error reaching server!');
-          } else if (data['payload'] === null) {
-            alert('Invalid Credentials');
-          } else if (data['payload']['email'] === this.funcionario.email
-          && data['payload']['senha'] === this.funcionario.senha) {
-            console.log('passou');
-            const tempbetter: Funcionario = data['payload'];
-            this.data.better = tempbetter;
-
-          } else {
-            alert('Invalid Credentials');
-          }
-
-        }, error => { console.log(error); alert('Error reaching server'); });*/
   }
   recover() {
 
   }
 
   doAction() {
-    const regex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
-    if (!regex.test(this.funcionario.email)) {
-      alert('Email inválido!');
+    let regex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
+    if(!regex.test(this.funcionario.email))
+    {
+      alert("Email inválido!");
       return;
     }
-
-    if (this.isLogin) {
+    
+    if(this.isLogin)
       this.login();
-    } else {
+    else
       this.recover();
-    }
   }
 }

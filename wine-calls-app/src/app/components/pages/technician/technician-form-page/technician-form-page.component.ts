@@ -1,76 +1,80 @@
 import { Component, OnInit } from '@angular/core';
-import { Tecnico } from '../../../../model/tecnico';
-import { DataStorageService } from '../../../../service/data-storage.service';
-import { TecnicoService } from '../../../../service/tecnico.service';
-import { Router } from '@angular/router';
 import { Masks } from '../../../../masks';
+import { Funcionario } from '../../../../model/funcionario';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../service/auth.service';
+import { FuncionarioService } from '../../../../service/funcionario.service';
+
 @Component({
   selector: 'app-technician-form-page',
   templateUrl: './technician-form-page.component.html',
   styleUrls: ['./technician-form-page.component.scss']
 })
 export class TechnicianFormPageComponent implements OnInit {
-  public tecnicoAtual: Tecnico;
-  public cadastrar = true;
+  public funcionarioAtual: Funcionario;
   public masks = Masks;
-
+  public isSalvar = true;
   constructor(
     private router: Router,
-    public dataStorage: DataStorageService,
-    private tecnicoService: TecnicoService
+    private auth: AuthService,
+    private funcionarioService: FuncionarioService
   ) { }
 
   ngOnInit() {
-    this.dataStorage.sync();
-    if (this.dataStorage.empresa_parceira === undefined) {
-      this.router.navigateByUrl('/empresasParceiras');
+    this.funcionarioAtual = new Funcionario();
+    if(this.router.url == '/funcionario/first') {
+      // Proteção de segurança do front end
+      this.auth.checkIfIsEmptyOfEmployees().subscribe(retorno => {
+        if(retorno['success'] != true || retorno['data']!= true)
+          this.router.navigateByUrl('/login');
+      });
     }
 
-    if (this.dataStorage.tecnico !== undefined) {
-      this.tecnicoAtual = this.dataStorage.tecnico;
-      this.tecnicoAtual.data_rg = this.tecnicoAtual.data_rg.substr(0,10);
-      this.tecnicoAtual.nascimento = this.tecnicoAtual.nascimento.substr(0,10);
-      this.cadastrar = false;
-    } else {
-      this.tecnicoAtual = new Tecnico();
-      this.tecnicoAtual.empresa_do_tecnico_id = this.dataStorage.empresa_parceira.id;
-      this.tecnicoAtual.status = "ativo";
-    }
   }
-  exec() {
+  exec(){
     // todo: verificação do input vem aqui
-    this.tecnicoAtual.cpf.replace('.','');
-    if (this.cadastrar)
+    if (this.isSalvar && this.router.url == '/funcionario/first')
+      this.salvarGenesis();
+    else if (this.isSalvar)
       this.salvar();
     else
       this.atualizar();
   }
-  salvar(){
-    this.tecnicoService.create(this.tecnicoAtual).subscribe(retorno => {
+  salvar() {
+    this.funcionarioService.create(this.funcionarioAtual).subscribe(retorno => {
       if(retorno !== undefined && retorno['success'] === true)
         {
-          alert("Tecnico Salvo com Sucesso!");
+          alert("Funcionario Salvo com Sucesso!");
         }
         else{
-          alert("Erro ao salvar Tecnico...");
+          alert("Erro ao salvar Funcionario...");
         }
-        this.router.navigateByUrl("/tecnicos");
+        this.router.navigateByUrl("/funcionarios");
+    });
+  }
+  salvarGenesis(){
+    this.funcionarioService.createFirst(this.funcionarioAtual).subscribe(retorno => {
+      if(retorno !== undefined && retorno['success'] === true)
+        {
+          alert("Funcionario Salvo com Sucesso!");
+        }
+        else{
+          console.log(retorno);
+          alert("Erro ao salvar Funcionario...");
+        }
+        this.router.navigateByUrl("/login");
     });
   }
   atualizar(){
-    this.tecnicoService.update(this.tecnicoAtual).subscribe(retorno => {
+    this.funcionarioService.update(this.funcionarioAtual).subscribe(retorno => {
       if(retorno !== undefined && retorno['success'] === true)
       {
-        alert("Tecnico Atualizado com Sucesso!");
+        alert("Funcionário Atualizado com Sucesso!");
       }
       else{
-        alert("Erro ao atualizar Tecnico...");
+        alert("Erro ao atualizar Funcionario...");
       }
-      this.router.navigateByUrl("/tecnicos");
+      this.router.navigateByUrl("/funcionarios");
     });
-
-  }
-  cancelar(){
-    this.router.navigateByUrl("/tecnicos");
   }
 }

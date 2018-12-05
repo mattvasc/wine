@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     let token = localStorage.getItem('token');
     if(token !== undefined && token !== null)
-      this.router.navigateByUrl(`/main`);
+      this.router.navigateByUrl(`/home`);
     this.auth.checkIfIsEmptyOfEmployees().subscribe(retorno => {
       if(retorno['success'] == true && retorno['data'] == true) {
         alert("Sistema vazio! Cadastre o primeiro Administrador");
@@ -50,7 +50,7 @@ export class LoginPageComponent implements OnInit {
     this.auth.doLogin(this.funcionario).subscribe(data => {
       if(data['success'] == true) {
         window.localStorage.setItem("token", data['data']);
-        this.router.navigateByUrl(`/main`);
+        this.router.navigateByUrl(`/home`);
       }
       else
         this.erroAoFazerLogin();

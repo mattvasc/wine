@@ -1,13 +1,13 @@
 const Model = require('../model');
 const geradorDeRotas = require('./gerador_de_rotas');
 const entidade_nome = "funcionario_wine";
-
+const Util = require('../Util');
 let quais_rotas_criar = {
 	"single": false,
 	"all": false,
 	"paginacao": false,
 	"describe": false,
-	"create": true,
+	"create": false,
 	"update": true,
 	"delete": true
 }
@@ -19,27 +19,60 @@ var entidade = Model[entidade_nome];
 
 const jwt = require('jsonwebtoken');
 
+router.post('/', (req,res) => {
+	console.log("Entrou nessa função xiq");
+	let temp = entidade.build(req.body);
+	temp.senha = Util.saltHashPassword(temp.senha);
+		temp.save()
+			.then(payload => {
+				let temp = {
+					success: true,
+					data: {}
+				};
+				delete payload.senha;
+				delete payload['senha'];
+				temp["data"][entidade_nome] = payload;
+				res.json(temp);
+			})
+			.catch(error => {
+				console.log(error);
+				res.statusCode = 500;
+				res.json({
+					success: false,
+					data: {},
+					error: error
+				})
+			});
+})
 
 router.post('/login', (req, res) => {
-
+	
 	if (req.body.email !== undefined && req.body.senha !== undefined) {
+
 		entidade.findOne({
 			where: {
-				email: req.body.email,
-				senha: req.body.senha
+				email: req.body.email
 			}
 		})
 		.then(retorno => {
 			if(retorno !== null) {
-				res.statusCode = 200;
-				let token_claims = {
-					nome: retorno.nome, 
-					email: retorno.email};
-				let token = jwt.sign(token_claims, process.env.JWT_PASSWORD, { expiresIn: process.env.JWT_EXPIRATION });
+				let pass = retorno.senha.split('.');
+				console.log(pass);
+				req.body.senha = Util.sha512(req.body.senha, pass[1]);
+				if(req.body.senha == retorno.senha) {
+					res.statusCode = 200;
+					let token_claims = {
+						nome: retorno.nome, 
+						email: retorno.email};
+					let token = jwt.sign(token_claims, process.env.JWT_PASSWORD, { expiresIn: process.env.JWT_EXPIRATION });
+	
+					res.json({success: true, data: token});
+				} else { // quando senha incorreta
+					res.statusCode = 403;
+					res.json({"success":false, "error":"Invalid Credentials"});
+				}
 
-				res.json({success: true, data: token});
-
-			} else{
+			} else{ // quando email incorreto
 				res.statusCode = 403;
 				res.json({"success":false, "error":"Invalid Credentials"});
 			}

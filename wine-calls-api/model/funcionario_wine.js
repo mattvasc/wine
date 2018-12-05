@@ -14,15 +14,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     email: {
       type: DataTypes.STRING(45),
-      allowNull: true
+      allowNull: false,
+      unique: true
     },
     senha: {
-      type: DataTypes.STRING(45),
-      allowNull: true
+      type: DataTypes.STRING(161),
+      allowNull: false
     },
     cpf: {
       type: DataTypes.STRING(14),
-      allowNull: true
+      allowNull: true,
+      unique: true
     },
 
 

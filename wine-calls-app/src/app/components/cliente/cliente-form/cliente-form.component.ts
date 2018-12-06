@@ -80,6 +80,9 @@ export class ClienteFormComponent implements OnInit {
     });
   }
 
+  cancelar(){
+    this.router.navigateByUrl("/clientes");
+  }
   atualizar() {
     console.log("indo atalizar criente");
     // TODO: Verificar dados

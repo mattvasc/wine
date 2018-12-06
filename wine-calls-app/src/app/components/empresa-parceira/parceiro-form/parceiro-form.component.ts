@@ -151,6 +151,10 @@ salvar() {
      });
    }
 
+   cancelar() {
+    this.router.navigateByUrl("/empresasParceiras");
+   }
+
    exec() {
      console.log(this.parceiroAtual);
      //if(this.parceiroAtual.data_rg.length != 10)

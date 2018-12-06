@@ -34,8 +34,14 @@ router.get('/vazio', (req, res) => {
 	});
 });
 
-async function criarNovoFunc(func){
-	let temp = entidade.build(func);
+async function criarNovoFunc(func) {
+
+}
+
+// Adicionar novos funcionários, estando já logado
+// requer JWT
+router.post('/', (req, res) => {
+	let temp = entidade.build(req.body);
 	temp.senha = Util.saltHashPassword(temp.senha);
 	temp.save()
 		.then(payload => {
@@ -46,25 +52,20 @@ async function criarNovoFunc(func){
 			delete payload.senha;
 			delete payload['senha'];
 			temp["data"][entidade_nome] = payload;
-			return [200,temp];
-			
+			res.statusCode = 200;
+			res.json(temp);
+
 		})
 		.catch(error => {
 			console.log(error);
-			return 	[ 500, {
-				 success: false,
-				 data: {}, 
-				 error: error
-			}];
+			res.statusCode = 500;
+			res.json(
+				{
+					success: false,
+					data: {},
+					error: error
+				});
 		});
-}
-
-// Adicionar novos funcionários, estando já logado
-// requer JWT
-router.post('/', (req, res) => {
-	let retorno = await criarNovoFunc(req.body);
-	res.statusCode = retorno[0];
-	res.json(retorno[1]);
 });
 
 // Adiciona o primeiro funcionario
@@ -73,9 +74,32 @@ router.post('/first', (req, res) => {
 	let resp = {};
 	entidade.count().then(c => {
 		if (c == 0) {
-			let retorno = await criarNovoFunc(req.body);
-			res.statusCode = retorno[0];
-			res.json(retorno[1]);
+			let temp = entidade.build(req.body);
+			temp.senha = Util.saltHashPassword(temp.senha);
+			temp.save()
+				.then(payload => {
+					let temp = {
+						success: true,
+						data: {}
+					};
+					delete payload.senha;
+					delete payload['senha'];
+					temp["data"][entidade_nome] = payload;
+					res.statusCode = 200;
+					res.json(temp);
+
+				})
+				.catch(error => {
+					console.log(error);
+					res.statusCode = 500;
+					res.json(
+						{
+							success: false,
+							data: {},
+							error: error
+						});
+				});
+
 		} else {
 			resp = {
 				success: false,

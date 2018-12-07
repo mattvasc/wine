@@ -4,6 +4,7 @@ export class Funcionario {
     public email?: string;
     public senha?: string;
     public cpf?: string;
+    public admin?: boolean;
     public status?: string;
     public telefones?: string;
     public data_rg?: string;

@@ -3,16 +3,16 @@
     <th>Id.</th>
     <th>Nome</th>
     <th>Email</th>
-    <th>Editar</th>
-    <th>Apagar</th>
+    <th *ngIf="funcionarioAtual.admin == true">Editar</th>
+    <th *ngIf="funcionarioAtual.admin == true">Apagar</th>
   </thead>
   <tbody>
     <tr *ngFor="let func of funcionarios">
       <td>{{func.id}}</td>
       <td>{{ func.nome}}</td>
       <td>{{func.email}}</td>
-      <td><button (click)="editFuncionario(func.id)" class="btn btn-block btn-success">Editar</button></td>
-      <td><button (click)="deleteFuncionario(func.id)" class="btn btn-block btn-danger">Apagar</button></td>
+      <td *ngIf="funcionarioAtual.admin == true"><button (click)="editFuncionario(func.id)" class="btn btn-block btn-success">Editar</button></td>
+      <td *ngIf="funcionarioAtual.admin == true"><button (click)="deleteFuncionario(func.id)" class="btn btn-block btn-danger">Apagar</button></td>
     </tr>
   </tbody>
 </table>

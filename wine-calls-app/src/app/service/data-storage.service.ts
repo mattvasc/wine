@@ -39,8 +39,10 @@ export class DataStorageService {
     let myrawtoken = window.localStorage.getItem("token");
     if(this.usuario_logado === undefined && myrawtoken !== null){
       let decoded = this.helper.decodeToken(myrawtoken);
+      this.usuario_logado = new Funcionario();
       this.usuario_logado.nome = decoded.nome;
       this.usuario_logado.email = decoded.email;
+      this.usuario_logado.admin = decoded.admin;
     }
     if (this.empresa_parceira === undefined && temp_empresa_parceira !== null) {
       this.empresa_parceira = JSON.parse(temp_empresa_parceira);

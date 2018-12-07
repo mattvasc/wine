@@ -19,6 +19,26 @@ var entidade = Model[entidade_nome];
 
 const jwt = require('jsonwebtoken');
 
+// Get todos, mas sem senha
+router.get('/', (req, res) => { 
+	console.log(`Indo pegar todos @s ${entidade_nome}`);
+			entidade.findAll({attributes: ['id','nome','email','admin']}).then(result => {
+				let temp = {
+					success: true, data: {}
+				};
+				temp["data"][entidade_nome] = result;
+				console.log(`Deu boa, retornando...`);
+				res.json(temp);
+			})
+				.catch(error => res.json({
+					success: false,
+					data: {},
+					error: error
+				}));
+});
+
+
+
 router.get('/vazio', (req, res) => {
 	entidade.count().then(c => {
 		let resp = { success: true, data: (c > 0) ? false : true }
@@ -136,7 +156,8 @@ router.post('/login', (req, res) => {
 						res.statusCode = 200;
 						let token_claims = {
 							nome: retorno.nome,
-							email: retorno.email
+							email: retorno.email,
+							admin: retorno.admin
 						};
 						let token = jwt.sign(token_claims, process.env.JWT_PASSWORD, { expiresIn: process.env.JWT_EXPIRATION });
 
@@ -179,6 +200,8 @@ router.post('/isvalid', (req, res) => {
 		try {
 			var decoded = jwt.verify(token, process.env.JWT_PASSWORD);
 			res.statusCode = 200;
+			console.log("Token decodado: ");
+			console.log(decoded);
 			if (parseInt(decoded.exp) - Math.floor(Date.now() / 1000) <= parseInt(process.env.JWT_RENEW)) { // se estiver espirando...
 				delete decoded.iat;
 				delete decoded.exp;

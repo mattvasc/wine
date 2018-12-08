@@ -14,7 +14,7 @@ export class Cliente {
 	public logradouro?: string = "";
 	public logradouro_numero?: string = "";
 	public complemento?: string = "";
-	public municipio?: string = '';
+	public cidade?: string = '';
 	public estado?: string = '';
 	public bairro?: string = "";
 

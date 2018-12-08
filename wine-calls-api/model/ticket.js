@@ -28,10 +28,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    data_criacao: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
     preco_cliente: {
       type: DataTypes.FLOAT,
       allowNull: true
@@ -62,15 +58,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    status: {
-      type: DataTypes.STRING(16),
-      allowNull: true
-    },
+
     observacoes: {
       type: DataTypes.STRING(256),
       allowNull: true
     },
 
+    // Categoria do Ticket
     tipo_ticket: {
       type: DataTypes.STRING(45),
       allowNull: true
@@ -106,16 +100,35 @@ module.exports = function(sequelize, DataTypes) {
     check_pgto_tecnico: {
       type: DataTypes.STRING(45),
       allowNull: true
-    }
-
-    // endereco_id: {
-    //   type: DataTypes.INTEGER(11),
-    //   allowNull: true,
-    //   references: {
-    //     model: 'endereco',
-    //     key: 'id'
-    //   }
-    // }
+    },
+    logradouro: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    logradouro_numero: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    complemento: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    bairro: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    cidade: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    estado: {
+      type: DataTypes.STRING(2),
+      defaultValue: 'SP'
+    },
+    cep: {
+      type: DataTypes.STRING(12),
+      allowNull: false
+    },
   }, {
     tableName: 'ticket'
   });

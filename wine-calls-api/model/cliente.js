@@ -55,7 +55,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(64),
       allowNull: false
     },
-    municipio: {
+    cidade: {
       type: DataTypes.STRING(64),
       allowNull: false
     },

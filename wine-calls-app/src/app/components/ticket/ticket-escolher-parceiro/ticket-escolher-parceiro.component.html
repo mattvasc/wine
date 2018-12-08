@@ -1,6 +1,7 @@
-Informe o nome da empresa parceira para atender o chamado:
-
-<input type="text" #nome_input (keyup)="this.nome_input_string = nome_input.value; pesquisar();" id="nome_input">
+<div class="input-group">
+  <label for="nome_input">Informe o nome da empresa parceira para atender o chamado:</label>
+  <input type="text" class="form-control" #nome_input (keyup)="this.nome_input_string = nome_input.value; pesquisar();" id="nome_input" name="nome_input">
+</div>
 
 <table *ngIf="parceirosPesquisados.length > 0; else semTicket" class="table table-hover">
   <thead class="thead-dark">
@@ -27,12 +28,16 @@ Informe o nome da empresa parceira para atender o chamado:
   <h4 *ngIf="nome_input.length > 0">Nenhum resultado encontrado :( </h4>
 </ng-template>
 
+
+<p class="clearfix"></p>
+
 <div class="form-group">
-    <div class="form-row">
-      <div class="col-md-6">
-        <button class="btn btn-warning" (click)="voltar()">Voltar</button>
-      </div>
-      <div class="col-md-1"></div>
-      <button class="btn btn-primary" (click)="avancar()">Não escolher Parceiro agora</button>
+  <div class="form-row">
+    <div class="col-4">
+      <button class="btn btn-warning btn-lg btn-block" (click)="voltar()">Voltar</button>
+    </div>
+    <div class="col-4 offset-4">
+      <button class="btn btn-success btn-lg btn-block" (click)="avancar()">Avançar sem selecionar o parceiro</button>
     </div>
   </div>
+</div>

@@ -1,6 +1,9 @@
-Informe a razão social ou nome fantasia:
+<div class="input-group">
+  <label for="nome_input">Informe a razão social ou nome fantasia:</label>
+  <input type="text" class="form-control" placeholder="" #nome_input (keyup)="this.nome_input_string = nome_input.value; pesquisar();" id="nome_input" name="nome_input">
+</div>
 
-<input type="text" #nome_input (keyup)="this.nome_input_string = nome_input.value; pesquisar();" id="nome_input">
+<p class="clearfix"></p>
 
 <table *ngIf="clientesPesquisados.length > 0; else semTicket" class="table table-hover">
   <thead class="thead-dark">
@@ -17,8 +20,8 @@ Informe a razão social ou nome fantasia:
       <td>{{ clientePesquisado.razao_social}}</td>
       <td>{{clientePesquisado.nome_fantasia}}</td>
       <td>{{clientePesquisado.email}}</td>
-      <td><button (click)="seeClient(i)" class="btn btn-block btn-success">Ver Detalhes</button></td>
-      <td><button (click)="selectClient(i)" class="btn btn-block btn-danger">Selecionar</button></td>
+      <td><button (click)="seeClient(i)" class="btn btn-block btn-primary">Ver Detalhes</button></td>
+      <td><button (click)="selectClient(i)" class="btn btn-block btn-success">Selecionar</button></td>
     </tr>
   </tbody>
 </table>

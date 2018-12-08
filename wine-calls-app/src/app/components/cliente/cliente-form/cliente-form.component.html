@@ -35,10 +35,10 @@
   </div>
 
   <div class="form-row ">
-    <div class="form-group col-md-12">
+    <div class="form-group col-md-12" id = "campoCNPJ">
       <label for="empresaCNPJ">CNPJ </label>
-      <input type="text" [(ngModel)]="clienteAtual.cnpj" name="empresaCNPJ" [textMask]="{mask: masks.CNPJ}" class="form-control"
-        id="empresaCNPJ" placeholder="99.999.999/9999-99" required>
+      <input type="text" [(ngModel)]="clienteAtual.cnpj" name="empresaCNPJ" (ngModelChange)="verificaCNPJ($event)" [textMask]="{mask: masks.CNPJ}" class="form-control" id="empresaCNPJ"
+        placeholder="99.999.999/9999-99" required>
     </div>
   </div>
 
@@ -149,8 +149,8 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="empresaEmail" name="email">Email</label>
-      <input type="email" [(ngModel)]="clienteAtual.email" class="form-control" name="email" id="empresaEmail"
-        placeholder="contato@empresa.com.br" required>
+      <input type="email" [(ngModel)]="clienteAtual.email" class="form-control" name="email" id="empresaEmail" placeholder="contato@empresa.com.br"
+        required>
     </div>
 
     <div class="form-group col-md-6">

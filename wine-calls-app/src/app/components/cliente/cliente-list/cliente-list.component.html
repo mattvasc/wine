@@ -7,8 +7,8 @@
 <tbody>
 <tr *ngFor="let client of clientes; let i = index">
   <td>{{client.id}}</td><td>{{ client.razao_social }}</td> <td>{{client.email}}</td>
-  <td><button (click)="editClient(i)" class="btn btn-block btn-success">Editar</button></td>
-  <td><button (click)="deleteClient(i)" class="btn btn-block btn-danger">Apagar</button></td>
+  <td><button (click)="editClient(i)" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button></td>
+  <td><button (click)="deleteClient(i)" class="btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
 </tr>
 </tbody>
 </table>

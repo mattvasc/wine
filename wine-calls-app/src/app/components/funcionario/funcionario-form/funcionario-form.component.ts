@@ -4,6 +4,7 @@ import { Funcionario } from '../../../model/funcionario';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 import { FuncionarioService } from '../../../service/funcionario.service';
+import { ApiService } from '../../../service/api.service';
 
 @Component({
   selector: 'app-funcionario-form',
@@ -17,7 +18,8 @@ export class FuncionarioFormComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private funcionarioService: FuncionarioService
+    private funcionarioService: FuncionarioService,
+    private apiGeral: ApiService
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,47 @@ export class FuncionarioFormComponent implements OnInit {
     }
 
   }
+
+  verificaNascimento(event: any){
+    if(event.replace(/[^\d]+/g,'') < 8)
+      return;
+
+    if(!this.apiGeral.verificaDataAtual(event)){
+      document.getElementById("campoDataNasc").classList.add("has-error");
+    } else {
+      document.getElementById("campoDataNasc").classList.remove("has-error");
+      if(this.funcionarioAtual.data_rg !== undefined && !this.apiGeral.verificaDataExpedicao(this.funcionarioAtual.nascimento, this.funcionarioAtual.data_rg)){
+        document.getElementById("campoDataRG").classList.add("has-error");
+      } else {
+        document.getElementById("campoDataRG").classList.remove("has-error");
+      }
+    }
+  }
+
+  verificaExpedicao(event: any){
+    if(event.replace(/[^\d]+/g,'') < 8 || this.funcionarioAtual.nascimento === undefined || !this.apiGeral.verificaDataAtual(this.funcionarioAtual.nascimento))
+      return;
+
+    if(!this.apiGeral.verificaDataExpedicao(this.funcionarioAtual.nascimento, event)){
+      document.getElementById("campoDataRG").classList.add("has-error");
+    } else {
+      document.getElementById("campoDataRG").classList.remove("has-error");
+    }
+  }
+
+  verificaCPF(event: any) { // TODO: Completar função
+
+  }
+
   exec(){
+    if(this.funcionarioAtual.nascimento !== undefined && !this.apiGeral.verificaDataAtual(this.funcionarioAtual.nascimento)){
+      alert("Dados inválidos");
+      return;
+    } else if (this.funcionarioAtual.nascimento !== undefined && this.funcionarioAtual.data_rg !== undefined && !this.apiGeral.verificaDataExpedicao(this.funcionarioAtual.nascimento, this.funcionarioAtual.data_rg)){
+      alert("Dados inválidos");
+      return;
+    }
+
     // todo: verificação do input vem aqui
     if (this.isSalvar && this.router.url == '/funcionario/first')
       this.salvarGenesis();

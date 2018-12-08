@@ -64,6 +64,17 @@ export class ClienteFormComponent implements OnInit {
     );
   }
 
+  verificaCNPJ(event: any) {
+    event = event.replace(/[^\d]+/g,'');
+    if(event.length < 14)
+      return;
+    if(!this.apiGeral.validarCNPJ(event)){
+      document.getElementById("campoCNPJ").classList.add("has-error");
+    } else {
+      document.getElementById("campoCNPJ").classList.remove("has-error");
+    }
+  }
+
 
   salvar() {
     // TODO: Verificar dados
@@ -101,8 +112,10 @@ export class ClienteFormComponent implements OnInit {
 
   exec() {
     console.log(this.clienteAtual);
-    //if(this.clienteAtual.data_rg.length != 10)
-    //delete this.clienteAtual.data_rg;
+    if(!this.apiGeral.validarCNPJ(this.clienteAtual.cnpj)){
+      alert("Dados inválidos");
+      return;
+    }
     if (this.cadastrar) {
       this.salvar();
     } else {

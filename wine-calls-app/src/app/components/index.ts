@@ -24,7 +24,8 @@ export { FuncionarioFormComponent } from './funcionario/funcionario-form/funcion
 export { FuncionarioListComponent } from './funcionario/funcionario-list/funcionario-list.component';
 export { TecnicoListComponent } from './tecnico-empresa/tecnico-list/tecnico-list.component';
 
-export { TicketInformacoesComponent } from './ticket/ticket-informacoes/ticket-informacoes.component';
 
+export { TicketInformacoesComponent } from './ticket/ticket-informacoes/ticket-informacoes.component';
 export { TicketAgendamentoComponent  } from './ticket/ticket-agendamento/ticket-agendamento.component';
 export { TicketEscolherParceiroComponent  } from './ticket/ticket-escolher-parceiro/ticket-escolher-parceiro.component';
+export { TicketRevisaoComponent  } from './ticket/ticket-revisao/ticket-revisao.component';

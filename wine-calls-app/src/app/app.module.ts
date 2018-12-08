@@ -16,6 +16,7 @@ import {
   EmpresaParceiraMainComponent,
   EmpresaParceiraListComponent,
   ParceiroFormComponent,
+  TicketRevisaoComponent,
   LoginComponent, 
   TicketEscolherClienteComponent,
   TicketInformacoesComponent,
@@ -33,6 +34,7 @@ import { FuncionarioListComponent } from './components/index';
 import { TecnicoListComponent } from './components/index';
 
 import { AuthService } from './service/auth.service';
+
 
 
 // Angular CLI environemnt
@@ -89,6 +91,7 @@ const appRoutes: Routes = [
     TicketInformacoesComponent,
     TicketAgendamentoComponent,
     TicketEscolherParceiroComponent,
+    TicketRevisaoComponent,
   ],
   imports: [
     BrowserModule,

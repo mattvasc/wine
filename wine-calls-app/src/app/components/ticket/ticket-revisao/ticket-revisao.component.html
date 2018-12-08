@@ -1,0 +1,26 @@
+  <h4>Confirmar dados fornecidos antes de salvar o chamado:</h4>
+
+Cliente Razão Social: {{dataStorage.cliente.razao_social}}
+Cliente Nome Fantasia: {{dataStorage.cliente.nome_fantasia}}
+
+
+
+Endereço: {{dataStorage.ticket.logradouro + ', ' + dataStorage.ticket.logradouro_numero}}
+Bairro: {{dataStorage.ticket.bairro}}
+Cidade: {{dataStorage.ticket.cidade}}  UF: {{dataStorage.ticket.estado}}
+
+Descrição: {{dataStorage.ticket.descricao}}
+Categoria: {{dataStorage.ticket.categoria}}
+
+
+
+  <div class="form-group">
+      <div class="form-row">
+        <div class="col-md-6">
+          <button class="btn btn-warning" (click)="voltar()">Voltar</button>
+        </div>
+        <div class="col-md-1"></div>
+        <button class="btn btn-primary" (click)="Salvar()">Salvar</button>
+      </div>
+    </div>
+  

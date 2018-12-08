@@ -1,12 +1,16 @@
 <h1>Cadastro de Chamado</h1>
-<progress   max="100" value="{{dataStorage.ticket.estagio * (1/5) * 100}}"> 33% </progress> <br>
+<progress   max="100" value="{{dataStorage.ticket.estagio * (1/6) * 100}}"> 33% </progress> <br>
 
 
 <app-ticket-escolher-cliente *ngIf="dataStorage.ticket.estagio == 1"></app-ticket-escolher-cliente>
 <app-ticket-informacoes *ngIf="dataStorage.ticket.estagio == 2"></app-ticket-informacoes>
 <app-ticket-agendamento *ngIf="dataStorage.ticket.estagio == 3"></app-ticket-agendamento>
 <app-ticket-escolher-parceiro *ngIf="dataStorage.ticket.estagio == 4"></app-ticket-escolher-parceiro>
-
+<app-ticket-revisao *ngIf="dataStorage.ticket.estagio == 5"></app-ticket-revisao>
+<div *ngIf="dataStorage.ticket.estagio == 6">
+  Chamado salvo com sucesso!
+  <button>Voltar para todos chamados</button>
+</div>
 <br><br><br><br><br>
 <!-- 
 <form id="formChamado">

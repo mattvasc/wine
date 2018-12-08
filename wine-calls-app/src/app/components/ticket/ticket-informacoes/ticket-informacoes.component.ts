@@ -16,7 +16,7 @@ export class TicketInformacoesComponent implements OnInit {
   voltar() {
     delete this.dataStorage.cliente;
     this.dataStorage.ticket = new Ticket();
-    this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio - 1;
+    this.dataStorage.ticket.estagio = 1;
     this.dataStorage.save();
   }
   avancar(){

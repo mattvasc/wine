@@ -4,7 +4,9 @@
 
 <h3>Agendamento: </h3>
 <button class="btn btn-primary" (click)="pular()">Pular o agendamento</button>
-<div class="form-row">
+
+<p class="clearfix"></p>
+
   <div class="form-group col-md-6">
     <label for="data_agendamento">Data</label>
     <input type="date" class="form-control" name="data_agendamento" [(ngModel)]="this.dataObj['data']">
@@ -14,20 +16,24 @@
     <label for="horario_agendamento">Horário</label>
     <input type="time" class="form-control" name="horario_agendamento" [(ngModel)]="this.dataObj['hora']">
   </div>
-</div>
+
 <h3>Observações: </h3>
 
-<div class="form-group">
-  <label for="observacao"></label>
-  <textarea class="form-control" name="observacao" id="observacao" rows="5" [(ngModel)]="this.dataStorage.ticket.observacoes"></textarea>
-</div>
+  <div class="col-12">
+    <div class="form-group">
+      <label for="observacao"></label>
+      <textarea class="form-control" name="observacao" id="observacao" rows="5" [(ngModel)]="this.dataStorage.ticket.observacoes"></textarea>
+    </div>
+  </div>
+
 
 <div class="form-group">
   <div class="form-row">
-    <div class="col-md-6">
-      <button class="btn btn-warning" (click)="voltar()">Voltar</button>
+    <div class="col-4">
+      <button class="btn btn-warning btn-lg btn-block" (click)="voltar()">Voltar</button>
     </div>
-    <div class="col-md-1"></div>
-    <button class="btn btn-primary" (click)="avancar()">Avançar</button>
+    <div class="col-4 offset-4">
+      <button class="btn btn-success btn-lg btn-block" (click)="avancar()">Avançar</button>
+    </div>
   </div>
 </div>

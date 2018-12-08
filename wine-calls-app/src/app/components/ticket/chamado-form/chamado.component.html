@@ -1,6 +1,8 @@
 <h1>Cadastro de Chamado</h1>
-<progress   max="100" value="{{dataStorage.ticket.estagio * (1/6) * 100}}"> 33% </progress> <br>
 
+<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" [ngStyle]="{'width':(dataStorage.ticket.estagio/6)*100+'%'}">{{((dataStorage.ticket.estagio/6)*100).toFixed(2)+'%'}}</div>
+</div>
 
 <app-ticket-escolher-cliente *ngIf="dataStorage.ticket.estagio == 1"></app-ticket-escolher-cliente>
 <app-ticket-informacoes *ngIf="dataStorage.ticket.estagio == 2"></app-ticket-informacoes>
@@ -12,7 +14,7 @@
   <button>Voltar para todos chamados</button>
 </div>
 <br><br><br><br><br>
-<!-- 
+<!--
 <form id="formChamado">
 
   <hr>

@@ -1,26 +1,32 @@
-  <h4>Confirmar dados fornecidos antes de salvar o chamado:</h4>
+  <h3>Confirme os dados fornecidos antes de salvar o chamado:</h3>
 
-Cliente Razão Social: {{dataStorage.cliente.razao_social}}
-Cliente Nome Fantasia: {{dataStorage.cliente.nome_fantasia}}
+  <div class="card border-secondary" style="width: 100%">
+    <div class="card-header bg-transparent border-secondary">
+      <h4 class="card-title"><strong>Razão Social do Cliente:</strong> {{dataStorage.cliente.razao_social}}</h4>
+      <h5 class="card-subtitle mb-2 text-muted"><strong>Nome Fantasia do Cliente:</strong> {{dataStorage.cliente.nome_fantasia}}</h5>
+    </div>
 
+    <div class="card-body">
+      <p class="card-text"><strong>Endereço:</strong> {{dataStorage.ticket.logradouro + ', ' + dataStorage.ticket.logradouro_numero}}</p>
+      <p class="card-text"><strong>Bairro:</strong> {{dataStorage.ticket.bairro}}</p>
+      <p class="card-text"><strong>Cidade:</strong> {{dataStorage.ticket.cidade}}  UF: {{dataStorage.ticket.estado}}</p>
+      <p class="card-text"><strong>Descrição:</strong> {{dataStorage.ticket.descricao}}</p>
+    </div>
 
+    <div class="card-footer bg-transparent border-secondary">
+      <h5 class="card-text"><strong>Categoria:</strong> {{dataStorage.ticket.tipo_ticket}}</h5>
+    </div>
+  </div>
 
-Endereço: {{dataStorage.ticket.logradouro + ', ' + dataStorage.ticket.logradouro_numero}}
-Bairro: {{dataStorage.ticket.bairro}}
-Cidade: {{dataStorage.ticket.cidade}}  UF: {{dataStorage.ticket.estado}}
-
-Descrição: {{dataStorage.ticket.descricao}}
-Categoria: {{dataStorage.ticket.categoria}}
-
-
+  <p class="clearfix"></p>
 
   <div class="form-group">
-      <div class="form-row">
-        <div class="col-md-6">
-          <button class="btn btn-warning" (click)="voltar()">Voltar</button>
-        </div>
-        <div class="col-md-1"></div>
-        <button class="btn btn-primary" (click)="Salvar()">Salvar</button>
+    <div class="form-row">
+      <div class="col-4">
+        <button class="btn btn-warning btn-lg btn-block" (click)="voltar()">Voltar</button>
+      </div>
+      <div class="col-4 offset-4">
+        <button class="btn btn-success btn-lg btn-block" (click)="salvar()">Salvar</button>
       </div>
     </div>
-  
+  </div>

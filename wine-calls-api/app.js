@@ -20,6 +20,7 @@ const cidadeRouter = require('./routes/Cidade');
 const estadoRouter = require('./routes/Estado');
 const ticketRouter = require('./routes/Ticket');
 const testRouter = require('./routes/Test');
+const email = require('./routes/Email');
 const FuncRouter = require('./routes/Funcionario');
 const Model = require('./model/');
 
@@ -52,6 +53,7 @@ app.use('/cidades', cidadeRouter);
 app.use('/estados', estadoRouter);
 app.use('/tickets', ticketRouter);
 app.use('/tests', testRouter);
+app.use('/email', email);
 
 
 // catch 404 and forward to error handler

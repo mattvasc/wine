@@ -33,6 +33,7 @@
     "mysql2": "^1.6.4",
     "pug": "^2.0.3",
     "sequelize": "^4.41.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "sparkpost": "^2.1.3"
   }
 }

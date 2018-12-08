@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';  
 import { EmpresaParceira } from '../model/empresa-parceira';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './api.service';
@@ -32,6 +33,11 @@ export class EmpresaParceiraService {
 
     return this.http.get<EmpresaParceira>(this.apiUrl + this.posfixo + `/${id}`);
   }
+
+  getWithName(name: String){
+    return this.http.get<any>(this.apiUrl + this.posfixo + `/nome/${name}`).pipe(debounceTime(50000));
+  }
+
 
   create(ep: EmpresaParceira): Observable<EmpresaParceira> {
 

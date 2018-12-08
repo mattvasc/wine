@@ -1,0 +1,38 @@
+Informe o nome da empresa parceira para atender o chamado:
+
+<input type="text" #nome_input (keyup)="this.nome_input_string = nome_input.value; pesquisar();" id="nome_input">
+
+<table *ngIf="parceirosPesquisados.length > 0; else semTicket" class="table table-hover">
+  <thead class="thead-dark">
+    <th>Id.</th>
+    <th>Razão Social</th>
+    <th>Nome Fantasia</th>
+    <th>Email</th>
+    <th>Ver</th>
+    <th>Selecionar</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parceiroPesquisado of parceirosPesquisados; let i = index">
+      <td>{{parceiroPesquisado.id}}</td>
+      <td>{{parceiroPesquisado.razao_social}}</td>
+      <td>{{parceiroPesquisado.nome_fantasia}}</td>
+      <td>{{parceiroPesquisado.email}}</td>
+      <td><button (click)="seeClient(i)" class="btn btn-block btn-success">Ver Detalhes</button></td>
+      <td><button (click)="selectClient(i)" class="btn btn-block btn-danger">Selecionar</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #semTicket>
+  <h4 *ngIf="nome_input.length > 0">Nenhum resultado encontrado :( </h4>
+</ng-template>
+
+<div class="form-group">
+    <div class="form-row">
+      <div class="col-md-6">
+        <button class="btn btn-warning" (click)="voltar()">Voltar</button>
+      </div>
+      <div class="col-md-1"></div>
+      <button class="btn btn-primary" (click)="avancar()">Não escolher Parceiro agora</button>
+    </div>
+  </div>

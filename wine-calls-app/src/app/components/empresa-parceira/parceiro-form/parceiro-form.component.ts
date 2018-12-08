@@ -127,11 +127,12 @@ salvar() {
     if(retorno !== undefined && retorno['success'] === true)
         {
           alert("Parceiro Salvo com Sucesso!");
+          this.router.navigateByUrl("/empresasParceiras");
         }
         else{
           alert("Erro ao salvar Parceiro...");
+          console.log(retorno['error']);
         }
-        this.router.navigateByUrl("/empresasParceiras");
      });
    }
 

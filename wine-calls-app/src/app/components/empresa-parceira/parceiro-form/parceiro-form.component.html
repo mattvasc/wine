@@ -107,7 +107,7 @@
 
         <div class="form-group col-md-2">
           <label for="empresanumero">Número</label>
-          <input type="text" class="form-control" name="numero" id="empresanumero" [(ngModel)]="parceiroAtual.numero"
+          <input type="text" class="form-control" name="numero" id="empresanumero" [(ngModel)]="parceiroAtual.logradouro_numero"
             placeholder="140">
         </div>
       </div>
@@ -248,7 +248,7 @@
           </div>
           <div class="form-group col-md-4">
             <label for="empresaCPFBanco">CNPJ</label>
-            <input type="text" [(ngModel)]="parceiroAtual.pgto_cppgto_cpfcnpj" [textMask]="{mask: masks.CNPJ}" class="form-control"
+            <input type="text" [(ngModel)]="parceiroAtual.pgto_cpfcnpj" [textMask]="{mask: masks.CNPJ}" class="form-control"
               name="empresaCPFBanco">
           </div>
         </div>

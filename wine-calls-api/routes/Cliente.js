@@ -18,7 +18,8 @@ router.get('/nome/:nome', function (req, res) {
 				nome_fantasia: { [Op.like]: '%' + nome + '%'},
 				razao_social: { [Op.like]: '%' + nome+'%'}
 			}	
-		}
+		},
+		limit: 5
 	})
 	.then(result => {
 		let temp = {success: true, data: {}};

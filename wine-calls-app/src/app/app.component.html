@@ -2,7 +2,7 @@
 
 <div [ngClass]="{'nav-side-menu col-3': this.router.url !== '/login' && this.router.url !== '/'}" *ngIf="this.router.url !== '/login' && this.router.url !== '/'">
   <div class="brand">
-    <a routerLink="/"><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
+    <a (click)='mudarRota("/")'><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
   </div>
     <i class="fa fa-menu fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
@@ -10,25 +10,25 @@
 
         <ul id="menu-content" class="menu-content collapse out">
 
-          <a routerLink="/"  class="linkMenu" >
+          <a (click)='mudarRota("/")'  class="linkMenu" >
             <li [ngClass]="{'active': router.url == '/'}">
               <i class="fa fa-menu fa-home fa-lg"></i> Início
             </li>
           </a>
 
-          <a routerLink="/empresasParceiras" class="linkMenu" >
+          <a (click)='mudarRota("/empresasParceiras")' class="linkMenu" >
             <li [ngClass]="{'active': router.url == '/empresasParceiras'}">
               <i class="fa fa-menu fa-people-carry fa-lg"></i> Parceiros
             </li>
           </a>
 
-          <!-- <a routerLink="/tecnicos" class="linkMenu" >
+          <!-- <a (click)='mudarRota("/tecnicos")' class="linkMenu" >
             <li [ngClass]="{'active': router.url == '/tecnicos'}">
               <i class="fa fa-menu fa-chess-pawn fa-lg"></i> Técnicos
             </li>
           </a> -->
 
-          <a routerLink="/chamados" class="linkMenu">
+          <a (click)='mudarRota("/chamados")' class="linkMenu">
             <li [ngClass]="{'active': router.url == '/chamados'}">
               <i class="fab fa-menu fa-stack-overflow fa-lg"></i> Chamados
             </li>
@@ -37,19 +37,19 @@
           <!--
           TODO: implementar
 
-          <a routerLink="/relatorios" class="linkMenu">
+          <a (click)='mudarRota("/relatorios" class="linkMenu">
             <li class="">
               <i class="fa fa-menu fa-chart-line fa-lg"></i> Relatórios
             </li>
           </a> -->
 
-          <a routerLink="/clientes" class="linkMenu">
+          <a (click)='mudarRota("/clientes")' class="linkMenu">
             <li [ngClass]="{'active': router.url == '/clientes'}">
               <i class="fa fa-menu fa-user fa-lg"></i> Clientes
             </li>
           </a>
 
-          <a routerLink="/funcionarios" class="linkMenu">
+          <a (click)='mudarRota("/funcionarios")' class="linkMenu">
             <li [ngClass]="{'active': router.url == '/funcionarios'}">
               <i class="fa fa-menu fa-cat fa-lg"></i> Funcionários
             </li>

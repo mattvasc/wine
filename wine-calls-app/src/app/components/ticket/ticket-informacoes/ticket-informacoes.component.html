@@ -1,0 +1,192 @@
+<form id="formChamado">
+
+    <hr>
+  
+    <h3>Dados Gerais: </h3>
+  
+      <!-- <div class="form-group col-md-4">
+        <label for="ticket_status_id">Status do Chamado</label>
+        <select id="ticket_status_id" class="custom-select custom-select-lg">
+          <option selected>Aberto</option>
+          <option>Agendado</option>
+          <option>em Atendimento</option>
+          <option>Entregue</option>
+          <option>Documentos Validados</option>
+          <option>Encerrado</option>
+        </select>
+      </div> -->
+  
+      <div class="form-group col-md-4">
+        <label for="tipo_ticket">Categoria do Chamado</label>
+        <select name="tipo_ticket" id="tipo_ticket" class="custom-select custom-select-lg"  [(ngModel)]="dataStorage.ticket.tipo_ticket">
+          <option selected>Rollout</option>
+          <option>Cabling</option>
+          <option>Data Center</option>
+          <option>Outros</option>
+        </select>
+      </div>
+  
+      <p style="clear: both"></p>
+      <!--
+        <hr>
+         <div class="form-group col-md-4">
+        <label for="docValidada">Documentação Validada</label>
+        <select id="docValidada" class="custom-select custom-select-lg">
+          <option selected>Pendente</option>
+          <option>Validada</option>
+        </select>
+      </div> -->
+  
+      <!-- <div class="form-group col-md-4">
+        <label for="pgto_cliente">Pago pelo cliente</label>
+        <select id="pgto_cliente" class="custom-select custom-select-lg">
+          <option selected>Pendente</option>
+          <option>Faturado</option>
+        </select>
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="pgto_tecnico">Pago para o técnico</label>
+        <select id="pgto_tecnico" class="custom-select custom-select-lg">
+          <option selected>Pendente</option>
+          <option>Faturado</option>
+        </select>
+      </div>
+   -->
+  
+  
+    <!-- <p style="clear: both"></p> -->
+  
+    <div class="form-group col-md-4">
+      <label for="ticket_cliente_id">Identificação do Chamado para o Cliente</label>
+      <input type="text" class="form-control" id="ticket_cliente_id"  name="ticket_cliente_id"placeholder="(Opcional)" [(ngModel)]="dataStorage.ticket.ticket_cliente_id">
+    </div>
+  
+    <div class="form-group col-md-8">
+      <label for="email_contato">E-mail para contato com cliente</label>
+      <input type="email" class="form-control" id="email_contato" required [(ngModel)]="dataStorage.cliente.email" name="email">
+    </div>
+  
+  
+  
+  
+    <p style="clear: both"></p>
+  
+  
+  
+  
+    <!-- Chamar Componente Endereço -->
+    <!-- Início Componente para Endereço Completo -->
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="empresaLogradouro">Endereço para atender o chamado</label>
+      <input type="text" class="form-control" name="logradouro" [(ngModel)]="dataStorage.cliente.logradouro"
+      id="empresaLogradouro" placeholder="Avenida Salgado Filho">
+    </div>
+
+    <div class="form-group col-md-2">
+        <label for="empresaLogradouroNumero">Numero</label>
+        <input type="text" class="form-control" name="logradouroNumero" [(ngModel)]="dataStorage.cliente.logradouro_numero"
+        id="empresaLogradouroNumero" placeholder="123B">
+      </div>
+  
+    <div class="form-group col-md-4">
+      <label for="empresaBairro">Bairro</label>
+      <input type="text" class="form-control" name="bairro"  id="empresaBairro" placeholder="Vila das Flores" [(ngModel)]="dataStorage.cliente.bairro">
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="empresaMunicipio">Município</label>
+      <input type="text" class="form-control" name="municipio" id="empresaMunicipio" [(ngModel)]="dataStorage.cliente.cidade">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="empresaEstado">Estado</label>
+      <select id="empresaEstado" class="custom-select custom-select-lg" name="estado" [(ngModel)]="dataStorage.cliente.estado">
+        <option selected>SP</option>
+        <option>AM</option>
+        <option>AC</option>
+        <option>AL</option>
+        <option>AP</option>
+        <option>AM</option>
+        <option>BA</option>
+        <option>CE</option>
+        <option>DF</option>
+        <option>ES</option>
+        <option>GO</option>
+        <option>MA</option>
+        <option>MT</option>
+        <option>MS</option>
+        <option>MG</option>
+        <option>PA</option>
+        <option>PB</option>
+        <option>PR</option>
+        <option>PE</option>
+        <option>PI</option>
+        <option>RJ</option>
+        <option>RN</option>
+        <option>RS</option>
+        <option>RO</option>
+        <option>RR</option>
+        <option>SC</option>
+        <option>SE</option>
+        <option>TO</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="empresaCEP">CEP</label>
+      <input type="text" class="form-control" name="cep" id="empresaCEP"  [(ngModel)]="dataStorage.cliente.cep" placeholder="07115-000">
+    </div>
+  </div>
+  <!-- Fim Componente para Endereço Completo -->
+  
+  
+    <!-- <p style="clear: both"></p>
+    <hr>
+  
+    <h3>Valores Pagamento: </h3>
+  
+    <div class="form-group col-md-6">
+      <label for="preco_cliente">Valor pago pelo cliente</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" value="100" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="10" class="form-control currency"
+          id="preco_cliente" />
+      </div>
+    </div>
+  
+    <div class="form-group col-md-6">
+      <label for="preco_tecnico">Valor pago para o técnico</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" value="100" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="10" class="form-control currency"
+          id="preco_tecnico" />
+      </div>
+    </div>
+  
+   -->
+  
+    <p style="clear: both"></p>
+    <hr>
+  
+  
+  
+    <h3>Descrição do Chamado: </h3>
+  
+    <div class="form-group">
+      <label for="observacao"></label>
+      <textarea class="form-control" name="observacao" id="observacao" rows="5" placeholder="Descrição breve do problema." [(ngModel)]="this.dataStorage.ticket.descricao"></textarea>
+    </div>
+  
+    <div class="form-group">
+        <div class="form-row">
+          <div class="col-md-6">
+            <button class="btn btn-warning" (click)="voltar()">Voltar</button>
+          </div>
+          <div class="col-md-1"></div>
+          <button class="btn btn-primary" (click)="avancar()">Avançar</button>
+        </div>
+      </div>
+  
+  </form>   

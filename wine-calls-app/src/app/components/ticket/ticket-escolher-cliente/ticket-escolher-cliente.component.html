@@ -1,0 +1,28 @@
+Informe a razão social ou nome fantasia:
+
+<input type="text" #nome_input (keyup)="this.nome_input_string = nome_input.value; pesquisar();" id="nome_input">
+
+<table *ngIf="clientesPesquisados.length > 0; else semTicket" class="table table-hover">
+  <thead class="thead-dark">
+    <th>Id.</th>
+    <th>Razão Social</th>
+    <th>Nome Fantasia</th>
+    <th>Email</th>
+    <th>Ver</th>
+    <th>Selecionar</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let clientePesquisado of clientesPesquisados; let i = index">
+      <td>{{clientePesquisado.id}}</td>
+      <td>{{ clientePesquisado.razao_social}}</td>
+      <td>{{clientePesquisado.nome_fantasia}}</td>
+      <td>{{clientePesquisado.email}}</td>
+      <td><button (click)="seeClient(i)" class="btn btn-block btn-success">Ver Detalhes</button></td>
+      <td><button (click)="selectClient(i)" class="btn btn-block btn-danger">Selecionar</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #semTicket>
+  <h4>Nenhum resultado encontrado :( </h4>
+</ng-template>

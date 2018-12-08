@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt'; // <-- JWT Lives here
 import { HttpClientModule } from '@angular/common/http';
 import {
@@ -15,7 +16,11 @@ import {
   EmpresaParceiraMainComponent,
   EmpresaParceiraListComponent,
   ParceiroFormComponent,
-  LoginComponent,
+  LoginComponent, 
+  TicketEscolherClienteComponent,
+  TicketInformacoesComponent,
+  TicketAgendamentoComponent,
+  TicketEscolherParceiroComponent,
   TicketMainComponent } from './components';
 import { environment } from '../environments/environment';
 
@@ -28,6 +33,8 @@ import { FuncionarioListComponent } from './components/index';
 import { TecnicoListComponent } from './components/index';
 
 import { AuthService } from './service/auth.service';
+
+
 // Angular CLI environemnt
 
 const appRoutes: Routes = [
@@ -78,9 +85,14 @@ const appRoutes: Routes = [
     LoginComponent,
     FuncionarioListComponent,
     TecnicoListComponent,
+    TicketEscolherClienteComponent,
+    TicketInformacoesComponent,
+    TicketAgendamentoComponent,
+    TicketEscolherParceiroComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     TextMaskModule,

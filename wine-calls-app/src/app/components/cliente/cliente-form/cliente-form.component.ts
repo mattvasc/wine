@@ -55,7 +55,7 @@ export class ClienteFormComponent implements OnInit {
         this.clienteAtual.bairro = retorno['bairro'];
       }
       if (retorno['localidade'] !== undefined) {
-        this.clienteAtual.municipio = retorno['localidade'];
+        this.clienteAtual.cidade = retorno['localidade'];
       }
       if (retorno['uf'] !== undefined) {
         this.clienteAtual.estado = retorno['uf'];

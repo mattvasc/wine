@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';  
+import { debounceTime } from 'rxjs/operators';  
 import { Cliente } from '../model/cliente';
 import {  HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { ApiService } from './api.service';
@@ -31,6 +31,10 @@ export class ClienteService {
   getSingle(id: number): Observable<Cliente> {
 
     return this.http.get<Cliente>(this.apiUrl + this.posfixo +`/${id}`);
+  }
+
+  getWithName(name: String){
+    return this.http.get<any>(this.apiUrl + this.posfixo + `/nome/${name}`).pipe(debounceTime(50000));
   }
 
   create(c: Cliente): Observable<Cliente> {

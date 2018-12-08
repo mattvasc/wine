@@ -13,7 +13,35 @@ let quais_rotas = {
 const router = geradorDeRotas(Model, entidade_nome);
 
 let entidade = Model[entidade_nome];
-let xablau = Model['endereco'];
+
+
+
+
+router.get('/nome/:nome', function (req, res) {
+	const nome = req.params.nome;
+
+	entidade.findAll({
+		where: {
+			[Op.or]: { 
+				nome_fantasia: { [Op.like]: '%' + nome + '%'},
+				razao_social: { [Op.like]: '%' + nome+'%'}
+			}	
+		},
+		limit: 5
+	})
+	.then(result => {
+		let temp = {success: true, data: {}};
+		temp.data["empresa_parceira"] = result;
+		res.json(temp);
+	})
+	.catch(error => res.json({
+			success: false,
+			data: {},
+			error: error
+	}));
+});
+
+
 
 // Get com associações
 router.get('/full/:id', function (req, res) {

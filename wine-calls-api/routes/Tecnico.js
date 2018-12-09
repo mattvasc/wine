@@ -19,7 +19,6 @@ router.get('/empresa/:id', function(req, res) {
             success: true, data: {}
         };
         temp["data"][entidade_nome] = result;
-        console.log(`Deu boa, retornando...`);
         res.json(temp);
     })
         .catch(error => res.json({
@@ -28,6 +27,30 @@ router.get('/empresa/:id', function(req, res) {
             error: error
         }));
 });
+
+
+router.get('/empresa/:id/nome/:nome', function(req, res) {
+    const empresa_id = req.params.id;
+    const nome = req.params.nome;
+    entidade.findAll({
+        where: {
+            empresa_do_tecnico_id: empresa_id,
+            nome: { [Op.like]: '%' + nome + '%'}
+        }
+      }).then(result => {
+        let temp = {
+            success: true, data: {}
+        };
+        temp["data"][entidade_nome] = result;
+        res.json(temp);
+    })
+        .catch(error => res.json({
+            success: false,
+            data: {},
+            error: error
+        }));
+});
+
 
 router.get('/nome/:nome', function (req, res) {
 	const nome = req.params.nome;

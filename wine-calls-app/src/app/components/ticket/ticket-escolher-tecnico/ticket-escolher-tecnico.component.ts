@@ -19,7 +19,7 @@ export class TicketEscolherTecnicoComponent implements OnInit {
     ) { }
 
     pesquisar(){
-      this.tecnicoService.getWithName(this.nome_input_string)
+      this.tecnicoService.getofOneCompany(this.dataStorage.empresa_parceira.id, this.nome_input_string)
       .pipe(debounceTime(50000))
       .subscribe(x => {
         console.log(x['data']);

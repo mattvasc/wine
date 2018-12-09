@@ -15,17 +15,11 @@ export class ChamadoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("antes do sync");
-    console.log(this.dataStorage.ticket);
     this.dataStorage.sync();
-    console.log("depois do sync");
-    console.log(this.dataStorage.ticket);
     if(this.dataStorage.ticket == undefined) {
       this.dataStorage.ticket = new Ticket();
       this.dataStorage.ticket['estagio'] = 1;
       this.dataStorage.save();
-      console.log("depois do save");
-      console.log(this.dataStorage.ticket);
     }
   }
 

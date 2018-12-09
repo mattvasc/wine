@@ -27,6 +27,10 @@ export class TecnicoService {
     return this.http.get<Tecnico[]>(this.apiUrl + this.posfixo + '/empresa/' + empresa_id);
   }
 
+  getofOneCompany(empresa_id: number, name: string): Observable<Tecnico[]> {
+    return this.http.get<Tecnico[]>(this.apiUrl + this.posfixo + '/empresa/' + empresa_id + '/nome/' + name);
+  }
+
   getSingle(id: number): Observable<Tecnico> {
 
     return this.http.get<Tecnico>(this.apiUrl + this.posfixo + `/${id}`);

@@ -10,8 +10,8 @@
   <div class="menu-list" *ngIf="this.router.url !== '/funcionario/first'">
     
     <div class="row">
-      <div class="col-md-1 col-md-offset-5">
-        <h3>Olá José</h3>
+      <div class="col-md-1 col-md-offset-4">
+        <h3>Olá {{this.dataStorage.usuario_logado.nome}}!</h3>
       </div>
     </div>
 

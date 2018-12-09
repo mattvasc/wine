@@ -10,8 +10,10 @@ export class AppComponent {
   title = 'Wine Tickets';
   constructor(
     private router: Router,
-    private dataStorage: DataStorageService
+    public dataStorage: DataStorageService
     ) {
+      this.dataStorage.sync();
+      
   }
   logOut() {
     localStorage.clear();

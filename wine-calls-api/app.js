@@ -14,10 +14,7 @@ var cors = require('cors');
 const routes = require('./routes/index');
 const clienteRouter = require('./routes/Cliente');
 const empresaParceiraRouter = require('./routes/EmpresaParceira');
-const pagamentoRouter = require('./routes/Pagamento');
 const tecnicoRouter = require('./routes/Tecnico');
-const cidadeRouter = require('./routes/Cidade');
-const estadoRouter = require('./routes/Estado');
 const ticketRouter = require('./routes/Ticket');
 const testRouter = require('./routes/Test');
 const email = require('./routes/Email');
@@ -45,12 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // TODO: Trocar para um for na pasta routes
 app.use('/', routes);
 app.use('/clientes', clienteRouter);
-app.use('/pagamentos', pagamentoRouter);
 app.use('/tecnicos', tecnicoRouter);
 app.use('/funcionarios', FuncRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
-app.use('/cidades', cidadeRouter);
-app.use('/estados', estadoRouter);
 app.use('/tickets', ticketRouter);
 app.use('/tests', testRouter);
 app.use('/email', email);
@@ -89,7 +83,7 @@ app.use(function (err, req, res, next) {
     });
 });
 Model.sequelize.sync(
-    // {"force":true} 
+    {"force":true} 
     ).then(() => {
     console.log('API Rodando na porta 3000');
     app.listen(3000);

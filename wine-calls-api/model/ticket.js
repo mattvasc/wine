@@ -77,14 +77,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    endereco_contato_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'endereco',
-        key: 'id'
-      }
-    },
     nome_contato: {
       type: DataTypes.STRING(45),
       allowNull: true

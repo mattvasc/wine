@@ -41,7 +41,7 @@ export class EmpresaParceiraService {
 
   create(ep: EmpresaParceira): Observable<EmpresaParceira> {
 
-    return this.http.post<EmpresaParceira>(this.apiUrl + this.posfixo + '/create', ep, httpOptions);
+    return this.http.post<EmpresaParceira>(this.apiUrl + this.posfixo, ep, httpOptions);
   }
 
   delete(id: number): Observable<Object> {

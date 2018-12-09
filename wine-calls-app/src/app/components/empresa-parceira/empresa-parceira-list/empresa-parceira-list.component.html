@@ -4,6 +4,7 @@
   <thead class="thead-dark">
     <th>Id.</th>
     <th>Razão Social</th>
+    <th>Nome Fantasia</th>
     <th>Email</th>
     <th>Funcionários</th>
     <th>Editar</th>
@@ -13,6 +14,7 @@
     <tr *ngFor="let ep of empresas_parceiras; let i = index">
       <td>{{ep.id}}</td>
       <td>{{ ep.razao_social}}</td>
+      <td>{{ ep.nome_fantasia}}</td>
       <td>{{ep.email}}</td>
       <td><button (click)="editFuncionariosEmpresaParceira(i)" class="btn btn-block btn-primary">Funcionários</button></td>
       <td><button (click)="editEmpresaParceira(ep.id)" class="btn btn-block btn-success">Editar</button></td>

@@ -41,6 +41,7 @@ router.get('/', (req, res) => {
 
 router.get('/vazio', (req, res) => {
 	entidade.count().then(c => {
+		res.statusCode = 200;
 		let resp = { success: true, data: (c > 0) ? false : true }
 		res.json(resp);
 	}).catch(error => {

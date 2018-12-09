@@ -32,10 +32,18 @@ export class LoginComponent implements OnInit {
     if(token !== undefined && token !== null)
       this.router.navigateByUrl(`/main`);
     this.auth.checkIfIsEmptyOfEmployees().subscribe(retorno => {
-      if(retorno['success'] == true && retorno['data'] == true) {
-        alert("Sistema vazio! Cadastre o primeiro Administrador");
-        this.router.navigateByUrl(`/funcionario/first`);
+      if (retorno['success'] == true){
+        if (retorno['data'] == true) {
+          alert("Sistema vazio! Cadastre o primeiro Administrador");
+          this.router.navigateByUrl(`/funcionario/first`);
+        }
+      } else {
+        alert("Erro interno no servidor!");
       }
+    }, erro => {
+      console.log(erro);
+      alert("Erro ao conectar com o servidor, verifique conexão!");
+      window.location.reload();
     });
 
   }

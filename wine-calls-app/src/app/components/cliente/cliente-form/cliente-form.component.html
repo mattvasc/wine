@@ -21,7 +21,7 @@
     <div class="form-group col-md-12">
       <label for="empresaNomeRazaoSocial">Nome Razão Social</label>
       <input type="text" [(ngModel)]="clienteAtual.razao_social" name="empresaNomeRazaoSocial" class="form-control" id="empresaNomeRazaoSocial"
-        placeholder="" required>
+        placeholder="" required ng-blur="obrigatorio(`empresaNomeRazaoSocial`);">
     </div>
   </div>
 
@@ -40,6 +40,11 @@
       <input type="text" [(ngModel)]="clienteAtual.cnpj" name="empresaCNPJ" (ngModelChange)="verificaCNPJ($event)" [textMask]="{mask: masks.CNPJ}" class="form-control" id="empresaCNPJ"
         placeholder="99.999.999/9999-99" required>
     </div>
+
+    <div class="alert alert-danger hidden col-12" id="cnpjInvalido">
+      <strong>Erro!</strong> CNPJ inválido! Favor verificar o valor inserido.
+    </div>
+
   </div>
 
 

@@ -1,16 +1,19 @@
 const Model = require('../model');
 const geradorDeRotas = require('./gerador_de_rotas');
 const entidade_nome = "empresa_parceira";
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 let quais_rotas = {
   "single": true,
   "all": true,
   "paginacao": true,
-  "describe": true,
-  "create": false,
+  "describe": false,
+  "create": true,
   "update": true,
   "delete": true
 }
-const router = geradorDeRotas(Model, entidade_nome);
+const router = geradorDeRotas(Model, entidade_nome, quais_rotas);
 
 let entidade = Model[entidade_nome];
 

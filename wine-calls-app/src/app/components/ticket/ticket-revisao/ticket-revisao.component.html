@@ -3,25 +3,25 @@
   <div class="card border-secondary" style="width: 100%">
     <div class="card-header bg-transparent border-secondary">
       <h2 class="card-title" style="margin-top: 0px;"><strong>Categoria:</strong> {{dataStorage.ticket.tipo_ticket}}</h2>
-      <p class="card-subtitle"><strong>Agendamento: </strong>{{dataStorage.ticket.data_inicio | date : 'dd/MM/yyyy HH:mm'}}</p>
+      <p class="card-subtitle" *ngIf="dataStorage.ticket.data_inicio"><strong>Agendamento: </strong>{{dataStorage.ticket.data_inicio | date : 'dd/MM/yyyy HH:mm'}}</p>
     </div>
 
     <div class="card-body">
       <h3 class="card-text" style="margin-top: 0px;">Dados do Cliente:</h3>
       <blockquote class="blockquote">
-        <p class="card-text"><strong>Razão Social:</strong> {{dataStorage.cliente.razao_social}}</p>
-        <p class="card-text"><strong>Nome Fantasia:</strong> {{dataStorage.cliente.nome_fantasia}}</p>
+        <p class="card-text" *ngIf="dataStorage.cliente.razao_social"><strong>Razão Social:</strong> {{dataStorage.cliente.razao_social}}</p>
+        <p class="card-text" *ngIf="dataStorage.cliente.nome_fantasia"><strong>Nome Fantasia:</strong> {{dataStorage.cliente.nome_fantasia}}</p>
 
         <p class="card-text"><strong>Endereço:</strong> {{dataStorage.ticket.logradouro + ', ' + dataStorage.ticket.logradouro_numero}}</p>
         <p class="card-text"><strong>Bairro:</strong> {{dataStorage.ticket.bairro}}</p>
         <p class="card-text"><strong>Cidade:</strong> {{dataStorage.ticket.cidade}}</p>
         <p class="card-text"><strong>UF:</strong> {{dataStorage.ticket.estado}}</p>
-        <p class="card-text"><strong>Descrição:</strong> {{dataStorage.ticket.descricao}}</p>
+        <p class="card-text" *ngIf="dataStorage.ticket.descricao"><strong>Descrição:</strong> {{dataStorage.ticket.descricao}}</p>
       </blockquote>
 
     </div>
 
-    <div class="card-footer bg-transparent border-secondary">
+    <div class="card-footer bg-transparent border-secondary" *ngIf="dataStorage.empresa_parceira">
       <h3 class="card-text" style="margin-top: 0px;">Dados da Empresa Parceira:</h3>
       <blockquote class="blockquote">
         <p class="card-text"><strong>Razão Social:</strong> {{ dataStorage.empresa_parceira.razao_social }}</p>
@@ -34,7 +34,7 @@
       </blockquote>
     </div>
 
-    <div class="card-footer bg-transparent border-secondary">
+    <div class="card-footer bg-transparent border-secondary" *ngIf="dataStorage.tecnico">
       <h3 class="card-text" style="margin-top: 0px;">Dados do Técnico:</h3>
       <blockquote class="blockquote">
         <p class="card-text"><strong>Nome:</strong> {{ dataStorage.tecnico.nome }}</p>

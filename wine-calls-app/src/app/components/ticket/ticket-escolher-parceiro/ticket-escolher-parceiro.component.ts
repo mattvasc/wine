@@ -40,8 +40,16 @@ export class TicketEscolherParceiroComponent implements OnInit {
   }
 
   pular(){
+    delete this.dataStorage.empresa_parceira;
     this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio + 2;
     this.dataStorage.save();
   }
+  seePartner(index: number) {
 
+  }
+
+  selectPartner(index: number) {
+    this.dataStorage.empresa_parceira = this.parceirosPesquisados[index];
+    this.avancar();
+  }
 }

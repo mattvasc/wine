@@ -66,13 +66,13 @@ module.exports = function (sequelize, DataTypes) {
 
 
     nome_para_contato: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(64),
       allowNull: false
     },
 
     telefones: {
       type: DataTypes.STRING(45),
-      allowNull: false
+      allowNull: true
     },
 
     email: {

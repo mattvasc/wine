@@ -1,15 +1,16 @@
 <h1>Cadastro de Chamado</h1>
 
 <div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" [ngStyle]="{'width':(dataStorage.ticket.estagio/6)*100+'%'}">{{((dataStorage.ticket.estagio/6)*100).toFixed(2)+'%'}}</div>
+  <div class="progress-bar progress-bar-striped progress-bar-animated" [ngStyle]="{'width':(dataStorage.ticket.estagio/6)*100+'%'}">{{((dataStorage.ticket.estagio/7)*100).toFixed(2)+'%'}}</div>
 </div>
 
 <app-ticket-escolher-cliente *ngIf="dataStorage.ticket.estagio == 1"></app-ticket-escolher-cliente>
 <app-ticket-informacoes *ngIf="dataStorage.ticket.estagio == 2"></app-ticket-informacoes>
 <app-ticket-agendamento *ngIf="dataStorage.ticket.estagio == 3"></app-ticket-agendamento>
 <app-ticket-escolher-parceiro *ngIf="dataStorage.ticket.estagio == 4"></app-ticket-escolher-parceiro>
-<app-ticket-revisao *ngIf="dataStorage.ticket.estagio == 5"></app-ticket-revisao>
-<div *ngIf="dataStorage.ticket.estagio == 6">
+<app-ticket-escolher-tecnico *ngIf="dataStorage.ticket.estagio == 5"></app-ticket-escolher-tecnico>
+<app-ticket-revisao *ngIf="dataStorage.ticket.estagio == 6"></app-ticket-revisao>
+<div *ngIf="dataStorage.ticket.estagio == 7">
   Chamado salvo com sucesso!
   <button>Voltar para todos chamados</button>
 </div>

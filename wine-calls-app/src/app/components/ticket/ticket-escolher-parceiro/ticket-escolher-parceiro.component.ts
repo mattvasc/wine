@@ -39,4 +39,9 @@ export class TicketEscolherParceiroComponent implements OnInit {
     this.dataStorage.save();
   }
 
+  pular(){
+    this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio + 2;
+    this.dataStorage.save();
+  }
+
 }

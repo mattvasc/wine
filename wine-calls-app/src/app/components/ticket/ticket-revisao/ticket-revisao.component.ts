@@ -15,7 +15,7 @@ export class TicketRevisaoComponent implements OnInit {
     this.dataStorage.sync();
   }
   voltar() {
-    this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio - 1;
+    this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio - 2;
     this.dataStorage.save();
   }
   salvar(){

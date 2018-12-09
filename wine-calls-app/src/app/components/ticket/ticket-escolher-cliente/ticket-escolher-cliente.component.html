@@ -5,7 +5,7 @@
 
 <p class="clearfix"></p>
 
-<table *ngIf="clientesPesquisados.length > 0; else semTicket" class="table table-hover">
+<table *ngIf="clientesPesquisados !== null && clientesPesquisados.length > 0; else semTicket" class="table table-hover">
   <thead class="thead-dark">
     <th>Id.</th>
     <th>Razão Social</th>

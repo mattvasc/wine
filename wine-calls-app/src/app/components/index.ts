@@ -29,3 +29,4 @@ export { TicketInformacoesComponent } from './ticket/ticket-informacoes/ticket-i
 export { TicketAgendamentoComponent  } from './ticket/ticket-agendamento/ticket-agendamento.component';
 export { TicketEscolherParceiroComponent  } from './ticket/ticket-escolher-parceiro/ticket-escolher-parceiro.component';
 export { TicketRevisaoComponent  } from './ticket/ticket-revisao/ticket-revisao.component';
+export { TicketEscolherTecnicoComponent } from './ticket/ticket-escolher-tecnico/ticket-escolher-tecnico.component';

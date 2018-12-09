@@ -20,6 +20,7 @@ import {
   LoginComponent, 
   TicketEscolherClienteComponent,
   TicketInformacoesComponent,
+  TicketEscolherTecnicoComponent,
   TicketAgendamentoComponent,
   TicketEscolherParceiroComponent,
   TicketMainComponent } from './components';
@@ -34,6 +35,7 @@ import { FuncionarioListComponent } from './components/index';
 import { TecnicoListComponent } from './components/index';
 
 import { AuthService } from './service/auth.service';
+
 
 
 
@@ -92,6 +94,7 @@ const appRoutes: Routes = [
     TicketAgendamentoComponent,
     TicketEscolherParceiroComponent,
     TicketRevisaoComponent,
+    TicketEscolherTecnicoComponent,
   ],
   imports: [
     BrowserModule,

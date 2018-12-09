@@ -38,7 +38,7 @@ export class TicketEscolherTecnicoComponent implements OnInit {
   }
 
   selectTechnician(index: number) {
-    this.dataStorage.empresa_parceira = this.tecnicosPesquisados[index];
+    this.dataStorage.tecnico = this.tecnicosPesquisados[index];
     this.avancar();
   }
 

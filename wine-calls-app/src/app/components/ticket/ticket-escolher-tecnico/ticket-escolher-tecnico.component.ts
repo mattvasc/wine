@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../../service/data-storage.service';
-import {Tecnico } from '../../../model/tecnico';
+import { Tecnico } from '../../../model/tecnico';
+import { TecnicoService } from '../../../service/tecnico.service';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ticket-escolher-tecnico',
@@ -9,16 +11,26 @@ import {Tecnico } from '../../../model/tecnico';
 })
 export class TicketEscolherTecnicoComponent implements OnInit {
   public tecnicosPesquisados: Tecnico[];
+  public nome_input_string: string;
+
   constructor(
+    private tecnicoService: TecnicoService,
     public dataStorage: DataStorageService
     ) { }
 
-  pesquisar() {
-    console.log("//TODO pesquisar()");
-  }
+    pesquisar(){
+      this.tecnicoService.getWithName(this.nome_input_string)
+      .pipe(debounceTime(50000))
+      .subscribe(x => {
+        console.log(x['data']);
+        if(x['success'] == true)
+          this.tecnicosPesquisados = x['data']['tecnico'];
+      });
+    }
 
   ngOnInit() {
     this.dataStorage.sync();
+    this.tecnicosPesquisados = [];
   }
 
   seeTechnician(index: number) {

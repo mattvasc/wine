@@ -1,7 +1,3 @@
-<h2>
-  Em progresso...
-</h2>
-
 <div class="input-group">
   <label for="nome_input">Informe o nome do técnico da {{dataStorage.empresa_parceira.razao_social}} atender o chamado:</label>
   <input type="text" class="form-control" #nome_input (keyup)="this.nome_input_string = nome_input.value; pesquisar();" id="nome_input" name="nome_input">
@@ -10,18 +6,18 @@
 <table *ngIf="tecnicosPesquisados != null && tecnicosPesquisados.length > 0; else semTicket" class="table table-hover">
   <thead class="thead-dark">
     <th>Id.</th>
-    <th>Razão Social</th>
-    <th>Nome Fantasia</th>
+    <th>Nome</th>
     <th>Email</th>
+    <th>CPF</th>
     <th>Ver</th>
     <th>Selecionar</th>
   </thead>
   <tbody>
     <tr *ngFor="let tecnicoPesquisado of tecnicosPesquisados; let i = index">
       <td>{{tecnicoPesquisado.id}}</td>
-      <td>{{tecnicoPesquisado.razao_social}}</td>
-      <td>{{tecnicoPesquisado.nome_fantasia}}</td>
+      <td>{{tecnicoPesquisado.nome}}</td>
       <td>{{tecnicoPesquisado.email}}</td>
+      <td>{{tecnicoPesquisado.cpf}}</td>
       <td><button (click)="seeTechnician(i)" class="btn btn-block btn-success">Ver Detalhes</button></td>
       <td><button (click)="selectTechnician(i)" class="btn btn-block btn-danger">Selecionar</button></td>
     </tr>

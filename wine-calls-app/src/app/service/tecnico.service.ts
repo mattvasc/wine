@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Tecnico } from '../model/tecnico';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './api.service';
-
+import { debounceTime } from 'rxjs/operators'; 
 
 
 @Injectable({
@@ -44,4 +44,9 @@ export class TecnicoService {
   update(tec: Tecnico): Observable<Tecnico> {
     return this.http.put<Tecnico>(this.apiUrl + this.posfixo + `/${tec.id}`, tec);
   }
+
+  getWithName(name: String){
+    return this.http.get<any>(this.apiUrl + this.posfixo + `/nome/${name}`).pipe(debounceTime(50000));
+  }
+
 }

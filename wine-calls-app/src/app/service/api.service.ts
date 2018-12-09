@@ -32,9 +32,13 @@ export class ApiService {
   }
 
   validarCPF(cpf) {
+    if(cpf === undefined || cpf === null)
+      return false;
     cpf = cpf.replace(/[^\d]+/g,'');
     if(cpf == '') return false;
+    
     // Elimina CPFs invalidos conhecidos
+    console.log(cpf);
     if (cpf.length != 11 ||
       cpf == "00000000000" ||
       cpf == "11111111111" ||

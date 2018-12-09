@@ -8,6 +8,7 @@ export class Funcionario {
     public status?: string;
     public telefones?: string;
     public data_rg?: string;
+    public rg?: string;
     public nome_pai?: string;
     public nome_mae?: string;
     public nascimento?: string;

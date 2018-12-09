@@ -1,6 +1,6 @@
 <!-- TODO: fazer o if para colocar a class "active" no lugar certo -->
 
-<div [ngClass]="{'nav-side-menu col-3': this.router.url !== '/login' && this.router.url !== '/'}" *ngIf="this.router.url !== '/login' && this.router.url !== '/'">
+<div [ngClass]="{'nav-side-menu col-3': this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'}" *ngIf="this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'">
   <div class="brand">
     <a (click)='mudarRota("/")'><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
   </div>

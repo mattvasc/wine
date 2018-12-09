@@ -10,69 +10,85 @@
 
 
     <div class="row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6" [ngClass]="{'has-error' : erros.nomeVazio}">
         <label for="funcionarioNome">Nome Completo</label>
-        <input type="text" [(ngModel)]="funcionarioAtual.nome" class="form-control" id="funcionarioNome" name="funcionarioNome" placeholder="Fábio Roberto Alves de Lima"
-          required>
+        <input type="text" (ngModelChange)="erros.nomeVazio = false"[(ngModel)]="funcionarioAtual.nome" class="form-control" id="funcionarioNome" name="funcionarioNome"
+          placeholder="Fábio Roberto Alves de Lima" required>
+        <small *ngIf="erros.nomeVazio" class="text-danger">Campo obrigatório!</small>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6" [ngClass]="{'has-error': erros.emailVazio || erros.emailInvalido}">
         <label for="funcionarioEmail">Email</label>
-        <input type="email" [(ngModel)]="funcionarioAtual.email" class="form-control" id="funcionarioEmail" name="funcionarioEmail" placeholder="fabio@wine.com.br"
-          required>
+        <input type="email" (ngModelChange)="erros.emailVazio = false" [(ngModel)]="funcionarioAtual.email" class="form-control" id="funcionarioEmail" name="funcionarioEmail"
+          placeholder="fabio@wine.com.br" required>
+        <small *ngIf="erros.emailVazio" class="text-danger">Campo obrigatório!</small>
       </div>
     </div>
 
     <div class="form-row">
 
-      <div class=" col-md-6" id="campoDataNasc">
+      <div class=" col-md-6" [ngClass]="{'has-error': erros.nascimento || erros.nascimentoVazio}">
         <label for="dataNasc">Data de Nascimento </label>
-        <input type="date" [(ngModel)]="funcionarioAtual.nascimento" (ngModelChange)="verificaNascimento($event)" class="form-control" id="dataNasc" name="dataNasc" required>
+        <input type="date" [(ngModel)]="funcionarioAtual.nascimento" (ngModelChange)="verificaNascimento($event)" class="form-control"
+          id="dataNasc" name="dataNasc" required>
+        <small *ngIf="erros.nascimento" class="text-danger">Data de nascimento inválida!</small>
+        <small *ngIf="erros.nascimentoVazio" class="text-danger">Campo obrigatório!</small>
       </div>
 
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6" [ngClass]="{'has-error': erros.cpf || erros.cpfVazio}">
         <label for="funcionarioCPF">CPF </label>
-        <input type="text" [(ngModel)]="funcionarioAtual.CPF" class="form-control"  [textMask]="{mask: masks.CPF}" id="funcionarioCPF" name="funcionarioCPF" placeholder="999.999.99-99"
-          required>
+        <input type="text" [(ngModel)]="funcionarioAtual.cpf" class="form-control" [textMask]="{mask: masks.CPF}" id="funcionarioCPF"
+          name="funcionarioCPF" (ngModelChange)="verificaCPF()" placeholder="999.999.99-99" required>
+        <small *ngIf="erros.cpf" class="text-danger">CPF inválido!</small>
+        <small *ngIf="erros.cpfVazio" class="text-danger">Campo obrigatório!</small>
       </div>
     </div>
 
     <div class="form-row">
-      <div class=" col-md-6">
+      <div class=" col-md-6" [ngClass]="{'has-error': erros.rgVazio}">
         <label for="funcionarioRG">RG </label>
-        <input type="text" [(ngModel)]="funcionarioAtual.rg" class="form-control" id="funcionarioRG" name="funcionarioRG" placeholder="99.999.999-9 SSP"
-          required>
+        <input type="text" (ngModelChange)="erros.rgVazio = false"[(ngModel)]="funcionarioAtual.rg" class="form-control" id="funcionarioRG" name="funcionarioRG"
+          placeholder="99.999.999-9 SSP" required>
+        <small *ngIf="erros.rgVazio" class="text-danger">Campo obrigatório!</small>
       </div>
 
-      <div class=" col-md-6" id="campoDataRG">
+      <div class=" col-md-6" [ngClass]="{'has-error': erros.expedicao || erros.expedicaoVazio}">
         <label for="dataRG">Data de Expedição do RG </label>
-        <input type="date" [(ngModel)]="funcionarioAtual.data_rg" (ngModelChange)="verificaExpedicao($event)" class="form-control" name="dataRG" id="dataRG" required>
+        <input type="date" [(ngModel)]="funcionarioAtual.data_rg" (ngModelChange)="verificaExpedicao($event)" class="form-control"
+          name="dataRG" id="dataRG" required>
+        <small *ngIf="erros.expedicao" class="text-danger">Data de expedição inválida!</small>
+        <small *ngIf="erros.expedicaoVazio" class="text-danger">Campo obrigatório!</small>
       </div>
     </div>
 
     <div class="form-row">
-      <div class="col-md-6">
+      <div class="col-md-6" [ngClass]="{'has-error': erros.nome_maeVazio}">
         <label for="funcionarioMae">Nome da Mãe</label>
-        <input type="text" [(ngModel)]="funcionarioAtual.nome_mae" class="form-control" name="funcionarioMae" id="funcionarioMae" placeholder="Maria da Silva"
-          required>
+        <input type="text" (ngModelChange)="erros.nome_maeVazio = false" [(ngModel)]="funcionarioAtual.nome_mae" class="form-control" name="funcionarioMae" id="funcionarioMae"
+          placeholder="Maria da Silva" required>
+        <small *ngIf="erros.nome_maeVazio" class="text-danger">Campo obrigatório!</small>
       </div>
 
       <div class="col-md-6">
         <label for="funcionarioPai">Nome do Pai</label>
-        <input type="text" [(ngModel)]="funcionarioAtual.nome_pai" class="form-control" name="funcionarioPai" id="funcionarioPai" placeholder="Jorge da Silva"
-          required>
+        <input type="text" [(ngModel)]="funcionarioAtual.nome_pai" class="form-control" name="funcionarioPai" id="funcionarioPai"
+          placeholder="Jorge da Silva" required>
       </div>
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6" [ngClass]="{'has-error': erros.senha1Vazio}">
         <label for="funcionarioSenha">Criar Senha</label>
-        <input type="password" class="form-control" id="funcionarioSenha" name="funcionarioSenha" required>
+        <input type="password" (ngModelChange)="erros.senha1Vazio = false; erros.senhasDiferentes = (funcionarioAtual.senha != undefined && funcionarioAtual.senha2 != undefined && this.funcionarioAtual.senha == this.funcionarioAtual.senha2) ? true : false;" [(ngModel)]=funcionarioAtual.senha class="form-control" id="funcionarioSenha" name="funcionarioSenha"
+          required>
+        <small *ngIf="erros.senha1Vazio" class="text-danger">Campo Obrigatório</small>
       </div>
 
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6" [ngClass]="{'has-error': erros.senha2Vazio || erros.senhasDiferentes}">
         <label for="funcionarioSenhaConfirmar">Confirmar Senha</label>
-        <input type="password" [(ngModel)]="funcionarioAtual.senha" class="form-control" id="funcionarioSenhaConfirmar" name="funcionarioSenhaConfirmar"
-          required>
+        <input type="password" (ngModelChange)="erros.senha2Vazio = false; erros.senhasDiferentes = (funcionarioAtual.senha != undefined && funcionarioAtual.senha2 != undefined && this.funcionarioAtual.senha == this.funcionarioAtual.senha2) ? true : false;" [(ngModel)]="funcionarioAtual.senha2" class="form-control" id="funcionarioSenhaConfirmar"
+          name="funcionarioSenhaConfirmar" required>
+        <small *ngIf="erros.senha2Vazio" class="text-danger">Campo Obrigatório</small>
+        <small *ngIf="erros.senhasDiferentes" class="text-danger">Senhas não conferem</small>
       </div>
     </div>
 
@@ -92,7 +108,7 @@
     <h3>Outras Informações: </h3>
 
     <label for="observacao"></label>
-    <textarea class="form-control" name="observacao" id="observacao" rows="15" placeholder="Campo adicional para inserir qualquer informação relevante."
+    <textarea class="form-control" name="observacao" id="observacao" rows="5" placeholder="Campo adicional para inserir qualquer informação relevante."
       [(ngModel)]="funcionarioAtual.observacoes"></textarea>
 
 

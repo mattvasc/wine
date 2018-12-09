@@ -3,6 +3,7 @@
   <div class="card border-secondary" style="width: 100%">
     <div class="card-header bg-transparent border-secondary">
       <h2 class="card-title" style="margin-top: 0px;"><strong>Categoria:</strong> {{dataStorage.ticket.tipo_ticket}}</h2>
+      <p class="card-subtitle"><strong>Agendamento: </strong>{{dataStorage.ticket.data_inicio | date : 'dd/MM/yyyy HH:mm'}}</p>
     </div>
 
     <div class="card-body">

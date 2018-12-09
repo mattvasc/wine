@@ -20,7 +20,8 @@ export class TicketAgendamentoComponent implements OnInit {
   }
   avancar(){
     this.dataStorage.ticket.data_inicio = this.dataObj['data'] + ' ' + this.dataObj['hora'];
-    this.pular();
+    this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio + 1;
+    this.dataStorage.save();
   }
   pular(){
     delete this.dataStorage.ticket.data_inicio;

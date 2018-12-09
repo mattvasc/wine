@@ -159,6 +159,9 @@ export class FuncionarioFormComponent implements OnInit {
         alert("Erro ao salvar Funcionario...");
       }
       this.router.navigateByUrl("/funcionarios");
+    }, () => {
+      alert("Erro ao salvar Funcionario...");
+      this.router.navigateByUrl("/funcionarios");
     });
   }
   salvarGenesis() {
@@ -171,6 +174,9 @@ export class FuncionarioFormComponent implements OnInit {
         alert("Erro ao salvar Funcionario...");
       }
       this.router.navigateByUrl("/login");
+    }, erro => {
+      console.log(erro);
+      alert("Erro ao salvar Funcionario...");
     });
   }
   atualizar() {
@@ -181,6 +187,9 @@ export class FuncionarioFormComponent implements OnInit {
       else {
         alert("Erro ao atualizar Funcionario...");
       }
+      this.router.navigateByUrl("/funcionarios");
+    }, () => {
+      alert("Erro ao atualizar Funcionario...");
       this.router.navigateByUrl("/funcionarios");
     });
   }

@@ -1,40 +1,52 @@
 <!-- TODO: fazer o if para colocar a class "active" no lugar certo -->
 
-<div [ngClass]="{'nav-side-menu col-3': this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'}" *ngIf="this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'">
+<div [ngClass]="{'nav-side-menu col-3': this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'}"
+  *ngIf="this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'">
   <div class="brand">
     <a (click)='mudarRota("/")'><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
   </div>
-    <i class="fa fa-menu fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+  <i class="fa fa-menu fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-    <div class="menu-list" *ngIf="this.router.url !== '/funcionario/first'">
+  <div class="menu-list" *ngIf="this.router.url !== '/funcionario/first'">
+    
+    <div class="row">
+      <div class="col-md-1 col-md-offset-5">
+        <h3>Olá José</h3>
+      </div>
+    </div>
 
-        <ul id="menu-content" class="menu-content collapse out">
+    <div class="row">
+      <div class="col-md-1 col-md-offset-3">
+        <button class="btn btn-primary" (click)='mudarRota("/formsTicket")'> Adicionar um novo chamado <i class="fa fa-menu fa-bolt fa-lg"></i></button>
+      </div>
+    </div>
+    <ul id="menu-content" class="menu-content collapse out">
 
-          <a (click)='mudarRota("/")'  class="linkMenu" >
-            <li [ngClass]="{'active': router.url == '/'}">
-              <i class="fa fa-menu fa-home fa-lg"></i> Início
-            </li>
-          </a>
+      <a (click)='mudarRota("/")' class="linkMenu">
+        <li [ngClass]="{'active': router.url == '/'}">
+          <i class="fa fa-menu fa-home fa-lg"></i> Início
+        </li>
+      </a>
 
-          <a (click)='mudarRota("/empresasParceiras")' class="linkMenu" >
-            <li [ngClass]="{'active': router.url == '/empresasParceiras'}">
-              <i class="fa fa-menu fa-people-carry fa-lg"></i> Parceiros
-            </li>
-          </a>
+      <a (click)='mudarRota("/empresasParceiras")' class="linkMenu">
+        <li [ngClass]="{'active': router.url == '/empresasParceiras'}">
+          <i class="fa fa-menu fa-people-carry fa-lg"></i> Parceiros
+        </li>
+      </a>
 
-          <!-- <a (click)='mudarRota("/tecnicos")' class="linkMenu" >
+      <!-- <a (click)='mudarRota("/tecnicos")' class="linkMenu" >
             <li [ngClass]="{'active': router.url == '/tecnicos'}">
               <i class="fa fa-menu fa-chess-pawn fa-lg"></i> Técnicos
             </li>
           </a> -->
 
-          <a (click)='mudarRota("/chamados")' class="linkMenu">
-            <li [ngClass]="{'active': router.url == '/chamados'}">
-              <i class="fab fa-menu fa-stack-overflow fa-lg"></i> Chamados
-            </li>
-          </a>
+      <a (click)='mudarRota("/chamados")' class="linkMenu">
+        <li [ngClass]="{'active': router.url == '/chamados'}">
+          <i class="fab fa-menu fa-stack-overflow fa-lg"></i> Chamados
+        </li>
+      </a>
 
-          <!--
+      <!--
           TODO: implementar
 
           <a (click)='mudarRota("/relatorios" class="linkMenu">
@@ -43,25 +55,25 @@
             </li>
           </a> -->
 
-          <a (click)='mudarRota("/clientes")' class="linkMenu">
-            <li [ngClass]="{'active': router.url == '/clientes'}">
-              <i class="fa fa-menu fa-user fa-lg"></i> Clientes
-            </li>
-          </a>
+      <a (click)='mudarRota("/clientes")' class="linkMenu">
+        <li [ngClass]="{'active': router.url == '/clientes'}">
+          <i class="fa fa-menu fa-user fa-lg"></i> Clientes
+        </li>
+      </a>
 
-          <a (click)='mudarRota("/funcionarios")' class="linkMenu">
-            <li [ngClass]="{'active': router.url == '/funcionarios'}">
-              <i class="fa fa-menu fa-cat fa-lg"></i> Funcionários
-            </li>
-          </a>
+      <a (click)='mudarRota("/funcionarios")' class="linkMenu">
+        <li [ngClass]="{'active': router.url == '/funcionarios'}">
+          <i class="fa fa-menu fa-cat fa-lg"></i> Funcionários
+        </li>
+      </a>
 
-          <a class="linkMenu" (click)="logOut()">
-            <li>
-              <i class="fa fa-menu fa-sign-out-alt  fa-lg"></i> Log Out
-            </li>
-          </a>
+      <a class="linkMenu" (click)="logOut()">
+        <li>
+          <i class="fa fa-menu fa-sign-out-alt  fa-lg"></i> Log Out
+        </li>
+      </a>
 
-        </ul>
+    </ul>
 
   </div>
 </div>

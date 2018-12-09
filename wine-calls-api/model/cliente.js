@@ -45,7 +45,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     logradouro_numero: {
       type: DataTypes.STRING(64),
-      allowNull: false
+      allowNull: true
     },
     complemento: {
       type: DataTypes.STRING(128),

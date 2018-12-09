@@ -89,7 +89,7 @@ app.use(function (err, req, res, next) {
     });
 });
 Model.sequelize.sync(
-    // {"force":true} 
+    //{"force":true} 
     ).then(() => {
     console.log('API Rodando na porta 3000');
     app.listen(3000);

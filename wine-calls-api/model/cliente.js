@@ -18,7 +18,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     nome_fantasia: {
       type: DataTypes.STRING(64),
-      allowNull: false
+      allowNull: true
     },
     cnpj: {
       type: DataTypes.STRING(45),

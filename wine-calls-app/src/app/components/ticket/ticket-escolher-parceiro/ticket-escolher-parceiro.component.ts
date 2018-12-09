@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaParceira } from '../../../model/empresa-parceira';
 import { EmpresaParceiraService } from '../../../service/empresa-parceira.service';
-import { debounceTime } from 'rxjs/operators';  
+import { debounceTime } from 'rxjs/operators';
 import {Ticket} from '../../../model/ticket';
 import { DataStorageService } from '../../../service/data-storage.service';
 
@@ -41,6 +41,7 @@ export class TicketEscolherParceiroComponent implements OnInit {
 
   pular(){
     delete this.dataStorage.empresa_parceira;
+    delete this.dataStorage.tecnico;
     this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio + 2;
     this.dataStorage.save();
   }

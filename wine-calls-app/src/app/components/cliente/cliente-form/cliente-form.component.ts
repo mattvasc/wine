@@ -70,8 +70,10 @@ export class ClienteFormComponent implements OnInit {
       return;
     if(!this.apiGeral.validarCNPJ(event)){
       document.getElementById("campoCNPJ").classList.add("has-error");
+      document.getElementById("cnpjInvalido").classList.remove("hidden");
     } else {
       document.getElementById("campoCNPJ").classList.remove("has-error");
+      document.getElementById("cnpjInvalido").classList.add("hidden");
     }
   }
 

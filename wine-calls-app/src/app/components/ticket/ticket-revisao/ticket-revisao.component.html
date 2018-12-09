@@ -2,21 +2,47 @@
 
   <div class="card border-secondary" style="width: 100%">
     <div class="card-header bg-transparent border-secondary">
-      <h4 class="card-title"><strong>Razão Social do Cliente:</strong> {{dataStorage.cliente.razao_social}}</h4>
-      <h5 class="card-subtitle mb-2 text-muted"><strong>Nome Fantasia do Cliente:</strong> {{dataStorage.cliente.nome_fantasia}}</h5>
+      <h2 class="card-title" style="margin-top: 0px;"><strong>Categoria:</strong> {{dataStorage.ticket.tipo_ticket}}</h2>
     </div>
 
     <div class="card-body">
-      <p class="card-text"><strong>Endereço:</strong> {{dataStorage.ticket.logradouro + ', ' + dataStorage.ticket.logradouro_numero}}</p>
-      <p class="card-text"><strong>Bairro:</strong> {{dataStorage.ticket.bairro}}</p>
-      <p class="card-text"><strong>Cidade:</strong> {{dataStorage.ticket.cidade}}</p>
-      <p class="card-text"><strong>UF:</strong> {{dataStorage.ticket.estado}}</p>
-      <p class="card-text"><strong>Descrição:</strong> {{dataStorage.ticket.descricao}}</p>
+      <h3 class="card-text" style="margin-top: 0px;">Dados do Cliente:</h3>
+      <blockquote class="blockquote">
+        <p class="card-text"><strong>Razão Social:</strong> {{dataStorage.cliente.razao_social}}</p>
+        <p class="card-text"><strong>Nome Fantasia:</strong> {{dataStorage.cliente.nome_fantasia}}</p>
+
+        <p class="card-text"><strong>Endereço:</strong> {{dataStorage.ticket.logradouro + ', ' + dataStorage.ticket.logradouro_numero}}</p>
+        <p class="card-text"><strong>Bairro:</strong> {{dataStorage.ticket.bairro}}</p>
+        <p class="card-text"><strong>Cidade:</strong> {{dataStorage.ticket.cidade}}</p>
+        <p class="card-text"><strong>UF:</strong> {{dataStorage.ticket.estado}}</p>
+        <p class="card-text"><strong>Descrição:</strong> {{dataStorage.ticket.descricao}}</p>
+      </blockquote>
+
     </div>
 
     <div class="card-footer bg-transparent border-secondary">
-      <h5 class="card-text"><strong>Categoria:</strong> {{dataStorage.ticket.tipo_ticket}}</h5>
+      <h3 class="card-text" style="margin-top: 0px;">Dados da Empresa Parceira:</h3>
+      <blockquote class="blockquote">
+        <p class="card-text"><strong>Razão Social:</strong> {{ dataStorage.empresa_parceira.razao_social }}</p>
+        <p class="card-text"><strong>Nome Fantasia:</strong> {{ dataStorage.empresa_parceira.nome_fantasia }}</p>
+        <p class="card-text"><strong>CNPJ:</strong> {{ dataStorage.empresa_parceira.cnpj }}</p>
+        <p class="card-text"><strong>E-mail:</strong> {{ dataStorage.empresa_parceira.email }}</p>
+        <p class="card-text"><strong>Telefones:</strong> {{ dataStorage.empresa_parceira.telefones }}</p>
+        <p class="card-text"><strong>Valor KM:</strong> {{ dataStorage.empresa_parceira.valor_km }}</p>
+        <p class="card-text"><strong>Valor Visita:</strong> {{ dataStorage.empresa_parceira.valor_visita_tecnica }}</p>
+      </blockquote>
     </div>
+
+    <div class="card-footer bg-transparent border-secondary">
+      <h3 class="card-text" style="margin-top: 0px;">Dados do Técnico:</h3>
+      <blockquote class="blockquote">
+        <p class="card-text"><strong>Nome:</strong> {{ dataStorage.tecnico.nome }}</p>
+        <p class="card-text"><strong>CPF:</strong> {{ dataStorage.tecnico.cpf }}</p>
+        <p class="card-text"><strong>E-mail:</strong> {{ dataStorage.tecnico.email }}</p>
+        <p class="card-text"><strong>Telefones:</strong> {{ dataStorage.tecnico.telefones }}</p>
+      </blockquote>
+    </div>
+
   </div>
 
   <p class="clearfix"></p>

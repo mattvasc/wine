@@ -3,7 +3,6 @@ import { ClienteService } from '../../../service/cliente.service';
 import { DataStorageService } from '../../../service/data-storage.service';
 import { Cliente } from '../../../model/cliente';
 import { debounceTime } from 'rxjs/operators';  
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -28,13 +27,14 @@ export class TicketEscolherClienteComponent implements OnInit {
   }
 
   pesquisar() {
-    this.clienteService.getWithName(this.nome_input_string)
+    this.clienteService.getWithNamePaginated(this.nome_input_string, 5, 0)
     .pipe(debounceTime(50000))
     .subscribe(x => {
       if(x['success'] == true)
         this.clientesPesquisados = x['data']['cliente'];
     });
   }
+
 
   seeClient(index: number){
     // todo

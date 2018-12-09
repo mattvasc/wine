@@ -33,8 +33,8 @@ export class ClienteService {
     return this.http.get<Cliente>(this.apiUrl + this.posfixo +`/${id}`);
   }
 
-  getWithName(name: String){
-    return this.http.get<any>(this.apiUrl + this.posfixo + `/nome/${name}`).pipe(debounceTime(50000));
+  getWithNamePaginated(name: String, limit: number, offset: number) {
+    return this.http.get<any>(this.apiUrl + this.posfixo + `/nome/${name}/limit/${limit}/offset/${offset}`).pipe(debounceTime(50000));
   }
 
   create(c: Cliente): Observable<Cliente> {

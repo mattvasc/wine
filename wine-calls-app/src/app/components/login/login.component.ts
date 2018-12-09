@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Funcionario } from '../../model/funcionario';
 import {AuthService} from '../../service/auth.service';
-import { catchError } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +15,12 @@ import { catchError } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   private funcionario: Funcionario;
   public isLogin = true;
+  public modalWarning;
   private easteregg = 0;
   constructor(
     // private service: BetterService,
     private router: Router,
+    private modalService: NgbModal,
     private auth: AuthService
     // private data: DataStorageService
     ) {
@@ -26,30 +28,47 @@ export class LoginComponent implements OnInit {
     this.funcionario.email = '';
     this.funcionario.senha = '';
   }
+
+  open(content) {
+    this.modalService.open(content, {centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
   
   ngOnInit() {
+    this.modalWarning = {};
+    this.modalWarning['title'] = '';
+    this.modalWarning['message'] = '';
     let token = localStorage.getItem('token');
     if(token !== undefined && token !== null)
       this.router.navigateByUrl(`/main`);
     this.auth.checkIfIsEmptyOfEmployees().subscribe(retorno => {
       if (retorno['success'] == true){
         if (retorno['data'] == true) {
-          alert("Sistema vazio! Cadastre o primeiro Administrador");
+          this.modalWarning['message'] = "Sistema Vazio! Cadastre o primeiro administrador!";
+          this.modalWarning['title'] = 'Atenção!';
+          document.getElementById('openGenericModal').click();
           this.router.navigateByUrl(`/funcionario/first`);
         }
       } else {
-        alert("Erro interno no servidor!");
+        this.modalWarning['message'] = "Erro interno!";
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
     }, erro => {
       console.log(erro);
-      alert("Erro ao conectar com o servidor, verifique conexão!");
+      this.modalWarning['message'] = "Conexão perdida com o Servidor, tente novamente mais tarde";
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
       window.location.reload();
     });
 
   }
   erroAoFazerLogin() {
-    // todo: mudar para modal
-    alert("Credenciais Inválidas!");
+    this.modalWarning['message'] = "Credenciais Inválidas";
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
   }
   login() {
     if (this.funcionario.email === '' || this.funcionario.senha === '') {
@@ -73,7 +92,10 @@ export class LoginComponent implements OnInit {
     let regex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
     if(!regex.test(this.funcionario.email))
     {
-      alert("Email inválido!");
+      this.modalWarning['message'] = 'Email no formato inválido, tente algo como login@winetecnologia.com.br';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
+
       return;
     }
     

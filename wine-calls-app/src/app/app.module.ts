@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt'; // <-- JWT Lives here
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {
   ClienteListComponent,
   ClientMainComponent,
@@ -100,6 +101,7 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NgbModule,
     HttpClientModule,
     TextMaskModule,
     FormsModule,

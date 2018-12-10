@@ -4,6 +4,7 @@ import { ClienteService } from '../../../service/cliente.service';
 import { Cliente } from '../../../model/cliente';
 import { Router } from '@angular/router';
 import { DataStorageService } from '../../../service/data-storage.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cliente-list',
@@ -12,15 +13,30 @@ import { DataStorageService } from '../../../service/data-storage.service';
 })
 export class ClienteListComponent implements OnInit {
 
+  public modalWarning: {};
+  public closeResult;
 
   constructor(
     private api: ClienteService,
     private router: Router,
-    public dataStorage: DataStorageService
+    public dataStorage: DataStorageService,
+    private modalService: NgbModal
     ) { }
-    
+  
+  open(content) {
+    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   clientes: Cliente[] = [];
   ngOnInit() {
+    this.modalWarning = {};
+    this.modalWarning['title'] = '';
+    this.modalWarning['message'] = '';
+
     this.getClientes();
   }
 
@@ -43,15 +59,21 @@ export class ClienteListComponent implements OnInit {
     this.api.delete(id).subscribe(c => {
       
       if(c['success'] == true){
-        alert("Cliente apagado com sucesso!");
+        this.modalWarning['message'] = 'Cliente apagado com sucesso!';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
         this.clientes.splice(index,1);
       } else {
         console.log(c);
-        alert("Erro ao tentar apagar cliente");
+        this.modalWarning['message'] = 'Erro ao tentar apagar cliente';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
     }, err => {
         console.log(err);
-        alert("Erro ao tentar apagar cliente");
+        this.modalWarning['message'] = 'Erro ao tentar apagar cliente';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
     });
     // Se deletou com sucesso então affect rows não será igual a zero
   }

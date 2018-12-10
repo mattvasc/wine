@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 import { FuncionarioService } from '../../../service/funcionario.service';
 import { ApiService } from '../../../service/api.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-funcionario-form',
@@ -12,6 +13,9 @@ import { ApiService } from '../../../service/api.service';
   styleUrls: ['./funcionario-form.component.scss']
 })
 export class FuncionarioFormComponent implements OnInit {
+
+  public modalWarning: {};
+  public closeResult;
   public funcionarioAtual: Funcionario;
   public masks = Masks;
   public isSalvar = true;
@@ -20,10 +24,24 @@ export class FuncionarioFormComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private funcionarioService: FuncionarioService,
-    private apiGeral: ApiService
+    private apiGeral: ApiService,
+    private modalService: NgbModal
   ) { }
 
+  open(content) {
+    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   ngOnInit() {
+
+    this.modalWarning = {};
+    this.modalWarning['title'] = '';
+    this.modalWarning['message'] = '';
+
     this.erros = {
       "expedicao": false, "nascimento": false, "nascimentoVazio": false, "expedicaoVazio": false,
       "rgVazio": false, "emailVazio": false, "emailInvalido": false, "cpf": false, "cpfVazio": false,
@@ -147,49 +165,68 @@ export class FuncionarioFormComponent implements OnInit {
       else
         this.atualizar();
     } else {
-      alert("Dados inválidos");
+      this.modalWarning['message'] = 'Dados inválidos';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
     }
   }
   salvar() {
     this.funcionarioService.create(this.funcionarioAtual).subscribe(retorno => {
       if (retorno !== undefined && retorno['success'] === true) {
-        alert("Funcionario Salvo com Sucesso!");
+        this.modalWarning['message'] = 'Funcionario Salvo com Sucesso';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
       }
       else {
-        alert("Erro ao salvar Funcionario...");
+        this.modalWarning['message'] = 'Erro ao Salvar Funcionario';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
       this.router.navigateByUrl("/funcionarios");
     }, () => {
-      alert("Erro ao salvar Funcionario...");
-      this.router.navigateByUrl("/funcionarios");
+      this.modalWarning['message'] = 'Erro ao Salvar Funcionario';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
     });
   }
   salvarGenesis() {
     this.funcionarioService.createFirst(this.funcionarioAtual).subscribe(retorno => {
       if (retorno !== undefined && retorno['success'] === true) {
-        alert("Funcionario Salvo com Sucesso!");
+        this.modalWarning['message'] = 'Funcionario Salvo com Sucesso';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
       }
       else {
         console.log(retorno);
-        alert("Erro ao salvar Funcionario...");
+        this.modalWarning['message'] = 'Erro ao Salvar Funcionario';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
       this.router.navigateByUrl("/login");
     }, erro => {
       console.log(erro);
-      alert("Erro ao salvar Funcionario...");
+      this.modalWarning['message'] = 'Erro ao Salvar Funcionario';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
     });
   }
   atualizar() {
     this.funcionarioService.update(this.funcionarioAtual).subscribe(retorno => {
       if (retorno !== undefined && retorno['success'] === true) {
-        alert("Funcionário Atualizado com Sucesso!");
+        this.modalWarning['message'] = 'Funcionario Atualizado com Sucesso';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
       }
       else {
-        alert("Erro ao atualizar Funcionario...");
+        this.modalWarning['message'] = 'Erro ao Salvar Funcionario';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
       this.router.navigateByUrl("/funcionarios");
     }, () => {
-      alert("Erro ao atualizar Funcionario...");
+      this.modalWarning['message'] = 'Erro ao Salvar Funcionario';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
       this.router.navigateByUrl("/funcionarios");
     });
   }

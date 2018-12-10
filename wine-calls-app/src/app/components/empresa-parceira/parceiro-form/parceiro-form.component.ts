@@ -7,12 +7,17 @@ import { ApiService } from '../../../service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 //import { Endereco } from '../../../model/endereco';
 import { Masks } from '../../../masks';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-parceiro-form',
   templateUrl: './parceiro-form.component.html',
   styleUrls: ['./parceiro-form.component.scss']
 })
 export class ParceiroFormComponent implements OnInit, AfterViewInit {
+
+  public modalWarning: {};
+  public closeResult;
 
   public teste: String;
   public masks = Masks;
@@ -26,12 +31,24 @@ export class ParceiroFormComponent implements OnInit, AfterViewInit {
     private api: EmpresaParceiraService,
     private router: Router,
     private route: ActivatedRoute,
-    private apiGeral: ApiService
+    private apiGeral: ApiService,
+    private modalService: NgbModal
   ) {
   this.isSalvar = true;
 }
 
+open(content) {
+  this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+
 ngOnInit() {
+  this.modalWarning = {};
+  this.modalWarning['title'] = '';
+  this.modalWarning['message'] = '';
   this.parceiroAtual = new EmpresaParceira();
   this.atualizarCheckBoxes();
   this.route.params.subscribe(params => {
@@ -39,7 +56,9 @@ ngOnInit() {
     // se o usuário acessou a pagina sem passar um id inteiro...
     if (this.id !== undefined && isNaN(this.id)) {
       // TODO: Proteger a página, saindo dela quando informar id invalido
-      alert("Acessando a pagina de maneira inválida!");
+      this.modalWarning['message'] = 'Acessando a pagina de maneira inválida!';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
       this.router.navigateByUrl('/');
     }
 
@@ -59,7 +78,9 @@ ngOnInit() {
 
         } else {
           // TODO: Proteger a página, saindo dela quando informar id invalido
-          alert("Acessando a pagina com um id inválido!");
+          this.modalWarning['message'] = 'Acessando a pagina com um id inválido!';
+          this.modalWarning['title'] = 'Erro!';
+          document.getElementById('openGenericModal').click();
           this.router.navigateByUrl('/');
         }
       });
@@ -126,11 +147,15 @@ salvar() {
   this.api.create(this.parceiroAtual).subscribe(retorno => {
     if(retorno !== undefined && retorno['success'] === true)
         {
-          alert("Parceiro Salvo com Sucesso!");
+          this.modalWarning['message'] = 'Pareceiro Salvo com Sucesso!';
+          this.modalWarning['title'] = 'Sucesso!';
+          document.getElementById('openGenericModal').click();
           this.router.navigateByUrl("/empresasParceiras");
         }
         else{
-          alert("Erro ao salvar Parceiro...");
+          this.modalWarning['message'] = 'Erro ao Salvar Pareceiro';
+          this.modalWarning['title'] = 'Erro!';
+          document.getElementById('openGenericModal').click();
           console.log(retorno['error']);
         }
      });
@@ -143,10 +168,14 @@ salvar() {
      this.api.update(this.parceiroAtual).subscribe(retorno => {
        if(retorno !== undefined && retorno['success'] === true)
         {
-          alert("Parceiro Atualizado com Sucesso!");
+          this.modalWarning['message'] = 'Pareceiro Atualizado com Sucesso!';
+          this.modalWarning['title'] = 'Sucesso!';
+          document.getElementById('openGenericModal').click();
         }
         else{
-          alert("Erro ao atualizar Parceiro...");
+          this.modalWarning['message'] = 'Erro ao Atualizar Pareceiro';
+          this.modalWarning['title'] = 'Erro!';
+          document.getElementById('openGenericModal').click();
         }
         this.router.navigateByUrl("/empresasParceiras");
      });

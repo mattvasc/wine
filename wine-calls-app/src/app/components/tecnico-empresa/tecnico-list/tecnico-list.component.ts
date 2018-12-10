@@ -4,6 +4,7 @@ import { EmpresaParceira } from 'src/app/model/empresa-parceira';
 import { Router } from '@angular/router';
 import { DataStorageService } from '../../../service/data-storage.service';
 import { TecnicoService } from '../../../service/tecnico.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tecnico-list',
@@ -11,15 +12,31 @@ import { TecnicoService } from '../../../service/tecnico.service';
   styleUrls: ['./tecnico-list.component.scss']
 })
 export class TecnicoListComponent implements OnInit {
+  public modalWarning: {};
+  public closeResult;
+
   private tecnicos: Tecnico[];
   private empresa: EmpresaParceira;
   constructor(
     public dataStorage: DataStorageService,
     private router: Router,
-    private tecnicoService: TecnicoService
+    private tecnicoService: TecnicoService,
+    private modalService: NgbModal
   ) { }
 
+  open(content) {
+    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   ngOnInit() {
+    this.modalWarning = {};
+    this.modalWarning['title'] = '';
+    this.modalWarning['message'] = '';
+
     this.dataStorage.sync();
     if (this.dataStorage.empresa_parceira === undefined) {
       this.router.navigateByUrl('/empresasParceiras');
@@ -52,14 +69,20 @@ export class TecnicoListComponent implements OnInit {
     this.tecnicoService.delete(id).subscribe(c => {
       if(c['success']==true) {
         this.tecnicos.splice(index,1);
-        alert("Técnico apagado com sucesso!");
+        this.modalWarning['message'] = 'Técnico Apagado com Sucesso!';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
       } else {
         console.log(c);
-        alert("Erro ao apagar tecnico!!");
+        this.modalWarning['message'] = 'Erro ao Apagar Tecnico';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
     }, c => {
       console.log(c);
-      alert("Erro ao apagar tecnico!!");
+      this.modalWarning['message'] = 'Erro ao Apagar Tecnico';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
     });
   }
 }

@@ -121,3 +121,25 @@
 
 
 </form>
+
+<ng-template #genericModal let-modal >
+  <header class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">&nbsp;{{modalWarning.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </header>
+  <div class="modal-body" >
+    <div class="container offset-md-4" style="position: relative; margin-top:3em; margin-bottom:3em;">
+      <div class="row">
+        <div>
+          {{modalWarning.message}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="modal-footer">
+    <button type="button" class="btn btn-primary" id="closeNewBalanceModal" (click)="modal.close('Save click')">Ok</button>
+  </footer>
+</ng-template>
+<input type="hidden" id="openGenericModal" (click)="open(genericModal)" value="afasdf">

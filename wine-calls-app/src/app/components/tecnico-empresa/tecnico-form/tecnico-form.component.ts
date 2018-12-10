@@ -4,12 +4,18 @@ import { DataStorageService } from '../../../service/data-storage.service';
 import { TecnicoService } from '../../../service/tecnico.service';
 import { Router } from '@angular/router';
 import { Masks } from '../../../masks';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-tecnico-form',
   templateUrl: './tecnico-form.component.html',
   styleUrls: ['./tecnico-form.component.scss']
 })
+
 export class TecnicoFormComponent implements OnInit {
+  public modalWarning: {};
+  public closeResult;
+
   public tecnicoAtual: Tecnico;
   public cadastrar = true;
   public masks = Masks;
@@ -17,10 +23,23 @@ export class TecnicoFormComponent implements OnInit {
   constructor(
     private router: Router,
     public dataStorage: DataStorageService,
-    private tecnicoService: TecnicoService
+    private tecnicoService: TecnicoService,
+    private modalService: NgbModal
   ) { }
 
+  open(content) {
+    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   ngOnInit() {
+    this.modalWarning = {};
+    this.modalWarning['title'] = '';
+    this.modalWarning['message'] = '';
+
     this.dataStorage.sync();
     if (this.dataStorage.empresa_parceira === undefined) {
       this.router.navigateByUrl('/empresasParceiras');
@@ -49,10 +68,14 @@ export class TecnicoFormComponent implements OnInit {
     this.tecnicoService.create(this.tecnicoAtual).subscribe(retorno => {
       if(retorno !== undefined && retorno['success'] === true)
         {
-          alert("Tecnico Salvo com Sucesso!");
+          this.modalWarning['message'] = 'Tecnico Salvo com Sucesso!';
+          this.modalWarning['title'] = 'Sucesso!';
+          document.getElementById('openGenericModal').click();
         }
         else{
-          alert("Erro ao salvar Tecnico...");
+          this.modalWarning['message'] = 'Erro ao Salvar Tecnico';
+          this.modalWarning['title'] = 'Erro!';
+          document.getElementById('openGenericModal').click();
         }
         this.router.navigateByUrl("/tecnicos");
     });
@@ -61,10 +84,14 @@ export class TecnicoFormComponent implements OnInit {
     this.tecnicoService.update(this.tecnicoAtual).subscribe(retorno => {
       if(retorno !== undefined && retorno['success'] === true)
       {
-        alert("Tecnico Atualizado com Sucesso!");
+        this.modalWarning['message'] = 'Tecnico Atualizado com Sucesso!';
+          this.modalWarning['title'] = 'Sucesso!';
+          document.getElementById('openGenericModal').click();
       }
       else{
-        alert("Erro ao atualizar Tecnico...");
+        this.modalWarning['message'] = 'Erro ao Atualizar Tecnico';
+          this.modalWarning['title'] = 'Erro!';
+          document.getElementById('openGenericModal').click();
       }
       this.router.navigateByUrl("/tecnicos");
     });

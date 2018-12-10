@@ -5,29 +5,47 @@ import { ClienteService } from '../../../service/cliente.service';
 import { DataStorageService } from '../../../service/data-storage.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../../service/api.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-cliente-form',
   templateUrl: './cliente-form.component.html',
-  styleUrls: ['./cliente-form.component.scss']
+  styleUrls: ['./cliente-form.component.scss'],
 })
+
 export class ClienteFormComponent implements OnInit {
 
   public clienteAtual: Cliente;
   public cadastrar = true;
   private masks: any;
+  public modalWarning: {};
+  public closeResult;
+
   constructor(
     private clienteService: ClienteService,
     private router: Router,
     public dataStorage: DataStorageService,
-    private apiGeral: ApiService
+    private apiGeral: ApiService,
+    private modalService: NgbModal
   ) {
     this.masks = Masks;
   }
 
+  open(content) {
+    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
 
   ngOnInit() {
+    this.modalWarning = {};
+    this.modalWarning['title'] = '';
+    this.modalWarning['message'] = '';
+
     if (this.dataStorage.cliente !== undefined) {
       this.cadastrar = false;
       this.clienteAtual = this.dataStorage.cliente;
@@ -83,11 +101,15 @@ export class ClienteFormComponent implements OnInit {
     this.clienteService.create(this.clienteAtual).subscribe(retorno => {
       console.log(retorno);
       if (retorno !== undefined && retorno['success'] === true) {
-        alert("Cliente Salvo com Sucesso!");
+        this.modalWarning['message'] = 'Cliente Salvo com Sucesso!';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
         this.router.navigateByUrl("/clientes");
       }
       else {
-        alert("Erro ao salvar Cliente...");
+        this.modalWarning['message'] = 'Erro ao Salvar Cliente';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
       
     });
@@ -102,11 +124,15 @@ export class ClienteFormComponent implements OnInit {
     //this.clienteAtual.pagamento = this.pagamentoAtual;
     this.clienteService.update(this.clienteAtual).subscribe(retorno => {
       if (retorno !== undefined && retorno['success'] === true) {
-        alert("Cliente Atualizado com Sucesso!");
+        this.modalWarning['message'] = 'Cliente Atualizado com Sucesso!';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
         this.router.navigateByUrl("/clientes");
       }
       else {
-        alert("Erro ao atualizar Cliente...");
+        this.modalWarning['message'] = 'Erro ao Atualizar Cliente';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
       }
       this.router.navigateByUrl("/clientes");
     });
@@ -115,7 +141,10 @@ export class ClienteFormComponent implements OnInit {
   exec() {
     console.log(this.clienteAtual);
     if(!this.apiGeral.validarCNPJ(this.clienteAtual.cnpj)){
-      alert("Dados inválidos");
+      this.modalWarning['message'] = 'CNPJ inválido';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
+      //alert("Dados inválidos");
       return;
     }
     if (this.cadastrar) {

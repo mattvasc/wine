@@ -3,6 +3,7 @@ import { EmpresaParceira } from '../../../model/empresa-parceira';
 import { Router } from '@angular/router';
 import { EmpresaParceiraService } from 'src/app/service/empresa-parceira.service';
 import { DataStorageService } from '../../../service/data-storage.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-empresa-parceira-list',
@@ -11,9 +12,31 @@ import { DataStorageService } from '../../../service/data-storage.service';
 })
 export class EmpresaParceiraListComponent implements OnInit {
 
-  constructor(private api: EmpresaParceiraService, private router: Router, public dataStorage: DataStorageService) { }
+
+  public modalWarning: {};
+  public closeResult;
+
+  constructor(
+    private api: EmpresaParceiraService,
+    private router: Router,
+    public dataStorage: DataStorageService,
+    private modalService: NgbModal
+    ) { }
+
+  open(content) {
+    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   empresas_parceiras: EmpresaParceira[] = [];
   ngOnInit() {
+    this.modalWarning = {};
+    this.modalWarning['title'] = '';
+    this.modalWarning['message'] = '';
+
     this.getEmpresasParceiras();
   }
 
@@ -35,18 +58,27 @@ export class EmpresaParceiraListComponent implements OnInit {
   }
   deleteEmpresaParceira(index: number) {
     let id = this.empresas_parceiras[index].id;
-    console.log(`Indo apagar o cliente ${id}`);
+    console.log(`Indo apagar a empresa ${id}`);
     this.api.delete(id).subscribe(c => {
       if(c['success'] == true) {
         this.empresas_parceiras.splice(index,1);
-        alert('Empresa apagada com sucesso!');
+        this.modalWarning['message'] = 'Empresa apagada com sucesso!';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
+        //alert('Empresa apagada com sucesso!');
       } else{
         console.log(c);
-        alert("Erro ao apagar Empresa Parceira!");
+        this.modalWarning['message'] = 'Erro ao apagar Empresa Parceira!';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
+        //alert("Erro ao apagar Empresa Parceira!");
       }
     }, c => {
       console.log(c);
-      alert("Erro ao apagar Empresa Parceira!");
+      this.modalWarning['message'] = 'Erro ao apagar Empresa Parceira!';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
+      //alert("Erro ao apagar Empresa Parceira!");
     });
   }
 }

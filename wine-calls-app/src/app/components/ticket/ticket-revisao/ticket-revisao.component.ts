@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../../service/data-storage.service';
 import { Ticket } from 'src/app/model/ticket';
-import { TicketService  } from '../../../service/ticket.service';
+import { TicketService } from '../../../service/ticket.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -18,7 +18,7 @@ export class TicketRevisaoComponent implements OnInit {
     public dataStorage: DataStorageService,
     private ticketService: TicketService,
     private modalService: NgbModal
-    ) { }
+  ) { }
 
   open(content) {
     this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -40,11 +40,19 @@ export class TicketRevisaoComponent implements OnInit {
     this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio - 2;
     this.dataStorage.save();
   }
-  salvar(){
+  salvar() {
+    this.dataStorage.ticket.ticket_status = "agendado";
     this.ticketService.create(this.dataStorage.ticket).subscribe(success => {
-      this.modalWarning['message'] = 'Ticket Salvo com Sucesso!';
-      this.modalWarning['title'] = 'Sucesso!';
-      document.getElementById('openGenericModal').click();
+      if( success['success'] == true) {
+        this.modalWarning['message'] = 'Ticket Salvo com Sucesso!';
+        this.modalWarning['title'] = 'Sucesso!';
+        document.getElementById('openGenericModal').click();
+      } else {
+        this.modalWarning['message'] = 'Erro Interno!';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
+      }
+
     }, failure => {
       console.log(failure);
       this.modalWarning['message'] = 'Falha ao salvar Ticket';

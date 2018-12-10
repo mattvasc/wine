@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { BetterService } from '../service/better.service';
-// import { DataStorageService } from '../service/data-storage.service';
-// import { Better } from '../model/better';
 import { Router } from '@angular/router';
 import { Funcionario } from '../../model/funcionario';
 import {AuthService} from '../../service/auth.service';

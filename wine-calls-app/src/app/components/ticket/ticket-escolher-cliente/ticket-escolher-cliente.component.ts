@@ -41,7 +41,7 @@ export class TicketEscolherClienteComponent implements OnInit {
   }
 
   selectClient(index: number) {
-    this.dataStorage.ticket.client_id = this.clientesPesquisados[index].id;
+    this.dataStorage.ticket.cliente_id = this.clientesPesquisados[index].id;
     this.dataStorage.cliente = this.clientesPesquisados[index];
     this.dataStorage.ticket['estagio'] = 2;
     this.dataStorage.save();

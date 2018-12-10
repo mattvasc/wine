@@ -23,9 +23,9 @@ import {
   TicketInformacoesComponent,
   TicketEscolherTecnicoComponent,
   TicketAgendamentoComponent,
+  TicketVerDetalhesComponent,
   TicketEscolherParceiroComponent,
   TicketMainComponent } from './components';
-import { environment } from '../environments/environment';
 
 import { TecnicoFormComponent } from './components/index';
 import { ChamadoComponent } from './components/index';
@@ -36,6 +36,7 @@ import { FuncionarioListComponent } from './components/index';
 import { TecnicoListComponent } from './components/index';
 
 import { AuthService } from './service/auth.service';
+
 
 
 
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
   { path: 'formsTecnicoEmpresaParceira', component: TecnicoFormComponent, canActivate: [AuthService]},
 
   { path: 'chamados', component: TicketMainComponent, canActivate: [AuthService]  },
+  { path: 'chamados/detalhes', component: TicketVerDetalhesComponent, canActivate: [AuthService]  },
   { path: 'formsTicket', component: ChamadoComponent, canActivate: [AuthService]  },
   { path: 'funcionarios', component: FuncionarioListComponent, canActivate: [AuthService]  },
   { path: 'funcionario', component: FuncionarioFormComponent, canActivate: [AuthService]  },
@@ -96,6 +98,7 @@ const appRoutes: Routes = [
     TicketEscolherParceiroComponent,
     TicketRevisaoComponent,
     TicketEscolherTecnicoComponent,
+    TicketVerDetalhesComponent,
   ],
   imports: [
     BrowserModule,

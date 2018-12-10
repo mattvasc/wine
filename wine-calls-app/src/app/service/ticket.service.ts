@@ -19,6 +19,6 @@ export class TicketService {
    }
 
    create(ticket: Ticket): Observable<any> {
-    return this.http.post<Ticket>(this.apiUrl + this.posfixo + '/', ticket);
+    return this.http.post<Ticket>(this.apiUrl + '/', ticket);
   }
 }

@@ -2,7 +2,7 @@
 export class Ticket {
 	public id?: number;
 	/* FKS */
-	public client_id?: number;
+	public cliente_id?: number;
 	public tecnico_id?: number;
 	/* Fim fks */
 
@@ -10,7 +10,7 @@ export class Ticket {
 	public data_criacao?: string;
 	public preco_cliente?: number;
 	public preco_tecnico?: number;
-	public ticket_status_id?: string;
+	public ticket_status?: string;
 	/*
         aberto
         agendado

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../../service/ticket.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -14,7 +15,8 @@ export class MainComponent implements OnInit {
      'encerrado-com-sucesso': 0 ,
      'encerrado-com-insucesso': 0 ,
      'cancelado': 0 };
-  constructor(private api: TicketService) { }
+  constructor(private api: TicketService,
+    private router: Router) { }
 
   ngOnInit() {
     this.api.getCountStatus().subscribe(retorno => {
@@ -25,6 +27,10 @@ export class MainComponent implements OnInit {
       }
       console.log(retorno);
     });
+  }
+
+  detalhes(){
+    this.router.navigateByUrl('/chamados/detalhes');
   }
 
 }

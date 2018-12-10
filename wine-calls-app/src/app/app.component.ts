@@ -1,19 +1,24 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 import { DataStorageService } from './service/data-storage.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit  {
   title = 'Wine Tickets';
   constructor(
     private router: Router,
     public dataStorage: DataStorageService
     ) {
-      this.dataStorage.sync();
       
+      
+  }
+
+  ngOnInit() {
+    this.dataStorage.sync();
+
   }
   logOut() {
     localStorage.clear();

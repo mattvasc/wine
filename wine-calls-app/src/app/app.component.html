@@ -9,16 +9,12 @@
 
   <div class="menu-list" *ngIf="this.router.url !== '/funcionario/first'">
 
-    <div class="row hidden-xs hidden-sm">
-      <div class="col-10 col-md-offset-1">
-        <h3 class="text-left">Olá, {{this.dataStorage.usuario_logado.nome}}!</h3>
-      </div>
+    <div class="col-12 hidden-xs hidden-sm">
+      <h3 class="text-center">Olá, {{this.dataStorage.usuario_logado.nome}}!</h3>
     </div>
 
-    <div class="row hidden-xs hidden-sm">
-      <div class="col-8 offset-1">
-        <button class="btn btn-primary" (click)='mudarRota("/formsTicket")'> Adicionar um novo chamado <i class="fa fa-menu fa-bolt fa-lg"></i></button>
-      </div>
+    <div class="col-12 hidden-xs hidden-sm">
+      <button class="btn btn-primary btn-block" (click)='mudarRota("/formsTicket")'>Adicionar um novo chamado<i class="fa fa-menu fa-bolt fa-lg"></i></button>
     </div>
     <ul id="menu-content" class="menu-content collapse out">
 

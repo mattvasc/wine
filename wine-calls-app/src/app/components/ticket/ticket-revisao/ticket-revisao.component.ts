@@ -41,7 +41,11 @@ export class TicketRevisaoComponent implements OnInit {
     this.dataStorage.save();
   }
   salvar() {
-    this.dataStorage.ticket.ticket_status = "agendado";
+    if (this.dataStorage.ticket.data_inicio && this.dataStorage.tecnico)
+      this.dataStorage.ticket.ticket_status = "agendado";
+    else
+      this.dataStorage.ticket.ticket_status = "aberto";
+
     this.ticketService.create(this.dataStorage.ticket).subscribe(success => {
       if( success['success'] == true) {
         this.modalWarning['message'] = 'Ticket Salvo com Sucesso!';
@@ -61,4 +65,3 @@ export class TicketRevisaoComponent implements OnInit {
     });
   }
 }
-

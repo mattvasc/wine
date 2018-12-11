@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../../service/cliente.service';
 import { ApiService } from '../../../service/api.service';
 import { Cliente } from '../../../model/cliente';
+import { Ticket } from '../../../model/ticket';
 import { Router } from '@angular/router';
 import { DataStorageService } from '../../../service/data-storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +19,8 @@ export class ClienteListComponent implements OnInit {
   public closeResult;
   public count = 0;
   public p;
+  public pageSize: number = 8;
+  public termoPesquisado: string;
 
   constructor(
     private geral: ApiService,
@@ -30,38 +33,37 @@ export class ClienteListComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
   clientes: Cliente[] = [];
   ngOnInit() {
+    this.termoPesquisado = '';
     this.modalWarning = {};
     this.modalWarning['title'] = '';
     this.modalWarning['message'] = '';
 
-    this.getClientes();
+    this.getPage(1,this.pageSize);
   }
 
-  getClientes() {
-    this.api.getAll().subscribe(c => {
+  
+  getPage(page: number, pageSize: number) {
+    this.api.getWithNamePaginated
+    this.api.getWithNamePaginated(this.termoPesquisado, pageSize, pageSize*(page-1)).subscribe(c => {
       console.log(c);
-      if (c['data']["cliente"] !== undefined) {
+      if (c['success']==true) {
         this.clientes = c['data']['cliente'];
-        this.count = c['data']['cliente'].length;
-        this.p = 0;
-        this.getPage(1, 8);
+        this.count = c['count'];
       }
     });
   }
 
-  getPage(page: number, pageSize: number) {
-    this.geral.getPaginate('clientes', pageSize, pageSize*(page-1)).subscribe(c => {
-      console.log(c);
-      if (c['data']["cliente"] !== undefined)
-        this.clientes = c['data']['cliente'];
-    });
+  ticketForClient(index: number) {
+    this.dataStorage.cliente = this.clientes[index];
+    this.dataStorage.ticket = new Ticket();
+    this.dataStorage.ticket.estagio = 2;
+    this.dataStorage.save();
+    this.router.navigateByUrl('/formsTicket');
   }
 
 

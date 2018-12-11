@@ -1,29 +1,39 @@
 <!-- // TODO: formatar essa tabela -->
-
+<label>Filtrar por nome:</label> <input type="text" [(ngModel)]="termoPesquisado"  (ngModelChange)="getPage(1,pageSize)" name="termoPesquisado">
 <table *ngIf="clientes.length > 0; else semClientes" class="table table-hover">
-<thead class="thead-dark">
-  <th>Id.</th><th>Razão Social</th><th>Email</th><th>Editar</th><th>Apagar</th>
-</thead>
-<tbody>
-<tr *ngFor="let client of clientes | paginate: { id: 'clientspagination', itemsPerPage: 8, currentPage: p, totalItems: count }">
-  <td>{{client.id}}</td><td>{{ client.razao_social }}</td> <td>{{client.email}}</td>
-  <td><button (click)="editClient(client.id-1)" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button></td>
-  <td><button (click)="deleteClient(client.id-1)" class="btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
-</tr>
-</tbody>
+  <thead class="thead-dark">
+    <th>Id.</th>
+    <th>Razão Social</th>
+    <th>Email</th>
+    <th>Abrir Chamado</th>
+    <th>Editar</th>
+    <th>Apagar</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clientes | paginate: { id: 'clientspagination', itemsPerPage: pageSize, currentPage: p, totalItems: count }; let i = index">
+      <td>{{client.id}}</td>
+      <td>{{ client.razao_social }}</td>
+      <td>{{client.email}}</td>
+      <td><button (click)="ticketForClient(i)" class="btn btn-primary"><i class="fa fa-bolt"></i></button></td>
+      <td><button (click)="editClient(i)" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button></td>
+      <td><button (click)="deleteClient(i)" class="btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
+    </tr>
+  </tbody>
 </table>
-<pagination-controls *ngIf="clientes.length > 0;" id="clientspagination" (pageChange)="changePage($event)"
-previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
-<ng-template #semClientes><h2>Não há clientes cadastrados no momento!</h2></ng-template>
+<pagination-controls *ngIf="count > pageSize;" id="clientspagination" (pageChange)="changePage($event)"
+  previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
+<ng-template #semClientes>
+  <h2>Não há clientes cadastrados no momento!</h2>
+</ng-template>
 
-<ng-template #genericModal let-modal >
+<ng-template #genericModal let-modal>
   <header class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">&nbsp;{{modalWarning.title}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </header>
-  <div class="modal-body" >
+  <div class="modal-body">
     <div class="container offset-md-4" style="position: relative; margin-top:3em; margin-bottom:3em;">
       <div class="row">
         <div>

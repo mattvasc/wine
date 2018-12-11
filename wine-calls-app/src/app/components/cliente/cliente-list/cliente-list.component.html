@@ -5,13 +5,15 @@
   <th>Id.</th><th>Razão Social</th><th>Email</th><th>Editar</th><th>Apagar</th>
 </thead>
 <tbody>
-<tr *ngFor="let client of clientes; let i = index">
+<tr *ngFor="let client of clientes | paginate: { id: 'clientspagination', itemsPerPage: 8, currentPage: p, totalItems: count }">
   <td>{{client.id}}</td><td>{{ client.razao_social }}</td> <td>{{client.email}}</td>
-  <td><button (click)="editClient(i)" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button></td>
-  <td><button (click)="deleteClient(i)" class="btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
+  <td><button (click)="editClient(client.id-1)" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button></td>
+  <td><button (click)="deleteClient(client.id-1)" class="btn btn-danger"><i class="fas fa-times-circle"></i></button></td>
 </tr>
 </tbody>
 </table>
+<pagination-controls *ngIf="clientes.length > 0;" id="clientspagination" (pageChange)="changePage($event)"
+previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
 <ng-template #semClientes><h2>Não há clientes cadastrados no momento!</h2></ng-template>
 
 <ng-template #genericModal let-modal >

@@ -11,17 +11,19 @@
     <th>Apagar</th>
   </thead>
   <tbody>
-    <tr *ngFor="let ep of empresas_parceiras; let i = index">
+    <tr *ngFor="let ep of empresas_parceiras | paginate: { id: 'empresapagination', itemsPerPage: 8, currentPage: p, totalItems: count }">
       <td>{{ep.id}}</td>
       <td>{{ ep.razao_social}}</td>
       <td>{{ ep.nome_fantasia}}</td>
       <td>{{ep.email}}</td>
-      <td><button (click)="editFuncionariosEmpresaParceira(i)" class="btn btn-block btn-primary">Funcionários</button></td>
+      <td><button (click)="editFuncionariosEmpresaParceira(ep.id-1)" class="btn btn-block btn-primary">Funcionários</button></td>
       <td><button (click)="editEmpresaParceira(ep.id)" class="btn btn-block btn-success">Editar</button></td>
-      <td><button (click)="deleteEmpresaParceira(i)" class="btn btn-block btn-danger">Apagar</button></td>
+      <td><button (click)="deleteEmpresaParceira(ep.id-1)" class="btn btn-block btn-danger">Apagar</button></td>
     </tr>
   </tbody>
 </table>
+<pagination-controls *ngIf="empresas_parceiras.length > 0;" id="empresapagination" (pageChange)="changePage($event)"
+previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
 <ng-template #semEP>
   <h2>Não há empresas parceiras cadastradas no momento!</h2>
 </ng-template>

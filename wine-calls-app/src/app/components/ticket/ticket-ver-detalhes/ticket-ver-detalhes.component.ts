@@ -23,7 +23,7 @@ export class TicketVerDetalhesComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+      // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -50,15 +50,15 @@ export class TicketVerDetalhesComponent implements OnInit {
     });
   }
 
-  public function seeTicket(id) {
-    $("#idChamado").val(id);
-    $("#detalhesChamado").modal('show');
+  seeTicket(id) {
+    // $("#idChamado").val(id);
+    // $("#detalhesChamado").modal('show');
     console.log(this.chamados[id]);
   }
 
-  public function encerrarChamado() {
-    let ticketApagar = this.chamados[$("#idChamado").val()];
-
+  encerrarChamado() {
+    // let ticketApagar = this.chamados[$("#idChamado").val()];
+    let ticketApagar = new Ticket;
     ticketApagar.ticket_status = "encerrado_com_sucesso";
 
     console.log(ticketApagar);
@@ -68,8 +68,8 @@ export class TicketVerDetalhesComponent implements OnInit {
         this.modalWarning['message'] = 'Ticket encerrado com sucesso!';
         this.modalWarning['title'] = 'Sucesso!';
         document.getElementById('openGenericModal').click();
-        this.chamados.splice($("#idChamado").val(),1);
-        $("#detalhesChamado").modal('hide');
+        // this.chamados.splice($("#idChamado").val(),1);
+        // $("#detalhesChamado").modal('hide');
       } else {
         this.modalWarning['message'] = 'Erro Interno!';
         this.modalWarning['title'] = 'Erro!';

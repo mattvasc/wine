@@ -51,10 +51,10 @@ export class TicketRevisaoComponent implements OnInit {
         this.dataStorage.ticket.ticket_status = "em_atendimento";
       else
         this.dataStorage.ticket.ticket_status = "agendado";
-      this.dataStorage.ticket.email_tecnico = this.dataStorage.tecnico.email;
+      this.dataStorage.ticket['email_tecnico'] = this.dataStorage.tecnico.email;
 
-      this.dataStorage.ticket.tecnico_nome = this.dataStorage.tecnico.nome;
-      this.dataStorage.ticket.cliente_nome = this.dataStorage.cliente.razao_social;
+      this.dataStorage.ticket['tecnico_nome'] = this.dataStorage.tecnico.nome;
+      this.dataStorage.ticket['cliente_nome'] = this.dataStorage.cliente.razao_social;
     }
     else
       this.dataStorage.ticket.ticket_status = "aberto";

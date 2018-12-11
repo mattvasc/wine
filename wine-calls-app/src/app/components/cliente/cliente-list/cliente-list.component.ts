@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { CrudService } from '../../../../service/crud.service';
 import { ClienteService } from '../../../service/cliente.service';
+import { ApiService } from '../../../service/api.service';
 import { Cliente } from '../../../model/cliente';
 import { Router } from '@angular/router';
 import { DataStorageService } from '../../../service/data-storage.service';
@@ -15,14 +16,17 @@ export class ClienteListComponent implements OnInit {
 
   public modalWarning: {};
   public closeResult;
+  public count = 0;
+  public p;
 
   constructor(
+    private geral: ApiService,
     private api: ClienteService,
     private router: Router,
     public dataStorage: DataStorageService,
     private modalService: NgbModal
     ) { }
-  
+
   open(content) {
     this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -43,9 +47,27 @@ export class ClienteListComponent implements OnInit {
   getClientes() {
     this.api.getAll().subscribe(c => {
       console.log(c);
-      if (c['data']["cliente"] !== undefined)
-        this.clientes = c['data']['cliente']
+      if (c['data']["cliente"] !== undefined) {
+        this.clientes = c['data']['cliente'];
+        this.count = c['data']['cliente'].length;
+        this.p = 0;
+        this.getPage(1, 8);
+      }
     });
+  }
+
+  getPage(page: number, pageSize: number) {
+    this.geral.getPaginate('clientes', pageSize, pageSize*(page-1)).subscribe(c => {
+      console.log(c);
+      if (c['data']["cliente"] !== undefined)
+        this.clientes = c['data']['cliente'];
+    });
+  }
+
+
+  changePage(event: any): void {
+    this.p = event;
+    this.getPage(event, 8);
   }
 
   editClient(index: number) {
@@ -57,7 +79,7 @@ export class ClienteListComponent implements OnInit {
     let id = this.clientes[index].id;
     console.log(`Indo apagar o cliente ${id}`);
     this.api.delete(id).subscribe(c => {
-      
+
       if(c['success'] == true){
         this.modalWarning['message'] = 'Cliente apagado com sucesso!';
         this.modalWarning['title'] = 'Sucesso!';

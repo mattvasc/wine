@@ -154,4 +154,9 @@ export class ApiService {
       return true;
     return false;
   }
+
+  getPaginate(name: String, limit: number, offset: number) {
+    console.log(this.apiUrl + `${name}/limit/${limit}/offset/${offset}`);
+    return this.http.get<any>(this.apiUrl + `${name}/limit/${limit}/offset/${offset}`);
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaParceira } from '../../../model/empresa-parceira';
 import { Router } from '@angular/router';
+import { ApiService } from '../../../service/api.service';
 import { EmpresaParceiraService } from 'src/app/service/empresa-parceira.service';
 import { DataStorageService } from '../../../service/data-storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,8 +16,11 @@ export class EmpresaParceiraListComponent implements OnInit {
 
   public modalWarning: {};
   public closeResult;
+  public count = 0;
+  public p;
 
   constructor(
+    private geral: ApiService,
     private api: EmpresaParceiraService,
     private router: Router,
     public dataStorage: DataStorageService,
@@ -44,6 +48,9 @@ export class EmpresaParceiraListComponent implements OnInit {
     this.api.getAll().subscribe(c => {
       if (c['data']['empresa_parceira'] !== undefined) {
         this.empresas_parceiras = c['data']['empresa_parceira'];
+        this.count = c['data']['empresa_parceira'].length;
+        this.p = 0;
+        this.getPage(1, 8);
       }
     });
   }
@@ -80,5 +87,17 @@ export class EmpresaParceiraListComponent implements OnInit {
       document.getElementById('openGenericModal').click();
       //alert("Erro ao apagar Empresa Parceira!");
     });
+  }
+
+  getPage(page: number, pageSize: number) {
+    this.geral.getPaginate('EmpresasParceiras', pageSize, pageSize*(page-1)).subscribe(c => {
+      if (c['data']['empresa_parceira'] !== undefined)
+        this.empresas_parceiras = c['data']['empresa_parceira'];
+    });
+  }
+
+  changePage(event: any): void {
+    this.p = event;
+    this.getPage(event, 8);
   }
 }

@@ -271,6 +271,8 @@ router.post('/ordemdeservico', function (req, res) {
             descricao: req.body.descricao,
             endereco:req.body.endereco,
             cidade: req.body.cidade,
+            email: req.body.email,
+            telefone: req.body.telefone,
             estado: req.body.estado,
             categoria: req.body.categoria,
             data_abertura: req.body.data_abertura,

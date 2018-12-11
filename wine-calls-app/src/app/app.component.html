@@ -1,6 +1,6 @@
 <!-- TODO: fazer o if para colocar a class "active" no lugar certo -->
 
-<div [ngClass]="{'nav-side-menu col-3': this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'}"
+<div [ngClass]="{'nav-side-menu col-md-3': this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'}"
   *ngIf="this.router.url !== '/login' && this.router.url !== '/' && this.router.url !== '/funcionario/first'">
   <div class="brand">
     <a (click)='mudarRota("/")'><img src="../assets/img/logo-pequeno.png" style="margin: 5px;"></a>
@@ -8,15 +8,15 @@
   <i class="fa fa-menu fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
   <div class="menu-list" *ngIf="this.router.url !== '/funcionario/first'">
-    
-    <div class="row">
-      <div class="col-md-1 col-md-offset-4">
-        <h3>Olá {{this.dataStorage.usuario_logado.nome}}!</h3>
+
+    <div class="row hidden-xs hidden-sm">
+      <div class="col-10 col-md-offset-1">
+        <h3 class="text-left">Olá, {{this.dataStorage.usuario_logado.nome}}!</h3>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-1 col-md-offset-3">
+    <div class="row hidden-xs hidden-sm">
+      <div class="col-8 offset-1">
         <button class="btn btn-primary" (click)='mudarRota("/formsTicket")'> Adicionar um novo chamado <i class="fa fa-menu fa-bolt fa-lg"></i></button>
       </div>
     </div>

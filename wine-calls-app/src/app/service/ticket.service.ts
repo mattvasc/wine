@@ -23,6 +23,10 @@ export class TicketService {
       return this.http.get<any>(this.apiUrl + `/status/${status}/limit/${limit}/offset/${offset}` );
      }
 
+   update(ticket: Ticket): Observable<Ticket> {
+     return this.http.put<Ticket>(this.apiUrl + `/${ticket.ticket_id}`, ticket);
+   }
+
 
    create(ticket: Ticket): Observable<any> {
     return this.http.post<Ticket>(this.apiUrl + '/', ticket);

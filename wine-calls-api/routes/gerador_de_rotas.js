@@ -113,8 +113,8 @@ module.exports = function buildRoutes(Model, entidade_nome,
 	if (quais_rotas.update)
 		router.put('/:id', function (req, res) {
 
-
 			const object_id = req.params.id;
+
 			if (object_id === undefined || isNaN(object_id)) {
 				res.json({
 					success: false,
@@ -122,23 +122,45 @@ module.exports = function buildRoutes(Model, entidade_nome,
 					error: ("Missing id for " + entidade_nome)
 				});
 			}
-			entidade.update(req.body, {
-				where: {
-					id: object_id
-				}
-			})
-				.then(payload => {
-					let temp = {
-						success: true,
-						"affected_rows": payload
+
+			if (entidade_nome != 'ticket') {
+
+				entidade.update(req.body, {
+					where: {
+						id: object_id
 					}
-					res.json(temp);
 				})
-				.catch(error => res.json({
-					success: false,
-					data: {},
-					error: error
-				}));
+					.then(payload => {
+						let temp = {
+							success: true,
+							"affected_rows": payload
+						}
+						res.json(temp);
+					})
+					.catch(error => res.json({
+						success: false,
+						data: {},
+						error: error
+					}));
+			} else {
+				entidade.update(req.body, {
+					where: {
+						ticket_id: object_id
+					}
+				})
+					.then(payload => {
+						let temp = {
+							success: true,
+							"affected_rows": payload
+						}
+						res.json(temp);
+					})
+					.catch(error => res.json({
+						success: false,
+						data: {},
+						error: error
+					}));
+			}
 		});
 
 

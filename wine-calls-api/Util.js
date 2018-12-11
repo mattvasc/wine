@@ -1,3 +1,6 @@
+const SparkPost = require('sparkpost');
+const credentials = require('./credentials');
+
 var crypto = require('crypto');
 function genRandomString(length) {
     return crypto.randomBytes(Math.ceil(length / 2))

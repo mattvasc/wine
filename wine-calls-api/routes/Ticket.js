@@ -1,4 +1,3 @@
-
 const Sequelize = require('sequelize');
 const formidable = require('formidable')
 const Model = require('../model');
@@ -18,42 +17,55 @@ let quais_rotas = {
     "delete": true
 };
 
-function gerarEmaildeNovoParaoClienteTicket(nome, categoria, descricao, 
+function gerarEmaildeNovoParaoClienteTicket(nome, categoria, descricao,
     /*opcional:*/ data_de_agendamento, /*opcional:*/ tecnico) {
-    return `
-<img src="https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png">
-Olá ${nome.split(' ')[0]}, seu ticket foi gerado com sucesso! <br>
-Categoria do problema:<br> ${categoria}<br>
-Descrição do problema:<br>${descricao}<br>
-` + (data_de_agendamento == undefined) ? "" : `
-Data de agendamento: <br> ${data_de_agendamento} </br>`
-+ (tecnico == undefined) ? "" : `
-Nome do Tecnico: <br> ${tecnico} </br>
-` +
-`
-Atenciosamente, 
-Wine Tecnologia.
-`;
+
+    let body = "";
+
+    body+= "<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">";
+
+    body+= "<p>Olá, " + nome + ", seu ticket foi gerado com sucesso!</p>";
+
+    body+= "<p><strong>Categoria do problema:</strong>  "+categoria+"</p>";
+
+    body+= "<p><strong>Descrição do problema:</strong> "+descricao+"</p>"
+
+    // TODO: formatar a data para padrão pt-BR
+    body+=(data_de_agendamento == undefined) ? "" : "<p><strong>Data de agendamento:</strong> " + data_de_agendamento + " </p>";
+
+    body+=(tecnico == undefined) ? "" : "<p><strong>Nome do Tecnico:</strong> " + tecnico + "</p></br>";
+
+    body+="<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
+
+    return body;
 }
 
 
-function gerarEmaildeNovoParaoTecnicoTicket(cliente, categoria, descricao, 
+function gerarEmaildeNovoParaoTecnicoTicket(cliente, categoria, descricao,
     /*opcional:*/ data_de_agendamento, tecnico, endereco) {
-    return `
-<img src="https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png">
-Olá ${tecnico.split(' ')[0]}, você recebeu um novo job! <br>
-Categoria do problema:<br> ${categoria}<br>
-Descrição do problema:<br>${descricao}<br>
-` + (data_de_agendamento == undefined) ? "" : `
-Data de agendamento: <br> ${data_de_agendamento} <br>`
-+ (tecnico == undefined) ? "" : `
-Nome do Cliente: <br> ${cliente} <br>
-` +
-`
-Endereço: ${endereco}<br><br><br>
-Atenciosamente, 
-Wine Tecnologia.
-`;
+
+    let body = "";
+
+    body+="<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">"
+
+
+    body+="<p>Olá, " + tecnico + ", você recebeu um novo job!</p>";
+
+    body+="<p><strong>Categoria do problema:</strong> " + categoria + "</p>";
+
+    body+="<p><strong>Descrição do problema:</strong> " + descricao + "</p>"
+
+    // TODO: formatar a data para padrão pt-BR
+    body+=(data_de_agendamento == undefined) ? "" : "<p><strong>Data de agendamento:</strong> " + data_de_agendamento + " </p>";
+
+    body+=(cliente == undefined) ? "" : "<p><strong>Nome do Cliente:</strong> " + tecnico + "</p></br>";
+
+    body+="<p><strong>Endereço:</strong> " + endereco + "</p>"
+
+    body+="<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
+
+    return body;
+
 }
 
 
@@ -67,17 +79,26 @@ router.post('/', function (req, res) {
         .then(payload => {
             let temp = {
                 success: true,
-                data: {}
+                data: {},
             };
+
+            let endereco = req.body.logradouro + ", " + req.body.logradouro_numero;
+
+            if (req.body.complemento)
+              endereco+=req.body.complemento;
+
+            endereco+="<br />Bairro: " + req.body.bairro;
+
+            endereco+="<br />Cidade: " + req.body.cidade;
+
+            endereco+=" - " + req.body.estado;
+
+            //E-mail para o técnico
+            Util.enviarEmail(req.body.email_tecnico, "[Wine] Você recebeu um novo job!", gerarEmaildeNovoParaoTecnicoTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome, endereco));
+
+            //E-mail para o cliente
+            Util.enviarEmail(req.body.email_contato, "[Wine] Detalhes do seu chamado", gerarEmaildeNovoParaoClienteTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome));
             temp["data"][entidade_nome] = payload;
-            /* util.enviarEmail()  
-                para fazer o util.enviarEmail, antes temos que pegar os emails dos caras...
-                Para isso podemos: 1) fazer o front enviar o email do cliente [e tecnico] (ênfase na notação de opcional)
-                2) pegar o client_id[, tecnico_id] do banco, e buscar o email e daí sim disparar o email
-
-                Usar as funções gerarEmaildeNovoParaoClienteTicket e gerarEmaildeNovoParaoTecnicoTicket aqui
-
-            */
             res.json(temp);
         })
         .catch(error => {
@@ -115,7 +136,7 @@ router.get('/status/:status/limit/:limit/offset/:offset', function (req, res) {
 	        });
     }
     if(!taok) return;
-    
+
     entidade.findAndCountAll({
         limit: limit_arg,
         offset: offset_arg,
@@ -161,7 +182,7 @@ router.get('/count/:status', function (req, res) {
 	        });
     }
 
-    
+
     if(!taok) return;
 
     if(status != "todos") { // busca a quantidade de apenas um status
@@ -186,10 +207,10 @@ router.get('/count/:status', function (req, res) {
           }).then(function (result) {
             let temp = {success: true, data: {}};
             temp.data = result;
-            
+
             res.json(temp);
           });
-        
+
     }
 
 
@@ -214,11 +235,10 @@ router.post('/upload/comprovante', function (req, res) {
       form.on('fileBegin', function (name, file) {
           console.log(file);
           console.log(name);
-          
+
         const [fileName, fileExt] = file.name.split('.')
         file.path = path.join(uploadDir, `${fileName}_${new Date().getTime()}.${fileExt}`)
-        
+
       });
 });
 module.exports = router;
-

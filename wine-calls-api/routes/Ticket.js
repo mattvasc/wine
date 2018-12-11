@@ -4,9 +4,91 @@ const formidable = require('formidable')
 const Model = require('../model');
 const geradorDeRotas = require('./gerador_de_rotas');
 const path = require('path')
-const router = geradorDeRotas(Model, "ticket");
-let entidade = Model["ticket"];
+const util = require('../Util');
+const entidade_nome = "ticket";
+let entidade = Model[entidade_nome];
 
+let quais_rotas = {
+    "single": true,
+    "all": true,
+    "paginacao": true,
+    "describe": true,
+    "create": false,
+    "update": true,
+    "delete": true
+};
+
+function gerarEmaildeNovoParaoClienteTicket(nome, categoria, descricao, 
+    /*opcional:*/ data_de_agendamento, /*opcional:*/ tecnico) {
+    return `
+<img src="https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png">
+Olá ${nome.split(' ')[0]}, seu ticket foi gerado com sucesso! <br>
+Categoria do problema:<br> ${categoria}<br>
+Descrição do problema:<br>${descricao}<br>
+` + (data_de_agendamento == undefined) ? "" : `
+Data de agendamento: <br> ${data_de_agendamento} </br>`
++ (tecnico == undefined) ? "" : `
+Nome do Tecnico: <br> ${tecnico} </br>
+` +
+`
+Atenciosamente, 
+Wine Tecnologia.
+`;
+}
+
+
+function gerarEmaildeNovoParaoTecnicoTicket(cliente, categoria, descricao, 
+    /*opcional:*/ data_de_agendamento, tecnico, endereco) {
+    return `
+<img src="https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png">
+Olá ${tecnico.split(' ')[0]}, você recebeu um novo job! <br>
+Categoria do problema:<br> ${categoria}<br>
+Descrição do problema:<br>${descricao}<br>
+` + (data_de_agendamento == undefined) ? "" : `
+Data de agendamento: <br> ${data_de_agendamento} <br>`
++ (tecnico == undefined) ? "" : `
+Nome do Cliente: <br> ${cliente} <br>
+` +
+`
+Endereço: ${endereco}<br><br><br>
+Atenciosamente, 
+Wine Tecnologia.
+`;
+}
+
+
+const router = geradorDeRotas(Model, "ticket", quais_rotas);
+
+// Cria um novo chamado e envia email para os caras
+router.post('/', function (req, res) {
+    console.log("indo criar uma nova instancia de " + entidade_nome);
+    let temp = entidade.build(req.body);
+    temp.save()
+        .then(payload => {
+            let temp = {
+                success: true,
+                data: {}
+            };
+            temp["data"][entidade_nome] = payload;
+            /* util.enviarEmail()  
+                para fazer o util.enviarEmail, antes temos que pegar os emails dos caras...
+                Para isso podemos: 1) fazer o front enviar o email do cliente [e tecnico] (ênfase na notação de opcional)
+                2) pegar o client_id[, tecnico_id] do banco, e buscar o email e daí sim disparar o email
+
+                Usar as funções gerarEmaildeNovoParaoClienteTicket e gerarEmaildeNovoParaoTecnicoTicket aqui
+
+            */
+            res.json(temp);
+        })
+        .catch(error => {
+            console.log(error);
+            res.json({
+                success: false,
+                data: {},
+                error: error
+            })
+        });
+});
 
 // Retorna com paginação os status solicitados
 router.get('/status/:status/limit/:limit/offset/:offset', function (req, res) {
@@ -139,3 +221,4 @@ router.post('/upload/comprovante', function (req, res) {
       });
 });
 module.exports = router;
+

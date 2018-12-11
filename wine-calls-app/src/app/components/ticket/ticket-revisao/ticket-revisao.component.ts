@@ -3,6 +3,7 @@ import { DataStorageService } from '../../../service/data-storage.service';
 import { Ticket } from 'src/app/model/ticket';
 import { TicketService } from '../../../service/ticket.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-revisao',
@@ -41,8 +42,16 @@ export class TicketRevisaoComponent implements OnInit {
     this.dataStorage.save();
   }
   salvar() {
-    if (this.dataStorage.ticket.data_inicio && this.dataStorage.tecnico)
-      this.dataStorage.ticket.ticket_status = "agendado";
+    if (this.dataStorage.ticket.data_inicio && this.dataStorage.tecnico) {
+
+      let today = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
+      let agendado = formatDate(this.dataStorage.ticket.data_inicio, 'yyyy-MM-dd', 'en-US');
+
+      if (today == agendado)
+        this.dataStorage.ticket.ticket_status = "em-atendimento";
+      else
+        this.dataStorage.ticket.ticket_status = "agendado";
+    }
     else
       this.dataStorage.ticket.ticket_status = "aberto";
 

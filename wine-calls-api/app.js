@@ -1,4 +1,6 @@
 const result = require('dotenv').config()
+var commandExists = require('command-exists');
+ 
 
 if (result.error) {
   throw result.error
@@ -83,8 +85,17 @@ app.use(function (err, req, res, next) {
 Model.sequelize.sync(
     // {"force":true} 
     ).then(() => {
-    console.log('API Rodando na porta 3000');
-    app.listen(3000);
+        commandExists('pdftk', function(err, commandExists) {
+ 
+            if(commandExists) {
+                console.log('API Rodando na porta 3000');
+                app.listen(3000);
+            } else {
+                console.log("[ERRO] Instale PDFTK Server CLI no servidor, e verifique se ele está no PATH");
+            }
+         
+        });
+    
  } );
 
 module.exports = app;

@@ -22,20 +22,20 @@ function gerarEmaildeNovoParaoClienteTicket(nome, categoria, descricao,
 
     let body = "";
 
-    body+= "<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">";
+    body += "<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">";
 
-    body+= "<p>Olá, " + nome + ", seu ticket foi gerado com sucesso!</p>";
+    body += "<p>Olá, " + nome + ", seu ticket foi gerado com sucesso!</p>";
 
-    body+= "<p><strong>Categoria do problema:</strong>  "+categoria+"</p>";
+    body += "<p><strong>Categoria do problema:</strong>  " + categoria + "</p>";
 
-    body+= "<p><strong>Descrição do problema:</strong> "+descricao+"</p>"
+    body += "<p><strong>Descrição do problema:</strong> " + descricao + "</p>"
 
     // TODO: formatar a data para padrão pt-BR
-    body+=(data_de_agendamento == undefined) ? "" : "<p><strong>Data de agendamento:</strong> " + data_de_agendamento + " </p>";
+    body += (data_de_agendamento == undefined) ? "" : "<p><strong>Data de agendamento:</strong> " + data_de_agendamento + " </p>";
 
-    body+=(tecnico == undefined) ? "" : "<p><strong>Nome do Tecnico:</strong> " + tecnico + "</p></br>";
+    body += (tecnico == undefined) ? "" : "<p><strong>Nome do Tecnico:</strong> " + tecnico + "</p></br>";
 
-    body+="<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
+    body += "<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
 
     return body;
 }
@@ -46,23 +46,23 @@ function gerarEmaildeNovoParaoTecnicoTicket(cliente, categoria, descricao,
 
     let body = "";
 
-    body+="<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">"
+    body += "<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">"
 
 
-    body+="<p>Olá, " + tecnico + ", você recebeu um novo job!</p>";
+    body += "<p>Olá, " + tecnico + ", você recebeu um novo job!</p>";
 
-    body+="<p><strong>Categoria do problema:</strong> " + categoria + "</p>";
+    body += "<p><strong>Categoria do problema:</strong> " + categoria + "</p>";
 
-    body+="<p><strong>Descrição do problema:</strong> " + descricao + "</p>"
+    body += "<p><strong>Descrição do problema:</strong> " + descricao + "</p>"
 
     // TODO: formatar a data para padrão pt-BR
-    body+=(data_de_agendamento == undefined) ? "" : "<p><strong>Data de agendamento:</strong> " + data_de_agendamento + " </p>";
+    body += (data_de_agendamento == undefined) ? "" : "<p><strong>Data de agendamento:</strong> " + data_de_agendamento + " </p>";
 
-    body+=(cliente == undefined) ? "" : "<p><strong>Nome do Cliente:</strong> " + tecnico + "</p></br>";
+    body += (cliente == undefined) ? "" : "<p><strong>Nome do Cliente:</strong> " + tecnico + "</p></br>";
 
-    body+="<p><strong>Endereço:</strong> " + endereco + "</p>"
+    body += "<p><strong>Endereço:</strong> " + endereco + "</p>"
 
-    body+="<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
+    body += "<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
 
     return body;
 
@@ -85,13 +85,13 @@ router.post('/', function (req, res) {
             let endereco = req.body.logradouro + ", " + req.body.logradouro_numero;
 
             if (req.body.complemento)
-              endereco+=req.body.complemento;
+                endereco += req.body.complemento;
 
-            endereco+="<br />Bairro: " + req.body.bairro;
+            endereco += "<br />Bairro: " + req.body.bairro;
 
-            endereco+="<br />Cidade: " + req.body.cidade;
+            endereco += "<br />Cidade: " + req.body.cidade;
 
-            endereco+=" - " + req.body.estado;
+            endereco += " - " + req.body.estado;
 
             //E-mail para o técnico
             Util.enviarEmail(req.body.email_tecnico, "[Wine] Você recebeu um novo job!", gerarEmaildeNovoParaoTecnicoTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome, endereco));
@@ -117,7 +117,7 @@ router.get('/status/:status/limit/:limit/offset/:offset', function (req, res) {
     const limit_arg = parseInt(req.params.limit);
     const offset_arg = parseInt(req.params.offset);
     let taok = true;
-	switch(status) {
+    switch (status) {
         case 'aberto':
         case 'agendado':
         case 'em_atendimento':
@@ -133,26 +133,26 @@ router.get('/status/:status/limit/:limit/offset/:offset', function (req, res) {
                 success: false,
                 data: {},
                 error: "Status Inválido!"
-	        });
+            });
     }
-    if(!taok) return;
+    if (!taok) return;
 
     entidade.findAndCountAll({
         limit: limit_arg,
         offset: offset_arg,
-        where: {'ticket_status': status}
+        where: { 'ticket_status': status }
     })
-    .then(result => {
-        let temp = {success: true, data: {}};
-        temp.data["ticket"] = result.rows;
-        temp.data['count'] = result.count;
-        res.json(temp);
-    })
-    .catch(error => res.json({
+        .then(result => {
+            let temp = { success: true, data: {} };
+            temp.data["ticket"] = result.rows;
+            temp.data['count'] = result.count;
+            res.json(temp);
+        })
+        .catch(error => res.json({
             success: false,
             data: {},
             error: JSON.stringify(error)
-    }));
+        }));
 
 });
 
@@ -162,7 +162,7 @@ router.get('/count/:status', function (req, res) {
 
     const status = req.params.status;
     let taok = true;
-	switch(status) {
+    switch (status) {
         case 'aberto':
         case 'agendado':
         case 'em_atendimento':
@@ -179,37 +179,37 @@ router.get('/count/:status', function (req, res) {
                 success: false,
                 data: {},
                 error: "Status Inválido!"
-	        });
+            });
     }
 
 
-    if(!taok) return;
+    if (!taok) return;
 
-    if(status != "todos") { // busca a quantidade de apenas um status
+    if (status != "todos") { // busca a quantidade de apenas um status
         entidade.count({
-            where: {'ticket_status': status}
+            where: { 'ticket_status': status }
         })
-        .then(result => {
-            let temp = {success: true, data: {}};
-            temp.data["count"] = result;
-            res.json(temp);
-        })
-        .catch(error => res.json({
+            .then(result => {
+                let temp = { success: true, data: {} };
+                temp.data["count"] = result;
+                res.json(temp);
+            })
+            .catch(error => res.json({
                 success: false,
                 data: {},
                 error: error.toString()
-        }));
+            }));
 
     } else { // Busca a quantidade de todos os status de chamados
         entidade.findAll({
             group: ['ticket_status'],
             attributes: ['ticket_status', [Sequelize.fn('COUNT', 'ticket_status'), 'count']],
-          }).then(function (result) {
-            let temp = {success: true, data: {}};
+        }).then(function (result) {
+            let temp = { success: true, data: {} };
             temp.data = result;
 
             res.json(temp);
-          });
+        });
 
     }
 
@@ -227,18 +227,70 @@ router.post('/upload/comprovante', function (req, res) {
     form.multiples = true;
     form.keepExtensions = true;
     uploadDir = process.env.COMPROVANTE_CHAMADO;
-    form.uploadDir =  uploadDir;
+    form.uploadDir = uploadDir;
     form.parse(req, (err, fields, files) => {
         if (err) return res.status(500).json({ error: err })
         res.status(200).json({ uploaded: true })
-      })
-      form.on('fileBegin', function (name, file) {
-          console.log(file);
-          console.log(name);
+    })
+    form.on('fileBegin', function (name, file) {
+        console.log(file);
+        console.log(name);
 
         const [fileName, fileExt] = file.name.split('.')
         file.path = path.join(uploadDir, `${fileName}_${new Date().getTime()}.${fileExt}`)
 
-      });
+    });
 });
+
+/* Envia:
+id_chamado
+cliente
+descricao
+endereco
+cidade
+estado
+telefone
+email
+categoria
+data_abertura
+tecnico
+observacoes
+
+Recebe:
+Ordem_de_Servico.pdf
+*/
+router.post('/ordemdeservico', function (req, res) {
+    console.log(req.body);
+    const pdftk = require('node-pdftk');
+    pdftk
+        .input('./pdfs/Ordem_de_Servico.pdf')
+        // .input('./Ordem_de_Servico.pdf')
+        .fillForm({
+            id_chamado: req.body.id_chamado,
+            cliente: req.body.cliente,
+            descricao: req.body.descricao,
+            endereco:req.body.endereco,
+            cidade: req.body.cidade,
+            estado: req.body.estado,
+            categoria: req.body.categoria,
+            data_abertura: req.body.data_abertura,
+            tecnico: req.body.tecnico,
+            observacoes: req.body.observacoes
+        })
+        .flatten()
+        .output()
+        .then(buffer => {
+            // Do stuff with the output buffer
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment; filename=Ordem_de_Servico.pdf');
+            res.setHeader('Content-Length', Buffer.byteLength(buffer));
+            res.send(buffer);
+        })
+        .catch(err => {
+            console.log(err);
+            res.statusCode = 500;
+            res.json({"success":false, error: "Erro interno ao gerar pdf!"});
+        });
+});
+
 module.exports = router;

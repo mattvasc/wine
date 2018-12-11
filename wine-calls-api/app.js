@@ -17,7 +17,6 @@ const empresaParceiraRouter = require('./routes/EmpresaParceira');
 const tecnicoRouter = require('./routes/Tecnico');
 const ticketRouter = require('./routes/Ticket');
 const testRouter = require('./routes/Test');
-const email = require('./routes/Email');
 const FuncRouter = require('./routes/Funcionario');
 const Model = require('./model/');
 
@@ -47,7 +46,6 @@ app.use('/funcionarios', FuncRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
 app.use('/tickets', ticketRouter);
 app.use('/tests', testRouter);
-app.use('/email', email);
 
 
 // catch 404 and forward to error handler

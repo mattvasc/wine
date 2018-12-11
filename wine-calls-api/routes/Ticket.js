@@ -7,6 +7,52 @@ const path = require('path')
 const router = geradorDeRotas(Model, "ticket");
 let entidade = Model["ticket"];
 
+
+// Retorna com paginação os status solicitados
+router.get('/status/:status/limit/:limit/offset/:offset', function (req, res) {
+    const status = req.params.status;
+    const limit_arg = parseInt(req.params.limit);
+    const offset_arg = parseInt(req.params.offset);
+    let taok = true;
+	switch(status) {
+        case 'aberto':
+        case 'agendado':
+        case 'em_atendimento':
+        case 'entregue':
+        case 'encerrado_com_sucesso':
+        case 'encerrado_com_insucesso':
+        case 'cancelado':
+            break;
+        default:
+            taok = false;
+            res.statusCode = 400;
+            res.json({
+                success: false,
+                data: {},
+                error: "Status Inválido!"
+	        });
+    }
+    if(!taok) return;
+    
+    entidade.findAndCountAll({
+        limit: limit_arg,
+        offset: offset_arg,
+        where: {'ticket_status': status}
+    })
+    .then(result => {
+        let temp = {success: true, data: {}};
+        temp.data["ticket"] = result.rows;
+        temp.data['count'] = result.count;
+        res.json(temp);
+    })
+    .catch(error => res.json({
+            success: false,
+            data: {},
+            error: JSON.stringify(error)
+    }));
+
+});
+
 // Retorna a quantidade de chamados para o status informado, ou um objeto do tipo
 // {aberto: 5, fechado: 13} se o parametro "todos" for informado para "status"
 router.get('/count/:status', function (req, res) {
@@ -25,6 +71,7 @@ router.get('/count/:status', function (req, res) {
             break;
         default:
             taok = false;
+            res.statusCode = 400;
             res.json({
                 success: false,
                 data: {},

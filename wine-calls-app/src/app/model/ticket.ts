@@ -1,6 +1,6 @@
 
 export class Ticket {
-	public id?: number;
+	public ticket_id?: number;
 	/* FKS */
 	public cliente_id?: number;
 	public tecnico_id?: number;

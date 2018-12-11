@@ -18,6 +18,12 @@ export class TicketService {
     return this.http.get<any>(this.apiUrl + '/count/' + status );
    }
 
+    // Retorna todos os chamados de um tipo, paginado
+    public getWithStatus(status: string, limit: number, offset: number): Observable<any> {
+      return this.http.get<any>(this.apiUrl + `/status/${status}/limit/${limit}/offset/${offset}` );
+     }
+
+
    create(ticket: Ticket): Observable<any> {
     return this.http.post<Ticket>(this.apiUrl + '/', ticket);
   }

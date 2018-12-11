@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt'; // <-- JWT Lives here
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- bang pra paginação
 import {
   ClienteListComponent,
   ClientMainComponent,
@@ -106,6 +107,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    NgxPaginationModule,
     TextMaskModule,
     FormsModule,
     ReactiveFormsModule,

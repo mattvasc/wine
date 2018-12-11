@@ -9,13 +9,13 @@ import { Ticket } from 'src/app/model/ticket';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  private contadores = 
+  private contadores =
     { 'aberto': 0 ,
      'agendado': 0 ,
-     'em-atendimento': 0 ,
+     'em_atendimento': 0 ,
      'entregue': 0 ,
-     'encerrado-com-sucesso': 0 ,
-     'encerrado-com-insucesso': 0 ,
+     'encerrado_com_sucesso': 0 ,
+     'encerrado_com_insucesso': 0 ,
      'cancelado': 0 };
   constructor(private api: TicketService,
     public dataStorage: DataStorageService,

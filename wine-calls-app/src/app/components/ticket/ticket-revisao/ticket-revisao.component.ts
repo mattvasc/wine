@@ -48,7 +48,7 @@ export class TicketRevisaoComponent implements OnInit {
       let agendado = formatDate(this.dataStorage.ticket.data_inicio, 'yyyy-MM-dd', 'en-US');
 
       if (today == agendado)
-        this.dataStorage.ticket.ticket_status = "em-atendimento";
+        this.dataStorage.ticket.ticket_status = "em_atendimento";
       else
         this.dataStorage.ticket.ticket_status = "agendado";
       this.dataStorage.ticket.email_tecnico = this.dataStorage.tecnico.email;

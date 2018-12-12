@@ -61,6 +61,11 @@ export class TicketVerDetalhesComponent implements OnInit {
     this.ticketSelecionado = id;
   }
 
+  cancelarTicket(id : number) {
+    this.ticketSelecionado = id;
+    this.encerrarChamado();
+  }
+
   encerrarChamado() {
 
     this.chamados[this.ticketSelecionado].ticket_status = "encerrado_com_sucesso";
@@ -72,7 +77,7 @@ export class TicketVerDetalhesComponent implements OnInit {
         this.modalWarning['message'] = 'Ticket encerrado com sucesso!';
         this.modalWarning['title'] = 'Sucesso!';
         document.getElementById('openGenericModal').click();
-        // this.chamados.splice($("#idChamado").val(),1);
+        this.chamados.splice(this.ticketSelecionado,1);
         // $("#detalhesChamado").modal('hide');
       } else {
         this.modalWarning['message'] = 'Erro Interno!';

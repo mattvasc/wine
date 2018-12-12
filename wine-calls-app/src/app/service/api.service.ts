@@ -22,7 +22,7 @@ export class ApiService {
   constructor(private http: HttpClient) {  }
 
 
-  public apiUrl = 'http://localhost:3000/';
+  public apiUrl = 'http://192.168.16.103:3000/';
 
   buscaCep(cep: String){
     cep = cep.replace('-','');
@@ -36,7 +36,7 @@ export class ApiService {
       return false;
     cpf = cpf.replace(/[^\d]+/g,'');
     if(cpf == '') return false;
-    
+
     // Elimina CPFs invalidos conhecidos
     if (cpf.length != 11 ||
       cpf == "00000000000" ||

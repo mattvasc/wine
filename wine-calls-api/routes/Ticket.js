@@ -116,19 +116,16 @@ router.post('/', function (req, res) {
 router.get('/full/limit/:limit/offset/:offset', function (req, res) {
   const limit_arg = parseInt(req.params.limit);
   const offset_arg = parseInt(req.params.offset);
-  entidade.findAll({
+  entidade.findAndCountAll({
       limit: limit_arg,
       offset: offset_arg,
       include: [{ all: true, nested: true }]
   })
   .then(result => {
-      console.log(result);
-      /*
-        Olá, pessoal linda que está lendo isto.
-        Aqui vai um presente para você:
-
-        TODO: consumir o result, transformar em json e mandar para o usuário
-      */
+      let temp = { success: true, data: {} };
+      temp.data["ticket"] = result.rows;
+      temp.data['count'] = result.count;
+      res.json(temp);
   })
   .catch(error => res.json({
       success: false,

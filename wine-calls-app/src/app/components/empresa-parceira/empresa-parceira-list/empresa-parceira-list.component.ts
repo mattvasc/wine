@@ -58,8 +58,8 @@ export class EmpresaParceiraListComponent implements OnInit {
     const id = this.empresas_parceiras[index].id;
     console.log(`Indo apagar a empresa ${id}`);
     this.api.delete(id).subscribe(c => {
-      if(c['success'] == true) {
-        this.empresas_parceiras.splice(index,1);
+      if (c['success'] == true) {
+        this.empresas_parceiras.splice(index, 1);
         this.modalWarning['message'] = 'Empresa apagada com sucesso!';
         this.modalWarning['title'] = 'Sucesso!';
         document.getElementById('openGenericModal').click();
@@ -81,7 +81,7 @@ export class EmpresaParceiraListComponent implements OnInit {
   }
 
   getPage(page: number, pageSize: number) {
-    this.geral.getPaginate('EmpresasParceiras', pageSize, pageSize*(page-1)).subscribe(c => {
+    this.geral.getPaginate('EmpresasParceiras', pageSize, pageSize * (page - 1)).subscribe(c => {
       if (c['success'] == true) {
         this.empresas_parceiras = c['data']['empresa_parceira'];
         this.count = c['count'];

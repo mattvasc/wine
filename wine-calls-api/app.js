@@ -1,6 +1,6 @@
 const result = require('dotenv').config()
 var commandExists = require('command-exists');
- 
+
 
 if (result.error) {
   throw result.error
@@ -82,20 +82,24 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
+
+Model.sequelize.models.ticket.belongsTo(Model.sequelize.models.cliente, {foreignKey: 'cliente_id'});
+Model.sequelize.models.ticket.belongsTo(Model.sequelize.models.tecnico, {foreignKey: 'tecnico_id'});
+
 Model.sequelize.sync(
-    // {"force":true} 
+    // {"force":true}
     ).then(() => {
         commandExists('pdftk', function(err, commandExists) {
- 
+
             if(commandExists) {
                 console.log('API Rodando na porta 3000');
                 app.listen(3000);
             } else {
                 console.log("[ERRO] Instale PDFTK Server CLI no servidor, e verifique se ele está no PATH");
             }
-         
+
         });
-    
+
  } );
 
 module.exports = app;

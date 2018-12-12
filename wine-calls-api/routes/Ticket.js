@@ -97,7 +97,7 @@ router.post('/', function (req, res) {
               //E-mail para o técnico
               Util.enviarEmail(req.body.email_tecnico, "[Wine] Você recebeu um novo job!", gerarEmaildeNovoParaoTecnicoTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome, endereco));
             }
-            
+
             //E-mail para o cliente
             Util.enviarEmail(req.body.email_contato, "[Wine] Detalhes do seu chamado", gerarEmaildeNovoParaoClienteTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome));
             temp["data"][entidade_nome] = payload;
@@ -119,15 +119,16 @@ router.get('/full/limit/:limit/offset/:offset', function (req, res) {
   entidade.findAll({
       limit: limit_arg,
       offset: offset_arg,
-      include: [
-        {model: cliente}
-      ]
+      include: [{ all: true, nested: true }]
   })
   .then(result => {
-      let temp = { success: true, data: {} };
-      temp.data["ticket"] = result.rows;
-      temp.data['count'] = result.count;
-      res.json(temp);
+      console.log(result);
+      /*
+        Olá, pessoal linda que está lendo isto.
+        Aqui vai um presente para você:
+
+        TODO: consumir o result, transformar em json e mandar para o usuário
+      */
   })
   .catch(error => res.json({
       success: false,

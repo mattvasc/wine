@@ -15,6 +15,7 @@ export class FuncionarioListComponent implements OnInit {
   public modalWarning: {};
   public closeResult;
   public count = 0;
+  public pageSize: number = 8;
   public p;
 
   public funcionarios: Funcionario[] = [];
@@ -42,26 +43,15 @@ export class FuncionarioListComponent implements OnInit {
 
     this.dataStorage.sync();
     this.funcionarioAtual = this.dataStorage.usuario_logado;
-    this.funcionarioService.getAll().subscribe(retorno => {
-      console.log(retorno);
-      if(retorno['success'] == true) {
-        this.funcionarios = retorno["data"]['funcionario_wine'];
-        this.count = retorno['data']['funcionario_wine'].length;
-        this.p = 0;
-        this.getPage(1, 8);
-      } else {
-        this.modalWarning['message'] = 'Erro ao buscar funcionários ativos no sistema';
-        this.modalWarning['title'] = 'Erro!';
-        document.getElementById('openGenericModal').click();
-      }
-    });
+    this.getPage(1, this.pageSize);
   }
 
   getPage(page: number, pageSize: number) {
     this.geral.getPaginate('funcionarios', pageSize, pageSize*(page-1)).subscribe(f => {
-      console.log(f);
-      if(f['success'] == true)
+      if(f['success'] == true) {
         this.funcionarios = f["data"]['funcionario_wine'];
+        this.count = f['count'];
+      }
       else{
         this.modalWarning['message'] = 'Erro ao buscar funcionários ativos no sistema';
         this.modalWarning['title'] = 'Erro!';
@@ -72,7 +62,7 @@ export class FuncionarioListComponent implements OnInit {
 
   changePage(event: any): void {
     this.p = event;
-    this.getPage(event, 8);
+    this.getPage(event, this.pageSize);
   }
 
 }

@@ -7,7 +7,7 @@
     <th *ngIf="funcionarioAtual.admin == true">Apagar</th>
   </thead>
   <tbody>
-    <tr *ngFor="let func of funcionarios | paginate: { id: 'funcspagination', itemsPerPage: 8, currentPage: p, totalItems: count }">
+    <tr *ngFor="let func of funcionarios | paginate: { id: 'funcspagination', itemsPerPage: pageSize, currentPage: p, totalItems: count }">
       <td>{{func.id}}</td>
       <td>{{ func.nome}}</td>
       <td>{{func.email}}</td>
@@ -16,7 +16,7 @@
     </tr>
   </tbody>
 </table>
-<pagination-controls *ngIf="funcionarios.length > 0;" id="funcspagination" (pageChange)="changePage($event)"
+<pagination-controls *ngIf="count > pageSize;" id="funcspagination" (pageChange)="changePage($event)"
 previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
 <ng-template #semFunc>
     <h4>Não há funcionários Wine cadastrados no momento!</h4>

@@ -17,6 +17,7 @@ export class EmpresaParceiraListComponent implements OnInit {
   public modalWarning: {};
   public closeResult;
   public count = 0;
+  public pageSize: number = 8;
   public p;
 
   constructor(
@@ -40,6 +41,7 @@ export class EmpresaParceiraListComponent implements OnInit {
     this.modalWarning = {};
     this.modalWarning['title'] = '';
     this.modalWarning['message'] = '';
+    this.getPage(1, this.pageSize);
 
     this.getEmpresasParceiras();
   }
@@ -50,7 +52,7 @@ export class EmpresaParceiraListComponent implements OnInit {
         this.empresas_parceiras = c['data']['empresa_parceira'];
         this.count = c['data']['empresa_parceira'].length;
         this.p = 0;
-        this.getPage(1, 8);
+        
       }
     });
   }
@@ -91,13 +93,15 @@ export class EmpresaParceiraListComponent implements OnInit {
 
   getPage(page: number, pageSize: number) {
     this.geral.getPaginate('EmpresasParceiras', pageSize, pageSize*(page-1)).subscribe(c => {
-      if (c['data']['empresa_parceira'] !== undefined)
+      if (c['success'] == true) {
         this.empresas_parceiras = c['data']['empresa_parceira'];
+        this.count = c['count'];
+      }
     });
   }
 
   changePage(event: any): void {
     this.p = event;
-    this.getPage(event, 8);
+    this.getPage(event, this.pageSize);
   }
 }

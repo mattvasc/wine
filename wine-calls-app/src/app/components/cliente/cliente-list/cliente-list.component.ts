@@ -50,7 +50,6 @@ export class ClienteListComponent implements OnInit {
   getPage(page: number, pageSize: number) {
     this.api.getWithNamePaginated
     this.api.getWithNamePaginated(this.termoPesquisado, pageSize, pageSize*(page-1)).subscribe(c => {
-      console.log(c);
       if (c['success']==true) {
         this.clientes = c['data']['cliente'];
         this.count = c['count'];

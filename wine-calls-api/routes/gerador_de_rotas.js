@@ -62,11 +62,12 @@ module.exports = function buildRoutes(Model, entidade_nome,
 			limit_param = + limit_param;
 			offset_param = + offset_param;
 			console.log(`Limit: ${limit_param} - offset ${offset_param}`);
-			entidade.findAll({ limit: limit_param, offset: offset_param }).then(result => {
+			entidade.findAndCountAll({ limit: limit_param, offset: offset_param }).then(result => {
 				let temp = {
 					success: true, data: {}
 				};
-				temp["data"][entidade_nome] = result;
+				temp["data"][entidade_nome] = result.rows;
+				temp['count'] = result.count;
 				res.json(temp);
 			})
 				.catch(error => res.json({

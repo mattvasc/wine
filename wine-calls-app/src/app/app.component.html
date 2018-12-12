@@ -36,20 +36,18 @@
             </li>
           </a> -->
 
-      <a (click)='mudarRota("/chamados")' class="linkMenu">
+      <!-- <a (click)='mudarRota("/chamados")' class="linkMenu">
         <li [ngClass]="{'active': router.url == '/chamados'}">
           <i class="fab fa-menu fa-stack-overflow fa-lg"></i> Chamados
         </li>
+      </a> -->
+
+      <!-- TODO: implementar -->
+      <a (click)='mudarRota("/relatorio")' class="linkMenu">
+        <li class="">
+          <i class="fa fa-menu fa-chart-line fa-lg"></i> Relatórios
+        </li>
       </a>
-
-      <!--
-          TODO: implementar
-
-          <a (click)='mudarRota("/relatorios" class="linkMenu">
-            <li class="">
-              <i class="fa fa-menu fa-chart-line fa-lg"></i> Relatórios
-            </li>
-          </a> -->
 
       <a (click)='mudarRota("/clientes")' class="linkMenu">
         <li [ngClass]="{'active': router.url == '/clientes'}">

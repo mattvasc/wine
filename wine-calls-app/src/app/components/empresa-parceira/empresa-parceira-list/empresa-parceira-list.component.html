@@ -11,7 +11,7 @@
     <th>Apagar</th>
   </thead>
   <tbody>
-    <tr *ngFor="let ep of empresas_parceiras | paginate: { id: 'empresapagination', itemsPerPage: 8, currentPage: p, totalItems: count }">
+    <tr *ngFor="let ep of empresas_parceiras | paginate: { id: 'empresapagination', itemsPerPage: pageSize, currentPage: p, totalItems: count }">
       <td>{{ep.id}}</td>
       <td>{{ ep.razao_social}}</td>
       <td>{{ ep.nome_fantasia}}</td>
@@ -22,7 +22,7 @@
     </tr>
   </tbody>
 </table>
-<pagination-controls *ngIf="empresas_parceiras.length > 0;" id="empresapagination" (pageChange)="changePage($event)"
+<pagination-controls *ngIf="count > pageSize;" id="empresapagination" (pageChange)="changePage($event)"
 previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
 <ng-template #semEP>
   <h2>Não há empresas parceiras cadastradas no momento!</h2>

@@ -5,7 +5,7 @@ const Util = require('../Util');
 let quais_rotas_criar = {
 	"single": false,
 	"all": false,
-	"paginacao": false,
+	"paginacao": true,
 	"describe": false,
 	"create": false,
 	"update": true,

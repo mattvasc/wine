@@ -32,3 +32,8 @@ export { TicketRevisaoComponent  } from './ticket/ticket-revisao/ticket-revisao.
 export { TicketEscolherTecnicoComponent } from './ticket/ticket-escolher-tecnico/ticket-escolher-tecnico.component';
 
 export { TicketVerDetalhesComponent } from './ticket/ticket-ver-detalhes/ticket-ver-detalhes.component';
+
+
+export { RelatorioMainComponent } from './relatorio/relatorio-main/relatorio-main.component';
+export { RelatorioClienteComponent } from './relatorio/relatorio-cliente/relatorio-cliente.component';
+export { RelatorioEmpresaComponent } from './relatorio/relatorio-empresa/relatorio-empresa.component';

@@ -3,6 +3,8 @@ import { DataStorageService } from '../../../service/data-storage.service';
 import { Ticket } from 'src/app/model/ticket';
 import { TicketService } from '../../../service/ticket.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-ticket-ver-detalhes',
@@ -14,19 +16,23 @@ export class TicketVerDetalhesComponent implements OnInit {
   public quantidade: number;
   public ticket_status: string;
   public modalWarning: {};
-
+  public ticketSelecionado: number;
   constructor(
     public dataStorage: DataStorageService,
     private ticketService: TicketService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) { }
 
   open(content) {
-    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      // this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' }).result.then(() => {
+    }, () => {});
+  }
+
+  editTicket(index: number){
+    this.router.navigateByUrl('/formsTicket');
+    //this.dataStorage.ticket = this.chamados[index];
+    //this.dataStorage.
   }
 
   ngOnInit() {
@@ -50,17 +56,15 @@ export class TicketVerDetalhesComponent implements OnInit {
     });
   }
 
-  seeTicket(id) {
-    // $("#idChamado").val(id);
-    // $("#detalhesChamado").modal('show');
-    console.log(this.chamados[id]);
+  seeTicket(id: number) {
+    document.getElementById('openGenericModal2').click();
+    this.ticketSelecionado = id;
   }
 
   encerrarChamado() {
-    // let ticketApagar = this.chamados[$("#idChamado").val()];
-    let ticketApagar = new Ticket;
-    ticketApagar.ticket_status = "encerrado_com_sucesso";
 
+    this.chamados[this.ticketSelecionado].ticket_status = "encerrado_com_sucesso";
+    let ticketApagar = this.chamados[this.ticketSelecionado];
     console.log(ticketApagar);
 
     this.ticketService.update(ticketApagar).subscribe(success => {

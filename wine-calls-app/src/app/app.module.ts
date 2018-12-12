@@ -26,7 +26,12 @@ import {
   TicketAgendamentoComponent,
   TicketVerDetalhesComponent,
   TicketEscolherParceiroComponent,
-  TicketMainComponent } from './components';
+  TicketMainComponent,
+  RelatorioMainComponent,
+  RelatorioEmpresaComponent,
+  RelatorioClienteComponent
+
+} from './components';
 
 import { TecnicoFormComponent } from './components/index';
 import { ChamadoComponent } from './components/index';
@@ -41,14 +46,12 @@ import { AuthService } from './service/auth.service';
 
 
 
-
 // Angular CLI environemnt
 
 const appRoutes: Routes = [
   { path: 'clientes', component: ClientMainComponent, canActivate: [AuthService] },
   { path: 'formsCliente', component: ClienteFormComponent, canActivate: [AuthService]  },
   { path: 'formsCliente/:id', component: ClienteFormComponent, canActivate: [AuthService]  },
-
 
   { path: 'empresasParceiras', component: EmpresaParceiraMainComponent, canActivate: [AuthService]  },
   { path: 'formsEmpresaParceira', component: ParceiroFormComponent, canActivate: [AuthService]  },
@@ -61,11 +64,15 @@ const appRoutes: Routes = [
   { path: 'chamados', component: TicketMainComponent, canActivate: [AuthService]  },
   { path: 'chamados/detalhes', component: TicketVerDetalhesComponent, canActivate: [AuthService]  },
   { path: 'formsTicket', component: ChamadoComponent, canActivate: [AuthService]  },
+  
   { path: 'funcionarios', component: FuncionarioListComponent, canActivate: [AuthService]  },
   { path: 'funcionario', component: FuncionarioFormComponent, canActivate: [AuthService]  },
   { path: 'funcionario/first', component: FuncionarioFormComponent  },
   { path: 'funcionario/:id', component: FuncionarioFormComponent, canActivate: [AuthService]  },
 
+  { path: 'relatorio', component: RelatorioMainComponent, canActivate: [AuthService]  },
+  { path: 'relatorio/cliente', component: RelatorioClienteComponent, canActivate: [AuthService]  },
+  { path: 'relatorio/empresa', component: RelatorioEmpresaComponent, canActivate: [AuthService]  },
   { path: 'login', component: LoginComponent },
 
   // Colocar todas as rotas novas antes dessas três abaixo..!
@@ -100,6 +107,9 @@ const appRoutes: Routes = [
     TicketRevisaoComponent,
     TicketEscolherTecnicoComponent,
     TicketVerDetalhesComponent,
+    RelatorioMainComponent,
+    RelatorioEmpresaComponent,
+    RelatorioClienteComponent,
   ],
   imports: [
     BrowserModule,

@@ -45,8 +45,9 @@ export class EmpresaParceiraListComponent implements OnInit {
   }
 
 
-  editEmpresaParceira(id: number) {
-    this.router.navigateByUrl(`/formsEmpresaParceira/${id}`);
+  editEmpresaParceira(index: number) {
+    this.dataStorage.empresa_parceira = this.empresas_parceiras[index];
+    this.router.navigateByUrl(`/formsEmpresaParceira/`);
   }
 
   editFuncionariosEmpresaParceira(id: number) {
@@ -54,7 +55,7 @@ export class EmpresaParceiraListComponent implements OnInit {
     this.router.navigateByUrl(`/tecnicos`);
   }
   deleteEmpresaParceira(index: number) {
-    let id = this.empresas_parceiras[index].id;
+    const id = this.empresas_parceiras[index].id;
     console.log(`Indo apagar a empresa ${id}`);
     this.api.delete(id).subscribe(c => {
       if(c['success'] == true) {

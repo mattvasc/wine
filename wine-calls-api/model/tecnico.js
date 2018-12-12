@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
 
-    nome_pai: {
+    nome_mae: {
       type: DataTypes.STRING(45),
       allowNull: false
     },

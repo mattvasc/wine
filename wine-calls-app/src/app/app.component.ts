@@ -13,8 +13,6 @@ export class AppComponent implements OnInit  {
     private router: Router,
     public dataStorage: DataStorageService
     ) {
-      
-      
   }
 
   ngOnInit() {
@@ -33,7 +31,6 @@ export class AppComponent implements OnInit  {
     if(rota =='formsTicket') {
       this.dataStorage.ticket = new Ticket();
       this.dataStorage.ticket.estagio = 1;
-      
     }
     this.router.navigateByUrl(rota);
   }

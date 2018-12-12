@@ -16,40 +16,41 @@ export class AuthService implements CanActivate {
   ) { }
   canActivate(): boolean {
     const helper = new JwtHelperService();
-    let token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem('token');
     if (token == null) {
       this.router.navigateByUrl('/login');
       return false;
 
     }
-    if(helper.isTokenExpired(token)) {
+    if (helper.isTokenExpired(token)) {
       return false;
     } else {
-      if( Math.floor(helper.getTokenExpirationDate(token).getTime() / 1000 ) - Math.floor(Date.now() / 1000) < 180 )
+      if (Math.floor(helper.getTokenExpirationDate(token).getTime() / 1000) - Math.floor(Date.now() / 1000) < 180)
         this.renewToken();
       return true;
     }
   }
 
   doLogin(f: Funcionario) {
-    return this.http.post(this.apiService.apiUrl + "funcionarios/login", { "email": f.email, "senha": f.senha });
+    return this.http.post(this.apiService.apiUrl + 'funcionarios/login', { 'email': f.email, 'senha': f.senha });
   }
 
   // Pede um novo JWT para continuar usando a API de forma válida.
   renewToken() {
-    let token = window.localStorage.getItem("token");
-    this.http.post<boolean>(this.apiService.apiUrl + "funcionarios/isvalid", { "token": token }).subscribe(data => {
-        if (data['success'] == true) {
-          window.localStorage.setItem("token", data['token']);
-        } else
-          window.localStorage.removeItem("token");
-      }, err => {
-          window.localStorage.removeItem("token");
-      });
+    const token = window.localStorage.getItem('token');
+    this.http.post<boolean>(this.apiService.apiUrl + 'funcionarios/isvalid', { 'token': token }).subscribe(data => {
+      if (data['success'] == true) {
+        window.localStorage.setItem('token', data['token']);
+      } else {
+        window.localStorage.removeItem('token');
+      }
+    }, err => {
+      window.localStorage.removeItem('token');
+    });
   }
 
-  checkIfIsEmptyOfEmployees(){
-    return this.http.get(this.apiService.apiUrl + "funcionarios/vazio");
+  checkIfIsEmptyOfEmployees() {
+    return this.http.get(this.apiService.apiUrl + 'funcionarios/vazio');
   }
 
 }

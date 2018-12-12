@@ -17,9 +17,9 @@ export class EmpresaParceiraListComponent implements OnInit {
   public modalWarning: {};
   public closeResult;
   public count = 0;
-  public pageSize: number = 8;
+  public pageSize = 8;
   public p;
-
+  public empresas_parceiras: EmpresaParceira[] = [];
   constructor(
     private geral: ApiService,
     private api: EmpresaParceiraService,
@@ -36,26 +36,14 @@ export class EmpresaParceiraListComponent implements OnInit {
     });
   }
 
-  empresas_parceiras: EmpresaParceira[] = [];
   ngOnInit() {
     this.modalWarning = {};
     this.modalWarning['title'] = '';
     this.modalWarning['message'] = '';
     this.getPage(1, this.pageSize);
 
-    this.getEmpresasParceiras();
   }
 
-  getEmpresasParceiras() {
-    this.api.getAll().subscribe(c => {
-      if (c['data']['empresa_parceira'] !== undefined) {
-        this.empresas_parceiras = c['data']['empresa_parceira'];
-        this.count = c['data']['empresa_parceira'].length;
-        this.p = 0;
-        
-      }
-    });
-  }
 
   editEmpresaParceira(id: number) {
     this.router.navigateByUrl(`/formsEmpresaParceira/${id}`);
@@ -74,20 +62,20 @@ export class EmpresaParceiraListComponent implements OnInit {
         this.modalWarning['message'] = 'Empresa apagada com sucesso!';
         this.modalWarning['title'] = 'Sucesso!';
         document.getElementById('openGenericModal').click();
-        //alert('Empresa apagada com sucesso!');
+        // alert('Empresa apagada com sucesso!');
       } else{
         console.log(c);
         this.modalWarning['message'] = 'Erro ao apagar Empresa Parceira!';
         this.modalWarning['title'] = 'Erro!';
         document.getElementById('openGenericModal').click();
-        //alert("Erro ao apagar Empresa Parceira!");
+        // alert("Erro ao apagar Empresa Parceira!");
       }
     }, c => {
       console.log(c);
       this.modalWarning['message'] = 'Erro ao apagar Empresa Parceira!';
       this.modalWarning['title'] = 'Erro!';
       document.getElementById('openGenericModal').click();
-      //alert("Erro ao apagar Empresa Parceira!");
+      // alert("Erro ao apagar Empresa Parceira!");
     });
   }
 

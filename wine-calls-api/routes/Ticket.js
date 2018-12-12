@@ -93,9 +93,11 @@ router.post('/', function (req, res) {
 
             endereco += " - " + req.body.estado;
 
-            //E-mail para o técnico
-            Util.enviarEmail(req.body.email_tecnico, "[Wine] Você recebeu um novo job!", gerarEmaildeNovoParaoTecnicoTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome, endereco));
-
+            if (req.body.email_tecnico) {
+              //E-mail para o técnico
+              Util.enviarEmail(req.body.email_tecnico, "[Wine] Você recebeu um novo job!", gerarEmaildeNovoParaoTecnicoTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome, endereco));
+            }
+            
             //E-mail para o cliente
             Util.enviarEmail(req.body.email_contato, "[Wine] Detalhes do seu chamado", gerarEmaildeNovoParaoClienteTicket(req.body.cliente_nome, req.body.tipo_ticket, req.body.descricao, req.body.data_inicio, req.body.tecnico_nome));
             temp["data"][entidade_nome] = payload;
@@ -109,6 +111,29 @@ router.post('/', function (req, res) {
                 error: error
             })
         });
+});
+
+router.get('/full/limit/:limit/offset/:offset', function (req, res) {
+  const limit_arg = parseInt(req.params.limit);
+  const offset_arg = parseInt(req.params.offset);
+  entidade.findAll({
+      limit: limit_arg,
+      offset: offset_arg,
+      include: [
+        {model: cliente}
+      ]
+  })
+  .then(result => {
+      let temp = { success: true, data: {} };
+      temp.data["ticket"] = result.rows;
+      temp.data['count'] = result.count;
+      res.json(temp);
+  })
+  .catch(error => res.json({
+      success: false,
+      data: {},
+      error: JSON.stringify(error)
+  }));
 });
 
 // Retorna com paginação os status solicitados

@@ -13,7 +13,7 @@ module.exports = function buildRoutes(Model, entidade_nome,
 	let entidade = Model[entidade_nome];
 	// get single
 	if (quais_rotas.single)
-		router.get('/:id', function (req, res) {
+		router.get('/:id(\\d+)/', function (req, res) {
 			console.log(`Indo pegar um @s ${entidade_nome}`);
 			const object_id = req.params.id;
 			entidade.findByPk(object_id).then(result => {

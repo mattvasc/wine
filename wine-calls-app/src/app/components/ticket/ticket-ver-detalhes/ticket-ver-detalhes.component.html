@@ -61,7 +61,7 @@
       <div class="row">
         <div>
           <input type="hidden" name="idChamado" id="idChamado" value="">
-          <button type="button" class="btn btn-danger btn-block btn-lg" (click)="encerrarChamado();">Encerrar Chamado</button>
+          <button type="button" class="btn btn-danger btn-block btn-lg" (click)="encerrarChamado();" id="botaoEncerrarChamado">{{ (dataStorage.ticket.ticket_status === 'em_atendimento') ? 'Encerrar chamado' : 'Cancelar Chamados'}}</button>
         </div>
       </div>
     </div>

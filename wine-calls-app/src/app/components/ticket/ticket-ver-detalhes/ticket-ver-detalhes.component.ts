@@ -67,8 +67,11 @@ export class TicketVerDetalhesComponent implements OnInit {
   }
 
   encerrarChamado() {
+    if (this.chamados[this.ticketSelecionado].ticket_status == "em_atendimento")
+      this.chamados[this.ticketSelecionado].ticket_status = "encerrado_com_insucesso";
+    else
+      this.chamados[this.ticketSelecionado].ticket_status = "cancelado";
 
-    this.chamados[this.ticketSelecionado].ticket_status = "encerrado_com_sucesso";
     let ticketApagar = this.chamados[this.ticketSelecionado];
     console.log(ticketApagar);
 

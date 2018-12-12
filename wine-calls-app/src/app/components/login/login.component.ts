@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Funcionario } from '../../model/funcionario';
 import { AuthService } from '../../service/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataStorageService } from '../../service/data-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private modalService: NgbModal,
-    private auth: AuthService
-    // private data: DataStorageService
+    private auth: AuthService,
+    public dataStorage: DataStorageService
   ) {
     this.funcionario = new Funcionario();
     this.funcionario.email = '';
@@ -74,6 +75,7 @@ export class LoginComponent implements OnInit {
     this.auth.doLogin(this.funcionario).subscribe(data => {
       if (data['success'] == true) {
         window.localStorage.setItem('token', data['data']);
+        this.dataStorage.sync();
         this.router.navigateByUrl(`/main`);
       } else {
         this.erroAoFazerLogin();

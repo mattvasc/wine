@@ -1,3 +1,6 @@
+import {Cliente} from "./cliente";
+import {Tecnico} from "./tecnico";
+import {EmpresaParceira} from "./empresa-parceira";
 
 export class Ticket {
 	public ticket_id?: number;
@@ -41,5 +44,9 @@ export class Ticket {
 	public cidade?: string = '';
 	public estado?: string = '';
 	public bairro?: string = "";
+
+	public cliente?: Cliente;
+	public tecnico?: Tecnico;
+	public empresa?: EmpresaParceira;
 
 }

@@ -6,8 +6,9 @@
     <th>Cliente</th>
     <th>Categoria</th>
     <th>Ver</th>
-    <th>Editar</th>
-    <th>Cancelar Chamado</th>
+    <th *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado'">Editar</th>
+    <th *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado' || dataStorage.ticket.ticket_status == 'em_atendimento'">Cancelar Chamado</th>
+    <th *ngIf="dataStorage.ticket.ticket_status == 'encerrado_com_sucesso'">Upload de ordem</th>
   </thead>
   <tbody>
     <tr *ngFor="let ticket of chamados; let i = index">
@@ -16,12 +17,18 @@
       <td>{{ ticket.createdAt | date:'dd/L/yy'}}</td>
       <td>{{ticket.tipo_ticket}}</td>
       <td><button (click)="seeTicket(i)" class="btn btn-primary"><i class="fa fa-eye"></i></button></td>
-      <td><button (click)="editTicket(i)" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></button></td>
-      <td><button (click)="cancelarTicket(i)" class="btn btn-danger"><i class="fa fa-times"></i></button></td>
-
+      <td *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado'"><button (click)="editTicket(i)" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></button></td>
+      <td *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado' || dataStorage.ticket.ticket_status == 'em_atendimento'"><button (click)="cancelarTicket(i)" class="btn btn-danger"><i class="fa fa-times"></i></button></td>
+      <td *ngIf="dataStorage.ticket.ticket_status == 'encerrado_com_sucesso'"><button (click)="uploadOrdem(i)" class="btn btn-success"><i class="fa fa-file"></i></button></td>
     </tr>
   </tbody>
 </table>
+
+<form enctype="application/x-www-form-urlencoded" name="formularioDeSubmissaoDeOrdemDeServicoAssiadaPeloTecnico" id="formularioDeSubmissaoDeOrdemDeServicoAssiadaPeloTecnico">
+  <input type="file" name="uploadDeOrdemDeArquivoDoTecnico" hidden id="uploadDeOrdemDeArquivoDoTecnico">
+  <input type="hidden" name="idOrdemDeArquivoDoTecnico" hidden id="idDeOrdemDeArquivoDoTecnico">
+</form>
+
 <ng-template #semTickets>
     <h4>Não há tickets com o estado <b>{{this.ticket_status  | titlecase }}</b> no momento!</h4>
 </ng-template>

@@ -56,6 +56,10 @@ export class TicketVerDetalhesComponent implements OnInit {
     });
   }
 
+  uploadOrdem() {
+    document.getElementById('uploadDeOrdemDeArquivoDoTecnico').click();
+  }
+
   seeTicket(id: number) {
     document.getElementById('openGenericModal2').click();
     this.ticketSelecionado = id;

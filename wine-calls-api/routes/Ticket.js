@@ -134,6 +134,32 @@ router.get('/full/limit/:limit/offset/:offset', function (req, res) {
   }));
 });
 
+router.get('/full/status/:status/limit/:limit/offset/:offset', function (req, res) {
+  const limit_arg = parseInt(req.params.limit);
+  const offset_arg = parseInt(req.params.offset);
+  const status = req.params.status;
+  entidade.findAndCountAll({
+      limit: limit_arg,
+      offset: offset_arg,
+      include: [{ all: true, nested: true }],
+      where: { "ticket_status" : status }
+  })
+  .then(result => {
+      let temp = { success: true, data: {} };
+      temp.data["ticket"] = result.rows;
+      temp.data['count'] = result.count;
+      res.json(temp);
+  })
+  .catch(error => {
+    console.log(error);
+    res.json({
+      success: false,
+      data: {},
+      error: JSON.stringify(error)
+    })
+  });
+});
+
 // Retorna com paginação os status solicitados
 router.get('/status/:status/limit/:limit/offset/:offset', function (req, res) {
     const status = req.params.status;

@@ -13,8 +13,8 @@
   <tbody>
     <tr *ngFor="let ticket of chamados; let i = index">
       <td>{{ticket.ticket_id}}</td>
-      <td>{{ticket?.cliente_nome}}</td>
       <td>{{ ticket.createdAt | date:'dd/L/yy'}}</td>
+      <td>{{ticket.cliente.razao_social}}</td>
       <td>{{ticket.tipo_ticket}}</td>
       <td><button (click)="seeTicket(i)" class="btn btn-primary"><i class="fa fa-eye"></i></button></td>
       <td *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado'"><button (click)="editTicket(i)" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></button></td>

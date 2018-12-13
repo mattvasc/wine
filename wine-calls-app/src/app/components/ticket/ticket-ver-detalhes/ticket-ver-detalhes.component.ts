@@ -44,7 +44,7 @@ export class TicketVerDetalhesComponent implements OnInit {
     this.ticket_status = this.dataStorage.ticket.ticket_status.replace(/_/g, ' ');
     this.dataStorage.sync();
     this.chamados = [];
-    this.ticketService.getWithStatus(this.dataStorage.ticket.ticket_status, 5, 0).subscribe(retorno => {
+    this.ticketService.getFullWithStatus(this.dataStorage.ticket.ticket_status, 5, 0).subscribe(retorno => {
       if(retorno['success']==true){
         this.chamados = retorno['data']['ticket']
         this.quantidade = retorno['count'];

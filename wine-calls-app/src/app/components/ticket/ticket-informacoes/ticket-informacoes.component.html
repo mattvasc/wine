@@ -78,9 +78,9 @@
       id="empresaLogradouro" placeholder="Avenida Salgado Filho">
     </div>
 
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-2" [ngClass]="{'has-warning': dataStorage.cliente.logradouro_numero == undefined || dataStorage.cliente.logradouro_numero == null || dataStorage.cliente.logradouro_numero ==''}">
       <label for="empresaLogradouroNumero">Numero</label>
-      <input type="text" class="form-control" name="logradouroNumero" [(ngModel)]="dataStorage.cliente.logradouro_numero"
+      <input type="text"  class="form-control" name="logradouroNumero" [(ngModel)]="dataStorage.cliente.logradouro_numero"
       id="empresaLogradouroNumero" placeholder="123B">
     </div>
 
@@ -183,7 +183,7 @@
           <button class="btn btn-warning btn-lg btn-block" (click)="voltar()">Voltar</button>
         </div>
         <div class="col-4 offset-4">
-          <button class="btn btn-success btn-lg btn-block" (click)="avancar()">Avançar</button>
+          <button class="btn btn-success btn-lg btn-block" (click)="avancar()" [disabled]="dataStorage.ticket.tipo_ticket== undefined || dataStorage.ticket.tipo_ticket== null || dataStorage.ticket.tipo_ticket==''">Avançar</button>
         </div>
       </div>
     </div>

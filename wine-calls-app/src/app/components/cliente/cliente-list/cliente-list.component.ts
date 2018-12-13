@@ -62,6 +62,7 @@ export class ClienteListComponent implements OnInit {
     this.dataStorage.ticket = new Ticket();
     this.dataStorage.ticket.estagio = 2;
     this.dataStorage.ticket.cliente = this.dataStorage.cliente;
+    this.dataStorage.ticket.cliente_id = this.dataStorage.cliente.id;
     this.dataStorage.save();
     this.router.navigateByUrl('/formsTicket');
   }

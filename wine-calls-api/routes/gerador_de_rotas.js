@@ -157,9 +157,6 @@ module.exports = function buildRoutes(Model, entidade_nome,
 						if (req.body.ticket_status == "encerrado_com_sucesso") {
 							//Avaliacao do cliente
 							Util.enviarEmail(req.body.email_contato, "[Wine] Avalie nossos serviços", gerarEmailAvaliacaoCliente(req.body.tipo_ticket, req.body.ticket_id, req.body.cliente_id, req.body.tecnico_id));
-
-							//Avaliacao do tecnico
-	            Util.enviarEmail(req.body.email_contato, "[Wine] Avalie o caso atendido", gerarEmailAvaliacaoTecnico(req.body.tipo_ticket, req.body.ticket_id, req.body.cliente_id, req.body.tecnico_id));
 						}
 						res.json(temp);
 					})

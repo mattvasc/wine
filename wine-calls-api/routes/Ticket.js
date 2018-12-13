@@ -17,6 +17,26 @@ let quais_rotas = {
     "delete": true
 };
 
+function gerarEmailAvaliacaoTecnico(categoria, id_chamado, id_empresa, id_tecnico) {
+
+    let body = "";
+
+    body += "<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">";
+
+    body += "<p>Olá!</p>";
+
+    body += "<p>Recentemente você atendeu um problema de " + categoria + "</p>"
+
+    body += "<p>Foi uma boa experiência trabalhar com  a Wine?</p>";
+
+    body += "<p><a href='"+process.env.DOMINIO+"avaliacao/t/"+id_chamado+"/"+id_empresa+"/"+id_tecnico+"/sim'>Sim</a></p>";
+    body += "<p><a href='"+process.env.DOMINIO+"avaliacao/t/"+id_chamado+"/"+id_empresa+"/"+id_tecnico+"/nao'>Não</a></p>";
+
+    body += "<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
+
+    return body;
+}
+
 function gerarEmaildeNovoParaoClienteTicket(nome, categoria, descricao,
     /*opcional:*/ data_de_agendamento, /*opcional:*/ tecnico) {
 
@@ -279,7 +299,7 @@ router.post('/upload/comprovante/:id', function (req, res) {
         form.keepExtensions = true;
         uploadDir = process.env.COMPROVANTE_CHAMADO;
         form.uploadDir = uploadDir;
-        
+
         form.parse(req, (err, fields, files) => {
             console.log("ACONTECEU SEGUNDO??");
             if (err){
@@ -288,17 +308,21 @@ router.post('/upload/comprovante/:id', function (req, res) {
                 console.log(err);
                 return res.status(500).json({ error: err });
             }
-            
+
             entidade.findOne({
-                where: {"ticket_id" : req.params.id}
+                where: {"ticket_id" : req.params.id},
+                include: [{ all: true, nested: true }]
             }).then(function (result) {
                 // console.log(result);
                 result.ticket_status = "entregue";
-                // console.log(result);
-                
+                console.log(result.tecnico);
+
+                //Avaliacao do tecnico
+  	            Util.enviarEmail(result.tecnico.email, "[Wine] Avalie o caso atendido", gerarEmailAvaliacaoTecnico(result.tipo_ticket, result.ticket_id, result.cliente_id, result.tecnico_id));
+
                 result.update({ticket_status: "entregue"});
             }).catch(err => console.log(err));
-            
+
             res.status(200).json({
                 success: true
             })
@@ -308,7 +332,7 @@ router.post('/upload/comprovante/:id', function (req, res) {
             // console.log(name);
             const [fileName, fileExt] = file.name.split('.')
             file.path = path.join(uploadDir, `${req.params.id}.${fileExt}`)
-            
+
         });
     } catch(e) {
         console.log("CAIU NO CATCH!");
@@ -318,7 +342,7 @@ router.post('/upload/comprovante/:id', function (req, res) {
         })
     }
     });
-    
+
     /* Envia:
 ticket_id
 cliente
@@ -372,7 +396,7 @@ router.post('/ordemdeservico', function (req, res) {
         });
 });
 // Baixa a ordem de serviço do id especificado
-router.get('/ordemdeservico/:id', function (req, res) { 
+router.get('/ordemdeservico/:id', function (req, res) {
     var   fileSystem = require('fs'),
          path = require('path');
          var filePath = path.join(process.env.COMPROVANTE_CHAMADO, `${req.params.id}.pdf`);

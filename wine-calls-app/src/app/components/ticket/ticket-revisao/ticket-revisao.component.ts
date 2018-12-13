@@ -41,6 +41,9 @@ export class TicketRevisaoComponent implements OnInit {
     this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio - 2;
     this.dataStorage.save();
   }
+  isNaNangular(arg:any){
+    return isNaN(arg);
+  }
   salvar() {
     if (this.dataStorage.ticket.data_inicio && this.dataStorage.tecnico) {
 
@@ -59,22 +62,42 @@ export class TicketRevisaoComponent implements OnInit {
     else
       this.dataStorage.ticket.ticket_status = "aberto";
 
-    this.ticketService.create(this.dataStorage.ticket).subscribe(success => {
-      if( success['success'] == true) {
-        this.modalWarning['message'] = 'Ticket Salvo com Sucesso!';
-        this.modalWarning['title'] = 'Sucesso!';
-        document.getElementById('openGenericModal').click();
-      } else {
-        this.modalWarning['message'] = 'Erro Interno!';
+    if(isNaN(this.dataStorage.ticket.ticket_id)) {
+      this.ticketService.create(this.dataStorage.ticket).subscribe(success => {
+        if( success['success'] == true) {
+          this.modalWarning['message'] = 'Ticket Salvo com Sucesso!';
+          this.modalWarning['title'] = 'Sucesso!';
+          document.getElementById('openGenericModal').click();
+        } else {
+          this.modalWarning['message'] = 'Erro Interno!';
+          this.modalWarning['title'] = 'Erro!';
+          document.getElementById('openGenericModal').click();
+        }
+
+      }, failure => {
+        console.log(failure);
+        this.modalWarning['message'] = 'Falha ao salvar Ticket';
         this.modalWarning['title'] = 'Erro!';
         document.getElementById('openGenericModal').click();
-      }
+      });
+    } else {
+      this.ticketService.update(this.dataStorage.ticket).subscribe(success => {
+        if( success['success'] == true) {
+          this.modalWarning['message'] = 'Ticket Atualizado com Sucesso!';
+          this.modalWarning['title'] = 'Sucesso!';
+          document.getElementById('openGenericModal').click();
+        } else {
+          this.modalWarning['message'] = 'Erro Interno!';
+          this.modalWarning['title'] = 'Erro!';
+          document.getElementById('openGenericModal').click();
+        }
 
-    }, failure => {
-      console.log(failure);
-      this.modalWarning['message'] = 'Falha ao salvar Ticket';
-      this.modalWarning['title'] = 'Erro!';
-      document.getElementById('openGenericModal').click();
-    });
+      }, failure => {
+        console.log(failure);
+        this.modalWarning['message'] = 'Falha ao atualizar o Ticket';
+        this.modalWarning['title'] = 'Erro!';
+        document.getElementById('openGenericModal').click();
+      });
+    }
   }
 }

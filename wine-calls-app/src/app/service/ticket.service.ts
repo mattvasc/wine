@@ -32,6 +32,10 @@ export class TicketService {
      return this.http.put<Ticket>(this.apiUrl + `/${ticket.ticket_id}`, ticket);
    }
 
+   upload(file: any, id: number): Observable<any> {
+     return this.http.post<any>(this.apiUrl + `/upload/comprovante/${id}`, file);
+   }
+
    baixarPDF(ticket: Ticket) {
      let headers = new HttpHeaders();
      headers.append("Content-type", 'application/pdf');

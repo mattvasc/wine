@@ -26,10 +26,11 @@
   </tbody>
 </table>
 
-<form enctype="application/x-www-form-urlencoded" name="formularioDeSubmissaoDeOrdemDeServicoAssiadaPeloTecnico" id="formularioDeSubmissaoDeOrdemDeServicoAssiadaPeloTecnico">
-  <input type="file" name="uploadDeOrdemDeArquivoDoTecnico" hidden id="uploadDeOrdemDeArquivoDoTecnico">
-  <input type="hidden" name="idOrdemDeArquivoDoTecnico" hidden id="idDeOrdemDeArquivoDoTecnico">
-</form>
+<!-- <form enctype="multipart/form-data" name="formularioDeSubmissaoDeOrdemDeServicoAssiadaPeloTecnico" id="formularioDeSubmissaoDeOrdemDeServicoAssiadaPeloTecnico" method="post" action="{{api.apiUrl + '/tickets/upload/comprovante/'+coisoSelecionado}}"> -->
+  <input type="file" name="uploadDeOrdemDeArquivoDoTecnico" id="uploadDeOrdemDeArquivoDoTecnico">
+  <input type="hidden" name="idOrdemDeArquivoDoTecnico" id="idDeOrdemDeArquivoDoTecnico" (ngModelChange)="alert('oi')" [(ngModel)]='nomedeumavariavel'>
+  <!-- <input type="submit" name="nomenobotao" value="" style="" id="botaoSubmterForm"> -->
+<!-- </form> -->
 
 <ng-template #semTickets>
     <h4>Não há tickets com o estado <b>{{this.ticket_status  | titlecase }}</b> no momento!</h4>
@@ -65,7 +66,7 @@
     </button>
   </header>
   <div class="modal-body" >
-    DETALHES DO CHAMADO GOES HERE
+  <div [innerHTML]="imprimir"></div>
     <div class="container offset-md-4" style="position: relative; margin-top:3em; margin-bottom:3em;">
       <div class="row">
         <div>

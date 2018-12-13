@@ -4,6 +4,7 @@ import { Ticket } from 'src/app/model/ticket';
 import { TicketService } from '../../../service/ticket.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ApiService } from '../../../service/api.service';
 
 
 @Component({
@@ -17,11 +18,15 @@ export class TicketVerDetalhesComponent implements OnInit {
   public ticket_status: string;
   public modalWarning: {};
   public ticketSelecionado: number;
+  public coisoSelecionado : number = 0;
+  public nomedeumavariavel : any;
+  public imprimir: any = "";
   constructor(
     public dataStorage: DataStorageService,
     private ticketService: TicketService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    public api : ApiService,
   ) { }
 
   open(content) {
@@ -31,8 +36,11 @@ export class TicketVerDetalhesComponent implements OnInit {
 
   editTicket(index: number){
     this.router.navigateByUrl('/formsTicket');
-    //this.dataStorage.ticket = this.chamados[index];
-    //this.dataStorage.
+    console.log(this.chamados[index]);
+    this.dataStorage.ticket = this.chamados[index];
+    this.dataStorage.cliente = this.dataStorage.ticket.cliente;
+    this.dataStorage.ticket.estagio = 2;
+    this.dataStorage.save();
   }
 
   ngOnInit() {
@@ -56,13 +64,41 @@ export class TicketVerDetalhesComponent implements OnInit {
     });
   }
 
-  uploadOrdem() {
+  uploadOrdem(index) {
+    this.coisoSelecionado = this.chamados[index].ticket_id;
     document.getElementById('uploadDeOrdemDeArquivoDoTecnico').click();
+    // this.ticketService.
+  }
+
+  submeterForm() {
+    document.getElementById('botaoSubmterForm').click();
   }
 
   seeTicket(id: number) {
-    document.getElementById('openGenericModal2').click();
     this.ticketSelecionado = id;
+    let temp: {} = this.chamados[this.ticketSelecionado];
+    // temp.splice('Createdat',1);
+    delete temp['Updatedat'];
+    delete temp['Cliente'];
+    delete temp['Tecnico'];
+    delete temp['preco_tecnico'];
+    delete temp['check_docs'];
+    delete temp['check_pgto_cliete'];
+    delete temp['check_pgto_tecnico'];
+
+
+
+    this.imprimir = Object.keys(temp).map
+     (function(key){
+       if(temp[key] !== undefined && temp[key] != null)
+        return key.replace('_',' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})+ ": " + temp[key];
+      else
+      return undefined;
+
+}).join("<br>");
+this.imprimir = this.imprimir.replace(/<br><br>/g, "<br>");
+document.getElementById('openGenericModal2').click();
+
   }
 
   cancelarTicket(id : number) {

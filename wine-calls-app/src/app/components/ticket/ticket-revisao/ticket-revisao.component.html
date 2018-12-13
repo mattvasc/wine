@@ -54,7 +54,7 @@
         <button class="btn btn-warning btn-lg btn-block" (click)="voltar()">Voltar</button>
       </div>
       <div class="col-4 offset-4">
-        <button class="btn btn-success btn-lg btn-block" (click)="salvar()">Salvar</button>
+        <button class="btn btn-success btn-lg btn-block" (click)="salvar()">{{ (isNaNangular(this.dataStorage.ticket.ticket_id)) ? "Salvar" : "Atualizar"}}</button>
       </div>
     </div>
   </div>

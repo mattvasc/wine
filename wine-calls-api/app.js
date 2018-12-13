@@ -19,6 +19,7 @@ const empresaParceiraRouter = require('./routes/EmpresaParceira');
 const tecnicoRouter = require('./routes/Tecnico');
 const ticketRouter = require('./routes/Ticket');
 const testRouter = require('./routes/Test');
+const avaliacaoRouter = require('./routes/Avaliacao');
 const FuncRouter = require('./routes/Funcionario');
 const Model = require('./model/');
 
@@ -48,6 +49,7 @@ app.use('/funcionarios', FuncRouter);
 app.use('/empresasParceiras', empresaParceiraRouter);
 app.use('/tickets', ticketRouter);
 app.use('/tests', testRouter);
+app.use('/avaliacao', avaliacaoRouter);
 
 
 // catch 404 and forward to error handler
@@ -87,8 +89,11 @@ Model.sequelize.models.ticket.belongsTo(Model.sequelize.models.cliente, {foreign
 Model.sequelize.models.ticket.belongsTo(Model.sequelize.models.tecnico, {foreignKey: 'tecnico_id'});
 Model.sequelize.models.tecnico.hasMany(Model.sequelize.models.ticket, {foreignKey: 'tecnico_id'});
 
+Model.sequelize.models.avaliacao.belongsTo(Model.sequelize.models.tecnico, {foreignKey: 'tecnico_id'});
+Model.sequelize.models.avaliacao.belongsTo(Model.sequelize.models.cliente, {foreignKey: 'cliente_id'});
+
 Model.sequelize.sync(
-    // {"force":true}
+    //{"force":true}
     ).then(() => {
         commandExists('pdftk', function(err, commandExists) {
 

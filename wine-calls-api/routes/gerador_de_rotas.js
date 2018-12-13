@@ -154,6 +154,13 @@ module.exports = function buildRoutes(Model, entidade_nome,
 							success: true,
 							"affected_rows": payload
 						}
+						if (req.body.ticket_status == "encerrado_com_sucesso") {
+							//Avaliacao do cliente
+							Util.enviarEmail(req.body.email_contato, "[Wine] Avalie nossos serviços", gerarEmailAvaliacaoCliente(req.body.tipo_ticket, req.body.ticket_id, req.body.cliente_id, req.body.tecnico_id));
+
+							//Avaliacao do tecnico
+	            Util.enviarEmail(req.body.email_contato, "[Wine] Avalie o caso atendido", gerarEmailAvaliacaoTecnico(req.body.tipo_ticket, req.body.ticket_id, req.body.cliente_id, req.body.tecnico_id));
+						}
 						res.json(temp);
 					})
 					.catch(error => res.json({
@@ -193,4 +200,44 @@ module.exports = function buildRoutes(Model, entidade_nome,
 		});
 
 	return router;
+}
+
+function gerarEmailAvaliacaoCliente(categoria, id_chamado, id_empresa, id_tecnico) {
+
+    let body = "";
+
+    body += "<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">";
+
+    body += "<p>Olá!</p>";
+
+    body += "<p>Recentemente você foi atendido para resolver um problema de " + categoria + "</p>"
+
+    body += "<p>Você gostou dos serviços prestados pelo nosso técnico?</p>";
+
+    body += "<p><a href='"+process.env.DOMINIO+"avaliacao/c/"+id_chamado+"/"+id_empresa+"/"+id_tecnico+"/sim'>Sim</a></p>";
+    body += "<p><a href='"+process.env.DOMINIO+"avaliacao/c/"+id_chamado+"/"+id_empresa+"/"+id_tecnico+"/nao'>Não</a></p>";
+
+    body += "<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
+
+    return body;
+}
+
+function gerarEmailAvaliacaoTecnico(categoria, id_chamado, id_empresa, id_tecnico) {
+
+    let body = "";
+
+    body += "<img src=\"https://www.winetecnologia.com.br/wp-content/uploads/2018/02/logo-novo-1.png\">";
+
+    body += "<p>Olá!</p>";
+
+    body += "<p>Recentemente você atendeu um problema de " + categoria + "</p>"
+
+    body += "<p>Foi uma boa experiência trabalhar com  a Wine?</p>";
+
+    body += "<p><a href='"+process.env.DOMINIO+"avaliacao/t/"+id_chamado+"/"+id_empresa+"/"+id_tecnico+"/sim'>Sim</a></p>";
+    body += "<p><a href='"+process.env.DOMINIO+"avaliacao/t/"+id_chamado+"/"+id_empresa+"/"+id_tecnico+"/nao'>Não</a></p>";
+
+    body += "<p>Atenciosamente,<br/>Wine Tecnologia.</p>";
+
+    return body;
 }

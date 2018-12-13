@@ -271,19 +271,33 @@ router.get('/count/:status', function (req, res) {
 // Sete o header do requst para {Content-Type: multipart/form-data}
 // No body: {file: @arquivo_a_subir}
 // O Arquivo vai ser salvo de acordo com a pasta setada no .env
-router.post('/upload/comprovante', function (req, res) {
+router.post('/upload/comprovante/:id', function (req, res) {
     var form = new formidable.IncomingForm();
     form.multiples = true;
     form.keepExtensions = true;
     uploadDir = process.env.COMPROVANTE_CHAMADO;
     form.uploadDir = uploadDir;
     form.parse(req, (err, fields, files) => {
-        if (err) return res.status(500).json({ error: err })
-        res.status(200).json({ uploaded: true })
+        if (err)
+          return res.status(500).json({ error: err });
+
+        entidade.findOne({
+          where: {"ticket_id" : req.params.id}
+        }).then(function (result) {
+          console.log(result);
+            result.ticket_status = "entregue";
+            console.log(result);
+
+            result.update({ticket_status: "entregue"});
+          }).catch(err => console.log(err));
+
+        res.status(200).json({
+          uploaded: true
+        })
     })
     form.on('fileBegin', function (name, file) {
-        console.log(file);
-        console.log(name);
+        // console.log(file);
+        // console.log(name);
 
         const [fileName, fileExt] = file.name.split('.')
         file.path = path.join(uploadDir, `${fileName}_${new Date().getTime()}.${fileExt}`)

@@ -48,7 +48,6 @@ export class TicketVerDetalhesComponent implements OnInit {
     this.modalWarning = {};
     this.modalWarning['title'] = '';
     this.modalWarning['message'] = '';
-
     this.ticket_status = this.dataStorage.ticket.ticket_status.replace(/_/g, ' ');
     this.dataStorage.sync();
     this.chamados = [];
@@ -65,13 +64,25 @@ export class TicketVerDetalhesComponent implements OnInit {
   }
 
   uploadOrdem(index) {
-    this.coisoSelecionado = this.chamados[index].ticket_id;
+    this.coisoSelecionado =index;
     document.getElementById('uploadDeOrdemDeArquivoDoTecnico').click();
     // this.ticketService.
   }
 
-  submeterForm() {
-    document.getElementById('botaoSubmterForm').click();
+  submeterForm(event: any) {
+    console.log(event);
+    // document.getElementById('botaoSubmterForm').click();
+    this.ticketService.upload(event.target.files[0], this.chamados[this.coisoSelecionado].ticket_id).subscribe(ret => {
+      this.chamados.splice(this.coisoSelecionado, 1);
+      this.modalWarning['message'] = 'Evidencia salva com sucesso!';
+      this.modalWarning['title'] = 'Sucesso!';
+      document.getElementById('openGenericModal').click();
+    }, err => {
+      this.modalWarning['message'] = 'Erro ao fazer upload do arquivo!';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
+      console.log(err)
+    });
   }
 
   seeTicket(id: number) {
@@ -101,29 +112,51 @@ document.getElementById('openGenericModal2').click();
 
   }
 
-  cancelarTicket(id : number) {
-    this.ticketSelecionado = id;
+  cancelarTicket(index : number) {
+    this.ticketSelecionado = index;
+
+    if (this.chamados[index].ticket_status == "em_atendimento") {
+      this.chamados[index].ticket_status = "encerrado_com_insucesso";
+    }  else {
+      this.chamados[index].ticket_status = "cancelado";
+    }
+    this.encerrarChamado();
+  }
+  concluirTicket(index: number) {
+    console.log(index);
+    console.log(this.chamados);
+    this.ticketSelecionado = index;;
+    this.chamados[index].ticket_status = "encerrado_com_sucesso";
     this.encerrarChamado();
   }
 
   downloadOrdem(index : number) {
     this.ticketService.baixarPDF(this.chamados[index]).subscribe(retorno => {
-      console.log("oi");
-      const a = document.createElement("a");
       const file = new Blob([retorno], {type: 'application/pdf'});
       const fileURL = window.URL.createObjectURL(file);
-      a.href = fileURL;
-      a.download = "ordem-servico.pdf";
-      a.click();
+      window.location.href = fileURL;
 
-    }, (err) => {console.log(err); alert("Erro ao buscar Ordem de Serviço");});
+    }, () => {
+      this.modalWarning['message'] = 'Erro ao gerar Ordem de Serviço';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
+    });
+  }
+  downloadEvidencia(index: number) {
+    this.ticketService.baixarEvidencia(this.chamados[index].ticket_id).subscribe(retorno => {
+      const file = new Blob([retorno], {type: 'application/pdf'});
+      const fileURL = window.URL.createObjectURL(file);
+      window.location.href = fileURL;
+    }
+    , () => {
+      this.modalWarning['message'] = 'Erro ao buscar Ordem de Serviço';
+      this.modalWarning['title'] = 'Erro!';
+      document.getElementById('openGenericModal').click();
+    })
   }
 
   encerrarChamado() {
-    if (this.chamados[this.ticketSelecionado].ticket_status == "em_atendimento")
-      this.chamados[this.ticketSelecionado].ticket_status = "encerrado_com_insucesso";
-    else
-      this.chamados[this.ticketSelecionado].ticket_status = "cancelado";
+   
 
     let ticketApagar = this.chamados[this.ticketSelecionado];
     console.log(ticketApagar);
@@ -134,7 +167,6 @@ document.getElementById('openGenericModal2').click();
         this.modalWarning['title'] = 'Sucesso!';
         document.getElementById('openGenericModal').click();
         this.chamados.splice(this.ticketSelecionado,1);
-        // $("#detalhesChamado").modal('hide');
       } else {
         this.modalWarning['message'] = 'Erro Interno!';
         this.modalWarning['title'] = 'Erro!';

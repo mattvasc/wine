@@ -272,40 +272,54 @@ router.get('/count/:status', function (req, res) {
 // No body: {file: @arquivo_a_subir}
 // O Arquivo vai ser salvo de acordo com a pasta setada no .env
 router.post('/upload/comprovante/:id', function (req, res) {
-    var form = new formidable.IncomingForm();
-    form.multiples = true;
-    form.keepExtensions = true;
-    uploadDir = process.env.COMPROVANTE_CHAMADO;
-    form.uploadDir = uploadDir;
-    form.parse(req, (err, fields, files) => {
-        if (err)
-          return res.status(500).json({ error: err });
+    try{
 
-        entidade.findOne({
-          where: {"ticket_id" : req.params.id}
-        }).then(function (result) {
-          console.log(result);
-            result.ticket_status = "entregue";
-            console.log(result);
-
-            result.update({ticket_status: "entregue"});
-          }).catch(err => console.log(err));
-
-        res.status(200).json({
-          uploaded: true
+        var form = new formidable.IncomingForm();
+        form.multiples = false;
+        form.keepExtensions = true;
+        uploadDir = process.env.COMPROVANTE_CHAMADO;
+        form.uploadDir = uploadDir;
+        
+        form.parse(req, (err, fields, files) => {
+            console.log("ACONTECEU SEGUNDO??");
+            if (err){
+                console.log(fields)
+                console.log(files);
+                console.log(err);
+                return res.status(500).json({ error: err });
+            }
+            
+            entidade.findOne({
+                where: {"ticket_id" : req.params.id}
+            }).then(function (result) {
+                // console.log(result);
+                result.ticket_status = "entregue";
+                // console.log(result);
+                
+                result.update({ticket_status: "entregue"});
+            }).catch(err => console.log(err));
+            
+            res.status(200).json({
+                success: true
+            })
         })
-    })
-    form.on('fileBegin', function (name, file) {
-        // console.log(file);
-        // console.log(name);
-
-        const [fileName, fileExt] = file.name.split('.')
-        file.path = path.join(uploadDir, `${fileName}_${new Date().getTime()}.${fileExt}`)
-
+        form.on('fileBegin', function (name, file) {
+            // console.log(file);
+            // console.log(name);
+            const [fileName, fileExt] = file.name.split('.')
+            file.path = path.join(uploadDir, `${req.params.id}.${fileExt}`)
+            
+        });
+    } catch(e) {
+        console.log("CAIU NO CATCH!");
+        console.log(e);
+        res.status(500).json({
+            success: false
+        })
+    }
     });
-});
-
-/* Envia:
+    
+    /* Envia:
 ticket_id
 cliente
 descricao
@@ -357,5 +371,17 @@ router.post('/ordemdeservico', function (req, res) {
             res.json({"success":false, error: "Erro interno ao gerar pdf!"});
         });
 });
-
+// Baixa a ordem de serviço do id especificado
+router.get('/ordemdeservico/:id', function (req, res) { 
+    var   fileSystem = require('fs'),
+         path = require('path');
+         var filePath = path.join(process.env.COMPROVANTE_CHAMADO, `${req.params.id}.pdf`);
+         var stat = fileSystem.statSync(filePath);
+         res.writeHead(200, {
+            'Content-Type': 'application/pdf',
+            'Content-Length': stat.size
+        });
+        var readStream = fileSystem.createReadStream(filePath);
+        readStream.pipe(res);
+});
 module.exports = router;

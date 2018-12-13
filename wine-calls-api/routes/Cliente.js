@@ -53,6 +53,7 @@ router.get('/nome/:nome/limit/:limit/offset/:offset', function (req, res) {
 
 });
 
+
 router.get('/nome//limit/:limit/offset/:offset', function (req, res) {
 	console.log("entrou na rota certa");
 	let limit_param = req.params.limit;
@@ -91,6 +92,51 @@ router.get('/nome//limit/:limit/offset/:offset', function (req, res) {
 
 });
 
+router.post('/relatorio/id/:id/periodo/:periodo', function (req, res) {
+	const id_arg = req.params.id;
+	const periodo_inicio = new Date(req.params.periodo);
+	const periodo_fim = new Date(periodo_inicio.getFullYear(), periodo_inicio.getMonth()+1, 0);
+	const ticketRepo = Model['ticket'];
 
+	ticketRepo.findAll({
+		where: {"cliente_id": id_arg},
+		include: [{ all: true, nested: true }]
+	}).then(resultado =>
+		{
+			res.json(resultado);
+		})
+   /* const pdftk = require('node-pdftk');
+    pdftk
+        .input('./pdfs/Ordem_de_Servico.pdf')
+        // .input('./Ordem_de_Servico.pdf')
+        .fillForm({
+            id_chamado: ''+req.body.ticket_id,
+            cliente: req.body.cliente.razao_social,
+            descricao: (req.body.descricao) ? req.body.descricao : "",
+            endereco:req.body.logradouro + ", " + req.body.logradouro_numero + ' - ' + req.body.bairro,
+            cidade: req.body.cidade,
+            email: req.body.email_contato,
+            telefone: (req.body.cliente.telefones) ? req.body.cliente.telefones : "",
+            estado: (req.body.estado) ? req.body.estado : "",
+            categoria: req.body.tipo_ticket,
+            data_abertura: ''+req.body.createdAt.split('T')[0].split('-').reverse().join('/'),
+            tecnico: (req.body.tecnico.nome) ? req.body.tecnico.nome : "",
+            observacoes: (req.body.observacoes) ? req.body.observacoes : ""
+        })
+        .flatten()
+        .output()
+        .then(buffer => {
+            // Do stuff with the output buffer
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment; filename=Ordem_de_Servico.pdf');
+            res.setHeader('Content-Length', Buffer.byteLength(buffer));
+            res.send(buffer);
+        })*/
+        .catch(err => {
+            console.log(err);
+            res.statusCode = 500;
+            res.json({"success":false, error: "Erro interno ao gerar pdf!"});
+        });
+});
 
 module.exports = router;

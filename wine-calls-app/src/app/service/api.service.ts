@@ -22,7 +22,7 @@ export class ApiService {
   constructor(private http: HttpClient) {  }
 
 
-  public apiUrl = 'http://192.168.16.103:3000/';
+  public apiUrl = 'http://localhost:3000/';
 
   buscaCep(cep: String){
     cep = cep.replace('-','');

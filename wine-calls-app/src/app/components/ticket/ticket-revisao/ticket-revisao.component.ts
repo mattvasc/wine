@@ -36,6 +36,7 @@ export class TicketRevisaoComponent implements OnInit {
 
     this.dataStorage.sync();
     console.log(this.dataStorage.ticket);
+    
   }
   voltar() {
     this.dataStorage.ticket.estagio = this.dataStorage.ticket.estagio - 2;
@@ -62,7 +63,7 @@ export class TicketRevisaoComponent implements OnInit {
     else
       this.dataStorage.ticket.ticket_status = "aberto";
 
-    if(isNaN(this.dataStorage.ticket.ticket_id)) {
+    if(isNaN(this.dataStorage.ticket.ticket_id)) { // É um Atualizar
       this.ticketService.create(this.dataStorage.ticket).subscribe(success => {
         if( success['success'] == true) {
           this.modalWarning['message'] = 'Ticket Salvo com Sucesso!';
@@ -80,7 +81,7 @@ export class TicketRevisaoComponent implements OnInit {
         this.modalWarning['title'] = 'Erro!';
         document.getElementById('openGenericModal').click();
       });
-    } else {
+    } else { // É um criar
       this.ticketService.update(this.dataStorage.ticket).subscribe(success => {
         if( success['success'] == true) {
           this.modalWarning['message'] = 'Ticket Atualizado com Sucesso!';

@@ -33,7 +33,7 @@
       <button class="btn btn-warning btn-lg btn-block" (click)="voltar()">Voltar</button>
     </div>
     <div class="col-4 offset-4">
-      <button class="btn btn-success btn-lg btn-block" (click)="avancar()">Avançar</button>
+      <button class="btn btn-success btn-lg btn-block" [disabled]="this.dataObj['data'] == undefined || this.dataObj['hora'] == undefined" (click)="avancar()">Avançar</button>
     </div>
   </div>
 </div>

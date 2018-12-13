@@ -85,6 +85,7 @@ app.use(function (err, req, res, next) {
 
 Model.sequelize.models.ticket.belongsTo(Model.sequelize.models.cliente, {foreignKey: 'cliente_id'});
 Model.sequelize.models.ticket.belongsTo(Model.sequelize.models.tecnico, {foreignKey: 'tecnico_id'});
+Model.sequelize.models.tecnico.hasMany(Model.sequelize.models.ticket, {foreignKey: 'tecnico_id'});
 
 Model.sequelize.sync(
     // {"force":true}

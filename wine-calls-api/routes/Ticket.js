@@ -292,7 +292,7 @@ router.post('/upload/comprovante', function (req, res) {
 });
 
 /* Envia:
-id_chamado
+ticket_id
 cliente
 descricao
 endereco
@@ -315,18 +315,18 @@ router.post('/ordemdeservico', function (req, res) {
         .input('./pdfs/Ordem_de_Servico.pdf')
         // .input('./Ordem_de_Servico.pdf')
         .fillForm({
-            id_chamado: req.body.id_chamado,
-            cliente: req.body.cliente,
-            descricao: req.body.descricao,
-            endereco:req.body.endereco,
+            id_chamado: ''+req.body.ticket_id,
+            cliente: req.body.cliente.razao_social,
+            descricao: (req.body.descricao) ? req.body.descricao : "",
+            endereco:req.body.logradouro + ", " + req.body.logradouro_numero + ' - ' + req.body.bairro,
             cidade: req.body.cidade,
-            email: req.body.email,
-            telefone: req.body.telefone,
-            estado: req.body.estado,
-            categoria: req.body.categoria,
-            data_abertura: req.body.data_abertura,
-            tecnico: req.body.tecnico,
-            observacoes: req.body.observacoes
+            email: req.body.email_contato,
+            telefone: (req.body.cliente.telefones) ? req.body.cliente.telefones : "",
+            estado: (req.body.estado) ? req.body.estado : "",
+            categoria: req.body.tipo_ticket,
+            data_abertura: ''+req.body.createdAt.split('T')[0].split('-').reverse().join('/'),
+            tecnico: (req.body.tecnico.nome) ? req.body.tecnico.nome : "",
+            observacoes: (req.body.observacoes) ? req.body.observacoes : ""
         })
         .flatten()
         .output()

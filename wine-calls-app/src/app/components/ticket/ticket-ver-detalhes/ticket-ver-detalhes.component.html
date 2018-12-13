@@ -9,6 +9,7 @@
     <th *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado'">Editar</th>
     <th *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado' || dataStorage.ticket.ticket_status == 'em_atendimento'">Cancelar Chamado</th>
     <th *ngIf="dataStorage.ticket.ticket_status == 'encerrado_com_sucesso'">Upload de ordem</th>
+    <th *ngIf="dataStorage.ticket.ticket_status == 'agendado' || dataStorage.ticket.ticket_status == 'em_atendimento'">Download de ordem</th>
   </thead>
   <tbody>
     <tr *ngFor="let ticket of chamados; let i = index">
@@ -20,6 +21,7 @@
       <td *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado'"><button (click)="editTicket(i)" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></button></td>
       <td *ngIf="dataStorage.ticket.ticket_status == 'aberto' || dataStorage.ticket.ticket_status == 'agendado' || dataStorage.ticket.ticket_status == 'em_atendimento'"><button (click)="cancelarTicket(i)" class="btn btn-danger"><i class="fa fa-times"></i></button></td>
       <td *ngIf="dataStorage.ticket.ticket_status == 'encerrado_com_sucesso'"><button (click)="uploadOrdem(i)" class="btn btn-success"><i class="fa fa-file"></i></button></td>
+      <td *ngIf="dataStorage.ticket.ticket_status == 'agendado' || dataStorage.ticket.ticket_status == 'em_atendimento'"><button (click)="downloadOrdem(i)" class="btn btn-success"><i class="fa fa-download"></i></button></td>
     </tr>
   </tbody>
 </table>

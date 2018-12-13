@@ -70,6 +70,19 @@ export class TicketVerDetalhesComponent implements OnInit {
     this.encerrarChamado();
   }
 
+  downloadOrdem(index : number) {
+    this.ticketService.baixarPDF(this.chamados[index]).subscribe(retorno => {
+      console.log("oi");
+      const a = document.createElement("a");
+      const file = new Blob([retorno], {type: 'application/pdf'});
+      const fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = "ordem-servico.pdf";
+      a.click();
+
+    }, (err) => {console.log(err); alert("Erro ao buscar Ordem de Serviço");});
+  }
+
   encerrarChamado() {
     if (this.chamados[this.ticketSelecionado].ticket_status == "em_atendimento")
       this.chamados[this.ticketSelecionado].ticket_status = "encerrado_com_insucesso";

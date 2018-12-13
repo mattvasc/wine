@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { Ticket } from '../model/ticket';
@@ -31,7 +32,12 @@ export class TicketService {
      return this.http.put<Ticket>(this.apiUrl + `/${ticket.ticket_id}`, ticket);
    }
 
+   baixarPDF(ticket: Ticket) {
+     let headers = new HttpHeaders();
+     headers = headers.set("Accept", 'application/pdf');
+     return this.http.post<any>(this.apiUrl + '/ordemdeservico', ticket, {headers: headers, responseType: "blob"});
 
+   }
    create(ticket: Ticket): Observable<any> {
     return this.http.post<Ticket>(this.apiUrl + '/', ticket);
   }

@@ -100,7 +100,9 @@ router.get('/relatorio/id/:id/periodo/:periodo', function (req, res) {
 	const ticketRepo = Model['ticket'];
 
 	ticketRepo.findAll({
-		where: { "cliente_id": id_arg },
+		where: { "cliente_id": id_arg, "ticket_status" : {
+			[Op.ne] : "aberto"
+		} },
 		// TODO por data aqui
 		include: [{ all: true, nested: true }]
 	}).then(resultado => {

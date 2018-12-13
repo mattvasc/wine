@@ -13,7 +13,7 @@
     <th *ngIf="dataStorage.ticket.ticket_status == 'encerrado_com_sucesso'">Upload de ordem</th>
     <th *ngIf="dataStorage.ticket.ticket_status == 'agendado' || dataStorage.ticket.ticket_status == 'em_atendimento'">Download
       de ordem</th>
-    <th *ngIf="dataStorage.ticket.ticket_status == 'entregue'">Ver evidencia</th>
+    <th *ngIf="dataStorage.ticket.ticket_status == 'entregue'">Ver evidência</th>
   </thead>
   <tbody>
     <tr *ngFor="let ticket of chamados; let i = index">
@@ -40,7 +40,7 @@
 
 <input hidden type="file" [(ngModel)]='nomedeumavariavel'  accept="application/pdf" (change)="submeterForm($event)" name="uploadDeOrdemDeArquivoDoTecnico" id="uploadDeOrdemDeArquivoDoTecnico">
 <input hidden type="hidden" name="idOrdemDeArquivoDoTecnico" id="idDeOrdemDeArquivoDoTecnico">
-  
+
 
 <ng-template #semTickets>
   <h4>Não há tickets com o estado <b>{{this.ticket_status | titlecase }}</b> no momento!</h4>

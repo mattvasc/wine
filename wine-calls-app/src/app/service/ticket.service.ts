@@ -34,8 +34,9 @@ export class TicketService {
 
    baixarPDF(ticket: Ticket) {
      let headers = new HttpHeaders();
-     headers = headers.set("Accept", 'application/pdf');
-     return this.http.post<any>(this.apiUrl + '/ordemdeservico', ticket, {headers: headers, responseType: "blob"});
+     headers.append("Content-type", 'application/pdf');
+     const options = { responseType : 'blob' as 'json' };
+     return this.http.post<Blob>(this.apiUrl + '/ordemdeservico', ticket, options);
 
    }
    create(ticket: Ticket): Observable<any> {

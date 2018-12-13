@@ -48,4 +48,9 @@ export class ClienteService {
   update(c : Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(this.apiUrl + this.posfixo +`/${c.id}`, c, httpOptions);
   }
+
+  getRelatorioPDF(id: number) {
+    const options = { responseType: 'blob' as 'json' };
+    return this.http.get<any>(this.apiUrl+ this.posfixo + `/relatorio/id/${id}/periodo/2018-12-01`, options);
+  }
 }

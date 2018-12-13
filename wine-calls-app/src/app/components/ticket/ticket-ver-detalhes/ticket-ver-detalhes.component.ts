@@ -134,7 +134,7 @@ document.getElementById('openGenericModal2').click();
     this.ticketService.baixarPDF(this.chamados[index]).subscribe(retorno => {
       const file = new Blob([retorno], {type: 'application/pdf'});
       const fileURL = window.URL.createObjectURL(file);
-      window.location.href = fileURL;
+      window.open(fileURL, '_blank');
 
     }, () => {
       this.modalWarning['message'] = 'Erro ao gerar Ordem de Serviço';
@@ -146,7 +146,7 @@ document.getElementById('openGenericModal2').click();
     this.ticketService.baixarEvidencia(this.chamados[index].ticket_id).subscribe(retorno => {
       const file = new Blob([retorno], {type: 'application/pdf'});
       const fileURL = window.URL.createObjectURL(file);
-      window.location.href = fileURL;
+      window.open(fileURL, '_blank');
     }
     , () => {
       this.modalWarning['message'] = 'Erro ao buscar Ordem de Serviço';

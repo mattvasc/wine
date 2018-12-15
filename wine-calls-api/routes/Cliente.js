@@ -101,12 +101,9 @@ router.get('/relatorio/id/:id/periodo/:periodo', function (req, res) {
 
 	ticketRepo.findAll({
 		where: { "cliente_id": id_arg, "ticket_status" : {
-			[Op.and] : {
-				[Op.ne] : "aberto",
-				[Op.ne] : "cancelado"
+					[Op.notIn] : ["aberto", "cancelado"]
 			}
-
-		} },
+		},
 		// TODO por data aqui
 		include: [{ all: true, nested: true }]
 	}).then(resultado => {

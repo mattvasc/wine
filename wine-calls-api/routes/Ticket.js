@@ -78,7 +78,7 @@ function gerarEmaildeNovoParaoTecnicoTicket(cliente, categoria, descricao,
     // TODO: formatar a data para padrão pt-BR
     body += (data_de_agendamento == undefined) ? "" : "<p><strong>Data de agendamento:</strong> " + data_de_agendamento + " </p>";
 
-    body += (cliente == undefined) ? "" : "<p><strong>Nome do Cliente:</strong> " + tecnico + "</p></br>";
+    body += (cliente == undefined) ? "" : "<p><strong>Nome do Cliente:</strong> " + cliente + "</p></br>";
 
     body += "<p><strong>Endereço:</strong> " + endereco + "</p>"
 

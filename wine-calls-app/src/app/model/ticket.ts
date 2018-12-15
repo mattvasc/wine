@@ -49,4 +49,6 @@ export class Ticket {
 	public tecnico?: Tecnico;
 	public empresa?: EmpresaParceira;
 
+	public cliente_nome?: string;
+	public tecnico_nome?: string;
 }

@@ -46,7 +46,7 @@ export class ClienteListComponent implements OnInit {
     this.getPage(1,this.pageSize);
   }
 
-  
+
   getPage(page: number, pageSize: number) {
     this.api.getWithNamePaginated
     this.api.getWithNamePaginated(this.termoPesquisado, pageSize, pageSize*(page-1)).subscribe(c => {
@@ -62,6 +62,7 @@ export class ClienteListComponent implements OnInit {
     this.dataStorage.ticket = new Ticket();
     this.dataStorage.ticket.estagio = 2;
     this.dataStorage.ticket.cliente = this.dataStorage.cliente;
+    this.dataStorage.ticket.cliente_nome = this.dataStorage.cliente.razao_social;
     this.dataStorage.ticket.cliente_id = this.dataStorage.cliente.id;
     this.dataStorage.save();
     this.router.navigateByUrl('/formsTicket');

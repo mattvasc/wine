@@ -47,7 +47,7 @@ export class EmpresaParceiraListComponent implements OnInit {
 
   editEmpresaParceira(index: number) {
     this.dataStorage.empresa_parceira = this.empresas_parceiras[index];
-    this.router.navigateByUrl(`/formsEmpresaParceira/`);
+    this.router.navigateByUrl("/formsEmpresaParceira/"+this.dataStorage.empresa_parceira.id);
   }
 
   editFuncionariosEmpresaParceira(id: number) {

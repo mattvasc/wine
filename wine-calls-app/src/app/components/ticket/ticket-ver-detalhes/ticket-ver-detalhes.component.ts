@@ -89,19 +89,24 @@ export class TicketVerDetalhesComponent implements OnInit {
     this.ticketSelecionado = id;
     let temp: {} = this.chamados[this.ticketSelecionado];
     // temp.splice('Createdat',1);
-    delete temp['Updatedat'];
-    delete temp['Cliente'];
-    delete temp['Tecnico'];
     delete temp['preco_tecnico'];
     delete temp['check_docs'];
     delete temp['check_pgto_cliete'];
     delete temp['check_pgto_tecnico'];
 
+    console.log(temp);
+    if (temp['cliente'])
+      if (temp['cliente']['razao_social'])
+        temp['cliente_chamado'] = temp['cliente']['razao_social'] + " (" + temp['cliente']['cnpj'] + ")";
+
+    if (temp['tecnico'])
+      if (temp['tecnico']['nome'])
+        temp['tecnico_chamado'] = temp['tecnico']['nome'] + " (" + temp['tecnico']['cpf'] + ")";
 
 
     this.imprimir = Object.keys(temp).map
      (function(key){
-       if(temp[key] !== undefined && temp[key] != null)
+       if(temp[key] !== undefined && temp[key] != null && (!(typeof temp[key] === 'object')))
         return key.replace('_',' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})+ ": " + temp[key];
       else
       return undefined;
@@ -156,7 +161,7 @@ document.getElementById('openGenericModal2').click();
   }
 
   encerrarChamado() {
-   
+
 
     let ticketApagar = this.chamados[this.ticketSelecionado];
     console.log(ticketApagar);

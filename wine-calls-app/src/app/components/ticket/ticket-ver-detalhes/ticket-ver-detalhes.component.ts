@@ -94,12 +94,14 @@ export class TicketVerDetalhesComponent implements OnInit {
     delete temp['check_pgto_cliete'];
     delete temp['check_pgto_tecnico'];
 
-    temp['Cliente'] = '';
-
     console.log(temp);
+    if (temp['cliente'])
+      if (temp['cliente']['razao_social'])
+        temp['cliente_chamado'] = temp['cliente']['razao_social'] + " (" + temp['cliente']['cnpj'] + ")";
 
-    temp['Cliente'] = temp['cliente']['razao_social'] + " (" + temp['cliente']['cnpj'] + ")";
-    temp['Tecnico'] = temp['tecnico']['nome'] + " (" + temp['tecnico']['cpf'] + ")";
+    if (temp['tecnico'])
+      if (temp['tecnico']['nome'])
+        temp['tecnico_chamado'] = temp['tecnico']['nome'] + " (" + temp['tecnico']['cpf'] + ")";
 
 
     this.imprimir = Object.keys(temp).map
@@ -159,7 +161,7 @@ document.getElementById('openGenericModal2').click();
   }
 
   encerrarChamado() {
-   
+
 
     let ticketApagar = this.chamados[this.ticketSelecionado];
     console.log(ticketApagar);

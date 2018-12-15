@@ -81,8 +81,8 @@
       <div class="row">
         <div>
           <input type="hidden" name="idChamado" id="idChamado" value="">
-          <button type="button" class="btn btn-danger btn-block btn-lg" (click)="encerrarChamado();" id="botaoEncerrarChamado">{{
-            (dataStorage.ticket.ticket_status === 'em_atendimento') ? 'Encerrar com insucesso' : 'Cancelar Chamados'}}</button>
+          <button type="button" class="btn btn-danger btn-block btn-lg" (click)="encerrarChamado();" id="botaoEncerrarChamado" *ngIf="dataStorage.ticket.ticket_status != 'cancelado' && dataStorage.ticket.ticket_status != 'encerrado_com_sucesso' && dataStorage.ticket.ticket_status != 'encerrado_com_insucesso' && dataStorage.ticket.ticket_status != 'entregue'">{{
+            (dataStorage.ticket.ticket_status === 'em_atendimento') ? 'Encerrar com insucesso' : 'Cancelar Chamado'}}</button>
         </div>
       </div>
     </div>

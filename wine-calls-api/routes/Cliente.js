@@ -128,7 +128,10 @@ router.get('/relatorio/id/:id/periodo/:periodo', function (req, res) {
 					return value['tipo_ticket'];
 				}).join('\n'),
 				data_atendimento: resultado.map(value => {
-					return value['data_inicio'].split(' ')[0].split('-').reverse().join('/');
+					if (value['data_inicio'])
+						return value['data_inicio'].split(' ')[0].split('-').reverse().join('/');
+					else
+						return '';
 				}).join("\n"),
 
 				estado_chamado: resultado.map(value => {
@@ -136,7 +139,10 @@ router.get('/relatorio/id/:id/periodo/:periodo', function (req, res) {
 				}).join("\n"),
 
 				tecnico: resultado.map(value => {
-					return value['tecnico']['nome']
+					if (value['tecnico'])
+						return value['tecnico']['nome'];
+					else
+						return '';
 				}).join("\n"),
 
 				ticket_id: resultado.map(value => {
